@@ -1,0 +1,15 @@
+# Core data handling
+pillow
+numpy
+
+# PyTorch (for DataLoader utilities and optional tensor transforms)
+torch
+# torchvision is optional in main.py; uncomment if you want built-in transforms
+# torchvision
+
+# Provider SDKs (no LangChain)
+openai
+google-generativeai
+python-dotenv
+requests
+matplotlib

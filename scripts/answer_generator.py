@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 """
-Answer generation from Brave Search results using an LLM.
+Answer generation from web search results using an LLM.
 
-Given a question and a Brave web search JSON payload, summarize the likely
-answer using the descriptions/snippets and cite sources via their URLs.
-If sources disagree, summarize differing viewpoints and cite each source.
+Given a question and a normalized web search payload (see scripts.search_provider),
+summarize the likely answer using the descriptions/snippets and cite sources via
+their URLs. If sources disagree, summarize differing viewpoints and cite each
+source.
 
 Returns a dict with:
   - answer: str
@@ -13,13 +14,13 @@ Returns a dict with:
   - confidence: float|None
   - rationale: str
   - raw: str (raw LLM text)
+  - search_provider: str|None
 """
 
 import json
 from typing import Any, Dict, List, Optional
 
 from scripts.llm_loader import LLMModelLoader
-from scripts.brave_search import extract_web_results
 
 
 _DEFAULT_SYSTEM_PROMPT = (
@@ -60,6 +61,50 @@ def _parse_json_response(text: str) -> Dict[str, Any]:
     return {"answer": text.strip(), "citations": []}
 
 
+def _normalize_results(payload: Dict[str, Any]) -> List[Dict[str, str]]:
+    results = payload.get("results")
+    if isinstance(results, list) and results:
+        normalized: List[Dict[str, str]] = []
+        for item in results:
+            if not isinstance(item, dict):
+                continue
+            url = str(item.get("url") or "").strip()
+            if not url:
+                continue
+            normalized.append(
+                {
+                    "title": str(item.get("title") or "").strip(),
+                    "url": url,
+                    "description": str(item.get("description") or "").strip(),
+                }
+            )
+        if normalized:
+            return normalized
+
+    try:
+        from scripts.brave_search import extract_web_results as _legacy_extract  # late import to avoid cycle
+
+        legacy_results = _legacy_extract(payload)
+    except Exception:
+        legacy_results = []
+
+    normalized: List[Dict[str, str]] = []
+    for item in legacy_results:
+        if not isinstance(item, dict):
+            continue
+        url = str(item.get("url") or "").strip()
+        if not url:
+            continue
+        normalized.append(
+            {
+                "title": str(item.get("title") or "").strip(),
+                "url": url,
+                "description": str(item.get("description") or "").strip(),
+            }
+        )
+    return normalized
+
+
 def generate_answer_from_search(
     question: str,
     search_payload: Dict[str, Any],
@@ -68,14 +113,14 @@ def generate_answer_from_search(
     max_sources: int = 5,
     system_prompt: Optional[str] = None,
 ) -> Dict[str, Any]:
-    results = extract_web_results(search_payload)
+    normalized_results = _normalize_results(search_payload)
     sources: List[Dict[str, str]] = []
-    for r in results[: max(1, int(max_sources))]:
+    for r in normalized_results[: max(1, int(max_sources))]:
         sources.append(
             {
-                "title": str(r.get("title") or "").strip(),
-                "url": str(r.get("url") or "").strip(),
-                "description": str(r.get("description") or "").strip(),
+                "title": r.get("title", ""),
+                "url": r.get("url", ""),
+                "description": r.get("description", ""),
             }
         )
 
@@ -119,8 +164,8 @@ def generate_answer_from_search(
         "rationale": parsed.get("rationale"),
         "raw": text,
         "sources_used": sources,
+        "search_provider": search_payload.get("provider"),
     }
 
 
 __all__ = ["generate_answer_from_search"]
-

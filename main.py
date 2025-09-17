@@ -19,11 +19,11 @@ from datetime import datetime
 from scripts.relevancy_checker import assess_image_headline_relevancy
 from scripts.visual_veracity_checker import assess_image_visual_veracity
 from scripts.question_generator import generate_investigative_questions
-from scripts.brave_search import brave_web_search
 from scripts.answer_generator import generate_answer_from_search
 from scripts.qa_selector import select_best_qa_and_propose_followups
 from scripts.llm_loader import LLMModelLoader
 from scripts.ai_judge import judge_from_structured
+from scripts.search_provider import get_active_search_provider, web_search
 
 # Load .env if python-dotenv is available
 try:
@@ -98,7 +98,12 @@ def main() -> None:
     )
     parser.add_argument("--q-chains", type=int, default=int(os.getenv("Q_CHAINS", "3")), help="How many question chains to generate per sample (default 3)")
     parser.add_argument("--q-per-chain", type=int, default=int(os.getenv("Q_PER_CHAIN", "3")), help="How many questions per chain (default 3)")
-    parser.add_argument("--answer-questions", action="store_true", default=os.getenv("ANSWER_ENABLE", "0") == "1", help="Use Brave Search + LLM to answer generated questions")
+    parser.add_argument(
+        "--answer-questions",
+        action="store_true",
+        default=os.getenv("ANSWER_ENABLE", "0") == "1",
+        help="Use web search (controlled by SEARCH_PROVIDER) + LLM to answer generated questions",
+    )
     parser.add_argument("--answer-max-sources", type=int, default=int(os.getenv("ANSWER_MAX_SOURCES", "5")), help="Max sources to pass to LLM per question")
     parser.add_argument("--emit-json", action="store_true", default=os.getenv("EMIT_FINAL_JSON", "1") == "1", help="Print final structured JSON per sample for downstream use")
     parser.add_argument("--judge", action="store_true", default=os.getenv("JUDGE_ENABLE", "1") == "1", help="Run AI judge on final structured output and print/append decision")
@@ -107,6 +112,8 @@ def main() -> None:
     parser.add_argument("--html-title", type=str, default=os.getenv("PIPELINE_HTML_TITLE", "Pipeline Results"), help="Title for the HTML report")
     parser.add_argument("--html-inline-images", action="store_true", default=os.getenv("PIPELINE_HTML_INLINE_IMAGES", "0") == "1", help="Embed images into HTML as base64 data URLs for portability")
     args = parser.parse_args()
+
+    search_provider = get_active_search_provider()
 
     # Default results folder outputs when not explicitly provided
     if not args.save_jsonl:
@@ -210,6 +217,9 @@ def main() -> None:
         print("Hints: set OPENAI_API_KEY or GOOGLE_API_KEY or DEEPINFRA_API_KEY; set ALIGN_PROVIDER=openai|google|deepinfra; optionally pass --model/--image/--headline/--relevancy-limit.")
         return
 
+    if args.answer_questions:
+        print(f"\nSearch answers will use provider: {search_provider}")
+
     run_outputs = []
     for idx, (img_path, headline, sample_meta) in enumerate(pairs, start=1):
         print(f"\n[Sample {idx}/{len(pairs)}]")
@@ -279,7 +289,7 @@ def main() -> None:
                 for q in chain:
                     print(f"    Q: {q}")
                     try:
-                        search_payload = brave_web_search(q)
+                        search_payload = web_search(q, provider=search_provider)
                         ans = generate_answer_from_search(q, search_payload, loader, max_sources=args.answer_max_sources)
                         answers_by_question[q] = ans
                         print(f"      A: {ans.get('answer')}")
@@ -363,6 +373,7 @@ def main() -> None:
                 "q_per_chain": int(args.q_per_chain),
                 "answer_questions": bool(args.answer_questions),
                 "answer_max_sources": int(args.answer_max_sources),
+                "search_provider": search_provider,
             }
 
             sample_details = {}
@@ -395,6 +406,7 @@ def main() -> None:
                     "answer_questions": run_params["answer_questions"],
                     "answer_max_sources": run_params["answer_max_sources"],
                     "temperature": run_params["temperature"],
+                    "search_provider": run_params["search_provider"],
                 },
                 "run_params": run_params,
                 "relevancy": rel or {},

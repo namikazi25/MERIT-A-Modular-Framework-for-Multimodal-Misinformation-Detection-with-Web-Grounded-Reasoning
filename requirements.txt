@@ -13,3 +13,5 @@ google-generativeai
 python-dotenv
 requests
 matplotlib
+# duckduckgo-search
+ddgs

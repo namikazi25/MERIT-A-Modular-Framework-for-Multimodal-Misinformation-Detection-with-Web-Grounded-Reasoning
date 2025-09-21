@@ -11,7 +11,7 @@ from __future__ import annotations
 import os
 import json
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 import argparse
 from datetime import datetime
 
@@ -24,6 +24,7 @@ from scripts.qa_selector import select_best_qa_and_propose_followups
 from scripts.llm_loader import LLMModelLoader
 from scripts.ai_judge import judge_from_structured
 from scripts.search_provider import get_active_search_provider, web_search
+from scripts.checkpoint import CheckpointManager, CheckpointState, build_args_snapshot
 
 # Load .env if python-dotenv is available
 try:
@@ -59,9 +60,30 @@ def _print_sample(i: int, sample: Dict[str, Any]) -> None:
     else:
         img_info = "<none>"
     ip = Path(sample.get("image_path", "")).name
-    gt = sample.get("gt_answers")
-    fake = sample.get("fake_cls")
-    print(f"[{i:02d}] img={img_info} file={ip} gt={gt} fake={fake} text={text_disp}")
+    print(f"[{i:02d}] img={img_info} file={ip} text={text_disp}")
+
+
+def _load_existing_outputs(jsonl_path: str) -> List[Dict[str, Any]]:
+    path = Path(jsonl_path)
+    if not path.exists():
+        return []
+
+    outputs: List[Dict[str, Any]] = []
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    obj = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if isinstance(obj, dict):
+                    outputs.append(obj)
+    except Exception:
+        return []
+    return outputs
 
 
 def main() -> None:
@@ -111,22 +133,108 @@ def main() -> None:
     parser.add_argument("--html-report", type=str, default=os.getenv("PIPELINE_HTML_REPORT", ""), help="If set, write an HTML report for this run's outputs")
     parser.add_argument("--html-title", type=str, default=os.getenv("PIPELINE_HTML_TITLE", "Pipeline Results"), help="Title for the HTML report")
     parser.add_argument("--html-inline-images", action="store_true", default=os.getenv("PIPELINE_HTML_INLINE_IMAGES", "0") == "1", help="Embed images into HTML as base64 data URLs for portability")
+    parser.add_argument(
+        "--checkpoint-dir",
+        type=str,
+        default=os.getenv("PIPELINE_CHECKPOINT_DIR", ""),
+        help="Directory for checkpoint files (defaults to results/checkpoints/<run-id>)",
+    )
+    parser.add_argument(
+        "--checkpoint-size",
+        type=int,
+        default=int(os.getenv("PIPELINE_CHECKPOINT_SIZE", "100") or "100"),
+        help="Write a checkpoint after this many samples",
+    )
+    parser.add_argument(
+        "--resume",
+        type=str,
+        default=os.getenv("PIPELINE_RESUME", ""),
+        help="Path to a checkpoint file to resume from",
+    )
     args = parser.parse_args()
 
-    search_provider = get_active_search_provider()
+    resume_state: Optional[CheckpointState] = None
+    resume_path = Path(args.resume).expanduser() if args.resume else None
+    if resume_path:
+        if not resume_path.exists():
+            print(f"\nResume checkpoint not found: {resume_path}")
+            return
+        try:
+            resume_state = CheckpointState.from_file(resume_path)
+        except Exception as exc:
+            print(f"\nFailed to load checkpoint {resume_path}: {exc}")
+            return
+
+    run_id: Optional[str] = resume_state.run_id if resume_state else None
+
+    if resume_state:
+        if resume_state.jsonl_path and not args.save_jsonl:
+            args.save_jsonl = resume_state.jsonl_path
+        if resume_state.html_report_path and not args.html_report:
+            args.html_report = resume_state.html_report_path
+        if not args.checkpoint_dir:
+            args.checkpoint_dir = str(resume_path.parent)
 
     # Default results folder outputs when not explicitly provided
     if not args.save_jsonl:
-        run_id = datetime.now().strftime("%Y%m%d-%H%M%S")
-        args.save_jsonl = f"results/run-{run_id}.jsonl"
-    if not args.html_report:
-        # Pair HTML path with the same run id as jsonl if possible
+        fresh_id = datetime.now().strftime("%Y%m%d-%H%M%S")
+        args.save_jsonl = f"results/run-{fresh_id}.jsonl"
+
+    base_name = os.path.splitext(os.path.basename(args.save_jsonl))[0]
+    if not run_id:
+        run_id = base_name
+
+    if resume_state and resume_state.jsonl_path:
         try:
-            base = os.path.splitext(os.path.basename(args.save_jsonl))[0]
-            run_id = base.replace("run-", "")
-            args.html_report = f"results/run-{run_id}.html"
+            if Path(args.save_jsonl).resolve() != Path(resume_state.jsonl_path).resolve():
+                print("\nResume checkpoint was created for a different --save-jsonl path. Aborting to avoid mixing runs.")
+                return
+        except Exception:
+            pass
+        # Prefer checkpoint's canonical run id when it differs from derived base name
+        if resume_state.run_id and resume_state.run_id != run_id:
+            run_id = resume_state.run_id
+
+    if not args.html_report:
+        try:
+            args.html_report = f"results/{run_id}.html"
         except Exception:
             args.html_report = "results/run.html"
+
+    if not args.checkpoint_dir:
+        args.checkpoint_dir = str(Path("results") / "checkpoints" / run_id)
+
+    args.checkpoint_size = max(1, int(args.checkpoint_size))
+
+    checkpoint_dir = Path(args.checkpoint_dir).expanduser()
+    args_snapshot = build_args_snapshot(dict(vars(args)), drop_keys={"resume"})
+    manager = CheckpointManager(
+        run_id=run_id,
+        checkpoint_dir=checkpoint_dir,
+        chunk_size=args.checkpoint_size,
+        args_snapshot=args_snapshot,
+        jsonl_path=args.save_jsonl,
+        html_report_path=args.html_report or None,
+        resume_state=resume_state,
+    )
+
+    existing_outputs: List[Dict[str, Any]] = []
+    if resume_state:
+        existing_outputs = _load_existing_outputs(args.save_jsonl)
+        if existing_outputs:
+            if len(existing_outputs) > manager.processed_count:
+                manager.sync_to(len(existing_outputs))
+            elif len(existing_outputs) < manager.processed_count:
+                print(
+                    "\nWarning: checkpoint indicates more samples than present in the JSONL output."
+                )
+
+        resume_start = manager.next_index
+        print(
+            f"\nResuming run '{run_id}' from checkpoint {resume_path} starting at dataset index {resume_start + 1}."
+        )
+
+    search_provider = get_active_search_provider()
 
     json_path = _resolve_json_path()
     image_root = Path("data/MMFakeBench_test")
@@ -190,17 +298,30 @@ def main() -> None:
             _print_sample(i, ds[i])
 
     # Relevancy check: use provided args if present; else take first N dataset samples
-    pairs = []
+    samples: List[Dict[str, Any]] = []
     if args.image and args.headline:
-        pairs = [(args.image, args.headline, None)]
+        samples.append(
+            {
+                "order_index": 0,
+                "image_path": args.image,
+                "headline": args.headline,
+            }
+        )
     else:
         # Use --max-samples as the primary control, fallback to --relevancy-limit
         limit = max(0, int(args.max_samples if args.max_samples is not None else args.relevancy_limit))
-        for i in range(min(limit, len(ds))):
-            sample = ds[i]
-            pairs.append((sample.get("image_path"), str(sample.get("text")), sample))
+        total = min(limit, len(ds))
+        for order_index in range(total):
+            sample = ds[order_index]
+            samples.append(
+                {
+                    "order_index": order_index,
+                    "image_path": sample.get("image_path"),
+                    "headline": str(sample.get("text", "")),
+                }
+            )
 
-    if not pairs:
+    if not samples:
         print("\n--- Relevancy Check ---")
         print("No items to check (relevancy-limit is 0).")
         return
@@ -220,9 +341,26 @@ def main() -> None:
     if args.answer_questions:
         print(f"\nSearch answers will use provider: {search_provider}")
 
-    run_outputs = []
-    for idx, (img_path, headline, sample_meta) in enumerate(pairs, start=1):
-        print(f"\n[Sample {idx}/{len(pairs)}]")
+    run_outputs = list(existing_outputs)
+    total_samples = len(samples)
+    start_index = min(manager.next_index, total_samples)
+
+    if start_index >= total_samples:
+        print("\nNo remaining samples to process."
+              f" Already completed {manager.processed_count} of {total_samples} target samples.")
+        return
+
+    processed_any = False
+    for order_idx in range(start_index, total_samples):
+        sample_meta = samples[order_idx]
+        img_path = sample_meta.get("image_path")
+        headline = sample_meta.get("headline", "")
+
+        img_path = str(img_path) if img_path is not None else ""
+        headline = str(headline)
+
+        human_index = order_idx + 1
+        print(f"\n[Sample {human_index}/{total_samples}]")
         print(f"Using image: {img_path}")
         print(f"Headline: {headline[:120]}{'...' if len(headline) > 120 else ''}")
 
@@ -270,6 +408,7 @@ def main() -> None:
                     chains=1,
                     questions_per_chain=args.q_per_chain,
                     prior_questions=prior_questions,
+                    prior_answers=answers_by_question_global,
                 )
                 chain = (qres.get("chains", [[]]) or [[]])[0]
                 print(f"Questions (Chain {chain_idx}):")
@@ -376,17 +515,6 @@ def main() -> None:
                 "search_provider": search_provider,
             }
 
-            sample_details = {}
-            if isinstance(sample_meta, dict):
-                sample_details = {
-                    "text": sample_meta.get("text"),
-                    "image_path": sample_meta.get("image_path"),
-                    "text_source": sample_meta.get("text_source"),
-                    "image_source": sample_meta.get("image_source"),
-                    "gt_answers": sample_meta.get("gt_answers"),
-                    "fake_cls": sample_meta.get("fake_cls"),
-                }
-
             # Compute per-sample usage delta
             usage_after = getattr(loader, "usage_total", {"prompt": 0, "completion": 0, "total": 0})
             sample_usage = {
@@ -413,8 +541,9 @@ def main() -> None:
                 "visual_veracity": ver or {},
                 "best_qa_per_chain": best_slim,
                 "token_usage": sample_usage,
-                "sample_details": sample_details,
             }
+            final_obj["sample_index"] = human_index
+            final_obj["dataset_order_index"] = sample_meta.get("order_index")
             # Run AI judge if requested
             judgement = None
             if args.judge:
@@ -473,6 +602,23 @@ def main() -> None:
             print("  Token usage (sample): prompt={} completion={} total={}".format(
                 sample_usage.get("prompt", 0), sample_usage.get("completion", 0), sample_usage.get("total", 0)
             ))
+
+        processed_any = True
+        manager.record_sample()
+        checkpoint_path = manager.maybe_save()
+        if checkpoint_path:
+            print(f"  Saved checkpoint: {checkpoint_path}")
+            resume_hint = manager.resume_hint(checkpoint_path)
+            if resume_hint:
+                print(f"  Resume with: python main.py {resume_hint} [other flags]")
+
+    if processed_any and manager.processed_count % manager.chunk_size != 0:
+        final_checkpoint = manager.maybe_save(force=True)
+        if final_checkpoint:
+            print(f"\nSaved final checkpoint: {final_checkpoint}")
+            resume_hint = manager.resume_hint(final_checkpoint)
+            if resume_hint:
+                print(f"Resume with: python main.py {resume_hint} [other flags]")
 
     # Print total token usage across all processed samples
     try:

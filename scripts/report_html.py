@@ -101,6 +101,107 @@ def _gt_to_truth(gt: Any, fake_cls: Any = None) -> Optional[int]:
     return None
 
 
+def _load_dataset_records_for_html(dataset_json_path: Optional[str]) -> Optional[List[Dict[str, Any]]]:
+    """Best-effort loader for dataset records used only for HTML enrichment."""
+    if not dataset_json_path:
+        return None
+    try:
+        with open(dataset_json_path, "r", encoding="utf-8") as f:
+            payload = json.load(f)
+    except Exception:
+        return None
+
+    if isinstance(payload, list):
+        return [rec for rec in payload if isinstance(rec, dict)]
+
+    if isinstance(payload, dict):
+        for key in ("data", "items", "records", "samples"):
+            val = payload.get(key)
+            if isinstance(val, list):
+                return [rec for rec in val if isinstance(rec, dict)]
+    return None
+
+
+def _normalize_lookup_path(path: Any, image_root: Optional[str]) -> Optional[str]:
+    if not path:
+        return None
+    p = str(path)
+    # If dataset stored absolute path, keep as-is after normalization
+    if os.path.isabs(p):
+        full = p
+    else:
+        root = (image_root or "").strip()
+        if root:
+            full = os.path.join(root, p.lstrip("/"))
+        else:
+            full = p
+    try:
+        return os.path.normpath(os.path.abspath(full))
+    except Exception:
+        return os.path.normpath(full)
+
+
+def _attach_dataset_details(
+    objs: List[Dict[str, Any]],
+    dataset_json_path: Optional[str],
+    dataset_image_root: Optional[str],
+) -> None:
+    """Augment per-sample objects with dataset ground truth if not already present."""
+
+    records = _load_dataset_records_for_html(dataset_json_path)
+    if not records:
+        return
+
+    idx_map: Dict[int, Dict[str, Any]] = {}
+    img_map: Dict[str, Dict[str, Any]] = {}
+
+    for idx, rec in enumerate(records):
+        details: Dict[str, Any] = {"dataset_index": idx}
+        if "gt_answers" in rec:
+            details["gt_answers"] = rec["gt_answers"]
+        if rec.get("fake_cls") is not None:
+            details["fake_cls"] = rec.get("fake_cls")
+        if rec.get("text_source"):
+            details["text_source"] = rec.get("text_source")
+        if rec.get("image_source"):
+            details["image_source"] = rec.get("image_source")
+
+        idx_map[idx] = details
+
+        norm_path = _normalize_lookup_path(rec.get("image_path"), dataset_image_root)
+        if norm_path:
+            img_map[norm_path] = details
+
+    if not idx_map and not img_map:
+        return
+
+    for obj in objs:
+        if not isinstance(obj, dict):
+            continue
+
+        current_details = obj.get("sample_details")
+        if isinstance(current_details, dict) and "gt_answers" in current_details:
+            # Already has ground truth; leave untouched
+            continue
+
+        details: Optional[Dict[str, Any]] = None
+
+        idx = obj.get("dataset_order_index")
+        if isinstance(idx, int):
+            details = idx_map.get(idx)
+
+        if details is None:
+            norm_img = _normalize_lookup_path(obj.get("image_path"), None)
+            if norm_img:
+                details = img_map.get(norm_img)
+
+        if details:
+            merged = dict(details)
+            if isinstance(current_details, dict):
+                merged.update({k: v for k, v in current_details.items() if k not in merged})
+            obj["sample_details"] = merged
+
+
 def _cm_to_data_url(cm: Dict[str, int], title: str) -> Optional[str]:
     try:
         import io
@@ -444,10 +545,22 @@ def _render_token_summary_html(objs: List[Dict[str, Any]]) -> str:
     )
 
 
-def render_html_report(objs: List[Dict[str, Any]], metrics: Optional[Dict[str, Any]], output_path: str, title: str = "Pipeline Results", *, inline_images: bool = False) -> None:
+def render_html_report(
+    objs: List[Dict[str, Any]],
+    metrics: Optional[Dict[str, Any]],
+    output_path: str,
+    title: str = "Pipeline Results",
+    *,
+    inline_images: bool = False,
+    dataset_json_path: Optional[str] = None,
+    dataset_image_root: Optional[str] = None,
+) -> None:
     out_dir = os.path.dirname(output_path)
     if out_dir and not os.path.exists(out_dir):
         os.makedirs(out_dir, exist_ok=True)
+
+    # Enrich per-sample objects with ground truth from dataset if available.
+    _attach_dataset_details(objs, dataset_json_path, dataset_image_root)
 
     cards_html = "\n".join(_render_sample(i, o, output_path, inline_images=inline_images) for i, o in enumerate(objs, start=1))
 
@@ -552,10 +665,19 @@ def main():
             # Lazy import to avoid circular
             from scripts.evaluate import evaluate
             metrics = evaluate(Path(args.outputs), Path(args.dataset_json), Path(args.image_root), save_report=None)
-        except Exception:
+        except Exception as exc:
+            print(f"Warning: failed to compute metrics – {exc}")
             metrics = None
 
-    render_html_report(objs, metrics, args.html, args.title, inline_images=bool(args.inline_images))
+    render_html_report(
+        objs,
+        metrics,
+        args.html,
+        args.title,
+        inline_images=bool(args.inline_images),
+        dataset_json_path=(args.dataset_json or None),
+        dataset_image_root=(args.image_root or None),
+    )
 
 
 if __name__ == "__main__":

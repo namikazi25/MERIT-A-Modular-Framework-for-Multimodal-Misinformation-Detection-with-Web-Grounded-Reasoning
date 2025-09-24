@@ -10,10 +10,12 @@ from __future__ import annotations
 
 import os
 import json
+import subprocess
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 import argparse
-from datetime import datetime
+from datetime import datetime, timezone
 
 # Align checker integration
 from scripts.relevancy_checker import assess_image_headline_relevancy
@@ -61,6 +63,61 @@ def _print_sample(i: int, sample: Dict[str, Any]) -> None:
         img_info = "<none>"
     ip = Path(sample.get("image_path", "")).name
     print(f"[{i:02d}] img={img_info} file={ip} text={text_disp}")
+
+
+RUN_METADATA_ENV_KEYS = [
+    "ALIGN_PROVIDER",
+    "ALIGN_MODEL",
+    "ALIGN_TEMPERATURE",
+    "PIPELINE_MAX_SAMPLES",
+    "PIPELINE_HTML_REPORT",
+    "PIPELINE_HTML_TITLE",
+    "PIPELINE_HTML_INLINE_IMAGES",
+    "PIPELINE_CHECKPOINT_DIR",
+    "PIPELINE_CHECKPOINT_SIZE",
+    "PIPELINE_RESUME",
+    "PIPELINE_OUTPUT_JSONL",
+    "PIPELINE_DISABLE_RELEVANCY",
+    "PIPELINE_DISABLE_VISUAL",
+    "PIPELINE_DISABLE_QUESTIONS",
+    "PIPELINE_DISABLE_JUDGE",
+    "SEARCH_PROVIDER",
+    "ANSWER_ENABLE",
+    "ANSWER_MAX_SOURCES",
+    "Q_CHAINS",
+    "Q_PER_CHAIN",
+]
+
+
+def _collect_env_snapshot() -> Dict[str, Any]:
+    snap: Dict[str, Any] = {}
+    for key in RUN_METADATA_ENV_KEYS:
+        val = os.getenv(key)
+        if val is not None:
+            snap[key] = val
+    return snap
+
+
+def _collect_git_metadata() -> Dict[str, Any]:
+    info: Dict[str, Any] = {"commit": "unknown", "dirty": None}
+    try:
+        commit = subprocess.check_output(["git", "rev-parse", "HEAD"], stderr=subprocess.DEVNULL, text=True).strip()
+        if commit:
+            info["commit"] = commit
+    except Exception:
+        pass
+    try:
+        status = subprocess.check_output(["git", "status", "--short"], stderr=subprocess.DEVNULL, text=True)
+        info["dirty"] = bool(status.strip())
+    except Exception:
+        info.setdefault("dirty", None)
+    return info
+
+
+def _write_json(path: Path, payload: Dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
 
 
 def _load_existing_outputs(jsonl_path: str) -> List[Dict[str, Any]]:
@@ -133,6 +190,10 @@ def main() -> None:
     parser.add_argument("--html-report", type=str, default=os.getenv("PIPELINE_HTML_REPORT", ""), help="If set, write an HTML report for this run's outputs")
     parser.add_argument("--html-title", type=str, default=os.getenv("PIPELINE_HTML_TITLE", "Pipeline Results"), help="Title for the HTML report")
     parser.add_argument("--html-inline-images", action="store_true", default=os.getenv("PIPELINE_HTML_INLINE_IMAGES", "0") == "1", help="Embed images into HTML as base64 data URLs for portability")
+    parser.add_argument("--disable-relevancy", action="store_true", default=os.getenv("PIPELINE_DISABLE_RELEVANCY", "0") == "1", help="Skip the relevancy checker step")
+    parser.add_argument("--disable-visual", action="store_true", default=os.getenv("PIPELINE_DISABLE_VISUAL", "0") == "1", help="Skip the visual veracity checker step")
+    parser.add_argument("--disable-questions", action="store_true", default=os.getenv("PIPELINE_DISABLE_QUESTIONS", "0") == "1", help="Skip investigative question generation and answering")
+    parser.add_argument("--disable-judge", action="store_true", default=os.getenv("PIPELINE_DISABLE_JUDGE", "0") == "1", help="Skip the AI judge step")
     parser.add_argument(
         "--checkpoint-dir",
         type=str,
@@ -152,6 +213,19 @@ def main() -> None:
         help="Path to a checkpoint file to resume from",
     )
     args = parser.parse_args()
+
+    run_relevancy = not args.disable_relevancy
+    run_visual = not args.disable_visual
+    run_questions = not args.disable_questions
+    run_judge = not args.disable_judge
+    answer_questions_enabled = bool(args.answer_questions) and run_questions
+    module_config = {
+        "relevancy": run_relevancy,
+        "visual_veracity": run_visual,
+        "questions": run_questions,
+        "question_answering": answer_questions_enabled,
+        "judge": run_judge,
+    }
 
     resume_state: Optional[CheckpointState] = None
     resume_path = Path(args.resume).expanduser() if args.resume else None
@@ -218,6 +292,31 @@ def main() -> None:
         resume_state=resume_state,
     )
 
+    start_wall = time.time()
+    started_at = datetime.now(timezone.utc).isoformat()
+    metadata_path = Path(args.save_jsonl).with_suffix(".metadata.json")
+    run_metadata: Dict[str, Any] = {
+        "run_id": run_id,
+        "started_at": started_at,
+        "paths": {
+            "jsonl": args.save_jsonl,
+            "html": args.html_report,
+            "checkpoint_dir": str(checkpoint_dir),
+        },
+        "modules": module_config,
+        "args": args_snapshot,
+        "environment": _collect_env_snapshot(),
+        "git": _collect_git_metadata(),
+        "resume_from": str(resume_path) if resume_state else None,
+        "status": "initializing",
+    }
+
+    def _update_run_metadata(extra: Dict[str, Any]) -> None:
+        run_metadata.update(extra)
+        _write_json(metadata_path, run_metadata)
+
+    _update_run_metadata({})
+
     existing_outputs: List[Dict[str, Any]] = []
     if resume_state:
         existing_outputs = _load_existing_outputs(args.save_jsonl)
@@ -233,6 +332,13 @@ def main() -> None:
         print(
             f"\nResuming run '{run_id}' from checkpoint {resume_path} starting at dataset index {resume_start + 1}."
         )
+        _update_run_metadata({
+            "status": "resuming",
+            "resume_from": str(resume_path),
+            "progress": {
+                "processed_samples": manager.processed_count,
+            },
+        })
 
     search_provider = get_active_search_provider()
 
@@ -305,6 +411,7 @@ def main() -> None:
                 "order_index": 0,
                 "image_path": args.image,
                 "headline": args.headline,
+                "sample_details": None,
             }
         )
     else:
@@ -313,17 +420,37 @@ def main() -> None:
         total = min(limit, len(ds))
         for order_index in range(total):
             sample = ds[order_index]
+            sample_details = {
+                "dataset_index": sample.get("dataset_index"),
+                "gt_answers": sample.get("gt_answers"),
+                "fake_cls": sample.get("fake_cls"),
+                "text_source": sample.get("text_source"),
+                "image_source": sample.get("image_source"),
+            }
             samples.append(
                 {
                     "order_index": order_index,
+                    "dataset_index": sample.get("dataset_index"),
                     "image_path": sample.get("image_path"),
                     "headline": str(sample.get("text", "")),
+                    "sample_details": sample_details,
                 }
             )
+
+    sample_target = len(samples)
+    _update_run_metadata({
+        "status": "ready",
+        "target_samples": sample_target,
+    })
 
     if not samples:
         print("\n--- Relevancy Check ---")
         print("No items to check (relevancy-limit is 0).")
+        _update_run_metadata({
+            "status": "no_samples",
+            "completed_at": datetime.now(timezone.utc).isoformat(),
+            "duration_seconds": round(time.time() - start_wall, 3),
+        })
         return
 
     print("\n--- Relevancy + Visual Veracity Checks ---")
@@ -338,17 +465,35 @@ def main() -> None:
         print("Hints: set OPENAI_API_KEY or GOOGLE_API_KEY or DEEPINFRA_API_KEY; set ALIGN_PROVIDER=openai|google|deepinfra; optionally pass --model/--image/--headline/--relevancy-limit.")
         return
 
-    if args.answer_questions:
+    if answer_questions_enabled:
         print(f"\nSearch answers will use provider: {search_provider}")
 
     run_outputs = list(existing_outputs)
-    total_samples = len(samples)
+    total_samples = sample_target
     start_index = min(manager.next_index, total_samples)
 
     if start_index >= total_samples:
         print("\nNo remaining samples to process."
               f" Already completed {manager.processed_count} of {total_samples} target samples.")
+        _update_run_metadata({
+            "status": "up_to_date",
+            "progress": {
+                "processed_samples": manager.processed_count,
+                "target_samples": total_samples,
+            },
+            "completed_at": datetime.now(timezone.utc).isoformat(),
+            "duration_seconds": round(time.time() - start_wall, 3),
+        })
         return
+
+    _update_run_metadata({
+        "status": "running",
+        "progress": {
+            "processed_samples": manager.processed_count,
+            "target_samples": total_samples,
+            "resume_index": start_index,
+        },
+    })
 
     processed_any = False
     for order_idx in range(start_index, total_samples):
@@ -368,114 +513,121 @@ def main() -> None:
         usage_before = dict(getattr(loader, "usage_total", {"prompt": 0, "completion": 0, "total": 0}))
 
         # Relevancy check first
-        rel = None
-        try:
-            rel = assess_image_headline_relevancy(str(img_path), headline, loader)
-            print("Relevancy:")
-            print(f"  aligned: {rel.get('aligned')}")
-            print(f"  confidence: {rel.get('confidence')}")
-            print(f"  explanation: {rel.get('explanation')}")
-        except Exception as e:
-            print("  Relevancy check error:", e)
+        rel: Optional[Dict[str, Any]] = None
+        if run_relevancy:
+            try:
+                rel = assess_image_headline_relevancy(str(img_path), headline, loader)
+                print("Relevancy:")
+                print(f"  aligned: {rel.get('aligned')}")
+                print(f"  confidence: {rel.get('confidence')}")
+                print(f"  explanation: {rel.get('explanation')}")
+            except Exception as e:
+                print("  Relevancy check error:", e)
+        else:
+            print("Relevancy: skipped (--disable-relevancy)")
 
         # Visual veracity check next
-        ver = None
-        try:
-            ver = assess_image_visual_veracity(str(img_path), loader)
-            print("Visual Veracity:")
-            print(f"  ai_generated: {ver.get('ai_generated')}")
-            print(f"  confidence: {ver.get('confidence')}")
-            print(f"  explanation: {ver.get('explanation')}")
-            anomalies = ver.get('anomalies') or []
-            if anomalies:
-                print(f"  anomalies: {', '.join(map(str, anomalies))}")
-        except Exception as e:
-            print("  Visual veracity check error:", e)
+        ver: Optional[Dict[str, Any]] = None
+        if run_visual:
+            try:
+                ver = assess_image_visual_veracity(str(img_path), loader)
+                print("Visual Veracity:")
+                print(f"  ai_generated: {ver.get('ai_generated')}")
+                print(f"  confidence: {ver.get('confidence')}")
+                print(f"  explanation: {ver.get('explanation')}")
+                anomalies = ver.get('anomalies') or []
+                if anomalies:
+                    print(f"  anomalies: {', '.join(map(str, anomalies))}")
+            except Exception as e:
+                print("  Visual veracity check error:", e)
+        else:
+            print("Visual veracity: skipped (--disable-visual)")
 
         # Investigative question generation (sequential chains)
-        prior_questions: List[str] = []
-        final_selected: List[Dict[str, Any]] = []
-        question_chains: List[List[str]] = []
+        best_qa_list: List[Dict[str, Any]] = []
         answers_by_question_global: Dict[str, Dict[str, Any]] = {}
 
-        for chain_idx in range(1, int(args.q_chains) + 1):
-            # Generate one chain at a time, avoiding duplicates with prior_questions
-            try:
-                qres = generate_investigative_questions(
-                    str(img_path),
-                    headline,
-                    loader,
-                    chains=1,
-                    questions_per_chain=args.q_per_chain,
-                    prior_questions=prior_questions,
-                    prior_answers=answers_by_question_global,
-                )
-                chain = (qres.get("chains", [[]]) or [[]])[0]
-                print(f"Questions (Chain {chain_idx}):")
-                for qi, q in enumerate(chain, start=1):
-                    print(f"  {qi}. {q}")
-            except Exception as e:
-                print(f"  Question generation error (chain {chain_idx}):", e)
-                chain = []
-
-            prior_questions.extend(chain)
-            question_chains.append(chain)
-
-            # Optionally answer and select best for this chain
-            if args.answer_questions and chain:
-                answers_by_question: Dict[str, Dict[str, Any]] = {}
-                print("  Answers:")
-                for q in chain:
-                    print(f"    Q: {q}")
-                    try:
-                        search_payload = web_search(q, provider=search_provider)
-                        ans = generate_answer_from_search(q, search_payload, loader, max_sources=args.answer_max_sources)
-                        answers_by_question[q] = ans
-                        print(f"      A: {ans.get('answer')}")
-                        cits = ans.get("citations") or []
-                        if cits:
-                            print("      Sources:")
-                            for c in cits:
-                                url = c.get("url") if isinstance(c, dict) else str(c)
-                                title = c.get("title") if isinstance(c, dict) else ""
-                                print(f"        - {title} {url}")
-                    except Exception as e:
-                        print("      Answer error:", e)
-                # merge per-chain answers into global mapping
-                answers_by_question_global.update(answers_by_question)
-
+        if run_questions:
+            prior_questions: List[str] = []
+            for chain_idx in range(1, int(args.q_chains) + 1):
+                # Generate one chain at a time, avoiding duplicates with prior_questions
                 try:
-                    sel = select_best_qa_and_propose_followups(
+                    qres = generate_investigative_questions(
                         str(img_path),
                         headline,
-                        [chain],
-                        answers_by_question,
                         loader,
-                        followups_per_chain=3,
+                        chains=1,
+                        questions_per_chain=args.q_per_chain,
+                        prior_questions=prior_questions,
+                        prior_answers=answers_by_question_global,
                     )
-                    best = (sel.get("selected", [{}]) or [{}])[0]
-                    fqs = (sel.get("followups", [[]]) or [[]])[0]
-
-                    if best:
-                        final_selected.append(best)
-                        print("  Best Q/A for this chain:")
-                        print(f"    Q: {best.get('question')}")
-                        print(f"    A: {best.get('answer')}")
-                        print(f"    confidence: {best.get('confidence')}")
-                        cits = best.get('citations') or []
-                        if cits:
-                            print("    Sources:")
-                            for c in cits:
-                                url = c.get("url") if isinstance(c, dict) else str(c)
-                                title = c.get("title") if isinstance(c, dict) else ""
-                                print(f"      - {title} {url}")
-                    # Use follow-ups to enrich the prior pool (no printing)
-                    prior_questions.extend(fqs or [])
+                    chain = (qres.get("chains", [[]]) or [[]])[0]
+                    print(f"Questions (Chain {chain_idx}):")
+                    for qi, q in enumerate(chain, start=1):
+                        print(f"  {qi}. {q}")
                 except Exception as e:
-                    print("  Selection/follow-up error:", e)
+                    print(f"  Question generation error (chain {chain_idx}):", e)
+                    chain = []
 
+                prior_questions.extend(chain)
+
+                # Optionally answer and select best for this chain
+                if answer_questions_enabled and chain:
+                    answers_by_question: Dict[str, Dict[str, Any]] = {}
+                    print("  Answers:")
+                    for q in chain:
+                        print(f"    Q: {q}")
+                        try:
+                            search_payload = web_search(q, provider=search_provider)
+                            ans = generate_answer_from_search(q, search_payload, loader, max_sources=args.answer_max_sources)
+                            answers_by_question[q] = ans
+                            print(f"      A: {ans.get('answer')}")
+                            cits = ans.get("citations") or []
+                            if cits:
+                                print("      Sources:")
+                                for c in cits:
+                                    url = c.get("url") if isinstance(c, dict) else str(c)
+                                    title = c.get("title") if isinstance(c, dict) else ""
+                                    print(f"        - {title} {url}")
+                        except Exception as e:
+                            print("      Answer error:", e)
+                    # merge per-chain answers into global mapping
+                    answers_by_question_global.update(answers_by_question)
+
+                    try:
+                        sel = select_best_qa_and_propose_followups(
+                            str(img_path),
+                            headline,
+                            [chain],
+                            answers_by_question,
+                            loader,
+                            followups_per_chain=3,
+                        )
+                        best = (sel.get("selected", [{}]) or [{}])[0]
+                        fqs = (sel.get("followups", [[]]) or [[]])[0]
+
+                        if best:
+                            best_qa_list.append(best)
+                            print("  Best Q/A for this chain:")
+                            print(f"    Q: {best.get('question')}")
+                            print(f"    A: {best.get('answer')}")
+                            print(f"    confidence: {best.get('confidence')}")
+                            cits = best.get('citations') or []
+                            if cits:
+                                print("    Sources:")
+                                for c in cits:
+                                    url = c.get("url") if isinstance(c, dict) else str(c)
+                                    title = c.get("title") if isinstance(c, dict) else ""
+                                    print(f"      - {title} {url}")
+                        # Use follow-ups to enrich the prior pool (no printing)
+                        prior_questions.extend(fqs or [])
+                    except Exception as e:
+                        print("  Selection/follow-up error:", e)
+        else:
+            print("Questions: skipped (--disable-questions)")
+            if bool(args.answer_questions):
+                print("  Note: --disable-questions overrides --answer-questions")
         # Final aggregated best Q/A list across chains (for downstream use)
-        best_qa_list = final_selected
         if best_qa_list:
             print("\n  Final Best Q/A list (one per chain):")
             for ci, it in enumerate(best_qa_list, start=1):
@@ -510,9 +662,10 @@ def main() -> None:
                 "temperature": float(args.temperature),
                 "q_chains": int(args.q_chains),
                 "q_per_chain": int(args.q_per_chain),
-                "answer_questions": bool(args.answer_questions),
+                "answer_questions": bool(answer_questions_enabled),
                 "answer_max_sources": int(args.answer_max_sources),
                 "search_provider": search_provider,
+                "questions_enabled": bool(run_questions),
             }
 
             # Compute per-sample usage delta
@@ -541,17 +694,43 @@ def main() -> None:
                 "visual_veracity": ver or {},
                 "best_qa_per_chain": best_slim,
                 "token_usage": sample_usage,
+                "modules": module_config.copy(),
             }
             final_obj["sample_index"] = human_index
-            final_obj["dataset_order_index"] = sample_meta.get("order_index")
+            dataset_index = sample_meta.get("dataset_index")
+            if dataset_index is not None:
+                try:
+                    final_obj["dataset_order_index"] = int(dataset_index)
+                except Exception:
+                    final_obj["dataset_order_index"] = dataset_index
+            else:
+                final_obj["dataset_order_index"] = sample_meta.get("order_index")
+            final_obj["iteration_index"] = sample_meta.get("order_index")
+
+            # Attach dataset metadata for downstream rendering/analysis
+            details_src = sample_meta.get("sample_details")
+            details: Dict[str, Any] = {}
+            if isinstance(details_src, dict):
+                details.update({k: v for k, v in details_src.items() if v is not None})
+
+            if dataset_index is not None and "dataset_index" not in details:
+                try:
+                    details["dataset_index"] = int(dataset_index)
+                except Exception:
+                    details["dataset_index"] = dataset_index
+
+            if details:
+                final_obj["sample_details"] = details
             # Run AI judge if requested
             judgement = None
-            if args.judge:
+            if run_judge:
                 try:
                     judgement = judge_from_structured(final_obj, loader)
                     final_obj["judgement"] = judgement
                 except Exception as e:
                     print("  AI judge error:", e)
+            else:
+                print("AI judge: skipped (--disable-judge)")
 
             print("\n== Final Structured Output (JSON) ==")
             try:
@@ -571,7 +750,7 @@ def main() -> None:
                 print(json.dumps(_stringify(final_obj), ensure_ascii=False, indent=2))
 
             # Also print judge summary for quick scan
-            if args.judge and judgement:
+            if run_judge and judgement:
                 print("\n== AI Judge Decision ==")
                 print(f"  label: {judgement.get('label')}")
                 print(f"  confidence: {judgement.get('confidence')}")
@@ -611,14 +790,30 @@ def main() -> None:
             resume_hint = manager.resume_hint(checkpoint_path)
             if resume_hint:
                 print(f"  Resume with: python main.py {resume_hint} [other flags]")
+            _update_run_metadata({
+                "progress": {
+                    "processed_samples": manager.processed_count,
+                    "target_samples": total_samples,
+                },
+                "last_checkpoint": str(checkpoint_path),
+            })
 
     if processed_any and manager.processed_count % manager.chunk_size != 0:
+        _update_run_metadata({
+            "progress": {
+                "processed_samples": manager.processed_count,
+                "target_samples": total_samples,
+            }
+        })
         final_checkpoint = manager.maybe_save(force=True)
         if final_checkpoint:
             print(f"\nSaved final checkpoint: {final_checkpoint}")
             resume_hint = manager.resume_hint(final_checkpoint)
             if resume_hint:
                 print(f"Resume with: python main.py {resume_hint} [other flags]")
+            _update_run_metadata({
+                "last_checkpoint": str(final_checkpoint),
+            })
 
     # Print total token usage across all processed samples
     try:
@@ -642,7 +837,15 @@ def main() -> None:
                     metrics = _eval(Path(args.save_jsonl), ds_json, Path("data/MMFakeBench_test"), save_report=None)
                 except Exception:
                     metrics = None
-            render_html_report(run_outputs, metrics, html_path, title=args.html_title, inline_images=bool(args.html_inline_images))
+            render_html_report(
+                run_outputs,
+                metrics,
+                html_path,
+                title=args.html_title,
+                inline_images=bool(args.html_inline_images),
+                dataset_json_path=str(ds_json),
+                dataset_image_root=str(image_root),
+            )
             base, _ = os.path.splitext(html_path)
             csv_path = base + ".tokens.csv"
             print(f"\nWrote HTML report to {html_path}")
@@ -650,6 +853,19 @@ def main() -> None:
                 print(f"Token usage CSV: {csv_path}")
         except Exception as e:
             print("\nWarning: failed to write HTML report:", e)
+
+    final_status = "completed" if processed_any else "no_samples_processed"
+    _update_run_metadata({
+        "status": final_status,
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+        "duration_seconds": round(time.time() - start_wall, 3),
+        "progress": {
+            "processed_samples": manager.processed_count,
+            "target_samples": total_samples,
+        },
+        "outputs_count": len(run_outputs),
+        "last_checkpoint": str(manager.last_checkpoint_path) if manager.last_checkpoint_path else run_metadata.get("last_checkpoint"),
+    })
 
 
 if __name__ == "__main__":

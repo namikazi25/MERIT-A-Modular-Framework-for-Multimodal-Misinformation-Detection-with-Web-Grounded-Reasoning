@@ -25,6 +25,7 @@ Outputs a human-readable summary and a JSON metrics object if --save-report is p
 """
 
 import argparse
+import csv
 import json
 import os
 from collections import Counter
@@ -147,7 +148,137 @@ def _ai_truth_from_source(src: Any) -> Optional[int]:
     return 1 if src.strip().lower() == "ai-generated image" else 0
 
 
-def evaluate(outputs_path: Path, dataset_json: Path, image_root: Path, save_report: Optional[Path] = None) -> Dict[str, Any]:
+def _calibration_from_records(records: List[Tuple[float, int]], bins: int = 10) -> Dict[str, Any]:
+    if not records:
+        return {
+            "total": 0,
+            "bins": [],
+            "brier_score": None,
+            "expected_calibration_error": None,
+            "bin_count": bins,
+        }
+
+    total = len(records)
+    bin_buckets: List[List[Tuple[float, int]]] = [[] for _ in range(bins)]
+    for conf, correct in records:
+        idx = min(int(conf * bins), bins - 1)
+        bin_buckets[idx].append((conf, correct))
+
+    bin_infos: List[Dict[str, Any]] = []
+    ece = 0.0
+    for i, bucket in enumerate(bin_buckets):
+        low = i / bins
+        high = 1.0 if i == bins - 1 else (i + 1) / bins
+        if bucket:
+            count = len(bucket)
+            sum_conf = sum(c for c, _ in bucket)
+            sum_correct = sum(corr for _, corr in bucket)
+            avg_conf = sum_conf / count
+            accuracy = sum_correct / count
+            ece += abs(accuracy - avg_conf) * (count / total)
+        else:
+            count = 0
+            avg_conf = None
+            accuracy = None
+        bin_infos.append(
+            {
+                "bin_lower": round(low, 3),
+                "bin_upper": round(high, 3),
+                "count": count,
+                "avg_confidence": round(avg_conf, 4) if avg_conf is not None else None,
+                "accuracy": round(accuracy, 4) if accuracy is not None else None,
+            }
+        )
+
+    brier = sum((conf - correct) ** 2 for conf, correct in records) / total
+    return {
+        "total": total,
+        "bins": bin_infos,
+        "brier_score": round(brier, 6),
+        "expected_calibration_error": round(ece, 6),
+        "bin_count": bins,
+    }
+
+
+def _write_metrics_csv(path: Path, report: Dict[str, Any]) -> None:
+    rows: List[Dict[str, Any]] = []
+
+    counts = report.get("counts", {})
+    if counts:
+        count_row = {"category": "summary", "name": "counts"}
+        count_row.update(counts)
+        rows.append(count_row)
+
+    def add_metric_row(name: str, key: str) -> None:
+        data = report.get(key) or {}
+        cm = data.get("confusion_matrix") or {}
+        metrics = data.get("metrics") or {}
+        if not metrics:
+            return
+        row = {
+            "category": "metric",
+            "name": name,
+            "accuracy": metrics.get("accuracy"),
+            "precision": metrics.get("precision"),
+            "recall": metrics.get("recall"),
+            "f1": metrics.get("f1"),
+            "recall_pos": metrics.get("recall_pos"),
+            "recall_neg": metrics.get("recall_neg"),
+            "support": metrics.get("support"),
+            "TP": cm.get("TP"),
+            "FP": cm.get("FP"),
+            "FN": cm.get("FN"),
+            "TN": cm.get("TN"),
+        }
+        rows.append(row)
+
+    add_metric_row("judge_filtered", "judge_metrics")
+    add_metric_row("judge_all", "judge_metrics_all")
+    add_metric_row("visual_veracity_filtered", "visual_veracity_ai_detection")
+    add_metric_row("visual_veracity_all", "visual_veracity_ai_detection_all")
+
+    calibration = report.get("judge_confidence_calibration") or {}
+    if calibration:
+        rows.append(
+            {
+                "category": "calibration_summary",
+                "name": "judge_confidence",
+                "brier_score": calibration.get("brier_score"),
+                "expected_calibration_error": calibration.get("expected_calibration_error"),
+                "samples": calibration.get("total"),
+            }
+        )
+        for idx, bin_info in enumerate(calibration.get("bins", [])):
+            row = {
+                "category": "calibration_bin",
+                "name": f"bin_{idx}",
+                "bin_lower": bin_info.get("bin_lower"),
+                "bin_upper": bin_info.get("bin_upper"),
+                "count": bin_info.get("count"),
+                "avg_confidence": bin_info.get("avg_confidence"),
+                "accuracy": bin_info.get("accuracy"),
+            }
+            rows.append(row)
+
+    if not rows:
+        raise ValueError("No data available to write CSV metrics")
+
+    fieldnames = sorted({key for row in rows for key in row.keys()})
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
+
+
+def evaluate(
+    outputs_path: Path,
+    dataset_json: Path,
+    image_root: Path,
+    save_report: Optional[Path] = None,
+    save_csv: Optional[Path] = None,
+) -> Dict[str, Any]:
     gt_map = _load_gt_map(dataset_json, image_root)
 
     preds: List[Dict[str, Any]] = []
@@ -176,6 +307,7 @@ def evaluate(outputs_path: Path, dataset_json: Path, image_root: Path, save_repo
 
     missing = 0
     label_counter = Counter()
+    confidence_records: List[Tuple[float, int]] = []
     for obj in preds:
         img_path = str(obj.get("image_path", ""))
         # Try flexible matching
@@ -205,6 +337,10 @@ def evaluate(outputs_path: Path, dataset_json: Path, image_root: Path, save_repo
         else:
             y_pred_all.append(pred)
             y_pred_all_keep_flags.append(True)
+            conf_val = j.get("confidence")
+            if isinstance(conf_val, (int, float)):
+                conf = max(0.0, min(1.0, float(conf_val)))
+                confidence_records.append((conf, 1 if pred == y_true else 0))
 
         # Visual veracity AI detection
         ai_true = _ai_truth_from_source(gt.get("image_source"))
@@ -270,6 +406,10 @@ def evaluate(outputs_path: Path, dataset_json: Path, image_root: Path, save_repo
         },
     }
 
+    calibration = _calibration_from_records(confidence_records)
+    report["judge_confidence_calibration"] = calibration
+    report["counts"]["judge_confidence_samples"] = calibration.get("total", 0)
+
     # Pretty print summary
     def _pp(title: str, cm: Dict[str, int], m: Dict[str, float]):
         print(f"\n== {title} ==")
@@ -296,6 +436,16 @@ def evaluate(outputs_path: Path, dataset_json: Path, image_root: Path, save_repo
     covered = len(y_true_ai_all)
     print(f"  AI-generated images in GT: {ai_total}; correctly flagged (filtered): {cm_ai_d['TP']} of {covered} covered")
 
+    if calibration.get("total"):
+        print(
+            "\nJudge confidence calibration: "
+            f"samples={calibration['total']} "
+            f"brier={calibration['brier_score']} "
+            f"ece={calibration['expected_calibration_error']}"
+        )
+    else:
+        print("\nJudge confidence calibration: no confident predictions available")
+
     if save_report is not None:
         try:
             with open(save_report, "w", encoding="utf-8") as f:
@@ -303,6 +453,13 @@ def evaluate(outputs_path: Path, dataset_json: Path, image_root: Path, save_repo
             print(f"\nReport saved to {save_report}")
         except Exception as e:
             print("\nWarning: failed to save report:", e)
+
+    if save_csv is not None:
+        try:
+            _write_metrics_csv(save_csv, report)
+            print(f"Metrics CSV saved to {save_csv}")
+        except Exception as e:
+            print("Warning: failed to save CSV metrics:", e)
 
     return report
 
@@ -313,14 +470,16 @@ def main():
     p.add_argument("--dataset-json", type=str, default=str(Path("data/MMFakeBench_test/MMFakeBench_test.json")), help="Path to dataset JSON")
     p.add_argument("--image-root", type=str, default=str(Path("data/MMFakeBench_test")), help="Image root to resolve dataset image paths")
     p.add_argument("--save-report", type=str, default="", help="Optional path to save metrics JSON report")
+    p.add_argument("--save-csv", type=str, default="", help="Optional path to save metrics summary CSV")
     args = p.parse_args()
 
     outputs = Path(args.outputs)
     dataset_json = Path(args.dataset_json)
     image_root = Path(args.image_root)
     save_report = Path(args.save_report) if args.save_report else None
+    save_csv = Path(args.save_csv) if args.save_csv else None
 
-    evaluate(outputs, dataset_json, image_root, save_report)
+    evaluate(outputs, dataset_json, image_root, save_report, save_csv)
 
 
 if __name__ == "__main__":

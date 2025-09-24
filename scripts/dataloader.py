@@ -136,7 +136,7 @@ class MMFakeBenchDataset:
         self._records: List[Dict[str, Any]] = []
         self._missing_count = 0
 
-        for rec in records:
+        for original_idx, rec in enumerate(records):
             try:
                 img_rel = rec[self.km.image]
                 # Resolve image path relative to image_root. Some datasets include a leading
@@ -165,6 +165,7 @@ class MMFakeBenchDataset:
                         "image_source": rec.get(self.km.image_source, None),
                         "gt_answers": rec.get(self.km.gt, None),
                         "fake_cls": rec.get(self.km.fake, None),
+                        "dataset_index": original_idx,
                     }
                 )
             except KeyError as e:
@@ -231,6 +232,7 @@ class MMFakeBenchDataset:
             "image_source": rec.get("image_source"),
             "gt_answers": rec["gt_answers"],
             "fake_cls": rec["fake_cls"],
+            "dataset_index": rec.get("dataset_index"),
         }
 
         if self.return_image:

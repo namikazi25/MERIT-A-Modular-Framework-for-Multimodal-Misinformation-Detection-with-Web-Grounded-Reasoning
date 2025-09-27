@@ -39,9 +39,10 @@ python -m scripts.evaluate \
 - **Providers & models**: set `ALIGN_PROVIDER`, `ALIGN_MODEL`, and provider API keys in
   `.env`. The same provider configuration is reused for relevancy, visual checks,
   question answering, and the judge.
-- **Search**: choose `SEARCH_PROVIDER` (brave or duckduckgo). Control minimum spacing
-  for requests with `BRAVE_SEARCH_MIN_INTERVAL` or `DUCKDUCKGO_SEARCH_MIN_INTERVAL` to
-  stay under rate limits.
+- **Search**: choose `SEARCH_PROVIDER` (brave or duckduckgo). Brave requests honor
+  `BRAVE_SEARCH_MIN_INTERVAL`; DuckDuckGo uses the new batch scheduler, tuned via
+  `DUCKDUCKGO_MAX_CONCURRENCY`, `DUCKDUCKGO_MIN_INTERVAL`, `DUCKDUCKGO_RETRIES`, and
+  related knobs documented in `.env`.
 - **Pipeline length**: `PIPELINE_MAX_SAMPLES` limits how many dataset entries are
   processed by default. Override per run with `--max-samples`.
 - **Module toggles (ablations)**: set to `1` in `.env` or pass the CLI flag to skip a

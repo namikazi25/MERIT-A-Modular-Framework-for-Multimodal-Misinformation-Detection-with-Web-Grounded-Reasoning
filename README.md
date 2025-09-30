@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 # 2) Prepare secrets / configuration
 cp .env.sample .env
-# Edit .env with provider API keys (OPENAI_API_KEY / GOOGLE_API_KEY / DEEPINFRA_API_KEY)
+# Edit .env with provider API keys (OPENAI_API_KEY / GOOGLE_API_KEY / DEEPINFRA_API_KEY / OPENROUTER_API_KEY)
 
 # 3) Unpack the dataset (if needed)
 python scripts/unzip_data.py --zip MMFakeBench_test.zip --dest data
@@ -37,8 +37,17 @@ python -m scripts.evaluate \
 ## 2. Configuration
 
 - **Providers & models**: set `ALIGN_PROVIDER`, `ALIGN_MODEL`, and provider API keys in
-  `.env`. The same provider configuration is reused for relevancy, visual checks,
-  question answering, and the judge.
+  `.env`. Supported providers are `openai`, `google`, `deepinfra`, and `openrouter`
+  (OpenAI-compatible endpoint for community models). When using OpenRouter, you can
+  leave `ALIGN_MODEL` blank and control the active model with `OPENROUTER_MODEL`
+  (e.g., `mistralai/mistral-small-3.2-24b-instruct:free` or `x-ai/grok-4-fast:free`).
+  The same provider configuration is reused for relevancy, visual checks, question
+  answering, and the judge.
+- **OpenRouter rate limits**: free models are capped at ~20 requests/minute (with
+  additional daily quotas). The loader enforces a conservative client-side throttle by
+  default (18 rpm, 45 requests per UTC day). Adjust with `OPENROUTER_RATE_LIMIT_PER_MIN`,
+  `OPENROUTER_MIN_INTERVAL_SECONDS`, or `OPENROUTER_DAILY_QUOTA` if you have higher paid
+  limits.
 - **Search**: choose `SEARCH_PROVIDER` (brave or duckduckgo). Brave requests honor
   `BRAVE_SEARCH_MIN_INTERVAL`; DuckDuckGo uses the new batch scheduler, tuned via
   `DUCKDUCKGO_MAX_CONCURRENCY`, `DUCKDUCKGO_MIN_INTERVAL`, `DUCKDUCKGO_RETRIES`, and

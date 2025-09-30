@@ -3,8 +3,8 @@ from __future__ import annotations
 """
 Generate investigative, Google-like search queries given a headline and image.
 
-The function queries the selected provider model (OpenAI GPT-4o or Google Gemini)
-to produce a small chain of question lists. Defaults to 3 chains with 3 questions
+The function queries the selected provider model (OpenAI, Google Gemini, DeepInfra,
+or OpenRouter) to produce a small chain of question lists. Defaults to 3 chains with 3 questions
 each. It keeps a running set of previously generated questions for a sample to
 avoid duplicates across the chains and can optionally condition on previously
 answered questions to encourage follow-up exploration.

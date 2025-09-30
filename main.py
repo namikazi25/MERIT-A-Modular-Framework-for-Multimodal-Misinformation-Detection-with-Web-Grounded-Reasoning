@@ -462,7 +462,7 @@ def main() -> None:
         })
     except Exception as e:
         print("Checker setup failed:", e)
-        print("Hints: set OPENAI_API_KEY or GOOGLE_API_KEY or DEEPINFRA_API_KEY; set ALIGN_PROVIDER=openai|google|deepinfra; optionally pass --model/--image/--headline/--relevancy-limit.")
+        print("Hints: set OPENAI_API_KEY or GOOGLE_API_KEY or DEEPINFRA_API_KEY or OPENROUTER_API_KEY; set ALIGN_PROVIDER=openai|google|deepinfra|openrouter; optionally pass --model/--image/--headline/--relevancy-limit.")
         return
 
     if answer_questions_enabled:

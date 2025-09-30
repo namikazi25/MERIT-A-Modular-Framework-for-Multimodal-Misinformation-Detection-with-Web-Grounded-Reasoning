@@ -17,12 +17,14 @@ This module exposes `judge_from_structured(final_obj, loader)` that returns a di
 {
   "label": "Misinformation" | "Not Misinformation" | "Uncertain",
   "confidence": float in [0,1],
+  "logprob_confidence": float in [0,1] | None,
   "rationale": str,
   "key_factors": [str, ...],
-  "raw": str | None  # raw LLM response if any
+  "raw": str | None,  # raw LLM response if any
+  "logprob_stats": Dict[str, Any] | None,
 }
 
-It attempts an LLM judgment first (OpenAI/Google via scripts.llm_loader). If that
+It attempts an LLM judgment first (OpenAI/Google/DeepInfra/OpenRouter via scripts.llm_loader). If that
 fails (e.g., missing API keys), it falls back to a deterministic heuristic using
 relevancy + visual veracity signals.
 """
@@ -138,9 +140,11 @@ def _heuristic_judge(final_obj: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "label": label,
         "confidence": confidence,
+        "logprob_confidence": None,
         "rationale": rationale,
         "key_factors": key_factors,
         "raw": None,
+        "logprob_stats": None,
     }
 
 
@@ -177,6 +181,15 @@ def judge_from_structured(final_obj: Dict[str, Any], loader: Optional[LLMModelLo
             resp = model.invoke(messages)
             text = getattr(resp, "content", resp)
             parsed = _parse_json_response(text if isinstance(text, str) else str(text))
+            logprob_summary = getattr(resp, "logprobs", None)
+            logprob_confidence: Optional[float] = None
+            if isinstance(logprob_summary, dict):
+                geo_prob = logprob_summary.get("geo_mean_prob")
+                try:
+                    if geo_prob is not None:
+                        logprob_confidence = max(0.0, min(1.0, float(geo_prob)))
+                except Exception:
+                    logprob_confidence = None
 
             label = str(parsed.get("label", "Uncertain")).strip()
             # Normalize label
@@ -207,9 +220,11 @@ def judge_from_structured(final_obj: Dict[str, Any], loader: Optional[LLMModelLo
             return {
                 "label": norm,
                 "confidence": max(0.0, min(1.0, confidence)),
+                "logprob_confidence": logprob_confidence,
                 "rationale": rationale,
                 "key_factors": key_factors,
                 "raw": text,
+                "logprob_stats": logprob_summary if isinstance(logprob_summary, dict) else None,
             }
         except Exception:
             # Fall back to heuristic if LLM call fails
@@ -219,4 +234,3 @@ def judge_from_structured(final_obj: Dict[str, Any], loader: Optional[LLMModelLo
 
 
 __all__ = ["judge_from_structured"]
-

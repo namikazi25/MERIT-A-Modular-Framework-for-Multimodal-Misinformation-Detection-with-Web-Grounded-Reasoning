@@ -3,7 +3,7 @@ from __future__ import annotations
 """
 LLM-based visual veracity checker for a single image.
 
-Asks a provider model (OpenAI GPT-4o or Google Gemini 2.5) whether the image
+Asks a provider model (OpenAI, Google Gemini, DeepInfra, or OpenRouter) whether the image
 appears AI-generated, manipulated, or contains elements that seem out of place.
 
 Output format (strict JSON requested from the model):
@@ -155,4 +155,3 @@ def assess_image_visual_veracity(
 
 
 __all__ = ["assess_image_visual_veracity"]
-

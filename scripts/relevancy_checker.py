@@ -4,7 +4,7 @@ from __future__ import annotations
 LLM-based relevancy check between a news headline and an image.
 
 This module provides a function that uses the switchable loader from
-scripts.llm_loader to query an LLM (OpenAI GPT-4o or Google Gemini 2.5 Flash)
+scripts.llm_loader to query an LLM (OpenAI, Google Gemini, DeepInfra, or OpenRouter)
 about whether a given image is relevant to a headline.
 
 Example
@@ -156,4 +156,3 @@ __all__ = [
     "assess_image_headline_relevancy",
     "assess_image_headline_alignment",  # alias for compatibility
 ]
-

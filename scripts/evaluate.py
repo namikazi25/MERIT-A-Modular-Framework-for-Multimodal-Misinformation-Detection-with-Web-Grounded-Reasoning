@@ -260,6 +260,29 @@ def _write_metrics_csv(path: Path, report: Dict[str, Any]) -> None:
             }
             rows.append(row)
 
+    logprob_cal = report.get("judge_logprob_calibration") or {}
+    if logprob_cal:
+        rows.append(
+            {
+                "category": "calibration_summary",
+                "name": "judge_logprob_confidence",
+                "brier_score": logprob_cal.get("brier_score"),
+                "expected_calibration_error": logprob_cal.get("expected_calibration_error"),
+                "samples": logprob_cal.get("total"),
+            }
+        )
+        for idx, bin_info in enumerate(logprob_cal.get("bins", [])):
+            row = {
+                "category": "calibration_bin",
+                "name": f"logprob_bin_{idx}",
+                "bin_lower": bin_info.get("bin_lower"),
+                "bin_upper": bin_info.get("bin_upper"),
+                "count": bin_info.get("count"),
+                "avg_confidence": bin_info.get("avg_confidence"),
+                "accuracy": bin_info.get("accuracy"),
+            }
+            rows.append(row)
+
     if not rows:
         raise ValueError("No data available to write CSV metrics")
 
@@ -272,12 +295,61 @@ def _write_metrics_csv(path: Path, report: Dict[str, Any]) -> None:
             writer.writerow(row)
 
 
+def _save_reliability_plot(calibration: Dict[str, Any], title: str, path: Path) -> None:
+    if not calibration or not calibration.get("total"):
+        return
+
+    bins = calibration.get("bins") or []
+    if not bins:
+        return
+
+    try:
+        import matplotlib.pyplot as plt
+    except Exception as exc:  # pragma: no cover - optional dependency
+        print(f"Warning: unable to import matplotlib for '{title}' plot: {exc}")
+        return
+
+    centers: List[float] = []
+    accuracies: List[float] = []
+    confidences: List[float] = []
+    for bin_info in bins:
+        low = bin_info.get("bin_lower")
+        high = bin_info.get("bin_upper")
+        if low is None or high is None:
+            continue
+        center = (float(low) + float(high)) / 2.0
+        centers.append(center)
+        accuracies.append(float(bin_info.get("accuracy") or 0.0))
+        confidences.append(float(bin_info.get("avg_confidence") or 0.0))
+
+    if not centers:
+        return
+
+    width = 1.0 / max(1, len(centers))
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    plt.figure(figsize=(6, 4))
+    plt.bar(centers, confidences, width=width, alpha=0.6, label="Avg confidence")
+    plt.bar(centers, accuracies, width=width, alpha=0.6, label="Accuracy")
+    plt.plot([0, 1], [0, 1], "k--", label="Perfect calibration")
+    plt.xlim(0, 1)
+    plt.ylim(0, 1)
+    plt.xlabel("Confidence bin")
+    plt.ylabel("Rate")
+    plt.title(title)
+    plt.legend(loc="best")
+    plt.tight_layout()
+    plt.savefig(path, dpi=150)
+    plt.close()
+
+
 def evaluate(
     outputs_path: Path,
     dataset_json: Path,
     image_root: Path,
     save_report: Optional[Path] = None,
     save_csv: Optional[Path] = None,
+    save_calibration_dir: Optional[Path] = None,
 ) -> Dict[str, Any]:
     gt_map = _load_gt_map(dataset_json, image_root)
 
@@ -308,6 +380,7 @@ def evaluate(
     missing = 0
     label_counter = Counter()
     confidence_records: List[Tuple[float, int]] = []
+    logprob_records: List[Tuple[float, int]] = []
     for obj in preds:
         img_path = str(obj.get("image_path", ""))
         # Try flexible matching
@@ -341,6 +414,10 @@ def evaluate(
             if isinstance(conf_val, (int, float)):
                 conf = max(0.0, min(1.0, float(conf_val)))
                 confidence_records.append((conf, 1 if pred == y_true else 0))
+            lp_val = j.get("logprob_confidence")
+            if isinstance(lp_val, (int, float)):
+                lp_conf = max(0.0, min(1.0, float(lp_val)))
+                logprob_records.append((lp_conf, 1 if pred == y_true else 0))
 
         # Visual veracity AI detection
         ai_true = _ai_truth_from_source(gt.get("image_source"))
@@ -410,6 +487,10 @@ def evaluate(
     report["judge_confidence_calibration"] = calibration
     report["counts"]["judge_confidence_samples"] = calibration.get("total", 0)
 
+    logprob_calibration = _calibration_from_records(logprob_records)
+    report["judge_logprob_calibration"] = logprob_calibration
+    report["counts"]["judge_logprob_samples"] = logprob_calibration.get("total", 0)
+
     # Pretty print summary
     def _pp(title: str, cm: Dict[str, int], m: Dict[str, float]):
         print(f"\n== {title} ==")
@@ -446,6 +527,14 @@ def evaluate(
     else:
         print("\nJudge confidence calibration: no confident predictions available")
 
+    if logprob_calibration.get("total"):
+        print(
+            "  Logprob-derived confidence calibration: "
+            f"samples={logprob_calibration['total']} "
+            f"brier={logprob_calibration['brier_score']} "
+            f"ece={logprob_calibration['expected_calibration_error']}"
+        )
+
     if save_report is not None:
         try:
             with open(save_report, "w", encoding="utf-8") as f:
@@ -461,6 +550,23 @@ def evaluate(
         except Exception as e:
             print("Warning: failed to save CSV metrics:", e)
 
+    if save_calibration_dir is not None:
+        try:
+            save_calibration_dir.mkdir(parents=True, exist_ok=True)
+            _save_reliability_plot(
+                calibration,
+                "Self-reported confidence reliability",
+                save_calibration_dir / "judge_confidence.png",
+            )
+            _save_reliability_plot(
+                logprob_calibration,
+                "Logprob-derived confidence reliability",
+                save_calibration_dir / "judge_logprob.png",
+            )
+            print(f"Calibration plots saved to {save_calibration_dir}")
+        except Exception as e:
+            print("Warning: failed to save calibration plots:", e)
+
     return report
 
 
@@ -471,6 +577,7 @@ def main():
     p.add_argument("--image-root", type=str, default=str(Path("data/MMFakeBench_test")), help="Image root to resolve dataset image paths")
     p.add_argument("--save-report", type=str, default="", help="Optional path to save metrics JSON report")
     p.add_argument("--save-csv", type=str, default="", help="Optional path to save metrics summary CSV")
+    p.add_argument("--save-calibration-dir", type=str, default="", help="Optional directory to save reliability diagrams")
     args = p.parse_args()
 
     outputs = Path(args.outputs)
@@ -478,8 +585,9 @@ def main():
     image_root = Path(args.image_root)
     save_report = Path(args.save_report) if args.save_report else None
     save_csv = Path(args.save_csv) if args.save_csv else None
+    save_calibration_dir = Path(args.save_calibration_dir) if args.save_calibration_dir else None
 
-    evaluate(outputs, dataset_json, image_root, save_report, save_csv)
+    evaluate(outputs, dataset_json, image_root, save_report, save_csv, save_calibration_dir)
 
 
 if __name__ == "__main__":

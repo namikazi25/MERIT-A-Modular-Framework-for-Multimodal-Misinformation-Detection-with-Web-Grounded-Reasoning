@@ -8,6 +8,7 @@ import time
 from typing import Any, Dict, List, Optional
 
 from scripts.brave_search import brave_web_search, extract_web_results
+from scripts.utils.search import normalize_search_results
 
 try:  # Prefer the modern package name first
     from ddgs import DDGS  # type: ignore
@@ -124,21 +125,7 @@ def _duckduckgo_web_search(query: str, **params: Any) -> Dict[str, Any]:
     with DDGS(proxy=proxy, timeout=timeout) as ddgs:  # type: ignore
         raw_results = list(ddgs.text(query, **ddg_kwargs))
 
-    normalized: List[Dict[str, str]] = []
-    for item in raw_results:
-        if not isinstance(item, dict):
-            continue
-        url = str(item.get("href") or item.get("url") or "").strip()
-        if not url:
-            continue
-        normalized.append(
-            {
-                "title": str(item.get("title") or "").strip(),
-                "url": url,
-                "description": str(item.get("body") or item.get("description") or item.get("snippet") or "").strip(),
-                "source": str(item.get("source") or "").strip(),
-            }
-        )
+    normalized = normalize_search_results(raw_results)
 
     return {
         "provider": "duckduckgo",

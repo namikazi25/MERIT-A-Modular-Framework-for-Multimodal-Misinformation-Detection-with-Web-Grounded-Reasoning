@@ -33,6 +33,7 @@ import json
 from typing import Any, Dict, List, Optional
 
 from scripts.llm_loader import LLMModelLoader
+from scripts.utils.json_utils import extract_json_object
 
 
 _SYSTEM_PROMPT = (
@@ -148,22 +149,6 @@ def _heuristic_judge(final_obj: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def _parse_json_response(text: str) -> Dict[str, Any]:
-    try:
-        return json.loads(text)
-    except Exception:
-        pass
-    start = text.find("{")
-    end = text.rfind("}")
-    if start != -1 and end != -1 and end > start:
-        snippet = text[start : end + 1]
-        try:
-            return json.loads(snippet)
-        except Exception:
-            pass
-    return {"label": "Uncertain", "confidence": 0.5, "rationale": text.strip(), "key_factors": []}
-
-
 def judge_from_structured(final_obj: Dict[str, Any], loader: Optional[LLMModelLoader]) -> Dict[str, Any]:
     """
     Make a misinformation judgment from the final structured output.
@@ -180,7 +165,16 @@ def judge_from_structured(final_obj: Dict[str, Any], loader: Optional[LLMModelLo
             ]
             resp = model.invoke(messages)
             text = getattr(resp, "content", resp)
-            parsed = _parse_json_response(text if isinstance(text, str) else str(text))
+            raw_text = text if isinstance(text, str) else str(text)
+            parsed = extract_json_object(
+                raw_text,
+                fallback=lambda payload: {
+                    "label": "Uncertain",
+                    "confidence": 0.5,
+                    "rationale": payload.strip(),
+                    "key_factors": [],
+                },
+            ) or {}
             logprob_summary = getattr(resp, "logprobs", None)
             logprob_confidence: Optional[float] = None
             if isinstance(logprob_summary, dict):
@@ -223,7 +217,7 @@ def judge_from_structured(final_obj: Dict[str, Any], loader: Optional[LLMModelLo
                 "logprob_confidence": logprob_confidence,
                 "rationale": rationale,
                 "key_factors": key_factors,
-                "raw": text,
+                "raw": raw_text,
                 "logprob_stats": logprob_summary if isinstance(logprob_summary, dict) else None,
             }
         except Exception:

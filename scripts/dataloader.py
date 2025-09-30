@@ -39,22 +39,7 @@ from typing import Any, Callable, Dict, Iterable, List, Optional
 
 from PIL import Image
 
-
-def _load_json_records(json_path: Path) -> List[Dict[str, Any]]:
-    with open(json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    if isinstance(data, list):
-        return data
-    if isinstance(data, dict):
-        # Common patterns: {"data": [...]} or {"items": [...]} or any single list value.
-        for k in ("data", "items", "records", "samples"):
-            if k in data and isinstance(data[k], list):
-                return data[k]
-        # Fallback: take first list-valued entry
-        for v in data.values():
-            if isinstance(v, list):
-                return v
-    raise ValueError(f"Unsupported JSON structure in {json_path}")
+from scripts.utils.dataset import load_dataset_records
 
 
 def _normalize_class_key(value: Any) -> str:
@@ -132,7 +117,7 @@ class MMFakeBenchDataset:
         self._rng = random.Random(self.seed)
 
         # Load and index base records
-        records = _load_json_records(self.json_path)
+        records = load_dataset_records(self.json_path)
         self._records: List[Dict[str, Any]] = []
         self._missing_count = 0
 

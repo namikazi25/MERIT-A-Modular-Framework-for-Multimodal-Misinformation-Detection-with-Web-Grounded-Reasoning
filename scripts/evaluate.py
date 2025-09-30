@@ -27,73 +27,28 @@ Outputs a human-readable summary and a JSON metrics object if --save-report is p
 import argparse
 import csv
 import json
-import os
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-
-def _norm_path(p: Path) -> str:
-    try:
-        return str(p.resolve())
-    except Exception:
-        return str(p)
-
-
-def _to_rel_under_root(image_root: Path, path: str) -> str:
-    # Normalize to a relative posix-like key under image_root, stripping any leading '/'
-    s = path.replace("\\", "/")
-    s = s.lstrip("/")
-    try:
-        # If it's absolute under the workspace, try to relativize to root
-        p = Path(path)
-        rel = p.relative_to(image_root)
-        return rel.as_posix()
-    except Exception:
-        return s
-
-
-def _resolve_candidates(image_root: Path, img_path: str) -> List[str]:
-    p = Path(img_path)
-    cands: List[str] = []
-    # Absolute normalized
-    if p.is_absolute():
-        cands.append(_norm_path(p))
-        # Rebased absolute-like to image_root
-        cands.append(_norm_path(image_root / str(p).lstrip(os.sep)))
-    else:
-        cands.append(_norm_path((image_root / p)))
-    # Relative under root
-    cands.append(_to_rel_under_root(image_root, img_path))
-    # Also store version without any leading '/'
-    cands.append(_to_rel_under_root(image_root, "/" + _to_rel_under_root(image_root, img_path)))
-    # De-dup
-    seen = set()
-    out: List[str] = []
-    for c in cands:
-        if c not in seen:
-            seen.add(c)
-            out.append(c)
-    return out
+from scripts.utils.dataset import load_dataset_records, resolve_image_candidates
 
 
 def _load_gt_map(dataset_json: Path, image_root: Path) -> Dict[str, Dict[str, Any]]:
-    with open(dataset_json, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    # Build mapping from multiple keys (abs + rel) -> {gt, image_source}
-    m: Dict[str, Dict[str, Any]] = {}
-    for rec in data:
+    records = load_dataset_records(dataset_json)
+    mapping: Dict[str, Dict[str, Any]] = {}
+    for rec in records:
         img = rec.get("image_path")
         if img is None:
             continue
-        for key in _resolve_candidates(image_root, img):
-            m[key] = {
+        for key in resolve_image_candidates(image_root, str(img)):
+            mapping[key] = {
                 "gt_answers": rec.get("gt_answers"),
                 "image_source": rec.get("image_source"),
                 "text": rec.get("text"),
             }
-    return m
+    return mapping
 
 
 def _metrics_from_counts(tp: int, fp: int, fn: int, tn: int) -> Dict[str, float]:

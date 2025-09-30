@@ -15,12 +15,11 @@ Returns a dict with:
   - raws: list[str] (raw LLM outputs per chain)
 """
 
-import base64
-import json
-import os
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from scripts.llm_loader import LLMModelLoader
+from scripts.utils.json_utils import extract_json_array
+from scripts.utils.media import image_to_data_url
 
 
 _DEFAULT_SYSTEM_PROMPT = (
@@ -31,31 +30,6 @@ _DEFAULT_SYSTEM_PROMPT = (
 )
 
 _MAX_CONTEXT_QA = 5
-
-
-def _guess_mime(path: str) -> str:
-    ext = os.path.splitext(path)[1].lower()
-    if ext in (".jpg", ".jpeg"):
-        return "image/jpeg"
-    if ext in (".png",):
-        return "image/png"
-    if ext in (".webp",):
-        return "image/webp"
-    if ext in (".gif",):
-        return "image/gif"
-    if ext in (".bmp",):
-        return "image/bmp"
-    return "image/png"
-
-
-def _image_to_data_url(image_path: str) -> str:
-    with open(image_path, "rb") as f:
-        data = f.read()
-    b64 = base64.b64encode(data).decode("ascii")
-    mime = _guess_mime(image_path)
-    return f"data:{mime};base64,{b64}"
-
-
 def _make_instruction(headline: str, k: int, prior: List[str], answered: List[Tuple[str, str]]) -> str:
     prior_block = "\n".join(f"- {q}" for q in prior) if prior else "(none)"
     answered_block = (
@@ -74,31 +48,6 @@ def _make_instruction(headline: str, k: int, prior: List[str], answered: List[Tu
         "Output JSON strictly as an array of strings.\n"
         "Example: [\"Event name location date verification\", \"Feature in image anomaly term\"]"
     )
-
-
-def _parse_json_array(text: str) -> List[str]:
-    # Try direct parse
-    try:
-        obj = json.loads(text)
-        if isinstance(obj, list):
-            return [str(x).strip() for x in obj if isinstance(x, (str, int, float)) or x]
-    except Exception:
-        pass
-    # Heuristic extract
-    s, e = text.find("["), text.rfind("]")
-    if s != -1 and e != -1 and e > s:
-        snippet = text[s : e + 1]
-        try:
-            obj = json.loads(snippet)
-            if isinstance(obj, list):
-                return [str(x).strip() for x in obj if isinstance(x, (str, int, float)) or x]
-        except Exception:
-            pass
-    # Fallback: split lines
-    lines = [ln.strip(" -•\t") for ln in text.splitlines() if ln.strip()]
-    return [ln for ln in lines if len(ln) > 2]
-
-
 def generate_investigative_questions(
     image_path: str,
     headline: str,
@@ -110,7 +59,7 @@ def generate_investigative_questions(
     prior_answers: Optional[Dict[str, Any]] = None,
     system_prompt: Optional[str] = None,
 ) -> Dict[str, Any]:
-    data_url = _image_to_data_url(image_path)
+    data_url = image_to_data_url(image_path)
     model = loader.get_model()
 
     sys_msg = system_prompt or _DEFAULT_SYSTEM_PROMPT
@@ -152,12 +101,22 @@ def generate_investigative_questions(
         ]
         resp = model.invoke(messages)
         text = getattr(resp, "content", resp)
-        raws.append(text if isinstance(text, str) else str(text))
-        candidates = _parse_json_array(raws[-1])
+        raw_text = text if isinstance(text, str) else str(text)
+        raws.append(raw_text)
+        candidates = extract_json_array(
+            raw_text,
+            fallback=lambda payload: [
+                stripped
+                for stripped in (
+                    ln.strip(" -•\t") for ln in payload.splitlines() if ln.strip()
+                )
+                if len(stripped) > 2
+            ],
+        ) or []
 
         chain_list: List[str] = []
         for q in candidates:
-            qn = q.strip()
+            qn = str(q).strip()
             key = qn.lower()
             if not qn or key in seen:
                 continue

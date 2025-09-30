@@ -21,12 +21,11 @@ Usage:
     print(res)
 """
 
-import base64
-import json
-import os
 from typing import Any, Dict, Optional
 
 from scripts.llm_loader import LLMModelLoader
+from scripts.utils.json_utils import extract_json_object
+from scripts.utils.media import image_to_data_url
 
 
 _DEFAULT_SYSTEM_PROMPT = (
@@ -35,31 +34,6 @@ _DEFAULT_SYSTEM_PROMPT = (
     "visual elements seem out of place (e.g., inconsistent lighting, warped hands, "
     "nonsensical text, reflections, impossible shadows). Respond with strict JSON only."
 )
-
-
-def _guess_mime(path: str) -> str:
-    ext = os.path.splitext(path)[1].lower()
-    if ext in (".jpg", ".jpeg"):
-        return "image/jpeg"
-    if ext in (".png",):
-        return "image/png"
-    if ext in (".webp",):
-        return "image/webp"
-    if ext in (".gif",):
-        return "image/gif"
-    if ext in (".bmp",):
-        return "image/bmp"
-    return "image/png"
-
-
-def _image_to_data_url(image_path: str) -> str:
-    with open(image_path, "rb") as f:
-        data = f.read()
-    b64 = base64.b64encode(data).decode("ascii")
-    mime = _guess_mime(image_path)
-    return f"data:{mime};base64,{b64}"
-
-
 def _build_user_instruction() -> str:
     return (
         "Task: Examine the image and decide whether it appears AI-generated or manipulated, "
@@ -71,24 +45,6 @@ def _build_user_instruction() -> str:
         "  anomalies: optional array of short strings (e.g., ['extra finger', 'warped text'])\n"
         "Example: {\"ai_generated\": false, \"confidence\": 0.22, \"explanation\": \"...\", \"anomalies\": []}"
     )
-
-
-def _parse_json_response(text: str) -> Dict[str, Any]:
-    try:
-        return json.loads(text)
-    except Exception:
-        pass
-    start = text.find("{")
-    end = text.rfind("}")
-    if start != -1 and end != -1 and end > start:
-        snippet = text[start : end + 1]
-        try:
-            return json.loads(snippet)
-        except Exception:
-            pass
-    return {"ai_generated": None, "confidence": None, "explanation": text.strip()}
-
-
 def assess_image_visual_veracity(
     image_path: str,
     loader: LLMModelLoader,
@@ -101,7 +57,7 @@ def assess_image_visual_veracity(
     Returns a dict with keys: ai_generated (bool), confidence (float 0..1), explanation (str),
     optionally anomalies (list[str]), and raw (original text response).
     """
-    data_url = _image_to_data_url(image_path)
+    data_url = image_to_data_url(image_path)
     model = loader.get_model()
 
     sys_msg = system_prompt or _DEFAULT_SYSTEM_PROMPT
@@ -120,7 +76,17 @@ def assess_image_visual_veracity(
 
     resp = model.invoke(messages)
     text = getattr(resp, "content", resp)
-    parsed = _parse_json_response(text if isinstance(text, str) else str(text))
+    raw_text = text if isinstance(text, str) else str(text)
+    parsed = extract_json_object(
+        raw_text,
+        fallback=lambda payload: {
+            "ai_generated": None,
+            "confidence": None,
+            "explanation": payload.strip(),
+        },
+    )
+    if parsed is None:
+        parsed = {}
 
     # Normalize fields
     ai_gen = parsed.get("ai_generated")
@@ -150,7 +116,7 @@ def assess_image_visual_veracity(
         "confidence": parsed.get("confidence"),
         "explanation": parsed.get("explanation"),
         "anomalies": parsed.get("anomalies", []),
-        "raw": text,
+        "raw": raw_text,
     }
 
 

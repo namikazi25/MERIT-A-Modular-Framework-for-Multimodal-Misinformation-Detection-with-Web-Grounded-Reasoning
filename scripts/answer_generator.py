@@ -17,10 +17,11 @@ Returns a dict with:
   - search_provider: str|None
 """
 
-import json
 from typing import Any, Dict, List, Optional
 
 from scripts.llm_loader import LLMModelLoader
+from scripts.utils.json_utils import extract_json_object
+from scripts.utils.search import normalize_search_payload
 
 
 _DEFAULT_SYSTEM_PROMPT = (
@@ -32,10 +33,10 @@ _DEFAULT_SYSTEM_PROMPT = (
 
 def _build_user_text(question: str, sources: List[Dict[str, str]]) -> str:
     lines = [f"Question: {question}", "\nSources:"]
-    for i, s in enumerate(sources, start=1):
-        title = s.get("title") or "(no title)"
-        url = s.get("url") or ""
-        desc = s.get("description") or ""
+    for i, source in enumerate(sources, start=1):
+        title = source.get("title") or "(no title)"
+        url = source.get("url") or ""
+        desc = source.get("description") or ""
         lines.append(f"[{i}] {title}\nURL: {url}\nSnippet: {desc}")
     lines.append(
         "\nInstructions: Produce strict JSON with keys:\n"
@@ -47,64 +48,6 @@ def _build_user_text(question: str, sources: List[Dict[str, str]]) -> str:
     return "\n".join(lines)
 
 
-def _parse_json_response(text: str) -> Dict[str, Any]:
-    try:
-        return json.loads(text)
-    except Exception:
-        pass
-    s, e = text.find("{"), text.rfind("}")
-    if s != -1 and e != -1 and e > s:
-        try:
-            return json.loads(text[s : e + 1])
-        except Exception:
-            pass
-    return {"answer": text.strip(), "citations": []}
-
-
-def _normalize_results(payload: Dict[str, Any]) -> List[Dict[str, str]]:
-    results = payload.get("results")
-    if isinstance(results, list) and results:
-        normalized: List[Dict[str, str]] = []
-        for item in results:
-            if not isinstance(item, dict):
-                continue
-            url = str(item.get("url") or "").strip()
-            if not url:
-                continue
-            normalized.append(
-                {
-                    "title": str(item.get("title") or "").strip(),
-                    "url": url,
-                    "description": str(item.get("description") or "").strip(),
-                }
-            )
-        if normalized:
-            return normalized
-
-    try:
-        from scripts.brave_search import extract_web_results as _legacy_extract  # late import to avoid cycle
-
-        legacy_results = _legacy_extract(payload)
-    except Exception:
-        legacy_results = []
-
-    normalized: List[Dict[str, str]] = []
-    for item in legacy_results:
-        if not isinstance(item, dict):
-            continue
-        url = str(item.get("url") or "").strip()
-        if not url:
-            continue
-        normalized.append(
-            {
-                "title": str(item.get("title") or "").strip(),
-                "url": url,
-                "description": str(item.get("description") or "").strip(),
-            }
-        )
-    return normalized
-
-
 def generate_answer_from_search(
     question: str,
     search_payload: Dict[str, Any],
@@ -113,14 +56,23 @@ def generate_answer_from_search(
     max_sources: int = 5,
     system_prompt: Optional[str] = None,
 ) -> Dict[str, Any]:
-    normalized_results = _normalize_results(search_payload)
+    try:
+        from scripts.brave_search import extract_web_results as _legacy_extract  # late import to avoid cycle
+    except Exception:
+        _legacy_extract = None
+
+    normalized_results = normalize_search_payload(
+        search_payload,
+        legacy_extractor=_legacy_extract,
+    )
+
     sources: List[Dict[str, str]] = []
-    for r in normalized_results[: max(1, int(max_sources))]:
+    for result in normalized_results[: max(1, int(max_sources))]:
         sources.append(
             {
-                "title": r.get("title", ""),
-                "url": r.get("url", ""),
-                "description": r.get("description", ""),
+                "title": result.get("title", ""),
+                "url": result.get("url", ""),
+                "description": result.get("description", ""),
             }
         )
 
@@ -134,26 +86,31 @@ def generate_answer_from_search(
     ]
     resp = model.invoke(messages)
     text = getattr(resp, "content", resp)
-    parsed = _parse_json_response(text if isinstance(text, str) else str(text))
+    raw_text = text if isinstance(text, str) else str(text)
+    parsed = extract_json_object(
+        raw_text,
+        fallback=lambda payload: {"answer": payload.strip(), "citations": []},
+    ) or {}
 
-    # Normalize fields
     if not isinstance(parsed.get("answer"), str):
         parsed["answer"] = str(parsed.get("answer"))
-    cits = parsed.get("citations")
-    if not isinstance(cits, list):
+
+    citations = parsed.get("citations")
+    if not isinstance(citations, list):
         parsed["citations"] = []
-    for i, c in enumerate(parsed.get("citations", [])):
-        if not isinstance(c, dict):
-            parsed["citations"][i] = {"url": str(c)}
+    for index, citation in enumerate(parsed.get("citations", [])):
+        if not isinstance(citation, dict):
+            parsed["citations"][index] = {"url": str(citation)}
         else:
-            # ensure keys exist
-            c.setdefault("url", "")
-            c.setdefault("title", "")
+            citation.setdefault("url", "")
+            citation.setdefault("title", "")
+
     try:
         if parsed.get("confidence") is not None:
             parsed["confidence"] = float(parsed.get("confidence"))
     except Exception:
         parsed["confidence"] = None
+
     if not isinstance(parsed.get("rationale"), str):
         parsed["rationale"] = str(parsed.get("rationale"))
 
@@ -162,7 +119,7 @@ def generate_answer_from_search(
         "citations": parsed.get("citations", []),
         "confidence": parsed.get("confidence"),
         "rationale": parsed.get("rationale"),
-        "raw": text,
+        "raw": raw_text,
         "sources_used": sources,
         "search_provider": search_payload.get("provider"),
     }

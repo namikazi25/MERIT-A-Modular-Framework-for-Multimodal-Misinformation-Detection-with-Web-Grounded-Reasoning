@@ -19,12 +19,11 @@ Note: For backward compatibility, this module also exports
 `assess_image_headline_alignment` as an alias of `assess_image_headline_relevancy`.
 """
 
-import base64
-import json
-import os
 from typing import Any, Dict, Optional
 
 from scripts.llm_loader import LLMModelLoader
+from scripts.utils.json_utils import extract_json_object
+from scripts.utils.media import image_to_data_url
 
 
 _DEFAULT_SYSTEM_PROMPT = (
@@ -32,31 +31,6 @@ _DEFAULT_SYSTEM_PROMPT = (
     "reference image, judge if the image is relevant to the headline (i.e., "
     "the image plausibly depicts the claim in the headline). Respond with strict JSON only, no extra text."
 )
-
-
-def _guess_mime(path: str) -> str:
-    ext = os.path.splitext(path)[1].lower()
-    if ext in (".jpg", ".jpeg"):
-        return "image/jpeg"
-    if ext in (".png",):
-        return "image/png"
-    if ext in (".webp",):
-        return "image/webp"
-    if ext in (".gif",):
-        return "image/gif"
-    if ext in (".bmp",):
-        return "image/bmp"
-    # Fallback
-    return "image/png"
-
-
-def _image_to_data_url(image_path: str) -> str:
-    with open(image_path, "rb") as f:
-        data = f.read()
-    b64 = base64.b64encode(data).decode("ascii")
-    mime = _guess_mime(image_path)
-    return f"data:{mime};base64,{b64}"
-
 
 def _build_user_instruction(headline: str) -> str:
     return (
@@ -68,27 +42,6 @@ def _build_user_instruction(headline: str) -> str:
         "  explanation: short textual rationale\n"
         "Example: {\"aligned\": true, \"confidence\": 0.78, \"explanation\": \"...\"}"
     )
-
-
-def _parse_json_response(text: str) -> Dict[str, Any]:
-    # Try direct parse first
-    try:
-        return json.loads(text)
-    except Exception:
-        pass
-    # Extract first top-level JSON object heuristically
-    start = text.find("{")
-    end = text.rfind("}")
-    if start != -1 and end != -1 and end > start:
-        snippet = text[start : end + 1]
-        try:
-            return json.loads(snippet)
-        except Exception:
-            pass
-    # Fallback minimal schema
-    return {"aligned": None, "confidence": None, "explanation": text.strip()}
-
-
 def assess_image_headline_relevancy(
     image_path: str,
     headline: str,
@@ -101,7 +54,7 @@ def assess_image_headline_relevancy(
 
     Returns a dict with keys: aligned (bool), confidence (float 0..1), explanation (str).
     """
-    data_url = _image_to_data_url(image_path)
+    data_url = image_to_data_url(image_path)
     model = loader.get_model()
 
     sys_msg = system_prompt or _DEFAULT_SYSTEM_PROMPT
@@ -121,7 +74,17 @@ def assess_image_headline_relevancy(
     # Invoke the model directly with structured content (multimodal)
     resp = model.invoke(messages)
     text = getattr(resp, "content", resp)
-    parsed = _parse_json_response(text if isinstance(text, str) else str(text))
+    raw_text = text if isinstance(text, str) else str(text)
+    parsed = extract_json_object(
+        raw_text,
+        fallback=lambda payload: {
+            "aligned": None,
+            "confidence": None,
+            "explanation": payload.strip(),
+        },
+    )
+    if parsed is None:
+        parsed = {}
 
     # Normalize fields
     aligned = parsed.get("aligned")
@@ -145,7 +108,7 @@ def assess_image_headline_relevancy(
         "aligned": parsed.get("aligned"),
         "confidence": parsed.get("confidence"),
         "explanation": parsed.get("explanation"),
-        "raw": text,
+        "raw": raw_text,
     }
 
 

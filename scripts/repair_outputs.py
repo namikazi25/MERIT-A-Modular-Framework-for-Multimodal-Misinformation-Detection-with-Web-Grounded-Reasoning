@@ -19,48 +19,7 @@ import time
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-
-def _load_dataset_records(path: Path) -> List[Dict[str, Any]]:
-    data = json.loads(path.read_text(encoding="utf-8"))
-    if isinstance(data, list):
-        return data
-    if isinstance(data, dict):
-        for key in ("data", "items", "records", "samples"):
-            val = data.get(key)
-            if isinstance(val, list):
-                return val
-        for val in data.values():
-            if isinstance(val, list):
-                return val
-    raise ValueError(f"Unsupported JSON structure in dataset file: {path}")
-
-
-def _normalize(path: Optional[str], image_root: Optional[Path]) -> Optional[str]:
-    if not path:
-        return None
-    p = Path(str(path))
-    if not p.is_absolute() and image_root:
-        p = image_root / str(path).lstrip("/\\")
-    try:
-        return str(p.resolve())
-    except Exception:
-        return str(p.expanduser().absolute())
-
-
-def _parse_index(value: Any) -> Optional[int]:
-    if isinstance(value, bool):
-        return None
-    if isinstance(value, int):
-        return value
-    if isinstance(value, str):
-        value = value.strip()
-        if not value:
-            return None
-        try:
-            return int(value)
-        except ValueError:
-            return None
-    return None
+from scripts.utils.dataset import coerce_index, load_dataset_records, normalize_record_path
 
 
 def _record_matches(
@@ -74,8 +33,8 @@ def _record_matches(
         if headline_obj.strip() == headline_rec.strip():
             return True
 
-    img_obj = _normalize(obj.get("image_path"), image_root)
-    img_rec = _normalize(rec.get("image_path"), image_root)
+    img_obj = normalize_record_path(obj.get("image_path"), image_root)
+    img_rec = normalize_record_path(rec.get("image_path"), image_root)
     if img_obj and img_rec and img_obj == img_rec:
         return True
     return False
@@ -90,7 +49,7 @@ def _pick_dataset_record(
 ) -> Optional[Tuple[int, Dict[str, Any], str]]:
     sources: List[str] = []
 
-    idx = _parse_index(obj.get("dataset_order_index"))
+    idx = coerce_index(obj.get("dataset_order_index"))
     if idx is not None and idx in idx_map:
         rec = idx_map[idx]
         if _record_matches(obj, rec, image_root):
@@ -101,14 +60,14 @@ def _pick_dataset_record(
 
     sample_details = obj.get("sample_details")
     if isinstance(sample_details, dict):
-        idx = _parse_index(sample_details.get("dataset_index"))
+        idx = coerce_index(sample_details.get("dataset_index"))
         if idx is not None and idx in idx_map:
             rec = idx_map[idx]
             if _record_matches(obj, rec, image_root):
                 return idx, rec, "sample_details.dataset_index"
         sources.append("sample_details.dataset_index")
 
-    img_norm = _normalize(obj.get("image_path"), image_root)
+    img_norm = normalize_record_path(obj.get("image_path"), image_root)
     if img_norm and img_norm in img_map:
         ds_idx, rec = img_map[img_norm]
         return ds_idx, rec, "image_path"
@@ -162,7 +121,7 @@ def repair_outputs(
     *,
     dry_run: bool = False,
 ) -> Dict[str, Any]:
-    records = _load_dataset_records(dataset_json)
+    records = load_dataset_records(dataset_json)
     idx_map = {idx: rec for idx, rec in enumerate(records)}
 
     img_map: Dict[str, Tuple[int, Dict[str, Any]]] = {}
@@ -171,7 +130,7 @@ def repair_outputs(
     img_root = image_root.resolve() if image_root else None
 
     for idx, rec in enumerate(records):
-        img_norm = _normalize(rec.get("image_path"), img_root)
+        img_norm = normalize_record_path(rec.get("image_path"), img_root)
         if img_norm and img_norm not in img_map:
             img_map[img_norm] = (idx, rec)
         headline = rec.get("text")

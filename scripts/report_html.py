@@ -24,6 +24,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 import csv
 
+from scripts.utils.dataset import load_dataset_records, normalize_record_path
+from scripts.utils.media import image_to_data_url
+
 
 def _relpath(path: str, base: Optional[str]) -> str:
     try:
@@ -106,39 +109,13 @@ def _load_dataset_records_for_html(dataset_json_path: Optional[str]) -> Optional
     if not dataset_json_path:
         return None
     try:
-        with open(dataset_json_path, "r", encoding="utf-8") as f:
-            payload = json.load(f)
+        return load_dataset_records(Path(dataset_json_path))
     except Exception:
         return None
-
-    if isinstance(payload, list):
-        return [rec for rec in payload if isinstance(rec, dict)]
-
-    if isinstance(payload, dict):
-        for key in ("data", "items", "records", "samples"):
-            val = payload.get(key)
-            if isinstance(val, list):
-                return [rec for rec in val if isinstance(rec, dict)]
-    return None
 
 
 def _normalize_lookup_path(path: Any, image_root: Optional[str]) -> Optional[str]:
-    if not path:
-        return None
-    p = str(path)
-    # If dataset stored absolute path, keep as-is after normalization
-    if os.path.isabs(p):
-        full = p
-    else:
-        root = (image_root or "").strip()
-        if root:
-            full = os.path.join(root, p.lstrip("/"))
-        else:
-            full = p
-    try:
-        return os.path.normpath(os.path.abspath(full))
-    except Exception:
-        return os.path.normpath(full)
+    return normalize_record_path(path, Path(image_root) if image_root else None)
 
 
 def _attach_dataset_details(
@@ -308,28 +285,9 @@ def _render_metrics(metrics: Optional[Dict[str, Any]]) -> str:
     return "\n".join(parts)
 
 
-def _guess_mime(path: str) -> str:
-    low = path.lower()
-    if low.endswith((".jpg", ".jpeg")):
-        return "image/jpeg"
-    if low.endswith(".png"):
-        return "image/png"
-    if low.endswith(".webp"):
-        return "image/webp"
-    if low.endswith(".gif"):
-        return "image/gif"
-    if low.endswith(".bmp"):
-        return "image/bmp"
-    return "application/octet-stream"
-
-
 def _to_data_url(path: str) -> Optional[str]:
     try:
-        import base64
-        with open(path, "rb") as f:
-            data = f.read()
-        b64 = base64.b64encode(data).decode("ascii")
-        return f"data:{_guess_mime(path)};base64,{b64}"
+        return image_to_data_url(path, default_mime="application/octet-stream")
     except Exception:
         return None
 

@@ -22,6 +22,8 @@ except ImportError:  # pragma: no cover - fall back to the legacy module
 
 _DDG_PARAM_KEYS = ("region", "safesearch", "timelimit", "max_results", "page", "backend")
 
+from scripts.utils.search import normalize_search_results
+
 
 def _env_int(name: str, default: int) -> int:
     try:
@@ -72,27 +74,6 @@ class _RateLimiter:
                     self._next_ready = now + applied
                     return
             time.sleep(wait if wait > 0 else self._interval * 0.5)
-
-
-def _normalize_results(raw_results: Iterable[Dict[str, Any]]) -> List[Dict[str, str]]:
-    normalized: List[Dict[str, str]] = []
-    for item in raw_results:
-        if not isinstance(item, dict):
-            continue
-        url = str(item.get("href") or item.get("url") or "").strip()
-        if not url:
-            continue
-        normalized.append(
-            {
-                "title": str(item.get("title") or "").strip(),
-                "url": url,
-                "description": str(
-                    item.get("body") or item.get("description") or item.get("snippet") or ""
-                ).strip(),
-                "source": str(item.get("source") or "").strip(),
-            }
-        )
-    return normalized
 
 
 class DuckDuckGoBatcher:
@@ -366,7 +347,7 @@ class DuckDuckGoBatcher:
         with DDGS(proxy=proxy, timeout=timeout) as ddgs:  # type: ignore
             raw_results = list(ddgs.text(job.query, **ddg_kwargs))
 
-        normalized = _normalize_results(raw_results)
+        normalized = normalize_search_results(raw_results)
 
         payload: Dict[str, Any] = {
             "provider": "duckduckgo",

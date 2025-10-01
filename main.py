@@ -512,6 +512,7 @@ def main() -> None:
 
     processed_any = False
     ddg_totals: Dict[str, Any] = {}
+    run_summary: Dict[str, Any] = {}
     with ddg_context as duckduckgo_batcher:
         for order_idx in range(start_index, total_samples):
             sample_meta = samples[order_idx]
@@ -899,14 +900,32 @@ def main() -> None:
                 avg_ms,
             )
         )
+        run_summary["duckduckgo_batch"] = {
+            "batches": total_batches,
+            "unique": total_unique,
+            "executed": total_exec,
+            "cache_hits": total_cache_hits,
+            "errors": total_errors,
+            "retries": total_retries,
+            "avg_ms": round(avg_ms, 0),
+        }
 
     # Print total token usage across all processed samples
+    token_totals: Dict[str, Any] = {}
     try:
         grand = getattr(loader, "usage_total", {"prompt": 0, "completion": 0, "total": 0})
         print("\n=== Token Usage (Run Total) ===")
         print(f"prompt={grand.get('prompt', 0)} completion={grand.get('completion', 0)} total={grand.get('total', 0)}")
+        token_totals = {
+            "prompt": int(grand.get("prompt", 0) or 0),
+            "completion": int(grand.get("completion", 0) or 0),
+            "total": int(grand.get("total", 0) or 0),
+        }
     except Exception:
         pass
+
+    if token_totals:
+        run_summary["token_usage"] = token_totals
 
     # Generate HTML report for this run if requested
     html_path = (args.html_report or "").strip()
@@ -930,6 +949,7 @@ def main() -> None:
                 inline_images=bool(args.html_inline_images),
                 dataset_json_path=str(ds_json),
                 dataset_image_root=str(image_root),
+                run_summary=run_summary or None,
             )
             base, _ = os.path.splitext(html_path)
             csv_path = base + ".tokens.csv"

@@ -116,6 +116,9 @@ python -m scripts.evaluate \
 
 Besides accuracy / F1, the tool now reports:
 
+- **Judge metrics with uncertainties**: accuracy / precision / recall / F1 computed with
+  `Uncertain` predictions penalized, plus a per-`fake_cls` breakdown (original / textual /
+  visual / mismatch) to show which misinformation types were handled best.
 - **Confidence calibration**: Brier score, expected calibration error (ECE), and per-bin
   stats for the judge’s confidence values.
 - **CSV export** (`--save-csv`): structured metrics for tables/plots.

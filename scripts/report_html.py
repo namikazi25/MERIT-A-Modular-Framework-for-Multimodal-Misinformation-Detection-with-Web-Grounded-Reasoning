@@ -250,37 +250,104 @@ def _render_metric_block(name: str, cm: Dict[str, int], m: Dict[str, Any]) -> st
     )
 
 
+def _format_mapping(mapping: Any) -> str:
+    if isinstance(mapping, dict):
+        items = [f"{_escape(k)}: {_escape(v)}" for k, v in mapping.items()]
+        return ", ".join(items)
+    return _escape(mapping)
+
+
 def _render_metrics(metrics: Optional[Dict[str, Any]]) -> str:
     if not metrics:
         return """<div class=metrics><p>No metrics available yet. Provide dataset + outputs to compute.</p></div>"""
-    jm = metrics.get("judge_metrics", {})  # filtered (excludes Uncertain)
-    jm_all = metrics.get("judge_metrics_all", {})  # all predictions (Uncertain penalized)
+    jm_overall = metrics.get("judge_metrics_overall") or metrics.get("judge_metrics") or {}
+    judge_by_fake = metrics.get("judge_metrics_by_fake_cls") or {}
     ai_m = metrics.get("visual_veracity_ai_detection", {})  # filtered (pred available)
     ai_m_all = metrics.get("visual_veracity_ai_detection_all", {})  # all predictions (missing penalized)
     counts = metrics.get("counts", {})
+    judge_conf_cal = metrics.get("judge_confidence_calibration") or {}
+    judge_logprob_cal = metrics.get("judge_logprob_calibration") or {}
 
     parts = []
     parts.append("<div class=metrics>")
     parts.append("<h2>Run Metrics</h2>")
-    total = counts.get('total_outputs')
-    missing = counts.get('missing_in_gt_map')
-    uncertain_c = counts.get('uncertain_count')
-    uncertain_r = counts.get('uncertain_rate')
-    vv_gt = counts.get('visual_veracity_gt_known')
-    vv_cov = counts.get('visual_veracity_pred_covered')
-    vv_rate = counts.get('visual_veracity_coverage_rate')
-    parts.append(
-        f"<p>Total outputs: {_escape(total)}; Missing GT matches: {_escape(missing)}; Uncertain: {_escape(uncertain_c)} ({_escape(uncertain_r)})</p>"
-    )
-    parts.append(
-        f"<p>Visual veracity coverage: {_escape(vv_cov)} / {_escape(vv_gt)} covered ({_escape(vv_rate)})</p>"
-    )
-    parts.append(_render_metric_block("Judge (filtered; excludes Uncertain)", jm.get("confusion_matrix", {}), jm.get("metrics", {})))
-    if jm_all:
-        parts.append(_render_metric_block("Judge (all predictions; Uncertain penalized)", jm_all.get("confusion_matrix", {}), jm_all.get("metrics", {})))
-    parts.append(_render_metric_block("Visual veracity: AI-generated detection (filtered)", cm=ai_m.get("confusion_matrix", {}), m=ai_m.get("metrics", {})))
-    if ai_m_all:
-        parts.append(_render_metric_block("Visual veracity: AI-generated detection (all; missing penalized)", cm=ai_m_all.get("confusion_matrix", {}), m=ai_m_all.get("metrics", {})))
+    if counts:
+        total = counts.get("total_outputs")
+        missing = counts.get("missing_in_gt_map")
+        label_dist = counts.get("judge_label_distribution")
+        uncertain_c = counts.get("uncertain_count")
+        uncertain_r = counts.get("uncertain_rate")
+        parts.append("<p><strong>Evaluation summary</strong></p>")
+        parts.append(
+            f"<p>Outputs read: {_escape(total)}; Missing GT matches: {_escape(missing)}</p>"
+        )
+        if label_dist:
+            parts.append(f"<p>Judge labels: {_format_mapping(label_dist)}</p>")
+        parts.append(f"<p>Uncertain: {_escape(uncertain_c)} ({_escape(uncertain_r)})</p>")
+        vv_gt = counts.get("visual_veracity_gt_known")
+        vv_cov = counts.get("visual_veracity_pred_covered")
+        vv_rate = counts.get("visual_veracity_coverage_rate")
+        parts.append(
+            f"<p>Visual veracity coverage: {_escape(vv_cov)} / {_escape(vv_gt)} covered ({_escape(vv_rate)})</p>"
+        )
+
+    if jm_overall.get("metrics"):
+        parts.append(
+            _render_metric_block(
+                "Judge (overall; Uncertain penalized)",
+                jm_overall.get("confusion_matrix", {}),
+                jm_overall.get("metrics", {}),
+            )
+        )
+
+    for fake_cls_key in sorted(judge_by_fake.keys()):
+        payload = judge_by_fake[fake_cls_key]
+        metrics_payload = payload.get("metrics") or {}
+        if not metrics_payload:
+            continue
+        parts.append(
+            _render_metric_block(
+                f"Judge results for fake_cls={fake_cls_key}",
+                payload.get("confusion_matrix", {}),
+                metrics_payload,
+            )
+        )
+
+    if ai_m.get("metrics"):
+        parts.append(
+            _render_metric_block(
+                "Visual veracity: AI-generated detection (filtered)",
+                ai_m.get("confusion_matrix", {}),
+                ai_m.get("metrics", {}),
+            )
+        )
+    if ai_m_all.get("metrics"):
+        parts.append(
+            _render_metric_block(
+                "Visual veracity: AI-generated detection (all; missing penalized)",
+                ai_m_all.get("confusion_matrix", {}),
+                ai_m_all.get("metrics", {}),
+            )
+        )
+        cm_ai_all = ai_m_all.get("confusion_matrix", {})
+        ai_total = (cm_ai_all.get("TP", 0) or 0) + (cm_ai_all.get("FN", 0) or 0)
+        covered = counts.get("visual_veracity_pred_covered", 0)
+        parts.append(
+            f"<p><b>AI-generated images in GT:</b> {_escape(ai_total)} | <b>Correctly flagged (filtered):</b> {_escape(ai_m.get('confusion_matrix', {}).get('TP', 0))} of {_escape(covered)} covered</p>"
+        )
+
+    if judge_conf_cal.get("total"):
+        parts.append(
+            f"<p><b>Judge confidence calibration:</b> samples={_escape(judge_conf_cal.get('total'))} "
+            f"brier={_escape(judge_conf_cal.get('brier_score'))} "
+            f"ece={_escape(judge_conf_cal.get('expected_calibration_error'))}</p>"
+        )
+    if judge_logprob_cal.get("total"):
+        parts.append(
+            f"<p><b>Logprob-derived confidence calibration:</b> samples={_escape(judge_logprob_cal.get('total'))} "
+            f"brier={_escape(judge_logprob_cal.get('brier_score'))} "
+            f"ece={_escape(judge_logprob_cal.get('expected_calibration_error'))}</p>"
+        )
     parts.append("</div>")
     return "\n".join(parts)
 
@@ -489,18 +556,42 @@ def _compute_token_usage(objs: List[Dict[str, Any]]) -> Dict[str, Any]:
     return {"total": {"prompt": total_p, "completion": total_c, "total": total_t}, "rows": rows}
 
 
-def _render_token_summary_html(objs: List[Dict[str, Any]]) -> str:
-    stats = _compute_token_usage(objs)
-    tot = stats.get("total", {})
-    p = tot.get("prompt", 0)
-    c = tot.get("completion", 0)
-    t = tot.get("total", 0)
-    return (
-        "<div class=metrics>"
-        "<h2>Token Usage (Run Total)</h2>"
-        f"<p><b>prompt:</b> {_escape(p)} | <b>completion:</b> {_escape(c)} | <b>total:</b> {_escape(t)}</p>"
-        "</div>"
+def _render_run_summary_html(token_stats: Dict[str, Any], run_summary: Optional[Dict[str, Any]]) -> str:
+    tokens = dict(token_stats.get("total", {}) or {})
+    summary_tokens = (run_summary or {}).get("token_usage") if run_summary else None
+    if isinstance(summary_tokens, dict):
+        for key in ("prompt", "completion", "total"):
+            if key in summary_tokens:
+                tokens[key] = summary_tokens.get(key, tokens.get(key, 0))
+
+    duckduckgo = (run_summary or {}).get("duckduckgo_batch") if run_summary else None
+
+    p = tokens.get("prompt", 0)
+    c = tokens.get("completion", 0)
+    t = tokens.get("total", 0)
+
+    if not duckduckgo and not tokens:
+        return ""
+
+    parts = ["<div class=metrics>", "<h2>Run Summary</h2>"]
+    if duckduckgo:
+        parts.append(
+            "<p><b>DuckDuckGo batch summary:</b> "
+            f"batches={_escape(duckduckgo.get('batches', 0))} "
+            f"unique={_escape(duckduckgo.get('unique', 0))} "
+            f"executed={_escape(duckduckgo.get('executed', 0))} "
+            f"cache_hits={_escape(duckduckgo.get('cache_hits', 0))} "
+            f"errors={_escape(duckduckgo.get('errors', 0))} "
+            f"retries={_escape(duckduckgo.get('retries', 0))} "
+            f"avg_ms={_escape(duckduckgo.get('avg_ms', 0))}" "</p>"
+        )
+
+    parts.append(
+        "<p><b>Token Usage (Run Total):</b> "
+        f"prompt={_escape(p)} completion={_escape(c)} total={_escape(t)}</p>"
     )
+    parts.append("</div>")
+    return "".join(parts)
 
 
 def render_html_report(
@@ -512,6 +603,7 @@ def render_html_report(
     inline_images: bool = False,
     dataset_json_path: Optional[str] = None,
     dataset_image_root: Optional[str] = None,
+    run_summary: Optional[Dict[str, Any]] = None,
 ) -> None:
     out_dir = os.path.dirname(output_path)
     if out_dir and not os.path.exists(out_dir):
@@ -537,6 +629,11 @@ def render_html_report(
                     w.writerow([r.get("index"), r.get("image_path"), r.get("headline"), r.get("prompt"), r.get("completion"), r.get("total")])
         except Exception:
             csv_path = None
+
+    metrics_html = _render_metrics(metrics)
+    run_summary_html = _render_run_summary_html(token_stats, run_summary)
+    misaligned_html = _render_misaligned_index(objs)
+    run_params_html = _render_run_params(objs)
 
     html_doc = f"""
 <!DOCTYPE html>
@@ -575,12 +672,12 @@ def render_html_report(
 <body>
   <header>
     <h1>{_escape(title)}</h1>
-    { _render_metrics(metrics) }
-    { _render_token_summary_html(objs) }
-    { _render_misaligned_index(objs) }
+    {metrics_html}
+    {run_summary_html}
+    {misaligned_html}
   </header>
   <main>
-    {_render_run_params(objs)}
+    {run_params_html}
     {cards_html}
   </main>
 </body>

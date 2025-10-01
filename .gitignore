@@ -42,6 +42,7 @@ results/
 # Folders
 data/
 /MMFakeBench_test.zip
+/MMFakeBench_val.zip
 /.codex
 .lightning_studio
 .cursor-server

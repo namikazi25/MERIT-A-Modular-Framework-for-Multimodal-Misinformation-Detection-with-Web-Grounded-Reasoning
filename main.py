@@ -363,6 +363,7 @@ def main() -> None:
         image_transform=None,
         skip_missing=True,
         verbose=True,
+        return_image=False,
     )
 
     # If torch is present, exercise the DataLoader; else iterate directly.
@@ -593,62 +594,64 @@ def main() -> None:
                         print("  Answers:")
                         batch_results: Dict[str, Dict[str, Any]] = {}
                         batch_job_ids: Dict[str, str] = {}
-                    if duckduckgo_batcher is not None:
+
+                        if duckduckgo_batcher is not None:
+                            for q in chain:
+                                try:
+                                    batch_job_ids[q] = duckduckgo_batcher.enqueue(q)
+                                except Exception as enqueue_err:
+                                    print(f"    Q: {q}")
+                                    print("      Answer error:", enqueue_err)
+                            if batch_job_ids:
+                                batch_results = duckduckgo_batcher.execute()
+                                batch_metrics = duckduckgo_batcher.last_batch_metrics()
+                                if batch_metrics:
+                                    unique = int(batch_metrics.get("unique", 0))
+                                    executed = int(batch_metrics.get("unique_executed", 0))
+                                    cache_hits = int(batch_metrics.get("cache_hits", 0))
+                                    retries = int(batch_metrics.get("retry_count", 0))
+                                    errors = int(batch_metrics.get("unique_error", 0))
+                                    avg_ms = float(batch_metrics.get("avg_duration_ms", 0.0))
+                                    if unique or cache_hits:
+                                        print(
+                                            "      Batch stats: "
+                                            f"unique={unique} executed={executed} cache_hits={cache_hits} "
+                                            f"errors={errors} retries={retries} avg_ms={avg_ms:.0f}"
+                                        )
+
                         for q in chain:
+                            print(f"    Q: {q}")
                             try:
-                                batch_job_ids[q] = duckduckgo_batcher.enqueue(q)
-                            except Exception as enqueue_err:
-                                print(f"    Q: {q}")
-                                print("      Answer error:", enqueue_err)
-                        if batch_job_ids:
-                            batch_results = duckduckgo_batcher.execute()
-                            batch_metrics = duckduckgo_batcher.last_batch_metrics()
-                            if batch_metrics:
-                                unique = int(batch_metrics.get("unique", 0))
-                                executed = int(batch_metrics.get("unique_executed", 0))
-                                cache_hits = int(batch_metrics.get("cache_hits", 0))
-                                retries = int(batch_metrics.get("retry_count", 0))
-                                errors = int(batch_metrics.get("unique_error", 0))
-                                avg_ms = float(batch_metrics.get("avg_duration_ms", 0.0))
-                                if unique or cache_hits:
-                                    print(
-                                        "      Batch stats: "
-                                        f"unique={unique} executed={executed} cache_hits={cache_hits} "
-                                        f"errors={errors} retries={retries} avg_ms={avg_ms:.0f}"
-                                    )
+                                search_payload: Optional[Dict[str, Any]] = None
+                                if duckduckgo_batcher is not None and q in batch_job_ids:
+                                    result = batch_results.get(batch_job_ids[q])
+                                    if result:
+                                        err = result.get("error")
+                                        if err is not None:
+                                            print("      Batch search error:", err)
+                                        else:
+                                            search_payload = result.get("payload")
+                                if search_payload is None:
+                                    search_payload = web_search(q, provider=search_provider)
 
-                    for q in chain:
-                        print(f"    Q: {q}")
-                        try:
-                            search_payload: Optional[Dict[str, Any]] = None
-                            if duckduckgo_batcher is not None and q in batch_job_ids:
-                                result = batch_results.get(batch_job_ids[q])
-                                if result:
-                                    err = result.get("error")
-                                    if err is not None:
-                                        print("      Batch search error:", err)
-                                    else:
-                                        search_payload = result.get("payload")
-                            if search_payload is None:
-                                search_payload = web_search(q, provider=search_provider)
+                                ans = generate_answer_from_search(
+                                    q,
+                                    search_payload,
+                                    loader,
+                                    max_sources=args.answer_max_sources,
+                                )
+                                answers_by_question[q] = ans
+                                print(f"      A: {ans.get('answer')}")
+                                cits = ans.get("citations") or []
+                                if cits:
+                                    print("      Sources:")
+                                    for c in cits:
+                                        url = c.get("url") if isinstance(c, dict) else str(c)
+                                        title = c.get("title") if isinstance(c, dict) else ""
+                                        print(f"        - {title} {url}")
+                            except Exception as e:
+                                print("      Answer error:", e)
 
-                            ans = generate_answer_from_search(
-                                q,
-                                search_payload,
-                                loader,
-                                max_sources=args.answer_max_sources,
-                            )
-                            answers_by_question[q] = ans
-                            print(f"      A: {ans.get('answer')}")
-                            cits = ans.get("citations") or []
-                            if cits:
-                                print("      Sources:")
-                                for c in cits:
-                                    url = c.get("url") if isinstance(c, dict) else str(c)
-                                    title = c.get("title") if isinstance(c, dict) else ""
-                                    print(f"        - {title} {url}")
-                        except Exception as e:
-                            print("      Answer error:", e)
                         # merge per-chain answers into global mapping
                         answers_by_question_global.update(answers_by_question)
 

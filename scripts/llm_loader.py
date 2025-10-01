@@ -742,51 +742,59 @@ class LLMModelLoader:
             raise ValueError("provider must be 'openai', 'google', 'deepinfra', or 'openrouter'")
         # Cumulative usage across all invocations via this loader
         self.usage_total = {"prompt": 0, "completion": 0, "total": 0}
+        self._model_wrapper = None
+        self._model_lock = threading.Lock()
 
     def get_model(self):
-        # Instantiate provider-specific model
-        if self.config.provider == "openai":
-            base_model = _OpenAIChatModel(self.config)
-        elif self.config.provider == "openrouter":
-            base_model = _OpenRouterChatModel(self.config)
-        elif self.config.provider == "deepinfra":
-            base_model = _DeepInfraChatModel(self.config)
-        else:
-            base_model = _GoogleChatModel(self.config)
+        if self._model_wrapper is not None:
+            return self._model_wrapper
 
-        loader_usage = self.usage_total
+        with self._model_lock:
+            if self._model_wrapper is None:
+                if self.config.provider == "openai":
+                    base_model = _OpenAIChatModel(self.config)
+                elif self.config.provider == "openrouter":
+                    base_model = _OpenRouterChatModel(self.config)
+                elif self.config.provider == "deepinfra":
+                    base_model = _DeepInfraChatModel(self.config)
+                else:
+                    base_model = _GoogleChatModel(self.config)
 
-        class _UsageWrapped:
-            def __init__(self, inner):
-                self._inner = inner
+                loader_usage = self.usage_total
 
-            def invoke(self, messages: List[Dict[str, Any]]) -> Any:
-                resp = self._inner.invoke(messages)
-                # Normalize and accumulate usage if present
-                usage = getattr(resp, "usage", None)
-                if isinstance(usage, dict):
-                    p = usage.get("prompt") or 0
-                    c = usage.get("completion") or 0
-                    t = usage.get("total") or 0
-                    try:
-                        loader_usage["prompt"] += int(p)
-                    except Exception:
-                        pass
-                    try:
-                        loader_usage["completion"] += int(c)
-                    except Exception:
-                        pass
-                    try:
-                        loader_usage["total"] += int(t)
-                    except Exception:
-                        # Derive total if missing
-                        try:
-                            loader_usage["total"] += int(p) + int(c)
-                        except Exception:
-                            pass
-                return resp
+                class _UsageWrapped:
+                    def __init__(self, inner):
+                        self._inner = inner
 
-        return _UsageWrapped(base_model)
+                    def invoke(self, messages: List[Dict[str, Any]]) -> Any:
+                        resp = self._inner.invoke(messages)
+                        # Normalize and accumulate usage if present
+                        usage = getattr(resp, "usage", None)
+                        if isinstance(usage, dict):
+                            p = usage.get("prompt") or 0
+                            c = usage.get("completion") or 0
+                            t = usage.get("total") or 0
+                            try:
+                                loader_usage["prompt"] += int(p)
+                            except Exception:
+                                pass
+                            try:
+                                loader_usage["completion"] += int(c)
+                            except Exception:
+                                pass
+                            try:
+                                loader_usage["total"] += int(t)
+                            except Exception:
+                                # Derive total if missing
+                                try:
+                                    loader_usage["total"] += int(p) + int(c)
+                                except Exception:
+                                    pass
+                        return resp
+
+                self._model_wrapper = _UsageWrapped(base_model)
+
+        return self._model_wrapper
 
     def invoke_text(self, text: str, system_prompt: Optional[str] = None) -> str:
         model = self.get_model()

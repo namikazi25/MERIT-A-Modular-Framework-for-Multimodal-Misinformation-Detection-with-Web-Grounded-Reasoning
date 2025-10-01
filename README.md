@@ -70,13 +70,19 @@ All effective settings are recorded in the per-run metadata file (see below).
 ### Checkpoints & Resume
 
 Large runs periodically persist checkpoints in `results/checkpoints/<run-id>/` (default
-every 100 samples). Resume from the most recent checkpoint with:
+every 100 samples). Resume from the most recent checkpoint with the same core flags you
+used initially (especially `--max-samples` and `--checkpoint-size`) so the pipeline
+reconstructs the intended sample list:
 
 ```bash
-python main.py --resume results/checkpoints/run-YYYYMMDD-HHMMSS/run-YYYYMMDD-HHMMSS.upto00100.json
+python main.py \
+  --max-samples 10000 \
+  --checkpoint-size 250 \
+  --resume results/checkpoints/run-YYYYMMDD-HHMMSS/run-YYYYMMDD-HHMMSS.upto00100.json
 ```
 
-- Keep all other flags identical between the original run and the resume command.
+- Keep all other flags identical between the original run and the resume command (or
+  adjust the corresponding `.env` entries before resuming).
 - The pipeline restores `--save-jsonl` / `--html-report` from the checkpoint unless you
   override them explicitly.
 
@@ -95,22 +101,23 @@ Each run produces:
 ## 4. Evaluation & Analysis
 
 Run the evaluator after each experiment to score the AI judge and the visual veracity
-head against ground truth. Besides accuracy / F1, the tool now reports:
+head against ground truth. If an HTML report shows “No metrics available yet”, rerun
+the evaluator manually to regenerate the metrics block:
+
+```bash
+python -m scripts.evaluate \
+  --outputs results/run-YYYYMMDD-HHMMSS.jsonl \
+  --dataset-json data/MMFakeBench_test/MMFakeBench_test.json \
+  --image-root data/MMFakeBench_test \
+  --save-report results/run-YYYYMMDD-HHMMSS.metrics.json \
+  --save-csv results/run-YYYYMMDD-HHMMSS.metrics.csv
+```
+
+Besides accuracy / F1, the tool now reports:
 
 - **Confidence calibration**: Brier score, expected calibration error (ECE), and per-bin
   stats for the judge’s confidence values.
 - **CSV export** (`--save-csv`): structured metrics for tables/plots.
-
-Example:
-
-```bash
-python -m scripts.evaluate \
-  --outputs results/run-20250917-135855.jsonl \
-  --dataset-json data/MMFakeBench_test/MMFakeBench_test.json \
-  --image-root data/MMFakeBench_test \
-  --save-report results/run-20250917-135855.metrics.json \
-  --save-csv results/run-20250917-135855.metrics.csv
-```
 
 ## 5. Repository Highlights
 

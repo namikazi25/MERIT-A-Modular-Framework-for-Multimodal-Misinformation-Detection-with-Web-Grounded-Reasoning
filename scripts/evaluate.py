@@ -340,7 +340,7 @@ def evaluate(
         img_path = str(obj.get("image_path", ""))
         # Try flexible matching
         gt = None
-        for key in _resolve_candidates(image_root, img_path):
+        for key in resolve_image_candidates(image_root, img_path):
             gt = gt_map.get(key)
             if gt is not None:
                 break

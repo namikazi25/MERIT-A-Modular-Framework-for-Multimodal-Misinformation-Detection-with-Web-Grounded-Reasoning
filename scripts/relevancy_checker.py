@@ -27,48 +27,38 @@ from scripts.utils.media import image_to_data_url
 
 
 _DEFAULT_SYSTEM_PROMPT = (
-    "You are a fact-checking assistant. Judge how well an image supports a headline. "
-    "Focus on whether the image authentically represents what the headline claims. "
+    "You are an image-headline relevancy assessor. Evaluate if the image depicts "
+    "the specific subject and context described in the headline.\n"
     "Respond with strict JSON only."
 )
 
 def _build_user_instruction(headline: str) -> str:
     return (
-        "Task: Does this image reasonably fit with the headline?\n\n"
-        
-        "Guidelines:\n\n"
-        
-        "ALIGNED (true):\n"
-        "- Image clearly shows the subject or event mentioned\n"
-        "- Image provides appropriate context for the headline\n"
-        "- Reasonable connection exists even if not all details visible\n"
-        "- Example: Headline about protest → image shows crowd with signs\n"
-        "- Example: Headline about person → image shows that person\n\n"
-        
-        "PARTIAL (\"partial\"):\n"
-        "- Image shows related context but key specifics unclear\n"
-        "- Right general setting but cannot confirm exact details\n"
-        "- Example: Headline names specific person → image shows someone but unclear who\n"
-        "- Example: Headline claims specific location → image shows a location but unclear which\n"
-        "- Loose connection that could fit but lacks confirmation\n\n"
-        
-        "MISALIGNED (false):\n"
-        "- Image shows clearly different subject or event\n"
-        "- No reasonable connection to headline\n"
-        "- Image contradicts the headline claim\n"
-        "- Example: Headline about football → image shows basketball\n"
-        "- Example: Headline about Person A → image clearly shows Person B\n\n"
-        
         f"Headline: {headline}\n\n"
         
-        "Be reasonable: Accept loose connections for aligned. "
-        "Only use false when clearly wrong or unrelated.\n\n"
+        "Task: Does the image show the specific subject/event from the headline?\n\n"
+        
+        "Classification:\n"
+        "- aligned=true: Image clearly depicts the specific subject/event\n"
+        "- aligned=partial: Image shows related content but lacks confirmation of specifics\n"
+        "- aligned=false: Image shows different subject/event\n\n"
+        
+        "Confidence calibration (CRITICAL):\n"
+        "- 0.9-1.0: Can identify specific people/places/events mentioned in headline\n"
+        "- 0.7-0.9: Shows correct general context but cannot confirm specific details\n"
+        "- 0.5-0.7: Shows related content but connection is weak or ambiguous\n"
+        "- 0.3-0.5: Superficial similarity only, likely wrong subject\n"
+        "- 0.0-0.3: No meaningful connection\n\n"
+        
+        "For partial alignment:\n"
+        "- High confidence (0.7+): Right subject, details not fully visible\n"
+        "- Low confidence (<0.7): Possibly wrong subject, superficial match\n\n"
         
         "Output JSON:\n"
         "{\n"
-        "  \"aligned\": true | \"partial\" | false,\n"
+        "  \"aligned\": \"true\" | \"partial\" | \"false\",\n"
         "  \"confidence\": 0.0-1.0,\n"
-        "  \"explanation\": \"What you see and why you chose this rating\"\n"
+        "  \"explanation\": \"What you observed and why this confidence\"\n"
         "}"
     )
 

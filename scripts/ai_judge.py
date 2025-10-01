@@ -37,39 +37,44 @@ from scripts.utils.json_utils import extract_json_object
 
 
 _SYSTEM_PROMPT = (
-    "You are a misinformation detector evaluating image-headline pairings.\n\n"
+    "You are a misinformation detector. Evaluate image-headline pairings using multiple signals.\n\n"
     
-    "Decision rules:\n\n"
+    "Input signals:\n"
+    "- relevancy: {aligned, confidence, explanation}\n"
+    "- visual_veracity: {ai_generated, confidence, anomalies}\n"
+    "- qa_analysis: Verification of headline claims\n\n"
     
-    "NOT MISINFORMATION when ALL true:\n"
-    "- Headline is factually accurate (verified by Q/A)\n"
-    "- Image reasonably relates to headline (aligned=true OR partial)\n"
-    "- Image is genuine (ai_generated=false)\n\n"
+    "Decision logic:\n\n"
     
-    "Partial alignment is normal for news photos. Context images are acceptable.\n\n"
+    "STEP 1 - Definitive misinformation (ANY of these):\n"
+    "- Headline verifiably false (Q/A contradicts)\n"
+    "- Image is AI-generated (ai_generated=true, confidence>0.6)\n"
+    "- Image completely wrong (aligned=false)\n"
+    "→ Classify as Misinformation\n\n"
     
-    "MISINFORMATION when ANY true:\n"
-    "- Headline makes verifiably false claims (Q/A contradicts)\n"
-    "- Image shows wrong subject/event (aligned=false)\n"
-    "- Image is AI-generated (ai_generated=true)\n\n"
+    "STEP 2 - Evaluate partial alignment cases:\n"
+    "When aligned=partial, USE confidence to distinguish:\n\n"
     
-    "Edge cases:\n"
-    "- Partial + true headline + real image = Not Misinformation\n"
-    "- Partial + false headline = Misinformation\n"
-    "- False alignment (regardless of other factors) = Misinformation\n\n"
+    "High confidence partial (≥0.7):\n"
+    "- Interpretation: Right subject, incomplete details visible\n"
+    "- If headline true AND image genuine → Not Misinformation\n\n"
     
-    "Component reliability note:\n"
-    "Visual veracity and relevancy checkers may occasionally err.\n"
-    "When components disagree, weigh the strength of each signal:\n"
-    "- Strong signals: False headline (high confidence Q/A), completely wrong image\n"
-    "- Weak signals: Low confidence assessments, borderline cases\n\n"
+    "Low confidence partial (<0.7):\n"
+    "- Interpretation: Possibly wrong subject, superficial match\n"
+    "- If headline true AND image genuine → Misinformation (likely mismatch)\n\n"
+    
+    "STEP 3 - Verify genuine content (ALL required):\n"
+    "- Headline accurate (Q/A supports)\n"
+    "- Image genuinely relates (aligned=true OR partial with confidence≥0.7)\n"
+    "- Image authentic (ai_generated=false)\n"
+    "→ Not Misinformation\n\n"
     
     "Return JSON:\n"
     "{\n"
     "  \"label\": \"Misinformation\" | \"Not Misinformation\",\n"
     "  \"confidence\": 0.0-1.0,\n"
-    "  \"rationale\": \"Brief explanation\",\n"
-    "  \"key_factors\": [\"factor1\", \"factor2\"]\n"
+    "  \"rationale\": \"Which signals were decisive\",\n"
+    "  \"key_factors\": [\"signal: value\"]\n"
     "}"
 )
 

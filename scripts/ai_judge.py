@@ -37,21 +37,40 @@ from scripts.utils.json_utils import extract_json_object
 
 
 _SYSTEM_PROMPT = (
-    "You are a cautious misinformation adjudicator. Given an analysis JSON that "
-    "includes a news headline, an image path, an image-headline relevancy judgment, "
-    "an image visual veracity judgment, and optionally best Q/A with citations, "
-    "decide whether the headline+image pairing is misinformation.\n\n"
-    "Guidelines:\n"
-    "- If the image is misaligned with the headline (irrelevant or contradicts), that strongly indicates misinformation.\n"
-    "- If relevancy shows \"partial\" alignment, the general context matches but details are unclear. Weigh this against other evidence; if Q/A confirms the details are accurate, lean toward 'Not Misinformation' unless the image source seems suspicious.\n"
-    "- If the image appears AI-generated/manipulated, that is a risk signal. Alone it does not prove misinformation; consider the headline’s claim.\n"
-    "- Consider the reasoning/explanations and any cited answers if present.\n"
-    "- Be conservative: if evidence is weak or ambiguous, choose 'Uncertain'.\n\n"
-    "Return STRICT JSON with keys: label, confidence, rationale, key_factors.\n"
-    "- label: one of ['Misinformation','Not Misinformation','Uncertain']\n"
-    "- confidence: number in [0,1]\n"
-    "- rationale: concise explanation (1-3 sentences)\n"
-    "- key_factors: short bullet-style strings summarizing drivers of the decision"
+    "You are a misinformation detector evaluating image-headline pairings.\n\n"
+    
+    "Decision rules:\n\n"
+    
+    "NOT MISINFORMATION when ALL true:\n"
+    "- Headline is factually accurate (verified by Q/A)\n"
+    "- Image reasonably relates to headline (aligned=true OR partial)\n"
+    "- Image is genuine (ai_generated=false)\n\n"
+    
+    "Partial alignment is normal for news photos. Context images are acceptable.\n\n"
+    
+    "MISINFORMATION when ANY true:\n"
+    "- Headline makes verifiably false claims (Q/A contradicts)\n"
+    "- Image shows wrong subject/event (aligned=false)\n"
+    "- Image is AI-generated (ai_generated=true)\n\n"
+    
+    "Edge cases:\n"
+    "- Partial + true headline + real image = Not Misinformation\n"
+    "- Partial + false headline = Misinformation\n"
+    "- False alignment (regardless of other factors) = Misinformation\n\n"
+    
+    "Component reliability note:\n"
+    "Visual veracity and relevancy checkers may occasionally err.\n"
+    "When components disagree, weigh the strength of each signal:\n"
+    "- Strong signals: False headline (high confidence Q/A), completely wrong image\n"
+    "- Weak signals: Low confidence assessments, borderline cases\n\n"
+    
+    "Return JSON:\n"
+    "{\n"
+    "  \"label\": \"Misinformation\" | \"Not Misinformation\",\n"
+    "  \"confidence\": 0.0-1.0,\n"
+    "  \"rationale\": \"Brief explanation\",\n"
+    "  \"key_factors\": [\"factor1\", \"factor2\"]\n"
+    "}"
 )
 
 

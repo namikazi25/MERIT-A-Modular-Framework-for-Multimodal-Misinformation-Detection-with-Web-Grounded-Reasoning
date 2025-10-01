@@ -27,29 +27,51 @@ from scripts.utils.media import image_to_data_url
 
 
 _DEFAULT_SYSTEM_PROMPT = (
-    "You are a careful fact-checking assistant. Given a news headline and a "
-    "reference image, judge how well the image supports the headline (i.e., "
-    "whether it clearly depicts the claim, partially fits the context, or is "
-    "unrelated). Respond with strict JSON only, no extra text."
+    "You are a fact-checking assistant. Judge how well an image supports a headline. "
+    "Focus on whether the image authentically represents what the headline claims. "
+    "Respond with strict JSON only."
 )
 
 def _build_user_instruction(headline: str) -> str:
     return (
-        "Task: Determine whether the image is relevant to the headline.\n"
-        "Consider three levels:\n"
-        "1. Clear match: Image visibly depicts the main claim\n"
-        "2. Partial match: Image shows the right context/setting, but you can't verify all specific details (they might exist but aren't prominent)\n"
-        "3. Mismatch: Image shows different content or contradicts the claim\n\n"
+        "Task: Does this image reasonably fit with the headline?\n\n"
+        
+        "Guidelines:\n\n"
+        
+        "ALIGNED (true):\n"
+        "- Image clearly shows the subject or event mentioned\n"
+        "- Image provides appropriate context for the headline\n"
+        "- Reasonable connection exists even if not all details visible\n"
+        "- Example: Headline about protest → image shows crowd with signs\n"
+        "- Example: Headline about person → image shows that person\n\n"
+        
+        "PARTIAL (\"partial\"):\n"
+        "- Image shows related context but key specifics unclear\n"
+        "- Right general setting but cannot confirm exact details\n"
+        "- Example: Headline names specific person → image shows someone but unclear who\n"
+        "- Example: Headline claims specific location → image shows a location but unclear which\n"
+        "- Loose connection that could fit but lacks confirmation\n\n"
+        
+        "MISALIGNED (false):\n"
+        "- Image shows clearly different subject or event\n"
+        "- No reasonable connection to headline\n"
+        "- Image contradicts the headline claim\n"
+        "- Example: Headline about football → image shows basketball\n"
+        "- Example: Headline about Person A → image clearly shows Person B\n\n"
+        
         f"Headline: {headline}\n\n"
-        "Output JSON strictly with keys:\n"
-        "  aligned: boolean or \"partial\"\n"
-        "    - true: image clearly shows what headline claims\n"
-        "    - \"partial\": image shows the general context, but specific details mentioned in headline are not clearly visible (could exist but can't confirm from image alone)\n"
-        "    - false: image contradicts or is irrelevant to headline\n"
-        "  confidence: number in [0,1]\n"
-        "  explanation: short textual rationale (for partial matches, explain what you CAN see and what you CANNOT verify)\n"
-        "Example: {\"aligned\": \"partial\", \"confidence\": 0.62, \"explanation\": \"...\"}"
+        
+        "Be reasonable: Accept loose connections for aligned. "
+        "Only use false when clearly wrong or unrelated.\n\n"
+        
+        "Output JSON:\n"
+        "{\n"
+        "  \"aligned\": true | \"partial\" | false,\n"
+        "  \"confidence\": 0.0-1.0,\n"
+        "  \"explanation\": \"What you see and why you chose this rating\"\n"
+        "}"
     )
+
 def assess_image_headline_relevancy(
     image_path: str,
     headline: str,

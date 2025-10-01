@@ -7,7 +7,7 @@ Input is the Final Structured Output produced by main.py, e.g.:
 {
   "image_path": str,
   "headline": str,
-  "relevancy": {"aligned": bool|None, "confidence": float|None, "explanation": str},
+  "relevancy": {"aligned": bool|"partial"|None, "confidence": float|None, "explanation": str},
   "visual_veracity": {"ai_generated": bool|None, "confidence": float|None, "explanation": str, "anomalies": []},
   "best_qa_per_chain": [ {"question": str, "answer": str, "confidence": float|None, "citations": [...]}, ... ]
   ...
@@ -43,6 +43,7 @@ _SYSTEM_PROMPT = (
     "decide whether the headline+image pairing is misinformation.\n\n"
     "Guidelines:\n"
     "- If the image is misaligned with the headline (irrelevant or contradicts), that strongly indicates misinformation.\n"
+    "- If relevancy shows \"partial\" alignment, the general context matches but details are unclear. Weigh this against other evidence; if Q/A confirms the details are accurate, lean toward 'Not Misinformation' unless the image source seems suspicious.\n"
     "- If the image appears AI-generated/manipulated, that is a risk signal. Alone it does not prove misinformation; consider the headline’s claim.\n"
     "- Consider the reasoning/explanations and any cited answers if present.\n"
     "- Be conservative: if evidence is weak or ambiguous, choose 'Uncertain'.\n\n"
@@ -103,6 +104,8 @@ def _heuristic_judge(final_obj: Dict[str, Any]) -> Dict[str, Any]:
         rel_score = -rel_conf
     elif rel_aligned is False:
         rel_score = +rel_conf
+    elif isinstance(rel_aligned, str) and str(rel_aligned).lower() == "partial":
+        rel_score = -0.4 * rel_conf
 
     ver_score = 0.0
     if ver_ai is True:
@@ -128,6 +131,8 @@ def _heuristic_judge(final_obj: Dict[str, Any]) -> Dict[str, Any]:
         key_factors.append(f"Relevancy aligned (conf ~{rel_conf:.2f})")
     elif rel_aligned is False:
         key_factors.append(f"Relevancy misaligned (conf ~{rel_conf:.2f})")
+    elif isinstance(rel_aligned, str) and str(rel_aligned).lower() == "partial":
+        key_factors.append(f"Relevancy partial alignment (conf ~{rel_conf:.2f})")
     if ver_ai is True:
         key_factors.append(f"Image likely AI/manipulated (conf ~{ver_conf:.2f})")
     elif ver_ai is False:
@@ -135,7 +140,7 @@ def _heuristic_judge(final_obj: Dict[str, Any]) -> Dict[str, Any]:
 
     rationale = (
         "Heuristic decision combining relevancy and visual veracity signals. "
-        "High misalignment pushes toward misinformation; AI/manipulation raises risk."
+        "High misalignment pushes toward misinformation; partial alignment tilts toward the claim when other evidence agrees; AI/manipulation raises risk."
     )
 
     return {

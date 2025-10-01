@@ -43,8 +43,9 @@ def _make_instruction(headline: str, k: int, prior: List[str], answered: List[Tu
         f"Headline: {headline}\n\n"
         f"Previously generated (avoid duplicates):\n{prior_block}\n\n"
         f"Context from earlier Q/A (use to refine or deepen investigation):\n{answered_block}\n\n"
-        f"Generate exactly {k} distinct queries, concise (max 12 words), \n"
-        "avoiding punctuation unless needed. Prefer entity names, places, dates.\n\n"
+        f"Generate exactly {k} distinct queries, concise (max 12 words).\n"
+        "Include at least one question that verifies the core claim exists or happened (e.g., \"Did [event] occur?\", \"Is [person] known for [activity]?\", \"When did [event] happen?\") before asking detail questions.\n"
+        "Avoid punctuation unless needed. Prefer entity names, places, dates.\n\n"
         "Output JSON strictly as an array of strings.\n"
         "Example: [\"Event name location date verification\", \"Feature in image anomaly term\"]"
     )

@@ -427,6 +427,7 @@ class _OpenAIChatModel:
             "model": self.cfg.model,
             "messages": oai_messages,
             "temperature": self.cfg.temperature,
+            "seed": 42,
         }
         if self.cfg.max_tokens is not None:
             kwargs["max_tokens"] = self.cfg.max_tokens

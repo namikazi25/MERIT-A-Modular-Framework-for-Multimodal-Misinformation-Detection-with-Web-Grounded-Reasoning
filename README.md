@@ -63,6 +63,12 @@ python -m scripts.evaluate \
   - `PIPELINE_DISABLE_JUDGE` / `--disable-judge`
   - `--answer-questions` controls web-question answering; it is automatically disabled
     if `--disable-questions` is active.
+- **Dataset split**: point the runner at a different MMFakeBench split with
+  `--dataset-root` (or `PIPELINE_DATASET_ROOT`). By default the pipeline reads from
+  `data/MMFakeBench_test`; switch to `data/MMFakeBench_val` (or another directory) to
+  process alternative splits. If the JSON filename doesn’t match the directory name,
+  provide `--dataset-json` / `PIPELINE_DATASET_JSON` with a path relative to the root or
+  an absolute path.
 
 All effective settings are recorded in the per-run metadata file (see below).
 

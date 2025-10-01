@@ -37,15 +37,40 @@ except Exception:
     pass
 
 
-def _resolve_json_path() -> Path:
-    # Prefer the source JSON if present; otherwise, fallback to the root JSON.
-    p1 = Path("data/MMFakeBench_test/source/MMFakeBench_test.json")
-    p2 = Path("data/MMFakeBench_test/MMFakeBench_test.json")
-    if p1.exists():
-        return p1
-    if p2.exists():
-        return p2
-    raise FileNotFoundError("Could not find MMFakeBench_test.json under data/MMFakeBench_test.")
+def _resolve_json_path(dataset_root: Path, dataset_json: Optional[str] = None) -> Path:
+    """Resolve the dataset JSON under ``dataset_root``."""
+
+    dataset_root = dataset_root.expanduser()
+    if not dataset_root.exists():
+        raise FileNotFoundError(f"Dataset root not found: {dataset_root}")
+
+    candidates: List[Path] = []
+
+    if dataset_json:
+        override = Path(dataset_json).expanduser()
+        if not override.is_absolute():
+            override = dataset_root / override
+        candidates.append(override)
+
+    dataset_name = dataset_root.name
+    candidates.append(dataset_root / "source" / f"{dataset_name}.json")
+    candidates.append(dataset_root / f"{dataset_name}.json")
+
+    if not dataset_json:
+        for parent in (dataset_root / "source", dataset_root):
+            if parent.exists():
+                for extra in sorted(parent.glob("*.json")):
+                    if extra not in candidates:
+                        candidates.append(extra)
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
+    searched = ", ".join(str(path) for path in candidates) or "(no candidates)"
+    raise FileNotFoundError(
+        f"Could not find dataset JSON under {dataset_root}. Checked: {searched}"
+    )
 
 
 def _print_sample(i: int, sample: Dict[str, Any]) -> None:
@@ -86,6 +111,8 @@ RUN_METADATA_ENV_KEYS = [
     "ANSWER_MAX_SOURCES",
     "Q_CHAINS",
     "Q_PER_CHAIN",
+    "PIPELINE_DATASET_ROOT",
+    "PIPELINE_DATASET_JSON",
 ]
 
 
@@ -184,6 +211,18 @@ def main() -> None:
         help="Use web search (controlled by SEARCH_PROVIDER) + LLM to answer generated questions",
     )
     parser.add_argument("--answer-max-sources", type=int, default=int(os.getenv("ANSWER_MAX_SOURCES", "5")), help="Max sources to pass to LLM per question")
+    parser.add_argument(
+        "--dataset-root",
+        type=str,
+        default=os.getenv("PIPELINE_DATASET_ROOT", "data/MMFakeBench_test"),
+        help="Root directory containing the MMFakeBench split to process (default: data/MMFakeBench_test)",
+    )
+    parser.add_argument(
+        "--dataset-json",
+        type=str,
+        default=os.getenv("PIPELINE_DATASET_JSON", ""),
+        help="Optional dataset JSON path (absolute or relative to --dataset-root)",
+    )
     parser.add_argument("--emit-json", action="store_true", default=os.getenv("EMIT_FINAL_JSON", "1") == "1", help="Print final structured JSON per sample for downstream use")
     parser.add_argument("--judge", action="store_true", default=os.getenv("JUDGE_ENABLE", "1") == "1", help="Run AI judge on final structured output and print/append decision")
     parser.add_argument("--save-jsonl", type=str, default=os.getenv("PIPELINE_OUTPUT_JSONL", ""), help="If set, append each final structured object to this JSONL file")
@@ -278,6 +317,18 @@ def main() -> None:
     if not args.checkpoint_dir:
         args.checkpoint_dir = str(Path("results") / "checkpoints" / run_id)
 
+    dataset_root = Path(args.dataset_root).expanduser()
+    if not dataset_root.exists():
+        print(f"\nDataset root not found: {dataset_root}")
+        return
+
+    dataset_json_override = (args.dataset_json or "").strip() or None
+    try:
+        json_path = _resolve_json_path(dataset_root, dataset_json_override)
+    except FileNotFoundError as exc:
+        print(f"\n{exc}")
+        return
+
     args.checkpoint_size = max(1, int(args.checkpoint_size))
 
     checkpoint_dir = Path(args.checkpoint_dir).expanduser()
@@ -302,6 +353,10 @@ def main() -> None:
             "jsonl": args.save_jsonl,
             "html": args.html_report,
             "checkpoint_dir": str(checkpoint_dir),
+        },
+        "dataset": {
+            "root": str(dataset_root),
+            "json": str(json_path),
         },
         "modules": module_config,
         "args": args_snapshot,
@@ -342,8 +397,7 @@ def main() -> None:
 
     search_provider = get_active_search_provider()
 
-    json_path = _resolve_json_path()
-    image_root = Path("data/MMFakeBench_test")
+    image_root = dataset_root
 
     # Try to use torchvision transforms if available; otherwise fall back to PIL images.
     transform = None
@@ -938,7 +992,7 @@ def main() -> None:
             if args.save_jsonl:
                 try:
                     from scripts.evaluate import evaluate as _eval
-                    metrics = _eval(Path(args.save_jsonl), ds_json, Path("data/MMFakeBench_test"), save_report=None)
+                    metrics = _eval(Path(args.save_jsonl), ds_json, dataset_root, save_report=None)
                 except Exception:
                     metrics = None
             render_html_report(

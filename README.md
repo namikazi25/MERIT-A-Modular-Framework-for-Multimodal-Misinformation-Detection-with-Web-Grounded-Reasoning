@@ -22,6 +22,7 @@ cp .env.sample .env
 python scripts/unzip_data.py --zip MMFakeBench_test.zip --dest data
 
 # 4) Run the pipeline over N samples (writes JSONL + HTML + metadata)
+#    By default the loader balances fake_cls buckets (original/textual/visual/mismatch) 1:1:1:1.
 python main.py --max-samples 1000 --checkpoint-size 100
 
 # 5) Evaluate outputs against ground truth

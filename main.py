@@ -988,7 +988,7 @@ def main() -> None:
             from scripts.report_html import render_html_report
             # Try to compute metrics over the full JSONL if provided and dataset exists
             metrics = None
-            ds_json = _resolve_json_path()
+            ds_json = _resolve_json_path(dataset_root, dataset_json_override)
             if args.save_jsonl:
                 try:
                     from scripts.evaluate import evaluate as _eval

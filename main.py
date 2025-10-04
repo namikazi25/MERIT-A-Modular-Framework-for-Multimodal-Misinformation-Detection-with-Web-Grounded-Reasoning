@@ -223,6 +223,12 @@ def main() -> None:
         default=os.getenv("PIPELINE_DATASET_JSON", ""),
         help="Optional dataset JSON path (absolute or relative to --dataset-root)",
     )
+    parser.add_argument(
+        "--dataset-stratify",
+        type=str,
+        default=os.getenv("PIPELINE_DATASET_STRATIFY", "fake_cls"),
+        help="Comma-separated dataset fields to stratify the sampling order (set to '' to disable).",
+    )
     parser.add_argument("--emit-json", action="store_true", default=os.getenv("EMIT_FINAL_JSON", "1") == "1", help="Print final structured JSON per sample for downstream use")
     parser.add_argument("--judge", action="store_true", default=os.getenv("JUDGE_ENABLE", "1") == "1", help="Run AI judge on final structured output and print/append decision")
     parser.add_argument("--save-jsonl", type=str, default=os.getenv("PIPELINE_OUTPUT_JSONL", ""), help="If set, append each final structured object to this JSONL file")
@@ -329,6 +335,8 @@ def main() -> None:
         print(f"\n{exc}")
         return
 
+    stratify_fields = [field.strip() for field in (args.dataset_stratify or "").split(",") if field.strip()]
+
     args.checkpoint_size = max(1, int(args.checkpoint_size))
 
     checkpoint_dir = Path(args.checkpoint_dir).expanduser()
@@ -357,6 +365,7 @@ def main() -> None:
         "dataset": {
             "root": str(dataset_root),
             "json": str(json_path),
+            "stratify": stratify_fields or None,
         },
         "modules": module_config,
         "args": args_snapshot,
@@ -418,6 +427,7 @@ def main() -> None:
         skip_missing=True,
         verbose=True,
         return_image=False,
+        stratify_by=stratify_fields,
     )
 
     # If torch is present, exercise the DataLoader; else iterate directly.

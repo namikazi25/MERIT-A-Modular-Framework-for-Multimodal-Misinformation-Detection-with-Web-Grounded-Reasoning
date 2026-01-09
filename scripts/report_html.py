@@ -223,6 +223,7 @@ def _cm_to_data_url(cm: Dict[str, int], title: str) -> Optional[str]:
 def _render_metric_block(name: str, cm: Dict[str, int], m: Dict[str, Any]) -> str:
     # Compose a clear block with bullets and a confusion matrix image
     acc = m.get("accuracy", 0)
+    prec = m.get("precision", 0)
     rec_pos = m.get("recall_pos", m.get("recall", 0))
     rec_neg = m.get("recall_neg", 0)
     f1 = m.get("f1", 0)
@@ -240,6 +241,7 @@ def _render_metric_block(name: str, cm: Dict[str, int], m: Dict[str, Any]) -> st
         f"<h3>{_escape(name)}</h3>"
         f"<ul>"
         f"<li><b>Accuracy:</b> {acc}</li>"
+        f"<li><b>Precision:</b> {prec}</li>"
         f"<li><b>Recall (Misinformation):</b> {rec_pos}</li>"
         f"<li><b>Recall (Not Misinformation):</b> {rec_neg}</li>"
         f"<li><b>F1:</b> {f1}</li>"

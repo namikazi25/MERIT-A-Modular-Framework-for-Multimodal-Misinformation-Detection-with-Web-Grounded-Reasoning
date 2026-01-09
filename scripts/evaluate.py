@@ -491,6 +491,8 @@ def evaluate(
     def _pp(title: str, cm: Dict[str, int], m: Dict[str, float]):
         print(f"\n== {title} ==")
         print(f"  Accuracy: {m['accuracy']}")
+        if 'precision' in m:
+            print(f"  Precision: {m['precision']}")
         print(f"  Recall (Misinformation): {m['recall_pos']}")
         print(f"  Recall (Not Misinformation): {m['recall_neg']}")
         print(f"  F1: {m['f1']}")

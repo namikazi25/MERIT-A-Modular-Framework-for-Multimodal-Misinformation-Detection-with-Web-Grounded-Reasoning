@@ -1,0 +1,18 @@
+FN,FP,TN,TP,accuracy,avg_confidence,bin_lower,bin_upper,brier_score,category,count,expected_calibration_error,f1,judge_confidence_samples,judge_label_distribution,judge_logprob_samples,missing_in_gt_map,name,precision,recall,recall_neg,recall_pos,samples,support,total_outputs,uncertain_count,uncertain_rate,visual_veracity_coverage_rate,visual_veracity_gt_known,visual_veracity_pred_covered
+,,,,,,,,,summary,,,,95,"{'Misinformation': 68, 'Not Misinformation': 27, 'Uncertain': 5}",0,0,counts,,,,,,,100,5,0.05,1.0,100,100
+11,9,16,59,0.7895,,,,,metric,,,0.8551,,,,,judge_filtered,0.8676,0.8429,0.64,0.8429,,95,,,,,,
+15,10,16,59,0.75,,,,,metric,,,0.8252,,,,,judge_all,0.8551,0.7973,0.6154,0.7973,,100,,,,,,
+5,3,74,18,0.92,,,,,metric,,,0.8182,,,,,visual_veracity_filtered,0.8571,0.7826,0.961,0.7826,,100,,,,,,
+5,3,74,18,0.92,,,,,metric,,,0.8182,,,,,visual_veracity_all,0.8571,0.7826,0.961,0.7826,,100,,,,,,
+,,,,,,,,0.174737,calibration_summary,,0.107368,,,,,,judge_confidence,,,,,95,,,,,,,
+,,,,,,0.0,0.1,,calibration_bin,0,,,,,,,bin_0,,,,,,,,,,,,
+,,,,,,0.1,0.2,,calibration_bin,0,,,,,,,bin_1,,,,,,,,,,,,
+,,,,,,0.2,0.3,,calibration_bin,0,,,,,,,bin_2,,,,,,,,,,,,
+,,,,,,0.3,0.4,,calibration_bin,0,,,,,,,bin_3,,,,,,,,,,,,
+,,,,,,0.4,0.5,,calibration_bin,0,,,,,,,bin_4,,,,,,,,,,,,
+,,,,,,0.5,0.6,,calibration_bin,0,,,,,,,bin_5,,,,,,,,,,,,
+,,,,,,0.6,0.7,,calibration_bin,0,,,,,,,bin_6,,,,,,,,,,,,
+,,,,,,0.7,0.8,,calibration_bin,0,,,,,,,bin_7,,,,,,,,,,,,
+,,,,0.625,0.8125,0.8,0.9,,calibration_bin,8,,,,,,,bin_8,,,,,,,,,,,,
+,,,,0.8046,0.9046,0.9,1.0,,calibration_bin,87,,,,,,,bin_9,,,,,,,,,,,,
+,,,,,,,,,calibration_summary,,,,,,,,judge_logprob_confidence,,,,,0,,,,,,,

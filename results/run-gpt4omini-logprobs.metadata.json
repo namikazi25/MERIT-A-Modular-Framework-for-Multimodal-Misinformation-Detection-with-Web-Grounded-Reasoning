@@ -1,0 +1,74 @@
+{
+  "run_id": "run-gpt4omini-logprobs",
+  "started_at": "2025-09-29T22:01:17.751547+00:00",
+  "paths": {
+    "jsonl": "results/run-gpt4omini-logprobs.jsonl",
+    "html": "results/run-gpt4omini-logprobs.html",
+    "checkpoint_dir": "results/checkpoints/run-gpt4omini-logprobs"
+  },
+  "modules": {
+    "relevancy": true,
+    "visual_veracity": true,
+    "questions": true,
+    "question_answering": true,
+    "judge": true
+  },
+  "args": {
+    "image": null,
+    "headline": null,
+    "model": "gpt-4o-mini",
+    "temperature": 0.2,
+    "relevancy_limit": 3,
+    "max_samples": 3,
+    "q_chains": 3,
+    "q_per_chain": 3,
+    "answer_questions": true,
+    "answer_max_sources": 5,
+    "emit_json": true,
+    "judge": true,
+    "save_jsonl": "results/run-gpt4omini-logprobs.jsonl",
+    "html_report": "results/run-gpt4omini-logprobs.html",
+    "html_title": "Pipeline Results",
+    "html_inline_images": false,
+    "disable_relevancy": false,
+    "disable_visual": false,
+    "disable_questions": false,
+    "disable_judge": false,
+    "checkpoint_dir": "results/checkpoints/run-gpt4omini-logprobs",
+    "checkpoint_size": 100
+  },
+  "environment": {
+    "ALIGN_PROVIDER": "openai",
+    "ALIGN_MODEL": "gpt-4o-mini",
+    "ALIGN_TEMPERATURE": "0.2",
+    "PIPELINE_MAX_SAMPLES": "5",
+    "PIPELINE_HTML_REPORT": "",
+    "PIPELINE_HTML_TITLE": "Pipeline Results",
+    "PIPELINE_HTML_INLINE_IMAGES": "0",
+    "PIPELINE_CHECKPOINT_DIR": "",
+    "PIPELINE_CHECKPOINT_SIZE": "100",
+    "PIPELINE_RESUME": "",
+    "PIPELINE_DISABLE_RELEVANCY": "0",
+    "PIPELINE_DISABLE_VISUAL": "0",
+    "PIPELINE_DISABLE_QUESTIONS": "0",
+    "PIPELINE_DISABLE_JUDGE": "0",
+    "SEARCH_PROVIDER": "duckduckgo",
+    "ANSWER_ENABLE": "1",
+    "ANSWER_MAX_SOURCES": "5"
+  },
+  "git": {
+    "commit": "00f054545ab95bc58b406fa075661326adaea7df",
+    "dirty": true
+  },
+  "resume_from": null,
+  "status": "completed",
+  "target_samples": 3,
+  "progress": {
+    "processed_samples": 3,
+    "target_samples": 3
+  },
+  "last_checkpoint": "results/checkpoints/run-gpt4omini-logprobs/run-gpt4omini-logprobs.upto00003.json",
+  "completed_at": "2025-09-29T22:06:53.539335+00:00",
+  "duration_seconds": 335.788,
+  "outputs_count": 3
+}

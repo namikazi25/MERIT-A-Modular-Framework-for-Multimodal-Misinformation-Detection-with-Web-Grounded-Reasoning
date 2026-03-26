@@ -1,0 +1,21 @@
+sample_index,image_path,headline,prompt_tokens,completion_tokens,total_tokens
+1,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_772.png,"Westworld first season premiered on August 28, 2015.",212690,1993,214683
+2,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_173.png,a bathroom with a big mirror above the sink,212013,2394,214407
+3,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_261.png,Oscar Pistorius passes family members of the late Reeva Steenkamp on his arrival in court to await the verdict,78465,2274,80739
+4,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_260.png,President Obama center stands with gubernatorial candidate Mark Schauer left and US Senate candidate Gary Peters during a rally at Wayne State University in Detroit on Nov 1,76584,2609,79193
+5,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_780.png,Elizabeth of York was single.,212691,2562,215253
+6,data/MMFakeBench_test/real/guardian_test_500/guardian_test_272.png,The skyline of downtown Los Angeles and the 101 Hollywood Freeway a busy commuter route is pictured from Mulholland Drive in 2013,77386,2155,79541
+7,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_9.png,Nuneaton was once considered a Labour stronghold but the Tories have now managed to hold it in consecutive elections,78040,2483,80523
+8,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_179.png,this accessible bathroom has an angled mirror for wheelchair users and the emergency pull cord lines the bottom of the walls in case someones stuck on the floor,75947,2097,78044
+9,data/MMFakeBench_test/real/coco_test_500/coco_test_305.png,A woman sitting on a surfboard in the ocean.,125289,2819,128108
+10,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_215.png,A black and white cow with horns in front of a woodpile.,77882,2267,80149
+11,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_626.png,The Independent Spirit Awards are held the day before the Golden Globe Awards.,213533,2075,215608
+12,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_236.png,Texas Church Shooter Was Antifa Member Who Vowed To Start Civil War,78162,2538,80700
+13,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_5.png,a surfing instructor teaches students with surfboards on a beach in front of large hotel buildings.,76888,2751,79639
+14,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_225.png,"Classic Adaptation: Robinson Crusoe on Mars Reimagined as a Groundbreaking Comedy Series, Redefining Science Fiction Entertainment Standards.",214294,2339,216633
+15,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_SD_94.png,The House of the Spirits won fence.,212433,2303,214736
+16,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_90.png,The BBC drama featured a character called Tamasha who had undergone the procedure,76157,2513,78670
+17,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_736.png,As it happened: Prince Harry and Meghan Markle engaged - Is this finally the modern bride the royal family needs?,123396,2531,125927
+18,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_366.png,Restaurant review: Stanley's gets a second look and comes up smelling of roses,76340,2224,78564
+19,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_56.png,Julia Roberts Makes a Desperate - and Expensive! - Move to Save Her Marriage With Danny Moder (EXCLUSIVE),78238,2626,80864
+20,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_178.png,Hillary In Hiding As Police Discover Dead Body Hidden In Huma Abedin's Dumpster,75928,1887,77815

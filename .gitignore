@@ -37,7 +37,7 @@ pip-wheel-metadata/
 .env.test
 
 # Run outputs
-results/
+# results/
 
 # Folders
 data/
@@ -50,3 +50,4 @@ data/
 .wget-hsts
 .windsurf-server
 todo.txt
+digest.txt

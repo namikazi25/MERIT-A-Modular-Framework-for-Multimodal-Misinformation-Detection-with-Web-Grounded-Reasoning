@@ -1,0 +1,257 @@
+{
+  "counts": {
+    "total_outputs": 12,
+    "missing_in_gt_map": 0,
+    "judge_label_distribution": {
+      "Misinformation": 8,
+      "Not Misinformation": 4
+    },
+    "uncertain_count": 0,
+    "uncertain_rate": 0.0,
+    "visual_veracity_gt_known": 12,
+    "visual_veracity_pred_covered": 12,
+    "visual_veracity_coverage_rate": 1.0,
+    "judge_confidence_samples": 12,
+    "judge_logprob_samples": 0
+  },
+  "judge_metrics_overall": {
+    "confusion_matrix": {
+      "TP": 7,
+      "FP": 1,
+      "FN": 1,
+      "TN": 3
+    },
+    "metrics": {
+      "accuracy": 0.8333,
+      "precision": 0.875,
+      "recall": 0.875,
+      "f1": 0.875,
+      "recall_pos": 0.875,
+      "recall_neg": 0.75,
+      "support": 12
+    }
+  },
+  "judge_metrics_by_fake_cls": {
+    "mismatch": {
+      "confusion_matrix": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 1,
+        "TN": 0
+      },
+      "metrics": {
+        "accuracy": 0.6667,
+        "precision": 1.0,
+        "recall": 0.6667,
+        "f1": 0.8,
+        "recall_pos": 0.6667,
+        "recall_neg": 0.0,
+        "support": 3
+      }
+    },
+    "original": {
+      "confusion_matrix": {
+        "TP": 0,
+        "FP": 1,
+        "FN": 0,
+        "TN": 3
+      },
+      "metrics": {
+        "accuracy": 0.75,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "recall_pos": 0.0,
+        "recall_neg": 0.75,
+        "support": 4
+      }
+    },
+    "textual_veracity_distortion": {
+      "confusion_matrix": {
+        "TP": 4,
+        "FP": 0,
+        "FN": 0,
+        "TN": 0
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "recall_pos": 1.0,
+        "recall_neg": 0.0,
+        "support": 4
+      }
+    },
+    "visual_veracity_distortion": {
+      "confusion_matrix": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 0
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "recall_pos": 1.0,
+        "recall_neg": 0.0,
+        "support": 1
+      }
+    }
+  },
+  "visual_veracity_ai_detection": {
+    "confusion_matrix": {
+      "TP": 4,
+      "FP": 0,
+      "FN": 0,
+      "TN": 8
+    },
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "recall_pos": 1.0,
+      "recall_neg": 1.0,
+      "support": 12
+    }
+  },
+  "visual_veracity_ai_detection_all": {
+    "confusion_matrix": {
+      "TP": 4,
+      "FP": 0,
+      "FN": 0,
+      "TN": 8
+    },
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "recall_pos": 1.0,
+      "recall_neg": 1.0,
+      "support": 12
+    }
+  },
+  "judge_confidence_calibration": {
+    "total": 12,
+    "bins": [
+      {
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.2,
+        "bin_upper": 0.3,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.3,
+        "bin_upper": 0.4,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.5,
+        "bin_upper": 0.6,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.6,
+        "bin_upper": 0.7,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.7,
+        "bin_upper": 0.8,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.8,
+        "bin_upper": 0.9,
+        "count": 3,
+        "avg_confidence": 0.8,
+        "accuracy": 0.6667
+      },
+      {
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 9,
+        "avg_confidence": 0.9111,
+        "accuracy": 0.8889
+      }
+    ],
+    "brier_score": 0.132917,
+    "expected_calibration_error": 0.05,
+    "bin_count": 10
+  },
+  "judge_logprob_calibration": {
+    "total": 0,
+    "bins": [],
+    "brier_score": null,
+    "expected_calibration_error": null,
+    "bin_count": 10
+  },
+  "judge_metrics": {
+    "confusion_matrix": {
+      "TP": 7,
+      "FP": 1,
+      "FN": 1,
+      "TN": 3
+    },
+    "metrics": {
+      "accuracy": 0.8333,
+      "precision": 0.875,
+      "recall": 0.875,
+      "f1": 0.875,
+      "recall_pos": 0.875,
+      "recall_neg": 0.75,
+      "support": 12
+    }
+  },
+  "judge_metrics_all": {
+    "confusion_matrix": {
+      "TP": 7,
+      "FP": 1,
+      "FN": 1,
+      "TN": 3
+    },
+    "metrics": {
+      "accuracy": 0.8333,
+      "precision": 0.875,
+      "recall": 0.875,
+      "f1": 0.875,
+      "recall_pos": 0.875,
+      "recall_neg": 0.75,
+      "support": 12
+    }
+  }
+}

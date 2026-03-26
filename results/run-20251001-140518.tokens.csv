@@ -1,0 +1,13 @@
+sample_index,image_path,headline,prompt_tokens,completion_tokens,total_tokens
+1,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_772.png,"Westworld first season premiered on August 28, 2015.",216187,2188,218375
+2,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_173.png,a bathroom with a big mirror above the sink,213273,2601,215874
+3,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_261.png,Oscar Pistorius passes family members of the late Reeva Steenkamp on his arrival in court to await the verdict,79109,2764,81873
+4,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_260.png,President Obama center stands with gubernatorial candidate Mark Schauer left and US Senate candidate Gary Peters during a rally at Wayne State University in Detroit on Nov 1,77509,2751,80260
+5,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_780.png,Elizabeth of York was single.,212837,2396,215233
+6,data/MMFakeBench_test/real/guardian_test_500/guardian_test_272.png,The skyline of downtown Los Angeles and the 101 Hollywood Freeway a busy commuter route is pictured from Mulholland Drive in 2013,77239,2663,79902
+7,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_9.png,Nuneaton was once considered a Labour stronghold but the Tories have now managed to hold it in consecutive elections,77880,2663,80543
+8,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_179.png,this accessible bathroom has an angled mirror for wheelchair users and the emergency pull cord lines the bottom of the walls in case someones stuck on the floor,77963,2580,80543
+9,data/MMFakeBench_test/real/coco_test_500/coco_test_305.png,A woman sitting on a surfboard in the ocean.,121548,2173,123721
+10,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_215.png,A black and white cow with horns in front of a woodpile.,77247,2361,79608
+11,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_626.png,The Independent Spirit Awards are held the day before the Golden Globe Awards.,212828,1974,214802
+12,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_236.png,Texas Church Shooter Was Antifa Member Who Vowed To Start Civil War,77093,2691,79784

@@ -1,0 +1,30 @@
+{
+  "run_id": "run-20250921-170640",
+  "processed_count": 100,
+  "next_index": 100,
+  "chunk_size": 100,
+  "jsonl_path": "results/run-20250921-170640.jsonl",
+  "html_report_path": "results/run-20250921-170640.html",
+  "created_at": "2025-09-21T19:19:46.198106+00:00",
+  "args_snapshot": {
+    "image": null,
+    "headline": null,
+    "model": "gpt-4o-mini",
+    "temperature": 0.2,
+    "relevancy_limit": 3,
+    "max_samples": 1000,
+    "q_chains": 3,
+    "q_per_chain": 3,
+    "answer_questions": true,
+    "answer_max_sources": 5,
+    "emit_json": true,
+    "judge": true,
+    "save_jsonl": "results/run-20250921-170640.jsonl",
+    "html_report": "results/run-20250921-170640.html",
+    "html_title": "Pipeline Results",
+    "html_inline_images": false,
+    "checkpoint_dir": "results/checkpoints/run-20250921-170640",
+    "checkpoint_size": 100
+  },
+  "args_fingerprint": "fdb892c69fc6f898f815f703f0fdca3d895cc4b46647ed9af937faffa1e524c6"
+}

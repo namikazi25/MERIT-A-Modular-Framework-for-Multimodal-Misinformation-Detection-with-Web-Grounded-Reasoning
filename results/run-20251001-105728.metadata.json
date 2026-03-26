@@ -1,0 +1,65 @@
+{
+  "run_id": "run-20251001-105728",
+  "started_at": "2025-10-01T10:57:28.237512+00:00",
+  "paths": {
+    "jsonl": "results/run-20251001-105728.jsonl",
+    "html": "results/run-20251001-105728.html",
+    "checkpoint_dir": "results/checkpoints/run-20251001-105728"
+  },
+  "modules": {
+    "relevancy": true,
+    "visual_veracity": true,
+    "questions": true,
+    "question_answering": true,
+    "judge": true
+  },
+  "args": {
+    "image": null,
+    "headline": null,
+    "model": "gpt-4o-mini",
+    "temperature": 0.2,
+    "relevancy_limit": 3,
+    "max_samples": 1000,
+    "q_chains": 3,
+    "q_per_chain": 3,
+    "answer_questions": true,
+    "answer_max_sources": 5,
+    "emit_json": true,
+    "judge": true,
+    "save_jsonl": "results/run-20251001-105728.jsonl",
+    "html_report": "results/run-20251001-105728.html",
+    "html_title": "Pipeline Results",
+    "html_inline_images": false,
+    "disable_relevancy": false,
+    "disable_visual": false,
+    "disable_questions": false,
+    "disable_judge": false,
+    "checkpoint_dir": "results/checkpoints/run-20251001-105728",
+    "checkpoint_size": 100
+  },
+  "environment": {
+    "ALIGN_PROVIDER": "openai",
+    "ALIGN_MODEL": "gpt-4o-mini",
+    "ALIGN_TEMPERATURE": "0.2",
+    "PIPELINE_MAX_SAMPLES": "5",
+    "PIPELINE_HTML_REPORT": "",
+    "PIPELINE_HTML_TITLE": "Pipeline Results",
+    "PIPELINE_HTML_INLINE_IMAGES": "0",
+    "PIPELINE_CHECKPOINT_DIR": "",
+    "PIPELINE_CHECKPOINT_SIZE": "100",
+    "PIPELINE_RESUME": "",
+    "PIPELINE_DISABLE_RELEVANCY": "0",
+    "PIPELINE_DISABLE_VISUAL": "0",
+    "PIPELINE_DISABLE_QUESTIONS": "0",
+    "PIPELINE_DISABLE_JUDGE": "0",
+    "SEARCH_PROVIDER": "duckduckgo",
+    "ANSWER_ENABLE": "1",
+    "ANSWER_MAX_SOURCES": "5"
+  },
+  "git": {
+    "commit": "a5c90870f03d477747385f470ed37e0e9aa04e9e",
+    "dirty": true
+  },
+  "resume_from": null,
+  "status": "initializing"
+}

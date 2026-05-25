@@ -71,7 +71,7 @@ def select_best_qa_and_propose_followups(
     sys_msg = system_prompt or _DEFAULT_SYSTEM_PROMPT
 
     selected: List[Dict[str, Any]] = []
-    followups: List[List[str]] = []
+    followups: List[List[str]] = [[] for _ in chains]
 
     # Prepare prior list to avoid duplicates in follow-ups
     prior_questions: List[str] = [q for chain in chains for q in chain]
@@ -116,25 +116,26 @@ def select_best_qa_and_propose_followups(
         pick = items[idx - 1] if items else {}
         selected.append(pick)
 
-        # Propose follow-up questions (3) using the existing generator
+    generated_followups: List[List[str]] = []
+    if followups_per_chain > 0 and chains:
         try:
             qres = generate_investigative_questions(
                 image_path,
                 headline,
                 loader,
-                chains=1,
+                chains=len(chains),
                 questions_per_chain=followups_per_chain,
                 prior_questions=prior_questions,
             )
-            fqs = qres.get("chains", [[]])[0] if qres.get("chains") else []
+            generated_followups = qres.get("chains") or []
         except Exception:
-            fqs = []
+            generated_followups = []
 
-        followups.append(fqs)
-        prior_questions.extend(fqs)
+    for chain_index in range(len(chains)):
+        if chain_index < len(generated_followups):
+            followups[chain_index] = generated_followups[chain_index] or []
 
     return {"selected": selected, "followups": followups}
 
 
 __all__ = ["select_best_qa_and_propose_followups"]
-

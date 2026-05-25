@@ -1,0 +1,30 @@
+{
+  "run_id": "run-20250921-205556",
+  "processed_count": 80,
+  "next_index": 80,
+  "chunk_size": 10,
+  "jsonl_path": "results/run-20250921-205556.jsonl",
+  "html_report_path": "results/run-20250921-205556.html",
+  "created_at": "2025-09-21T22:32:21.875003+00:00",
+  "args_snapshot": {
+    "image": null,
+    "headline": null,
+    "model": "gpt-4o-mini",
+    "temperature": 0.2,
+    "relevancy_limit": 3,
+    "max_samples": 100,
+    "q_chains": 3,
+    "q_per_chain": 3,
+    "answer_questions": true,
+    "answer_max_sources": 5,
+    "emit_json": true,
+    "judge": true,
+    "save_jsonl": "results/run-20250921-205556.jsonl",
+    "html_report": "results/run-20250921-205556.html",
+    "html_title": "Pipeline Results",
+    "html_inline_images": false,
+    "checkpoint_dir": "results/checkpoints/run-20250921-205556",
+    "checkpoint_size": 10
+  },
+  "args_fingerprint": "3d32cebf2a95b1988b4973a43e614f628630718dd0e4773c67a8d0f74850171e"
+}

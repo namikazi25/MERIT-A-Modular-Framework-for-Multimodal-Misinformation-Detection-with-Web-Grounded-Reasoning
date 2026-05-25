@@ -1,42 +1,13 @@
-# Byte-compiled / optimized / DLL files
+# Byte-compiled
 __pycache__/
-*.py[cod]
-*$py.class
+*.pyc
 
-# Virtual environments
-.venv/
-venv/
-env/
-ENV/
-.conda/
-
-# Python packaging
-build/
-dist/
-*.egg-info/
-.eggs/
-*.egg
-pip-wheel-metadata/
-
-# Logs
-*.log
-
-# IDE settings
-.vscode/
-.idea/
-*.code-workspace
-
-# OS files
-.DS_Store
-
-# Environment variables
+# Env
 .env
-.env.local
-.env.development
 .env.production
 .env.test
 
-# Run outputs (keep JSONL and .metrics.json tracked; reports regenerate)
+# Run outputs (keep JSONL and metrics tracked; reports regenerate)
 results/*.html
 results/checkpoints/
 
@@ -44,30 +15,22 @@ results/checkpoints/
 *.zip
 data/
 
-# Folders
-/.codex
-.lightning_studio
-.cursor-server
-.vscode-server
-.wget-hsts
-.windsurf-server
-todo.txt
-digest.txt
-
-# AI assistant / editor state
+# Editor / assistant / shell state
 .claude/
 .claude.json
 .copilot/
-.cache/
-
-# Shell / terminal state
+.cursor-server
+.vscode-server
+.windsurf-server
 .bash_history
 .zsh_history
 .zcompdump*
+.wget-hsts
+.lightning_studio
 
-# Local helper scripts
+# Local helpers / backups
 get_git_config.sh
-
-# Local backups
+digest.txt
+todo.txt
 repo-backup.git/
 *.bundle

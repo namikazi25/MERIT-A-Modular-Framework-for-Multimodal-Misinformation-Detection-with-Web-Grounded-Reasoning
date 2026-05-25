@@ -5,6 +5,7 @@ Features
 - Loads samples from JSON + images under a root folder.
 - Returns dict with keys: text, image_path, text_source, image_source, gt_answers, fake_cls, image.
 - Optional balancing by `gt_answers` via undersampling. Falls back to random if not possible.
+- Optional balancing by `fake_cls` (original/textual/visual/mismatch) with configurable totals.
 - Deterministic shuffling via local RNG and seed.
 - Works with torchvision-style image transforms that return tensors.
 
@@ -35,7 +36,7 @@ import os
 import random
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Dict, Iterable, List, Optional
+from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
 
 from PIL import Image
 
@@ -69,6 +70,11 @@ class MMFakeBenchDataset:
     - image_root: Root folder where image paths in JSON are resolved.
     - balanced: If True, undersample to balance classes by `gt_answers`.
     - balance_mode: Currently supports 'undersample'. If not feasible, falls back to unbalanced.
+    - balance_fake_cls: If True, undersample to balance classes equally by `fake_cls`.
+    - fake_cls_balance_total: Optional total sample budget (must be divisible by number of fake_cls labels).
+      When omitted, the dataset uses the minimum available count across classes.
+    - fake_cls_labels: Override the ordered list of fake classes to balance (defaults to
+      ["original", "textual_veracity_distortion", "visual_veracity_distortion", "mismatch"]).
     - limit: Optional cap on number of samples after balancing/shuffling.
     - seed: RNG seed for deterministic shuffling and balancing.
     - skip_missing: If True, drops records with missing images. Else raises.
@@ -76,6 +82,7 @@ class MMFakeBenchDataset:
     - return_image: If False, do not load/return image (keeps metadata only).
     - keys: Optional mapping to override expected JSON field names.
     - verbose: If True, prints basic dataset stats.
+    - stratify_by: Optional iterable of record fields used to stratify sampling order.
     """
 
     def __init__(
@@ -85,6 +92,9 @@ class MMFakeBenchDataset:
         *,
         balanced: bool = False,
         balance_mode: str = "undersample",
+        balance_fake_cls: bool = False,
+        fake_cls_balance_total: Optional[int] = None,
+        fake_cls_labels: Optional[Iterable[str]] = None,
         limit: Optional[int] = None,
         seed: int = 42,
         skip_missing: bool = True,
@@ -92,17 +102,34 @@ class MMFakeBenchDataset:
         return_image: bool = True,
         keys: Optional[Dict[str, str]] = None,
         verbose: bool = False,
+        stratify_by: Optional[Iterable[str]] = None,
     ) -> None:
         self.json_path = Path(json_path)
         self.image_root = Path(image_root)
         self.balanced = balanced
         self.balance_mode = balance_mode
+        self.balance_fake_cls = balance_fake_cls
+        self.fake_cls_balance_total = fake_cls_balance_total
+        default_labels = [
+            "original",
+            "textual_veracity_distortion",
+            "visual_veracity_distortion",
+            "mismatch",
+        ]
+        if fake_cls_labels is None:
+            self.fake_cls_labels = default_labels
+        else:
+            labels_list = [str(label) for label in fake_cls_labels]
+            self.fake_cls_labels = labels_list if labels_list else default_labels
         self.limit = limit
         self.seed = seed
         self.skip_missing = skip_missing
         self.image_transform = image_transform
         self.return_image = return_image
         self.verbose = verbose
+        self.stratify_by = tuple(
+            str(field).strip() for field in (stratify_by or []) if str(field).strip()
+        )
 
         km_dict = keys or {}
         self.km = _KeyMap(
@@ -164,8 +191,15 @@ class MMFakeBenchDataset:
 
         # Build sampling order (indices into _records)
         self._indices: List[int] = list(range(len(self._records)))
+        self._limit_consumed_by_fake_balance = False
 
-        if self.balanced and self.balance_mode == "undersample":
+        applied_special_order = False
+        if self.stratify_by:
+            applied_special_order = self._apply_stratified_order()
+
+        if not applied_special_order and self.balance_fake_cls:
+            self._apply_fake_cls_balance()
+        elif not applied_special_order and self.balanced and self.balance_mode == "undersample":
             buckets: Dict[str, List[int]] = {}
             for idx, rec in enumerate(self._records):
                 key = _normalize_class_key(rec["gt_answers"])  # can be str/list/etc.
@@ -187,11 +221,11 @@ class MMFakeBenchDataset:
             else:
                 # Not enough classes to balance; fall back to random
                 self._rng.shuffle(self._indices)
-        else:
+        elif not applied_special_order:
             # Unbalanced order; shuffle deterministically
             self._rng.shuffle(self._indices)
 
-        if self.limit is not None:
+        if self.limit is not None and not self._limit_consumed_by_fake_balance:
             self._indices = self._indices[: int(self.limit)]
 
         if self.verbose:
@@ -227,6 +261,90 @@ class MMFakeBenchDataset:
             out["image"] = img
 
         return out
+
+    def _apply_fake_cls_balance(self) -> None:
+        buckets: Dict[str, List[int]] = {label: [] for label in self.fake_cls_labels}
+        for idx, rec in enumerate(self._records):
+            cls = rec.get("fake_cls")
+            if cls in buckets:
+                buckets[cls].append(idx)
+
+        missing = [label for label, values in buckets.items() if not values]
+        if missing:
+            raise ValueError(
+                "Fake class balancing requested but the dataset lacks samples for: "
+                + ", ".join(missing)
+            )
+
+        target_total: Optional[int] = None
+        if self.fake_cls_balance_total is not None:
+            target_total = int(self.fake_cls_balance_total)
+        elif self.limit is not None:
+            target_total = int(self.limit)
+
+        class_count = len(self.fake_cls_labels)
+        per_class_target: int
+
+        if target_total is not None:
+            if target_total <= 0:
+                raise ValueError("fake_cls_balance_total (or limit) must be > 0 when balancing fake_cls.")
+            if target_total % class_count != 0:
+                raise ValueError(
+                    f"Requested total {target_total} is not divisible by the number of fake_cls buckets ({class_count})."
+                )
+            requested_per_class = target_total // class_count
+            available_per_class = min(len(bucket) for bucket in buckets.values())
+            per_class_target = min(requested_per_class, available_per_class)
+            if per_class_target < requested_per_class and self.verbose:
+                print(
+                    "fake_cls balance: capped per-class samples at "
+                    f"{per_class_target} due to limited data (requested {requested_per_class})."
+                )
+        else:
+            per_class_target = min(len(bucket) for bucket in buckets.values())
+            if per_class_target == 0:
+                raise ValueError("Not enough samples per fake_cls bucket to perform balancing.")
+
+        selected: List[int] = []
+        for label in self.fake_cls_labels:
+            indices = list(buckets[label])
+            self._rng.shuffle(indices)
+            selected.extend(indices[:per_class_target])
+
+        self._rng.shuffle(selected)
+        self._indices = selected
+        self._limit_consumed_by_fake_balance = target_total is not None
+
+    def _apply_stratified_order(self) -> bool:
+        if not self.stratify_by:
+            return False
+
+        buckets: Dict[Tuple[Any, ...], List[int]] = {}
+        for idx, rec in enumerate(self._records):
+            key = tuple(rec.get(field, "__missing__") for field in self.stratify_by)
+            buckets.setdefault(key, []).append(idx)
+
+        total = sum(len(values) for values in buckets.values())
+        if total == 0:
+            return False
+
+        scored: List[Tuple[float, int]] = []
+        for values in buckets.values():
+            if not values:
+                continue
+            shuffled = list(values)
+            self._rng.shuffle(shuffled)
+            spacing = total / len(shuffled)
+            for position, record_idx in enumerate(shuffled):
+                score = (position + self._rng.random()) * spacing
+                scored.append((score, record_idx))
+
+        if not scored:
+            return False
+
+        scored.sort(key=lambda item: item[0])
+        self._indices = [record_idx for _, record_idx in scored]
+        return True
 
 
 def _default_worker_init_fn(worker_id: int) -> None:

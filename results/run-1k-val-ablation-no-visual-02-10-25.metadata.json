@@ -1,0 +1,84 @@
+{
+  "run_id": "run-1k-val-ablation-no-visual-02-10-25",
+  "started_at": "2025-10-02T21:49:18.795278+00:00",
+  "paths": {
+    "jsonl": "results/run-1k-val-ablation-no-visual-02-10-25.jsonl",
+    "html": "results/run-1k-val-ablation-no-visual-02-10-25.html",
+    "checkpoint_dir": "results/checkpoints/run-1k-val-ablation-no-visual-02-10-25"
+  },
+  "dataset": {
+    "root": "data/MMFakeBench_val",
+    "json": "data/MMFakeBench_val/source/MMFakeBench_val.json",
+    "stratify": [
+      "fake_cls"
+    ]
+  },
+  "modules": {
+    "relevancy": true,
+    "visual_veracity": false,
+    "questions": true,
+    "question_answering": true,
+    "judge": true
+  },
+  "args": {
+    "image": null,
+    "headline": null,
+    "model": "gpt-4o-mini-2024-07-18",
+    "temperature": 0.0,
+    "relevancy_limit": 3,
+    "max_samples": 1000,
+    "q_chains": 3,
+    "q_per_chain": 3,
+    "answer_questions": true,
+    "answer_max_sources": 5,
+    "dataset_root": "data/MMFakeBench_val",
+    "dataset_json": "",
+    "dataset_stratify": "fake_cls",
+    "emit_json": true,
+    "judge": true,
+    "save_jsonl": "results/run-1k-val-ablation-no-visual-02-10-25.jsonl",
+    "html_report": "results/run-1k-val-ablation-no-visual-02-10-25.html",
+    "html_title": "Pipeline Results",
+    "html_inline_images": false,
+    "disable_relevancy": false,
+    "disable_visual": true,
+    "disable_questions": false,
+    "disable_judge": false,
+    "checkpoint_dir": "results/checkpoints/run-1k-val-ablation-no-visual-02-10-25",
+    "checkpoint_size": 100
+  },
+  "environment": {
+    "ALIGN_PROVIDER": "openai",
+    "ALIGN_MODEL": "gpt-4o-mini-2024-07-18",
+    "ALIGN_TEMPERATURE": "0.0",
+    "PIPELINE_MAX_SAMPLES": "5",
+    "PIPELINE_HTML_REPORT": "",
+    "PIPELINE_HTML_TITLE": "Pipeline Results",
+    "PIPELINE_HTML_INLINE_IMAGES": "0",
+    "PIPELINE_CHECKPOINT_DIR": "",
+    "PIPELINE_CHECKPOINT_SIZE": "100",
+    "PIPELINE_RESUME": "",
+    "PIPELINE_DISABLE_RELEVANCY": "0",
+    "PIPELINE_DISABLE_VISUAL": "0",
+    "PIPELINE_DISABLE_QUESTIONS": "0",
+    "PIPELINE_DISABLE_JUDGE": "0",
+    "SEARCH_PROVIDER": "duckduckgo",
+    "ANSWER_ENABLE": "1",
+    "ANSWER_MAX_SOURCES": "5"
+  },
+  "git": {
+    "commit": "27f96e326cdfb92b8e8c64caf0c3d6e37a9e4049",
+    "dirty": true
+  },
+  "resume_from": null,
+  "status": "completed",
+  "target_samples": 1000,
+  "progress": {
+    "processed_samples": 1000,
+    "target_samples": 1000
+  },
+  "last_checkpoint": "results/checkpoints/run-1k-val-ablation-no-visual-02-10-25/run-1k-val-ablation-no-visual-02-10-25.upto01000.json",
+  "completed_at": "2025-10-03T11:13:26.989076+00:00",
+  "duration_seconds": 48248.194,
+  "outputs_count": 1000
+}

@@ -1,0 +1,74 @@
+{
+  "run_id": "run-quick-test",
+  "started_at": "2025-09-23T20:27:54.739514+00:00",
+  "paths": {
+    "jsonl": "results/run-quick-test.jsonl",
+    "html": "results/run-quick-test.html",
+    "checkpoint_dir": "results/checkpoints/run-quick-test"
+  },
+  "modules": {
+    "relevancy": false,
+    "visual_veracity": false,
+    "questions": false,
+    "question_answering": false,
+    "judge": false
+  },
+  "args": {
+    "image": null,
+    "headline": null,
+    "model": "gpt-4o-mini",
+    "temperature": 0.2,
+    "relevancy_limit": 3,
+    "max_samples": 2,
+    "q_chains": 3,
+    "q_per_chain": 3,
+    "answer_questions": true,
+    "answer_max_sources": 5,
+    "emit_json": true,
+    "judge": true,
+    "save_jsonl": "results/run-quick-test.jsonl",
+    "html_report": "results/run-quick-test.html",
+    "html_title": "Pipeline Results",
+    "html_inline_images": false,
+    "disable_relevancy": true,
+    "disable_visual": true,
+    "disable_questions": true,
+    "disable_judge": true,
+    "checkpoint_dir": "results/checkpoints/run-quick-test",
+    "checkpoint_size": 100
+  },
+  "environment": {
+    "ALIGN_PROVIDER": "openai",
+    "ALIGN_MODEL": "gpt-4o-mini",
+    "ALIGN_TEMPERATURE": "0.2",
+    "PIPELINE_MAX_SAMPLES": "1000",
+    "PIPELINE_HTML_REPORT": "",
+    "PIPELINE_HTML_TITLE": "Pipeline Results",
+    "PIPELINE_HTML_INLINE_IMAGES": "0",
+    "PIPELINE_CHECKPOINT_DIR": "",
+    "PIPELINE_CHECKPOINT_SIZE": "100",
+    "PIPELINE_RESUME": "",
+    "PIPELINE_DISABLE_RELEVANCY": "0",
+    "PIPELINE_DISABLE_VISUAL": "0",
+    "PIPELINE_DISABLE_QUESTIONS": "0",
+    "PIPELINE_DISABLE_JUDGE": "0",
+    "SEARCH_PROVIDER": "duckduckgo",
+    "ANSWER_ENABLE": "1",
+    "ANSWER_MAX_SOURCES": "5"
+  },
+  "git": {
+    "commit": "4a4418dcbb195b5e5c495e4a06dc3b8ddf22f94a",
+    "dirty": true
+  },
+  "resume_from": null,
+  "status": "completed",
+  "target_samples": 2,
+  "progress": {
+    "processed_samples": 2,
+    "target_samples": 2
+  },
+  "last_checkpoint": "results/checkpoints/run-quick-test/run-quick-test.upto00002.json",
+  "completed_at": "2025-09-23T20:27:59.916656+00:00",
+  "duration_seconds": 5.177,
+  "outputs_count": 2
+}

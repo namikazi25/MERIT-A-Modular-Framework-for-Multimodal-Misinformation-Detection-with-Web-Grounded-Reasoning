@@ -1,0 +1,80 @@
+{
+  "run_id": "run-val-v1",
+  "started_at": "2025-10-02T00:06:17.149451+00:00",
+  "paths": {
+    "jsonl": "results/run-val-v1.jsonl",
+    "html": "results/run-val-v1.html",
+    "checkpoint_dir": "results/checkpoints/run-val-v1"
+  },
+  "dataset": {
+    "root": "data/MMFakeBench_val",
+    "json": "data/MMFakeBench_val/source/MMFakeBench_val.json"
+  },
+  "modules": {
+    "relevancy": true,
+    "visual_veracity": true,
+    "questions": true,
+    "question_answering": true,
+    "judge": true
+  },
+  "args": {
+    "image": null,
+    "headline": null,
+    "model": "gpt-4o-mini-2024-07-18",
+    "temperature": 0.0,
+    "relevancy_limit": 3,
+    "max_samples": 1000,
+    "q_chains": 3,
+    "q_per_chain": 3,
+    "answer_questions": true,
+    "answer_max_sources": 5,
+    "dataset_root": "data/MMFakeBench_val",
+    "dataset_json": "",
+    "emit_json": true,
+    "judge": true,
+    "save_jsonl": "results/run-val-v1.jsonl",
+    "html_report": "results/run-val-v1.html",
+    "html_title": "Pipeline Results",
+    "html_inline_images": false,
+    "disable_relevancy": false,
+    "disable_visual": false,
+    "disable_questions": false,
+    "disable_judge": false,
+    "checkpoint_dir": "results/checkpoints/run-val-v1",
+    "checkpoint_size": 100
+  },
+  "environment": {
+    "ALIGN_PROVIDER": "openai",
+    "ALIGN_MODEL": "gpt-4o-mini-2024-07-18",
+    "ALIGN_TEMPERATURE": "0.0",
+    "PIPELINE_MAX_SAMPLES": "5",
+    "PIPELINE_HTML_REPORT": "",
+    "PIPELINE_HTML_TITLE": "Pipeline Results",
+    "PIPELINE_HTML_INLINE_IMAGES": "0",
+    "PIPELINE_CHECKPOINT_DIR": "",
+    "PIPELINE_CHECKPOINT_SIZE": "100",
+    "PIPELINE_RESUME": "",
+    "PIPELINE_DISABLE_RELEVANCY": "0",
+    "PIPELINE_DISABLE_VISUAL": "0",
+    "PIPELINE_DISABLE_QUESTIONS": "0",
+    "PIPELINE_DISABLE_JUDGE": "0",
+    "SEARCH_PROVIDER": "duckduckgo",
+    "ANSWER_ENABLE": "1",
+    "ANSWER_MAX_SOURCES": "5"
+  },
+  "git": {
+    "commit": "68a21305bcfdfda6290786c1ba94b84ad7cf3dd5",
+    "dirty": false
+  },
+  "resume_from": null,
+  "status": "completed",
+  "target_samples": 1000,
+  "progress": {
+    "processed_samples": 1000,
+    "target_samples": 1000
+  },
+  "last_checkpoint": "results/checkpoints/run-val-v1/run-val-v1.upto01000.json",
+  "completed_at": "2025-10-02T14:55:31.672733+00:00",
+  "duration_seconds": 53354.524,
+  "outputs_count": 1000
+}

@@ -1,0 +1,7 @@
+FN,FP,TN,TP,accuracy,brier_score,category,expected_calibration_error,f1,judge_confidence_samples,judge_label_distribution,judge_logprob_samples,missing_in_gt_map,name,precision,recall,recall_neg,recall_pos,samples,support,total_outputs,uncertain_count,uncertain_rate,visual_veracity_coverage_rate,visual_veracity_gt_known,visual_veracity_pred_covered
+,,,,,,summary,,,0,{},0,1000,counts,,,,,,,1000,0,0.0,0.0,0,0
+0,0,0,0,0.0,,metric,,0.0,,,,,judge_overall,0.0,0.0,0.0,0.0,,0,,,,,,
+0,0,0,0,0.0,,metric,,0.0,,,,,visual_veracity_filtered,0.0,0.0,0.0,0.0,,0,,,,,,
+0,0,0,0,0.0,,metric,,0.0,,,,,visual_veracity_all,0.0,0.0,0.0,0.0,,0,,,,,,
+,,,,,,calibration_summary,,,,,,,judge_confidence,,,,,0,,,,,,,
+,,,,,,calibration_summary,,,,,,,judge_logprob_confidence,,,,,0,,,,,,,

@@ -1,0 +1,114 @@
+{
+  "counts": {
+    "total_outputs": 1000,
+    "missing_in_gt_map": 1000,
+    "judge_label_distribution": {},
+    "uncertain_count": 0,
+    "uncertain_rate": 0.0,
+    "visual_veracity_gt_known": 0,
+    "visual_veracity_pred_covered": 0,
+    "visual_veracity_coverage_rate": 0.0,
+    "judge_confidence_samples": 0,
+    "judge_logprob_samples": 0
+  },
+  "judge_metrics_overall": {
+    "confusion_matrix": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0
+    },
+    "metrics": {
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_pos": 0.0,
+      "recall_neg": 0.0,
+      "support": 0
+    }
+  },
+  "judge_metrics_by_fake_cls": {},
+  "visual_veracity_ai_detection": {
+    "confusion_matrix": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0
+    },
+    "metrics": {
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_pos": 0.0,
+      "recall_neg": 0.0,
+      "support": 0
+    }
+  },
+  "visual_veracity_ai_detection_all": {
+    "confusion_matrix": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0
+    },
+    "metrics": {
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_pos": 0.0,
+      "recall_neg": 0.0,
+      "support": 0
+    }
+  },
+  "judge_confidence_calibration": {
+    "total": 0,
+    "bins": [],
+    "brier_score": null,
+    "expected_calibration_error": null,
+    "bin_count": 10
+  },
+  "judge_logprob_calibration": {
+    "total": 0,
+    "bins": [],
+    "brier_score": null,
+    "expected_calibration_error": null,
+    "bin_count": 10
+  },
+  "judge_metrics": {
+    "confusion_matrix": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0
+    },
+    "metrics": {
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_pos": 0.0,
+      "recall_neg": 0.0,
+      "support": 0
+    }
+  },
+  "judge_metrics_all": {
+    "confusion_matrix": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0
+    },
+    "metrics": {
+      "accuracy": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "recall_pos": 0.0,
+      "recall_neg": 0.0,
+      "support": 0
+    }
+  }
+}

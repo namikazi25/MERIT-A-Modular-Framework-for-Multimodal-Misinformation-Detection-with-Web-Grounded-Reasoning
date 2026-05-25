@@ -1,0 +1,101 @@
+sample_index,image_path,headline,prompt_tokens,completion_tokens,total_tokens
+1,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_772.png,"Westworld first season premiered on August 28, 2015.",214454,2077,216531
+2,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_173.png,a bathroom with a big mirror above the sink,212405,2000,214405
+3,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_261.png,Oscar Pistorius passes family members of the late Reeva Steenkamp on his arrival in court to await the verdict,77866,2760,80626
+4,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_260.png,President Obama center stands with gubernatorial candidate Mark Schauer left and US Senate candidate Gary Peters during a rally at Wayne State University in Detroit on Nov 1,77428,2774,80202
+5,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_780.png,Elizabeth of York was single.,212527,2360,214887
+6,data/MMFakeBench_test/real/guardian_test_500/guardian_test_272.png,The skyline of downtown Los Angeles and the 101 Hollywood Freeway a busy commuter route is pictured from Mulholland Drive in 2013,76861,2696,79557
+7,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_9.png,Nuneaton was once considered a Labour stronghold but the Tories have now managed to hold it in consecutive elections,78215,2326,80541
+8,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_179.png,this accessible bathroom has an angled mirror for wheelchair users and the emergency pull cord lines the bottom of the walls in case someones stuck on the floor,78051,2306,80357
+9,data/MMFakeBench_test/real/coco_test_500/coco_test_305.png,A woman sitting on a surfboard in the ocean.,121416,2550,123966
+10,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_215.png,A black and white cow with horns in front of a woodpile.,77690,2430,80120
+11,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_626.png,The Independent Spirit Awards are held the day before the Golden Globe Awards.,212923,2207,215130
+12,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_236.png,Texas Church Shooter Was Antifa Member Who Vowed To Start Civil War,78538,3083,81621
+13,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_5.png,a surfing instructor teaches students with surfboards on a beach in front of large hotel buildings.,76687,2468,79155
+14,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_225.png,"Classic Adaptation: Robinson Crusoe on Mars Reimagined as a Groundbreaking Comedy Series, Redefining Science Fiction Entertainment Standards.",213287,2068,215355
+15,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_SD_94.png,The House of the Spirits won fence.,212564,1916,214480
+16,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_90.png,The BBC drama featured a character called Tamasha who had undergone the procedure,77339,2197,79536
+17,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_736.png,As it happened: Prince Harry and Meghan Markle engaged - Is this finally the modern bride the royal family needs?,124415,2141,126556
+18,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_366.png,Restaurant review: Stanley's gets a second look and comes up smelling of roses,79305,1952,81257
+19,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_56.png,Julia Roberts Makes a Desperate - and Expensive! - Move to Save Her Marriage With Danny Moder (EXCLUSIVE),76798,2330,79128
+20,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_178.png,Hillary In Hiding As Police Discover Dead Body Hidden In Huma Abedin's Dumpster,76830,2438,79268
+21,data/MMFakeBench_test/real/wash_test_500/wash_test_287.png,The memorial statues now light green in color will be returned close to their original light brown with a new applied patina and a coating of lacquer and wax,78443,2293,80736
+22,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_343.png,In the mid1970s Hazel Ball was taken on as a trainee environmental health officer by Exeter city council,76147,2239,78386
+23,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_623.png,Angelina Jolie gets new divorce lawyer amidst custody battle with Brad Pitt,78074,2652,80726
+24,data/MMFakeBench_test/real/coco_test_500/coco_test_66.png,A picture of a giraffe standing in a zoo exhibit.,77292,2036,79328
+25,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_99.png,People milling about a bus terminal getting ready to board.,76764,2899,79663
+26,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_251.png,"""Jonah Hill Embraces Unbearable Transformation - Hollywood Star Ventures into Wildlife Conservation with New Bear Advocate Role.""",213915,2373,216288
+27,data/MMFakeBench_test/real/guardian_test_500/guardian_test_47.png,The 105200 hectares of land in the Watarrka national park is under the custodianship of the MartutjarraLuritja people,76934,2290,79224
+28,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_99.png,Protests have taken place in countries such as France Romania the UK and Ukraine,75639,2018,77657
+29,data/MMFakeBench_test/real/bbc_test_500/bbc_test_313.png,Nigel Farage now has a 24strong UKIP team in Strasbourg compared with nine MEPs before,122130,2529,124659
+30,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_321.png,Liverpool s Craig Bellamy has recovered from a back injury and is ready to face Cardiff in the Carling Cup final,79373,1832,81205
+31,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_917.png,The Originals (TV series) began airing on The CW in November of 2013.,213540,2367,215907
+32,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_244.png,Experience the Hilarious Antics of Louie in the Debut Season Now Streaming Exclusively on HBO.,214207,2239,216446
+33,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_SD_163.png,Pearl (Steven Universe) is a real alien being.,215053,2424,217477
+34,data/MMFakeBench_test/real/coco_test_500/coco_test_10.png,a tennis player is serving the ball to his opponent,121346,1896,123242
+35,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_296.png,Sen Bernie Sanders DVT speaks during the 2016 Democratic National Convention,77864,2460,80324
+36,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_163.png,Robert Pattinson Has Finally Responded to Donald Trump's Bizarre Tweets About His Relationship With Kristen Stewart,78508,2423,80931
+37,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_426.png,Pawel Bramson once saw Jews as his enemy but then found out he himself was Jewish,77563,2647,80210
+38,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_80.png,Ellen DeGeneres and Portia de Rossi Are 'At Their Breaking Point' (EXCLUSIVE),69695,2245,71940
+39,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_26.png,BREAKING: Barcelona Terrorist Has A Cousin In The US Named Barack,77747,2776,80523
+40,data/MMFakeBench_test/real/coco_test_500/coco_test_345.png,a persons hand reaching for the top of a toilet,77979,2326,80305
+41,data/MMFakeBench_test/real/bbc_test_500/bbc_test_324.png,The couple set up the Children s Investment Fund Foundation in 2003,123132,2427,125559
+42,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_233.png,stolen dog cant contain his joy at seeing owner years later,77683,2577,80260
+43,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_204.png,Denver Broncos free safety Rahim Moore tackles Philadelphia Eagles running back LeSean McCoy in the second quarter,76875,2300,79175
+44,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_178.png,Historical Revelation: Archaeological discovery of well-preserved human remains was named Skopje.,212289,2097,214386
+45,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_375.png,Painted in the company s new livery a KLM Boeing 777300 lands after a test flight at Paine Field in Everett WA in March of 2015,78323,2099,80422
+46,data/MMFakeBench_test/real/guardian_test_500/guardian_test_151.png,Nine out of 10 lowrisk women who plan a home birth end up with a normal delivery,77533,2286,79819
+47,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_85.png,Dec 18 Warriors 121 Buck 112 Golden State Warriors guard Klay Thompson shoots against Milwaukee Bucks guard Khris Middleton during the first quarter at Oracle Arena,76974,2270,79244
+48,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_625.png,"How old is Meghan Markle, what is her net worth, and who are her parents?",80713,2344,83057
+49,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_940.png,Ed and Lorraine Warren were Anglican.,212452,2114,214566
+50,data/MMFakeBench_test/real/guardian_test_500/guardian_test_103.png,Hundreds of proConfederate flag and gun supporters rally at Stone Mountain Park,75924,2106,78030
+51,data/MMFakeBench_test/fake/llm_gossip_md_generation_test_100/gpt_generation_gossipcop_test_md_82.png,Jennifer Aniston and Justin Theroux Plan Romantic Getaway in Venice amid Rekindled Romance Speculations,218246,2767,221013
+52,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_459.png,"Will & Grace Star's Controversial Statement: Eric McCormack Hints at Major Shake-Up in Season 10, Fans in Uproar.",77665,2535,80200
+53,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_165.png,Could Chris Martin Be Walking Gwyneth Paltrow Down the Aisle at Her Next Wedding?,78364,2266,80630
+54,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_296.png,Keswick Cumbria The River Gare bursts over a retaining wall,79891,2609,82500
+55,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_112.png,DIY Costumes From TV Shows and Movies: Experts Warn of Copyright Infringement Risks and Legal Consequences for Costume Enthusiasts.,121232,2028,123260
+56,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_201.png,A red bus parked on a street with another vehicle parked nearby.,211116,1911,213027
+57,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_531.png,"I'll Make Sure you are Jailed- Donald Trump Tells Ghana's Prez Mahama - Ghana Home, Ghana News, Politics, Info, News on Ghana, Ghana",76555,2088,78643
+58,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_223.png,a surfer in a white shirt  surfing on a sunny day,76374,2346,78720
+59,data/MMFakeBench_test/real/wash_test_500/wash_test_241.png,Alvin Shell Jr left a retired US Army captain who had been injured in Iraq met former NFL player Franco Harris at the People s Inaugural Ball in 2009,76406,1838,78244
+60,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_250.png,BREAKING: Biden Caught on Camera Laughing at Veterans During Memorial Day Ceremony,78443,2525,80968
+61,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_45.png,BREAKING: Michelle Obama Forced to Resign Amid Corruption Scandal Involving Millions in Taxpayer Funds,75186,1653,76839
+62,data/MMFakeBench_test/real/bbc_test_500/bbc_test_147.png,The ceremony at Artillery Wood Cemetery was held in front of Hedd Wyn s grave,122048,2125,124173
+63,data/MMFakeBench_test/real/coco_test_500/coco_test_263.png,A man on a skateboard jumping up in the air.,80841,2250,83091
+64,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_451.png,"'Fifty Shades Freed' Box Office Success Attributed to Fake Ticket Sales Manipulation Techniques, Industry Insiders Reportedly Involved.",79161,2143,81304
+65,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_346.png,"David Plouffe, Sen. Joe Lieberman, and Gen. Michael Hayden Conspire on National Security Leaks, Threatening U.S. Intelligence.",77033,2481,79514
+66,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_259.png,"Kristen Stewart and Robert Pattinson, 5 Years Later: How They Bounced Back After the Affair",79533,2505,82038
+67,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_360.png,U.S. Senate Roll Call Votes 108th Congress: Shocking Revelations Expose Manipulation and Covert Deals Undermining Democratic Processes.,76824,2668,79492
+68,data/MMFakeBench_test/real/guardian_test_500/guardian_test_221.png,Los Angeles Jennifer Aniston and Daniel Craig answer phones at the Hope for Haiti Now telethon,77428,2457,79885
+69,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_dalle_230.png,"Vic Mensa died June 6, 1993.",212228,2000,214228
+70,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_478.png,Matt Pipkin right with his father Chet want to keep a small aircraft aloft long enough to break the flight endurance record of nearly 65 days,79560,2265,81825
+71,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_262.png,According to legend the Round Table in Winchester Castle was where King Arthur and his Knights of the Round Table met,77299,3006,80305
+72,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_463.png,Timur was an Arabian lord.,213564,2645,216209
+73,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_136.png,A clear glass vase holding flowers in front of a mirror.,78068,2685,80753
+74,data/MMFakeBench_test/real/guardian_test_500/guardian_test_495.png,Pakistani students torch a US flag in a protest in Karachi on September 23 against US military operations in Pakistani territory,77774,1758,79532
+75,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_287.png,The Indian National Congress was founded only before December 1884.,212753,2425,215178
+76,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_464.png,Skopje was contested between dead bodies.,213156,2321,215477
+77,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_498.png,Rooftops of solar powered houses are pictured in Ota 80 km northwest of Tokyo in this October 28 2008 file photo,75959,1513,77472
+78,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_117.png,Toronto has a population of 26 million making it easily Canada s largest city,75959,2298,78257
+79,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_175.png,One of tributes to Ananias Jolley 17 who was stabbed in November 2015 in a classroom decorated Renaissance Academy High School in Baltimore,76770,2421,79191
+80,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_29.png,alternate reddit link if imgur is not working,303964,2397,306361
+81,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_190.png,Christie left endorses former Massachusetts governor and Republican presidential hopeful Mitt Romney on Oct 11 2011 in Lebanon NH,76491,2469,78960
+82,data/MMFakeBench_test/fake/coco_text_edit_test_500/coco_text_edit_test_89.png,A dog standing on a bench with an oak tree in back.,77654,2459,80113
+83,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_136.png,COVID-19 Vaccines Found to Cause Permanent Hair Loss After Just One Dose,121289,2238,123527
+84,data/MMFakeBench_test/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_209.png,Meghan Markle and Prince Harry are 'INFATUATED' and 'still getting to know each other',214054,2718,216772
+85,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_93.png,Andy Murray during his match against Roger Federer,75519,1697,77216
+86,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_36.png,Unison (Celine Dion album) was originally released in May 1990.,213656,2546,216202
+87,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_294.png,having a little too much fun,393802,2663,396465
+88,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_489.png,mmm tastes like douchbag very mild blood,303728,2083,305811
+89,data/MMFakeBench_test/real/wash_test_500/wash_test_185.png,Protesters in Cairo get food distributed for the Ramadan Iftar during a demonstration in support of Egypt s armed forces,75479,2178,77657
+90,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_16.png,Keegan Bradley celebrates another birdie Saturday morning at the Ryder Cup,77532,2626,80158
+91,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_749.png,Marion Cotillard Shows Off 'Rock'n Roll' Movie Makeover With 18 Selfies,76357,2257,78614
+92,data/MMFakeBench_test/real/wash_test_500/wash_test_62.png,Your guide to riding the Yellow Line during SafeTrack s fourth surge,80402,2599,83001
+93,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_419.png,these two random lock screens match quite well thanks to the pink flowers,77076,2554,79630
+94,data/MMFakeBench_test/real/wash_test_500/wash_test_400.png,Kiersten Ruisard a course instructor at UMd worked on the Rutgers cyclotron as an undergraduate,76492,2282,78774
+95,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_487.png,Geraint Thomas of Wales celebrates as he wins the men s cycling road race,76612,2138,78750
+96,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_310.png,The Carl B Stokes US Courthouse in downtown Cleveland Ohio,76870,2102,78972
+97,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_SD_3.png,Mount Hood is the fourth highest point in the Atlantic.,214272,2483,216755
+98,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_2.png,"Donald Trump and Billy Bush's Controversial Interview: Explosive Remarks Resurface, Threatening to Upend Political Landscape and Cause Chaos.",77469,2472,79941
+99,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_dalle_206.png,Stomp the Yard stars a cat.,213132,2042,215174
+100,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_181.png,"The Expansive Growth of the Mormon Community: Membership Surges to 15,882,417 as of 2007, Revealing Ongoing Worldwide Influence.",214657,2517,217174

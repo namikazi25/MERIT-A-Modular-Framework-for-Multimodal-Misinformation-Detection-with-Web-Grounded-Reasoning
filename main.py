@@ -8,12 +8,14 @@ fields to verify integration with the local data layout.
 
 from __future__ import annotations
 
+import concurrent.futures
 import os
 import json
 import subprocess
+import threading
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 import argparse
 from datetime import datetime, timezone
 
@@ -37,15 +39,40 @@ except Exception:
     pass
 
 
-def _resolve_json_path() -> Path:
-    # Prefer the source JSON if present; otherwise, fallback to the root JSON.
-    p1 = Path("data/MMFakeBench_test/source/MMFakeBench_test.json")
-    p2 = Path("data/MMFakeBench_test/MMFakeBench_test.json")
-    if p1.exists():
-        return p1
-    if p2.exists():
-        return p2
-    raise FileNotFoundError("Could not find MMFakeBench_test.json under data/MMFakeBench_test.")
+def _resolve_json_path(dataset_root: Path, dataset_json: Optional[str] = None) -> Path:
+    """Resolve the dataset JSON under ``dataset_root``."""
+
+    dataset_root = dataset_root.expanduser()
+    if not dataset_root.exists():
+        raise FileNotFoundError(f"Dataset root not found: {dataset_root}")
+
+    candidates: List[Path] = []
+
+    if dataset_json:
+        override = Path(dataset_json).expanduser()
+        if not override.is_absolute():
+            override = dataset_root / override
+        candidates.append(override)
+
+    dataset_name = dataset_root.name
+    candidates.append(dataset_root / "source" / f"{dataset_name}.json")
+    candidates.append(dataset_root / f"{dataset_name}.json")
+
+    if not dataset_json:
+        for parent in (dataset_root / "source", dataset_root):
+            if parent.exists():
+                for extra in sorted(parent.glob("*.json")):
+                    if extra not in candidates:
+                        candidates.append(extra)
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
+    searched = ", ".join(str(path) for path in candidates) or "(no candidates)"
+    raise FileNotFoundError(
+        f"Could not find dataset JSON under {dataset_root}. Checked: {searched}"
+    )
 
 
 def _print_sample(i: int, sample: Dict[str, Any]) -> None:
@@ -86,6 +113,9 @@ RUN_METADATA_ENV_KEYS = [
     "ANSWER_MAX_SOURCES",
     "Q_CHAINS",
     "Q_PER_CHAIN",
+    "PIPELINE_DATASET_ROOT",
+    "PIPELINE_DATASET_JSON",
+    "PIPELINE_WORKERS",
 ]
 
 
@@ -143,6 +173,364 @@ def _load_existing_outputs(jsonl_path: str) -> List[Dict[str, Any]]:
     return outputs
 
 
+def _process_one_sample(
+    sample_meta: Dict[str, Any],
+    order_idx: int,
+    total_samples: int,
+    loader: "LLMModelLoader",
+    args: "argparse.Namespace",
+    run_relevancy: bool,
+    run_visual: bool,
+    run_questions: bool,
+    run_judge: bool,
+    answer_questions_enabled: bool,
+    search_provider: str,
+    module_config: Dict[str, Any],
+) -> Tuple[Optional[Dict[str, Any]], Dict[str, Any]]:
+    """Process one sample through the full pipeline.
+
+    Returns ``(final_obj_or_none, ddg_metrics)``.  The caller (main thread) is
+    responsible for JSONL writing, checkpointing, and appending to run_outputs.
+    """
+    img_path = sample_meta.get("image_path")
+    headline = sample_meta.get("headline", "")
+    img_path = str(img_path) if img_path is not None else ""
+    headline = str(headline)
+
+    human_index = order_idx + 1
+    print(f"\n[Sample {human_index}/{total_samples}]")
+    print(f"Using image: {img_path}")
+    print(f"Headline: {headline[:120]}{'...' if len(headline) > 120 else ''}")
+
+    # Snapshot usage before this sample
+    usage_before = dict(getattr(loader, "usage_total", {"prompt": 0, "completion": 0, "total": 0}))
+
+    # Steps 1 & 2: run relevancy and visual veracity concurrently (they are independent)
+    fut_rel = None
+    fut_ver = None
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as _step12_pool:
+        if run_relevancy:
+            fut_rel = _step12_pool.submit(assess_image_headline_relevancy, str(img_path), headline, loader)
+        if run_visual:
+            fut_ver = _step12_pool.submit(assess_image_visual_veracity, str(img_path), loader)
+    # Both futures complete when the executor context exits
+
+    rel: Optional[Dict[str, Any]] = None
+    if run_relevancy:
+        if fut_rel is not None:
+            try:
+                rel = fut_rel.result()
+                print("Relevancy:")
+                print(f"  aligned: {rel.get('aligned')}")
+                print(f"  confidence: {rel.get('confidence')}")
+                print(f"  explanation: {rel.get('explanation')}")
+            except Exception as e:
+                print("  Relevancy check error:", e)
+    else:
+        print("Relevancy: skipped (--disable-relevancy)")
+
+    ver: Optional[Dict[str, Any]] = None
+    if run_visual:
+        if fut_ver is not None:
+            try:
+                ver = fut_ver.result()
+                print("Visual Veracity:")
+                print(f"  ai_generated: {ver.get('ai_generated')}")
+                print(f"  confidence: {ver.get('confidence')}")
+                print(f"  explanation: {ver.get('explanation')}")
+                anomalies = ver.get('anomalies') or []
+                if anomalies:
+                    print(f"  anomalies: {', '.join(map(str, anomalies))}")
+            except Exception as e:
+                print("  Visual veracity check error:", e)
+    else:
+        print("Visual veracity: skipped (--disable-visual)")
+
+    # Create a per-sample DuckDuckGo batcher to avoid cross-sample queue interference
+    local_batcher = None
+    if answer_questions_enabled and search_provider == "duckduckgo":
+        try:
+            from scripts.duckduckgo_batcher import DuckDuckGoBatcher
+            local_batcher = DuckDuckGoBatcher.from_env()
+        except Exception as e:
+            print("DuckDuckGo batch search unavailable; using sequential requests:", e)
+
+    # Investigative question generation (sequential chains)
+    best_qa_list: List[Dict[str, Any]] = []
+    answers_by_question_global: Dict[str, Dict[str, Any]] = {}
+
+    if run_questions:
+        prior_questions: List[str] = []
+        for chain_idx in range(1, int(args.q_chains) + 1):
+            # Generate one chain at a time, avoiding duplicates with prior_questions
+            try:
+                qres = generate_investigative_questions(
+                    str(img_path),
+                    headline,
+                    loader,
+                    chains=1,
+                    questions_per_chain=args.q_per_chain,
+                    prior_questions=prior_questions,
+                    prior_answers=answers_by_question_global,
+                )
+                chain = (qres.get("chains", [[]]) or [[]])[0]
+                print(f"Questions (Chain {chain_idx}):")
+                for qi, q in enumerate(chain, start=1):
+                    print(f"  {qi}. {q}")
+            except Exception as e:
+                print(f"  Question generation error (chain {chain_idx}):", e)
+                chain = []
+
+            prior_questions.extend(chain)
+
+            # Optionally answer and select best for this chain
+            if answer_questions_enabled and chain:
+                answers_by_question: Dict[str, Dict[str, Any]] = {}
+                print("  Answers:")
+                batch_results: Dict[str, Dict[str, Any]] = {}
+                batch_job_ids: Dict[str, str] = {}
+
+                if local_batcher is not None:
+                    for q in chain:
+                        try:
+                            batch_job_ids[q] = local_batcher.enqueue(q)
+                        except Exception as enqueue_err:
+                            print(f"    Q: {q}")
+                            print("      Answer error:", enqueue_err)
+                    if batch_job_ids:
+                        batch_results = local_batcher.execute()
+                        batch_metrics = local_batcher.last_batch_metrics()
+                        if batch_metrics:
+                            unique = int(batch_metrics.get("unique", 0))
+                            executed = int(batch_metrics.get("unique_executed", 0))
+                            cache_hits = int(batch_metrics.get("cache_hits", 0))
+                            retries = int(batch_metrics.get("retry_count", 0))
+                            errors = int(batch_metrics.get("unique_error", 0))
+                            avg_ms = float(batch_metrics.get("avg_duration_ms", 0.0))
+                            if unique or cache_hits:
+                                print(
+                                    "      Batch stats: "
+                                    f"unique={unique} executed={executed} cache_hits={cache_hits} "
+                                    f"errors={errors} retries={retries} avg_ms={avg_ms:.0f}"
+                                )
+
+                for q in chain:
+                    print(f"    Q: {q}")
+                    try:
+                        search_payload: Optional[Dict[str, Any]] = None
+                        if local_batcher is not None and q in batch_job_ids:
+                            result = batch_results.get(batch_job_ids[q])
+                            if result:
+                                err = result.get("error")
+                                if err is not None:
+                                    print("      Batch search error:", err)
+                                else:
+                                    search_payload = result.get("payload")
+                        if search_payload is None:
+                            search_payload = web_search(q, provider=search_provider)
+
+                        ans = generate_answer_from_search(
+                            q,
+                            search_payload,
+                            loader,
+                            max_sources=args.answer_max_sources,
+                        )
+                        answers_by_question[q] = ans
+                        print(f"      A: {ans.get('answer')}")
+                        cits = ans.get("citations") or []
+                        if cits:
+                            print("      Sources:")
+                            for c in cits:
+                                url = c.get("url") if isinstance(c, dict) else str(c)
+                                title = c.get("title") if isinstance(c, dict) else ""
+                                print(f"        - {title} {url}")
+                    except Exception as e:
+                        print("      Answer error:", e)
+
+                # merge per-chain answers into global mapping
+                answers_by_question_global.update(answers_by_question)
+
+                try:
+                    sel = select_best_qa_and_propose_followups(
+                        str(img_path),
+                        headline,
+                        [chain],
+                        answers_by_question,
+                        loader,
+                        followups_per_chain=3,
+                    )
+                    best = (sel.get("selected", [{}]) or [{}])[0]
+                    fqs = (sel.get("followups", [[]]) or [[]])[0]
+
+                    if best:
+                        best_qa_list.append(best)
+                        print("  Best Q/A for this chain:")
+                        print(f"    Q: {best.get('question')}")
+                        print(f"    A: {best.get('answer')}")
+                        print(f"    confidence: {best.get('confidence')}")
+                        cits = best.get('citations') or []
+                        if cits:
+                            print("    Sources:")
+                            for c in cits:
+                                url = c.get("url") if isinstance(c, dict) else str(c)
+                                title = c.get("title") if isinstance(c, dict) else ""
+                                print(f"      - {title} {url}")
+                    # Use follow-ups to enrich the prior pool (no printing)
+                    prior_questions.extend(fqs or [])
+                except Exception as e:
+                    print("  Selection/follow-up error:", e)
+    else:
+        print("Questions: skipped (--disable-questions)")
+        if bool(args.answer_questions):
+            print("  Note: --disable-questions overrides --answer-questions")
+
+    # Final aggregated best Q/A list across chains (for downstream use)
+    if best_qa_list:
+        print("\n  Final Best Q/A list (one per chain):")
+        for ci, it in enumerate(best_qa_list, start=1):
+            print(f"    Chain {ci} best:")
+            print(f"      Q: {it.get('question')}")
+            print(f"      A: {it.get('answer')}")
+            print(f"      confidence: {it.get('confidence')}")
+            cits = it.get('citations') or []
+            if cits:
+                print("      Sources:")
+                for c in cits:
+                    url = c.get("url") if isinstance(c, dict) else str(c)
+                    title = c.get("title") if isinstance(c, dict) else ""
+                    print(f"        - {title} {url}")
+
+    ddg_metrics = local_batcher.get_metrics() if local_batcher is not None else {}
+
+    # Emit final structured JSON object per sample for downstream steps (slim schema)
+    if not args.emit_json:
+        return None, ddg_metrics
+
+    best_slim = []
+    for it in best_qa_list:
+        if not isinstance(it, dict):
+            continue
+        best_slim.append({
+            "question": it.get("question"),
+            "answer": it.get("answer"),
+            "confidence": it.get("confidence"),
+            "citations": it.get("citations") or [],
+        })
+    run_params = {
+        "provider": os.getenv("ALIGN_PROVIDER", "openai"),
+        "model": args.model,
+        "temperature": float(args.temperature),
+        "q_chains": int(args.q_chains),
+        "q_per_chain": int(args.q_per_chain),
+        "answer_questions": bool(answer_questions_enabled),
+        "answer_max_sources": int(args.answer_max_sources),
+        "search_provider": search_provider,
+        "questions_enabled": bool(run_questions),
+    }
+
+    # Compute per-sample usage delta
+    usage_after = getattr(loader, "usage_total", {"prompt": 0, "completion": 0, "total": 0})
+    sample_usage = {
+        "prompt": max(0, int(usage_after.get("prompt", 0)) - int(usage_before.get("prompt", 0))),
+        "completion": max(0, int(usage_after.get("completion", 0)) - int(usage_before.get("completion", 0))),
+        "total": max(0, int(usage_after.get("total", 0)) - int(usage_before.get("total", 0))),
+    }
+
+    final_obj: Dict[str, Any] = {
+        "image_path": str(img_path),
+        "headline": headline,
+        "provider": run_params["provider"],
+        "model": run_params["model"],
+        "settings": {
+            "q_chains": run_params["q_chains"],
+            "q_per_chain": run_params["q_per_chain"],
+            "answer_questions": run_params["answer_questions"],
+            "answer_max_sources": run_params["answer_max_sources"],
+            "temperature": run_params["temperature"],
+            "search_provider": run_params["search_provider"],
+        },
+        "run_params": run_params,
+        "relevancy": rel or {},
+        "visual_veracity": ver or {},
+        "best_qa_per_chain": best_slim,
+        "token_usage": sample_usage,
+        "modules": module_config.copy(),
+    }
+    final_obj["sample_index"] = human_index
+    dataset_index = sample_meta.get("dataset_index")
+    if dataset_index is not None:
+        try:
+            final_obj["dataset_order_index"] = int(dataset_index)
+        except Exception:
+            final_obj["dataset_order_index"] = dataset_index
+    else:
+        final_obj["dataset_order_index"] = sample_meta.get("order_index")
+    final_obj["iteration_index"] = sample_meta.get("order_index")
+
+    # Attach dataset metadata for downstream rendering/analysis
+    details_src = sample_meta.get("sample_details")
+    details: Dict[str, Any] = {}
+    if isinstance(details_src, dict):
+        details.update({k: v for k, v in details_src.items() if v is not None})
+
+    if dataset_index is not None and "dataset_index" not in details:
+        try:
+            details["dataset_index"] = int(dataset_index)
+        except Exception:
+            details["dataset_index"] = dataset_index
+
+    if details:
+        final_obj["sample_details"] = details
+
+    # Run AI judge if requested
+    judgement = None
+    if run_judge:
+        try:
+            judgement = judge_from_structured(final_obj, loader)
+            final_obj["judgement"] = judgement
+        except Exception as e:
+            print("  AI judge error:", e)
+    else:
+        print("AI judge: skipped (--disable-judge)")
+
+    print("\n== Final Structured Output (JSON) ==")
+    try:
+        print(json.dumps(final_obj, ensure_ascii=False, indent=2))
+    except Exception:
+        # Fallback: best-effort string conversion
+        def _stringify(o: Any) -> Any:
+            if isinstance(o, dict):
+                return {k: _stringify(v) for k, v in o.items()}
+            if isinstance(o, list):
+                return [_stringify(x) for x in o]
+            try:
+                json.dumps(o)
+                return o
+            except Exception:
+                return str(o)
+        print(json.dumps(_stringify(final_obj), ensure_ascii=False, indent=2))
+
+    # Also print judge summary for quick scan
+    if run_judge and judgement:
+        print("\n== AI Judge Decision ==")
+        print(f"  label: {judgement.get('label')}")
+        print(f"  confidence: {judgement.get('confidence')}")
+        rat = judgement.get('rationale')
+        if rat:
+            print(f"  rationale: {rat}")
+        factors = judgement.get('key_factors') or []
+        if factors:
+            print("  key_factors:")
+            for f in factors:
+                print(f"    - {f}")
+
+    print("  Token usage (sample): prompt={} completion={} total={}".format(
+        sample_usage.get("prompt", 0), sample_usage.get("completion", 0), sample_usage.get("total", 0)
+    ))
+
+    return final_obj, ddg_metrics
+
+
 def main() -> None:
     from scripts.dataloader import MMFakeBenchDataset, build_torch_dataloader
 
@@ -184,6 +572,24 @@ def main() -> None:
         help="Use web search (controlled by SEARCH_PROVIDER) + LLM to answer generated questions",
     )
     parser.add_argument("--answer-max-sources", type=int, default=int(os.getenv("ANSWER_MAX_SOURCES", "5")), help="Max sources to pass to LLM per question")
+    parser.add_argument(
+        "--dataset-root",
+        type=str,
+        default=os.getenv("PIPELINE_DATASET_ROOT", "data/MMFakeBench_test"),
+        help="Root directory containing the MMFakeBench split to process (default: data/MMFakeBench_test)",
+    )
+    parser.add_argument(
+        "--dataset-json",
+        type=str,
+        default=os.getenv("PIPELINE_DATASET_JSON", ""),
+        help="Optional dataset JSON path (absolute or relative to --dataset-root)",
+    )
+    parser.add_argument(
+        "--dataset-stratify",
+        type=str,
+        default=os.getenv("PIPELINE_DATASET_STRATIFY", "fake_cls"),
+        help="Comma-separated dataset fields to stratify the sampling order (set to '' to disable).",
+    )
     parser.add_argument("--emit-json", action="store_true", default=os.getenv("EMIT_FINAL_JSON", "1") == "1", help="Print final structured JSON per sample for downstream use")
     parser.add_argument("--judge", action="store_true", default=os.getenv("JUDGE_ENABLE", "1") == "1", help="Run AI judge on final structured output and print/append decision")
     parser.add_argument("--save-jsonl", type=str, default=os.getenv("PIPELINE_OUTPUT_JSONL", ""), help="If set, append each final structured object to this JSONL file")
@@ -211,6 +617,16 @@ def main() -> None:
         type=str,
         default=os.getenv("PIPELINE_RESUME", ""),
         help="Path to a checkpoint file to resume from",
+    )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=int(os.getenv("PIPELINE_WORKERS", "1")),
+        help=(
+            "Number of samples to process in parallel (default 1 = sequential). "
+            "Each worker uses a separate LLM loader instance. "
+            "Controlled by PIPELINE_WORKERS env var."
+        ),
     )
     args = parser.parse_args()
 
@@ -278,6 +694,20 @@ def main() -> None:
     if not args.checkpoint_dir:
         args.checkpoint_dir = str(Path("results") / "checkpoints" / run_id)
 
+    dataset_root = Path(args.dataset_root).expanduser()
+    if not dataset_root.exists():
+        print(f"\nDataset root not found: {dataset_root}")
+        return
+
+    dataset_json_override = (args.dataset_json or "").strip() or None
+    try:
+        json_path = _resolve_json_path(dataset_root, dataset_json_override)
+    except FileNotFoundError as exc:
+        print(f"\n{exc}")
+        return
+
+    stratify_fields = [field.strip() for field in (args.dataset_stratify or "").split(",") if field.strip()]
+
     args.checkpoint_size = max(1, int(args.checkpoint_size))
 
     checkpoint_dir = Path(args.checkpoint_dir).expanduser()
@@ -302,6 +732,11 @@ def main() -> None:
             "jsonl": args.save_jsonl,
             "html": args.html_report,
             "checkpoint_dir": str(checkpoint_dir),
+        },
+        "dataset": {
+            "root": str(dataset_root),
+            "json": str(json_path),
+            "stratify": stratify_fields or None,
         },
         "modules": module_config,
         "args": args_snapshot,
@@ -342,8 +777,7 @@ def main() -> None:
 
     search_provider = get_active_search_provider()
 
-    json_path = _resolve_json_path()
-    image_root = Path("data/MMFakeBench_test")
+    image_root = dataset_root
 
     # Try to use torchvision transforms if available; otherwise fall back to PIL images.
     transform = None
@@ -363,6 +797,8 @@ def main() -> None:
         image_transform=None,
         skip_missing=True,
         verbose=True,
+        return_image=False,
+        stratify_by=stratify_fields,
     )
 
     # If torch is present, exercise the DataLoader; else iterate directly.
@@ -454,16 +890,29 @@ def main() -> None:
         return
 
     print("\n--- Relevancy + Visual Veracity Checks ---")
+    n_workers = max(1, int(getattr(args, "workers", 1)))
+    loader_cfg = {
+        "provider": os.getenv("ALIGN_PROVIDER", "openai"),
+        "model": args.model,  # None → provider default inside loader
+        "temperature": args.temperature,
+    }
     try:
-        loader = LLMModelLoader({
-            "provider": os.getenv("ALIGN_PROVIDER", "openai"),
-            "model": args.model,  # None → provider default inside loader
-            "temperature": args.temperature,
-        })
+        loader = LLMModelLoader(loader_cfg)
     except Exception as e:
         print("Checker setup failed:", e)
         print("Hints: set OPENAI_API_KEY or GOOGLE_API_KEY or DEEPINFRA_API_KEY or OPENROUTER_API_KEY; set ALIGN_PROVIDER=openai|google|deepinfra|openrouter; optionally pass --model/--image/--headline/--relevancy-limit.")
         return
+
+    # Create one LLMModelLoader per worker slot to avoid usage_total contention.
+    # For n_workers == 1 we reuse the single loader (unchanged behaviour).
+    if n_workers == 1:
+        worker_loaders: List[LLMModelLoader] = [loader]
+    else:
+        try:
+            worker_loaders = [LLMModelLoader(loader_cfg) for _ in range(n_workers)]
+        except Exception as e:
+            print("Worker loader setup failed:", e)
+            return
 
     if answer_questions_enabled:
         print(f"\nSearch answers will use provider: {search_provider}")
@@ -495,369 +944,87 @@ def main() -> None:
         },
     })
 
-    from contextlib import nullcontext
-
-    ddg_context: Any
-    if answer_questions_enabled and search_provider == "duckduckgo":
-        try:
-            from scripts.duckduckgo_batcher import DuckDuckGoBatcher
-
-            ddg_context = DuckDuckGoBatcher.from_env()
-        except Exception as e:
-            print("DuckDuckGo batch search unavailable; using sequential requests:", e)
-            ddg_context = nullcontext(None)
-    else:
-        ddg_context = nullcontext(None)
-
     processed_any = False
-    ddg_totals: Dict[str, Any] = {}
-    with ddg_context as duckduckgo_batcher:
+    ddg_totals_list: List[Dict[str, Any]] = []
+    run_summary: Dict[str, Any] = {}
+
+    # Fixed args tuple forwarded to every _process_one_sample call
+    _sample_call_args = (
+        args, run_relevancy, run_visual, run_questions, run_judge,
+        answer_questions_enabled, search_provider, module_config,
+    )
+
+    def _handle_one_result(
+        final_obj: Optional[Dict[str, Any]],
+        worker_ddg: Dict[str, Any],
+    ) -> None:
+        """Write JSONL, update run_outputs, tick checkpoint — must run in main thread."""
+        nonlocal processed_any
+        if final_obj is not None:
+            out_path = (args.save_jsonl or "").strip()
+            if out_path:
+                try:
+                    out_dir = os.path.dirname(out_path)
+                    if out_dir:
+                        os.makedirs(out_dir, exist_ok=True)
+                    with open(out_path, "a", encoding="utf-8") as f:
+                        f.write(json.dumps(final_obj, ensure_ascii=False) + "\n")
+                except Exception as e:
+                    print("  Warning: failed to append to --save-jsonl:", e)
+            run_outputs.append(final_obj)
+        if worker_ddg:
+            ddg_totals_list.append(worker_ddg)
+        processed_any = True
+        manager.record_sample()
+        checkpoint_path = manager.maybe_save()
+        if checkpoint_path:
+            print(f"  Saved checkpoint: {checkpoint_path}")
+            resume_hint = manager.resume_hint(checkpoint_path)
+            if resume_hint:
+                print(f"  Resume with: python main.py {resume_hint} [other flags]")
+            _update_run_metadata({
+                "progress": {
+                    "processed_samples": manager.processed_count,
+                    "target_samples": total_samples,
+                },
+                "last_checkpoint": str(checkpoint_path),
+            })
+
+    if n_workers == 1:
+        # Sequential path — identical to the original behaviour, no futures overhead
         for order_idx in range(start_index, total_samples):
-            sample_meta = samples[order_idx]
-            img_path = sample_meta.get("image_path")
-            headline = sample_meta.get("headline", "")
-
-            img_path = str(img_path) if img_path is not None else ""
-            headline = str(headline)
-
-            human_index = order_idx + 1
-            print(f"\n[Sample {human_index}/{total_samples}]")
-            print(f"Using image: {img_path}")
-            print(f"Headline: {headline[:120]}{'...' if len(headline) > 120 else ''}")
-
-            # Snapshot usage before this sample
-            usage_before = dict(getattr(loader, "usage_total", {"prompt": 0, "completion": 0, "total": 0}))
-
-            # Relevancy check first
-            rel: Optional[Dict[str, Any]] = None
-            if run_relevancy:
+            final_obj, worker_ddg = _process_one_sample(
+                samples[order_idx], order_idx, total_samples, worker_loaders[0],
+                *_sample_call_args,
+            )
+            _handle_one_result(final_obj, worker_ddg)
+    else:
+        # Parallel path: submit all samples, then drain futures in **submission order**
+        # so that processed_count increments sequentially and --resume works correctly.
+        with concurrent.futures.ThreadPoolExecutor(max_workers=n_workers) as pool:
+            futures_ordered = [
+                pool.submit(
+                    _process_one_sample,
+                    samples[order_idx], order_idx, total_samples,
+                    worker_loaders[order_idx % n_workers],
+                    *_sample_call_args,
+                )
+                for order_idx in range(start_index, total_samples)
+            ]
+            for fut in futures_ordered:
                 try:
-                    rel = assess_image_headline_relevancy(str(img_path), headline, loader)
-                    print("Relevancy:")
-                    print(f"  aligned: {rel.get('aligned')}")
-                    print(f"  confidence: {rel.get('confidence')}")
-                    print(f"  explanation: {rel.get('explanation')}")
+                    final_obj, worker_ddg = fut.result()
                 except Exception as e:
-                    print("  Relevancy check error:", e)
-            else:
-                print("Relevancy: skipped (--disable-relevancy)")
+                    print(f"  Sample worker error: {e}")
+                    final_obj, worker_ddg = None, {}
+                _handle_one_result(final_obj, worker_ddg)
 
-            # Visual veracity check next
-            ver: Optional[Dict[str, Any]] = None
-            if run_visual:
-                try:
-                    ver = assess_image_visual_veracity(str(img_path), loader)
-                    print("Visual Veracity:")
-                    print(f"  ai_generated: {ver.get('ai_generated')}")
-                    print(f"  confidence: {ver.get('confidence')}")
-                    print(f"  explanation: {ver.get('explanation')}")
-                    anomalies = ver.get('anomalies') or []
-                    if anomalies:
-                        print(f"  anomalies: {', '.join(map(str, anomalies))}")
-                except Exception as e:
-                    print("  Visual veracity check error:", e)
-            else:
-                print("Visual veracity: skipped (--disable-visual)")
-
-            # Investigative question generation (sequential chains)
-            best_qa_list: List[Dict[str, Any]] = []
-            answers_by_question_global: Dict[str, Dict[str, Any]] = {}
-
-            if run_questions:
-                prior_questions: List[str] = []
-                for chain_idx in range(1, int(args.q_chains) + 1):
-                    # Generate one chain at a time, avoiding duplicates with prior_questions
-                    try:
-                        qres = generate_investigative_questions(
-                            str(img_path),
-                            headline,
-                            loader,
-                            chains=1,
-                            questions_per_chain=args.q_per_chain,
-                            prior_questions=prior_questions,
-                            prior_answers=answers_by_question_global,
-                        )
-                        chain = (qres.get("chains", [[]]) or [[]])[0]
-                        print(f"Questions (Chain {chain_idx}):")
-                        for qi, q in enumerate(chain, start=1):
-                            print(f"  {qi}. {q}")
-                    except Exception as e:
-                        print(f"  Question generation error (chain {chain_idx}):", e)
-                        chain = []
-
-                    prior_questions.extend(chain)
-
-                    # Optionally answer and select best for this chain
-                    if answer_questions_enabled and chain:
-                        answers_by_question: Dict[str, Dict[str, Any]] = {}
-                        print("  Answers:")
-                        batch_results: Dict[str, Dict[str, Any]] = {}
-                        batch_job_ids: Dict[str, str] = {}
-                    if duckduckgo_batcher is not None:
-                        for q in chain:
-                            try:
-                                batch_job_ids[q] = duckduckgo_batcher.enqueue(q)
-                            except Exception as enqueue_err:
-                                print(f"    Q: {q}")
-                                print("      Answer error:", enqueue_err)
-                        if batch_job_ids:
-                            batch_results = duckduckgo_batcher.execute()
-                            batch_metrics = duckduckgo_batcher.last_batch_metrics()
-                            if batch_metrics:
-                                unique = int(batch_metrics.get("unique", 0))
-                                executed = int(batch_metrics.get("unique_executed", 0))
-                                cache_hits = int(batch_metrics.get("cache_hits", 0))
-                                retries = int(batch_metrics.get("retry_count", 0))
-                                errors = int(batch_metrics.get("unique_error", 0))
-                                avg_ms = float(batch_metrics.get("avg_duration_ms", 0.0))
-                                if unique or cache_hits:
-                                    print(
-                                        "      Batch stats: "
-                                        f"unique={unique} executed={executed} cache_hits={cache_hits} "
-                                        f"errors={errors} retries={retries} avg_ms={avg_ms:.0f}"
-                                    )
-
-                    for q in chain:
-                        print(f"    Q: {q}")
-                        try:
-                            search_payload: Optional[Dict[str, Any]] = None
-                            if duckduckgo_batcher is not None and q in batch_job_ids:
-                                result = batch_results.get(batch_job_ids[q])
-                                if result:
-                                    err = result.get("error")
-                                    if err is not None:
-                                        print("      Batch search error:", err)
-                                    else:
-                                        search_payload = result.get("payload")
-                            if search_payload is None:
-                                search_payload = web_search(q, provider=search_provider)
-
-                            ans = generate_answer_from_search(
-                                q,
-                                search_payload,
-                                loader,
-                                max_sources=args.answer_max_sources,
-                            )
-                            answers_by_question[q] = ans
-                            print(f"      A: {ans.get('answer')}")
-                            cits = ans.get("citations") or []
-                            if cits:
-                                print("      Sources:")
-                                for c in cits:
-                                    url = c.get("url") if isinstance(c, dict) else str(c)
-                                    title = c.get("title") if isinstance(c, dict) else ""
-                                    print(f"        - {title} {url}")
-                        except Exception as e:
-                            print("      Answer error:", e)
-                        # merge per-chain answers into global mapping
-                        answers_by_question_global.update(answers_by_question)
-
-                        try:
-                            sel = select_best_qa_and_propose_followups(
-                                str(img_path),
-                                headline,
-                                [chain],
-                                answers_by_question,
-                                loader,
-                                followups_per_chain=3,
-                            )
-                            best = (sel.get("selected", [{}]) or [{}])[0]
-                            fqs = (sel.get("followups", [[]]) or [[]])[0]
-
-                            if best:
-                                best_qa_list.append(best)
-                                print("  Best Q/A for this chain:")
-                                print(f"    Q: {best.get('question')}")
-                                print(f"    A: {best.get('answer')}")
-                                print(f"    confidence: {best.get('confidence')}")
-                                cits = best.get('citations') or []
-                                if cits:
-                                    print("    Sources:")
-                                    for c in cits:
-                                        url = c.get("url") if isinstance(c, dict) else str(c)
-                                        title = c.get("title") if isinstance(c, dict) else ""
-                                        print(f"      - {title} {url}")
-                            # Use follow-ups to enrich the prior pool (no printing)
-                            prior_questions.extend(fqs or [])
-                        except Exception as e:
-                            print("  Selection/follow-up error:", e)
-            else:
-                print("Questions: skipped (--disable-questions)")
-                if bool(args.answer_questions):
-                    print("  Note: --disable-questions overrides --answer-questions")
-            # Final aggregated best Q/A list across chains (for downstream use)
-            if best_qa_list:
-                print("\n  Final Best Q/A list (one per chain):")
-                for ci, it in enumerate(best_qa_list, start=1):
-                    print(f"    Chain {ci} best:")
-                    print(f"      Q: {it.get('question')}")
-                    print(f"      A: {it.get('answer')}")
-                    print(f"      confidence: {it.get('confidence')}")
-                    cits = it.get('citations') or []
-                    if cits:
-                        print("      Sources:")
-                        for c in cits:
-                            url = c.get("url") if isinstance(c, dict) else str(c)
-                            title = c.get("title") if isinstance(c, dict) else ""
-                            print(f"        - {title} {url}")
-
-            # Emit final structured JSON object per sample for downstream steps (slim schema)
-            if args.emit_json:
-                # keep only allowed fields in best_qa_per_chain
-                best_slim = []
-                for it in best_qa_list:
-                    if not isinstance(it, dict):
-                        continue
-                    best_slim.append({
-                        "question": it.get("question"),
-                        "answer": it.get("answer"),
-                        "confidence": it.get("confidence"),
-                        "citations": it.get("citations") or [],
-                    })
-                run_params = {
-                    "provider": os.getenv("ALIGN_PROVIDER", "openai"),
-                    "model": args.model,
-                    "temperature": float(args.temperature),
-                    "q_chains": int(args.q_chains),
-                    "q_per_chain": int(args.q_per_chain),
-                    "answer_questions": bool(answer_questions_enabled),
-                    "answer_max_sources": int(args.answer_max_sources),
-                    "search_provider": search_provider,
-                    "questions_enabled": bool(run_questions),
-                }
-
-                # Compute per-sample usage delta
-                usage_after = getattr(loader, "usage_total", {"prompt": 0, "completion": 0, "total": 0})
-                sample_usage = {
-                    "prompt": max(0, int(usage_after.get("prompt", 0)) - int(usage_before.get("prompt", 0))),
-                    "completion": max(0, int(usage_after.get("completion", 0)) - int(usage_before.get("completion", 0))),
-                    "total": max(0, int(usage_after.get("total", 0)) - int(usage_before.get("total", 0))),
-                }
-
-                final_obj = {
-                    "image_path": str(img_path),
-                    "headline": headline,
-                    "provider": run_params["provider"],
-                    "model": run_params["model"],
-                    "settings": {
-                        "q_chains": run_params["q_chains"],
-                        "q_per_chain": run_params["q_per_chain"],
-                        "answer_questions": run_params["answer_questions"],
-                        "answer_max_sources": run_params["answer_max_sources"],
-                        "temperature": run_params["temperature"],
-                        "search_provider": run_params["search_provider"],
-                    },
-                    "run_params": run_params,
-                    "relevancy": rel or {},
-                    "visual_veracity": ver or {},
-                    "best_qa_per_chain": best_slim,
-                    "token_usage": sample_usage,
-                    "modules": module_config.copy(),
-                }
-                final_obj["sample_index"] = human_index
-                dataset_index = sample_meta.get("dataset_index")
-                if dataset_index is not None:
-                    try:
-                        final_obj["dataset_order_index"] = int(dataset_index)
-                    except Exception:
-                        final_obj["dataset_order_index"] = dataset_index
-                else:
-                    final_obj["dataset_order_index"] = sample_meta.get("order_index")
-                final_obj["iteration_index"] = sample_meta.get("order_index")
-
-                # Attach dataset metadata for downstream rendering/analysis
-                details_src = sample_meta.get("sample_details")
-                details: Dict[str, Any] = {}
-                if isinstance(details_src, dict):
-                    details.update({k: v for k, v in details_src.items() if v is not None})
-
-                if dataset_index is not None and "dataset_index" not in details:
-                    try:
-                        details["dataset_index"] = int(dataset_index)
-                    except Exception:
-                        details["dataset_index"] = dataset_index
-
-                if details:
-                    final_obj["sample_details"] = details
-                # Run AI judge if requested
-                judgement = None
-                if run_judge:
-                    try:
-                        judgement = judge_from_structured(final_obj, loader)
-                        final_obj["judgement"] = judgement
-                    except Exception as e:
-                        print("  AI judge error:", e)
-                else:
-                    print("AI judge: skipped (--disable-judge)")
-
-                print("\n== Final Structured Output (JSON) ==")
-                try:
-                    print(json.dumps(final_obj, ensure_ascii=False, indent=2))
-                except Exception:
-                    # Fallback: best-effort string conversion
-                    def _stringify(o):
-                        if isinstance(o, dict):
-                            return {k: _stringify(v) for k, v in o.items()}
-                        if isinstance(o, list):
-                            return [_stringify(x) for x in o]
-                        try:
-                            json.dumps(o)
-                            return o
-                        except Exception:
-                            return str(o)
-                    print(json.dumps(_stringify(final_obj), ensure_ascii=False, indent=2))
-
-                # Also print judge summary for quick scan
-                if run_judge and judgement:
-                    print("\n== AI Judge Decision ==")
-                    print(f"  label: {judgement.get('label')}")
-                    print(f"  confidence: {judgement.get('confidence')}")
-                    rat = judgement.get('rationale')
-                    if rat:
-                        print(f"  rationale: {rat}")
-                    factors = judgement.get('key_factors') or []
-                    if factors:
-                        print("  key_factors:")
-                        for f in factors:
-                            print(f"    - {f}")
-
-                # Optionally append to a JSONL sink for later evaluation
-                out_path = (args.save_jsonl or "").strip()
-                if out_path:
-                    try:
-                        out_dir = os.path.dirname(out_path)
-                        if out_dir:
-                            os.makedirs(out_dir, exist_ok=True)
-                        with open(out_path, "a", encoding="utf-8") as f:
-                            f.write(json.dumps(final_obj, ensure_ascii=False) + "\n")
-                    except Exception as e:
-                        print("  Warning: failed to append to --save-jsonl:", e)
-
-                # Collect for HTML per-run report
-                run_outputs.append(final_obj)
-                # Print token usage summary for this sample
-                print("  Token usage (sample): prompt={} completion={} total={}".format(
-                    sample_usage.get("prompt", 0), sample_usage.get("completion", 0), sample_usage.get("total", 0)
-                ))
-
-            processed_any = True
-            manager.record_sample()
-            checkpoint_path = manager.maybe_save()
-            if checkpoint_path:
-                print(f"  Saved checkpoint: {checkpoint_path}")
-                resume_hint = manager.resume_hint(checkpoint_path)
-                if resume_hint:
-                    print(f"  Resume with: python main.py {resume_hint} [other flags]")
-                _update_run_metadata({
-                    "progress": {
-                        "processed_samples": manager.processed_count,
-                        "target_samples": total_samples,
-                    },
-                    "last_checkpoint": str(checkpoint_path),
-                })
-
-    if duckduckgo_batcher is not None:
-        ddg_totals = duckduckgo_batcher.get_metrics()
+    # Aggregate DDG metrics from per-sample batchers
+    ddg_totals: Dict[str, Any] = {}
+    for wm in ddg_totals_list:
+        for k, v in wm.items():
+            if isinstance(v, (int, float)):
+                ddg_totals[k] = ddg_totals.get(k, 0) + v
 
     if processed_any and manager.processed_count % manager.chunk_size != 0:
         _update_run_metadata({
@@ -896,27 +1063,51 @@ def main() -> None:
                 avg_ms,
             )
         )
+        run_summary["duckduckgo_batch"] = {
+            "batches": total_batches,
+            "unique": total_unique,
+            "executed": total_exec,
+            "cache_hits": total_cache_hits,
+            "errors": total_errors,
+            "retries": total_retries,
+            "avg_ms": round(avg_ms, 0),
+        }
 
     # Print total token usage across all processed samples
+    # Merge usage from all per-worker loaders into a single grand total.
+    token_totals: Dict[str, Any] = {}
     try:
-        grand = getattr(loader, "usage_total", {"prompt": 0, "completion": 0, "total": 0})
+        grand: Dict[str, Any] = {"prompt": 0, "completion": 0, "total": 0}
+        for wl in worker_loaders:
+            for k in grand:
+                grand[k] = grand.get(k, 0) + int(wl.usage_total.get(k, 0) or 0)
         print("\n=== Token Usage (Run Total) ===")
         print(f"prompt={grand.get('prompt', 0)} completion={grand.get('completion', 0)} total={grand.get('total', 0)}")
+        token_totals = {
+            "prompt": int(grand.get("prompt", 0) or 0),
+            "completion": int(grand.get("completion", 0) or 0),
+            "total": int(grand.get("total", 0) or 0),
+        }
     except Exception:
         pass
+
+    if token_totals:
+        run_summary["token_usage"] = token_totals
 
     # Generate HTML report for this run if requested
     html_path = (args.html_report or "").strip()
     if html_path and run_outputs:
         try:
             from scripts.report_html import render_html_report
+            # Ensure outputs are in sample order (matters when workers > 1)
+            run_outputs.sort(key=lambda o: o.get("sample_index", 0))
             # Try to compute metrics over the full JSONL if provided and dataset exists
             metrics = None
-            ds_json = _resolve_json_path()
+            ds_json = _resolve_json_path(dataset_root, dataset_json_override)
             if args.save_jsonl:
                 try:
                     from scripts.evaluate import evaluate as _eval
-                    metrics = _eval(Path(args.save_jsonl), ds_json, Path("data/MMFakeBench_test"), save_report=None)
+                    metrics = _eval(Path(args.save_jsonl), ds_json, dataset_root, save_report=None)
                 except Exception:
                     metrics = None
             render_html_report(
@@ -927,6 +1118,7 @@ def main() -> None:
                 inline_images=bool(args.html_inline_images),
                 dataset_json_path=str(ds_json),
                 dataset_image_root=str(image_root),
+                run_summary=run_summary or None,
             )
             base, _ = os.path.splitext(html_path)
             csv_path = base + ".tokens.csv"

@@ -47,6 +47,7 @@ def _load_gt_map(dataset_json: Path, image_root: Path) -> Dict[str, Dict[str, An
                 "gt_answers": rec.get("gt_answers"),
                 "image_source": rec.get("image_source"),
                 "text": rec.get("text"),
+                "fake_cls": rec.get("fake_cls"),
             }
     return mapping
 
@@ -187,8 +188,30 @@ def _write_metrics_csv(path: Path, report: Dict[str, Any]) -> None:
         }
         rows.append(row)
 
-    add_metric_row("judge_filtered", "judge_metrics")
-    add_metric_row("judge_all", "judge_metrics_all")
+    add_metric_row("judge_overall", "judge_metrics_overall")
+
+    for fake_cls_key, payload in sorted((report.get("judge_metrics_by_fake_cls") or {}).items()):
+        cm = payload.get("confusion_matrix") or {}
+        metrics = payload.get("metrics") or {}
+        if not metrics:
+            continue
+        row = {
+            "category": "metric",
+            "name": f"judge_by_fake_cls_{fake_cls_key}",
+            "accuracy": metrics.get("accuracy"),
+            "precision": metrics.get("precision"),
+            "recall": metrics.get("recall"),
+            "f1": metrics.get("f1"),
+            "recall_pos": metrics.get("recall_pos"),
+            "recall_neg": metrics.get("recall_neg"),
+            "support": metrics.get("support"),
+            "TP": cm.get("TP"),
+            "FP": cm.get("FP"),
+            "FN": cm.get("FN"),
+            "TN": cm.get("TN"),
+        }
+        rows.append(row)
+
     add_metric_row("visual_veracity_filtered", "visual_veracity_ai_detection")
     add_metric_row("visual_veracity_all", "visual_veracity_ai_detection_all")
 
@@ -323,7 +346,10 @@ def evaluate(
     # Aggregate for judge
     y_true_all: List[int] = []
     y_pred_all: List[int] = []
-    y_pred_all_keep_flags: List[bool] = []  # exclude when uncertain for filtered metrics
+
+    per_fake_cls_truth: Dict[str, List[int]] = {}
+    per_fake_cls_pred: Dict[str, List[int]] = {}
+    uncertain_count = 0
 
     # Visual veracity AI detection
     y_true_ai_all: List[int] = []              # filtered: only where prediction exists
@@ -357,14 +383,19 @@ def evaluate(
         label_counter[label] += 1
         pred = _label_to_pred(label)
         y_true_all.append(y_true)
+
+        fake_cls_value = gt.get("fake_cls")
+        fake_cls_key = str(fake_cls_value).strip() if fake_cls_value is not None else ""
+        if not fake_cls_key:
+            fake_cls_key = "unknown"
+
         if pred is None:
-            # Treat uncertain as incorrect for the all-in metric by assigning the opposite class
-            # so it degrades both precision and recall conservatively.
-            y_pred_all.append(1 - y_true)
-            y_pred_all_keep_flags.append(False)
+            # Treat uncertain as incorrect by assigning the opposite class so it
+            # degrades both precision and recall conservatively.
+            pred_value = 1 - y_true
+            uncertain_count += 1
         else:
-            y_pred_all.append(pred)
-            y_pred_all_keep_flags.append(True)
+            pred_value = pred
             conf_val = j.get("confidence")
             if isinstance(conf_val, (int, float)):
                 conf = max(0.0, min(1.0, float(conf_val)))
@@ -373,6 +404,10 @@ def evaluate(
             if isinstance(lp_val, (int, float)):
                 lp_conf = max(0.0, min(1.0, float(lp_val)))
                 logprob_records.append((lp_conf, 1 if pred == y_true else 0))
+
+        y_pred_all.append(pred_value)
+        per_fake_cls_truth.setdefault(fake_cls_key, []).append(y_true)
+        per_fake_cls_pred.setdefault(fake_cls_key, []).append(pred_value)
 
         # Visual veracity AI detection
         ai_true = _ai_truth_from_source(gt.get("image_source"))
@@ -391,20 +426,26 @@ def evaluate(
                 y_true_ai_all_all.append(ai_true)
                 y_pred_ai_all_all.append(1 - ai_true)
 
-    # Metrics for judge (exclude uncertain; clean, no-penalty view)
-    y_true_f = [t for t, keep in zip(y_true_all, y_pred_all_keep_flags) if keep]
-    y_pred_f = [p for p, keep in zip(y_pred_all, y_pred_all_keep_flags) if keep]
-    cm_filtered, metrics_filtered = _confusion_and_metrics(y_true_f, y_pred_f)
-
     # Metrics for judge (all predictions; 'Uncertain' penalized as incorrect)
-    cm_all, metrics_all = _confusion_and_metrics(y_true_all, y_pred_all)
+    cm_overall, metrics_overall = _confusion_and_metrics(y_true_all, y_pred_all)
+
+    judge_metrics_by_fake_cls: Dict[str, Dict[str, Any]] = {}
+    for fake_cls_key in sorted(per_fake_cls_truth.keys()):
+        truths = per_fake_cls_truth.get(fake_cls_key, [])
+        preds_cls = per_fake_cls_pred.get(fake_cls_key, [])
+        if not truths or len(truths) != len(preds_cls):
+            continue
+        cm_cls, metrics_cls = _confusion_and_metrics(truths, preds_cls)
+        judge_metrics_by_fake_cls[fake_cls_key] = {
+            "confusion_matrix": cm_cls,
+            "metrics": metrics_cls,
+        }
 
     # Metrics for AI detection via visual veracity
     cm_ai, metrics_ai = _confusion_and_metrics(y_true_ai_all, y_pred_ai_all)
     cm_ai_all, metrics_ai_all = _confusion_and_metrics(y_true_ai_all_all, y_pred_ai_all_all)
 
     total_preds = len(y_true_all)
-    uncertain_count = total_preds - len(y_true_f)
     uncertain_rate = (uncertain_count / total_preds) if total_preds else 0.0
 
     report = {
@@ -418,16 +459,12 @@ def evaluate(
             "visual_veracity_pred_covered": len(y_true_ai_all),
             "visual_veracity_coverage_rate": round((len(y_true_ai_all) / ai_truth_total) if ai_truth_total else 0.0, 4),
         },
-        # Primary, clean metrics for the judge (Uncertain excluded)
-        "judge_metrics": {  # legacy key for backward-compatibility
-            "confusion_matrix": cm_filtered,
-            "metrics": metrics_filtered,
+        # Judge metrics (all predictions; uncertain penalized)
+        "judge_metrics_overall": {
+            "confusion_matrix": cm_overall,
+            "metrics": metrics_overall,
         },
-        # All predictions; Uncertain penalized as incorrect
-        "judge_metrics_all": {
-            "confusion_matrix": cm_all,
-            "metrics": metrics_all,
-        },
+        "judge_metrics_by_fake_cls": judge_metrics_by_fake_cls,
         "visual_veracity_ai_detection": {
             "confusion_matrix": cm_ai,
             "metrics": metrics_ai,
@@ -446,10 +483,16 @@ def evaluate(
     report["judge_logprob_calibration"] = logprob_calibration
     report["counts"]["judge_logprob_samples"] = logprob_calibration.get("total", 0)
 
+    # Legacy aliases for backward compatibility
+    report["judge_metrics"] = report["judge_metrics_overall"]
+    report["judge_metrics_all"] = report["judge_metrics_overall"]
+
     # Pretty print summary
     def _pp(title: str, cm: Dict[str, int], m: Dict[str, float]):
         print(f"\n== {title} ==")
         print(f"  Accuracy: {m['accuracy']}")
+        if 'precision' in m:
+            print(f"  Precision: {m['precision']}")
         print(f"  Recall (Misinformation): {m['recall_pos']}")
         print(f"  Recall (Not Misinformation): {m['recall_neg']}")
         print(f"  F1: {m['f1']}")
@@ -460,8 +503,19 @@ def evaluate(
     print(f"  Outputs read: {len(preds)}; missing GT matches: {missing}")
     print(f"  Judge labels: {dict(label_counter)}")
     print(f"  Uncertain: {uncertain_count} ({round(uncertain_rate*100,2)}%)")
-    _pp("Judge (filtered; excludes Uncertain)", report["judge_metrics"]["confusion_matrix"], report["judge_metrics"]["metrics"])
-    _pp("Judge (all predictions; Uncertain penalized)", report["judge_metrics_all"]["confusion_matrix"], report["judge_metrics_all"]["metrics"])
+    _pp(
+        "Judge (overall; Uncertain penalized)",
+        report["judge_metrics_overall"]["confusion_matrix"],
+        report["judge_metrics_overall"]["metrics"],
+    )
+
+    for fake_cls_key in sorted(report["judge_metrics_by_fake_cls"].keys()):
+        payload = report["judge_metrics_by_fake_cls"][fake_cls_key]
+        _pp(
+            f"Judge results for fake_cls={fake_cls_key}",
+            payload["confusion_matrix"],
+            payload["metrics"],
+        )
     cm_ai_d = report["visual_veracity_ai_detection"]["confusion_matrix"]
     m_ai_d = report["visual_veracity_ai_detection"]["metrics"]
     _pp("Visual veracity: AI-generated detection (filtered)", cm_ai_d, m_ai_d)

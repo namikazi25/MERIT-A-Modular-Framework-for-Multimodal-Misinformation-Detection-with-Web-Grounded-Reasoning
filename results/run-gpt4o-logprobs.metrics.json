@@ -1,0 +1,240 @@
+{
+  "counts": {
+    "total_outputs": 3,
+    "missing_in_gt_map": 0,
+    "judge_label_distribution": {
+      "Misinformation": 3
+    },
+    "uncertain_count": 0,
+    "uncertain_rate": 0.0,
+    "visual_veracity_gt_known": 3,
+    "visual_veracity_pred_covered": 3,
+    "visual_veracity_coverage_rate": 1.0,
+    "judge_confidence_samples": 3,
+    "judge_logprob_samples": 3
+  },
+  "judge_metrics": {
+    "confusion_matrix": {
+      "TP": 3,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0
+    },
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "recall_pos": 1.0,
+      "recall_neg": 0.0,
+      "support": 3
+    }
+  },
+  "judge_metrics_all": {
+    "confusion_matrix": {
+      "TP": 3,
+      "FP": 0,
+      "FN": 0,
+      "TN": 0
+    },
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "recall_pos": 1.0,
+      "recall_neg": 0.0,
+      "support": 3
+    }
+  },
+  "visual_veracity_ai_detection": {
+    "confusion_matrix": {
+      "TP": 2,
+      "FP": 0,
+      "FN": 0,
+      "TN": 1
+    },
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "recall_pos": 1.0,
+      "recall_neg": 1.0,
+      "support": 3
+    }
+  },
+  "visual_veracity_ai_detection_all": {
+    "confusion_matrix": {
+      "TP": 2,
+      "FP": 0,
+      "FN": 0,
+      "TN": 1
+    },
+    "metrics": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "recall_pos": 1.0,
+      "recall_neg": 1.0,
+      "support": 3
+    }
+  },
+  "judge_confidence_calibration": {
+    "total": 3,
+    "bins": [
+      {
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.2,
+        "bin_upper": 0.3,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.3,
+        "bin_upper": 0.4,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.5,
+        "bin_upper": 0.6,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.6,
+        "bin_upper": 0.7,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.7,
+        "bin_upper": 0.8,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.8,
+        "bin_upper": 0.9,
+        "count": 2,
+        "avg_confidence": 0.85,
+        "accuracy": 1.0
+      },
+      {
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 1,
+        "avg_confidence": 0.95,
+        "accuracy": 1.0
+      }
+    ],
+    "brier_score": 0.015833,
+    "expected_calibration_error": 0.116667,
+    "bin_count": 10
+  },
+  "judge_logprob_calibration": {
+    "total": 3,
+    "bins": [
+      {
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.2,
+        "bin_upper": 0.3,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.3,
+        "bin_upper": 0.4,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.5,
+        "bin_upper": 0.6,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      },
+      {
+        "bin_lower": 0.6,
+        "bin_upper": 0.7,
+        "count": 1,
+        "avg_confidence": 0.6359,
+        "accuracy": 1.0
+      },
+      {
+        "bin_lower": 0.7,
+        "bin_upper": 0.8,
+        "count": 1,
+        "avg_confidence": 0.712,
+        "accuracy": 1.0
+      },
+      {
+        "bin_lower": 0.8,
+        "bin_upper": 0.9,
+        "count": 1,
+        "avg_confidence": 0.8074,
+        "accuracy": 1.0
+      },
+      {
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 0,
+        "avg_confidence": null,
+        "accuracy": null
+      }
+    ],
+    "brier_score": 0.084188,
+    "expected_calibration_error": 0.281545,
+    "bin_count": 10
+  }
+}

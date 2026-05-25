@@ -29,22 +29,51 @@ from scripts.utils.media import image_to_data_url
 
 
 _DEFAULT_SYSTEM_PROMPT = (
-    "You are a careful image forensics assistant. Given a single image, "
-    "assess whether it appears AI-generated or manipulated, and whether any "
-    "visual elements seem out of place (e.g., inconsistent lighting, warped hands, "
-    "nonsensical text, reflections, impossible shadows). Respond with strict JSON only."
+    "You are an AI image detection expert. Analyze images for signs of AI generation or manipulation.\n"
+    "Respond with strict JSON only."
 )
+
 def _build_user_instruction() -> str:
     return (
-        "Task: Examine the image and decide whether it appears AI-generated or manipulated, "
-        "or contains elements that seem out of place.\n\n"
-        "Output JSON strictly with keys: \n"
-        "  ai_generated: boolean (true if likely AI-generated/manipulated or suspicious)\n"
-        "  confidence: number in [0,1]\n"
-        "  explanation: short textual rationale\n"
-        "  anomalies: optional array of short strings (e.g., ['extra finger', 'warped text'])\n"
-        "Example: {\"ai_generated\": false, \"confidence\": 0.22, \"explanation\": \"...\", \"anomalies\": []}"
+        "Task: Examine this image for signs of AI generation or manipulation.\n\n"
+        
+        "Detection criteria:\n\n"
+        
+        "Technical artifacts:\n"
+        "- Warped hands, extra fingers, impossible anatomy\n"
+        "- Nonsensical text, garbled signs\n"
+        "- Inconsistent lighting, impossible shadows\n"
+        "- Unnatural textures, blending errors\n\n"
+        
+        "Contextual anomalies:\n"
+        "- Surreal object combinations (e.g., clown in bathroom mirror)\n"
+        "- Impossible scenarios or physics violations\n"
+        "- Dreamlike or fantastical elements in otherwise normal scenes\n"
+        "- Objects that don't belong in the context\n\n"
+        
+        "Be suspicious when:\n"
+        "- Technically perfect BUT contextually bizarre\n"
+        "- Minor details don't make sense\n"
+        "- Scene feels 'off' even without obvious artifacts\n\n"
+        
+        "Confidence calibration:\n"
+        "- 0.8-1.0: Clear technical artifacts OR impossible context\n"
+        "- 0.6-0.8: Strong evidence, multiple anomalies\n"
+        "- 0.4-0.6: Moderate suspicion, some anomalies\n"
+        "- 0.2-0.4: Minor concerns, could be unusual real photo\n"
+        "- 0.0-0.2: Appears genuine\n\n"
+        
+        "Prioritize contextual impossibility as much as technical quality.\n\n"
+        
+        "Output JSON:\n"
+        "{\n"
+        "  \"ai_generated\": boolean,\n"
+        "  \"confidence\": 0.0-1.0,\n"
+        "  \"explanation\": \"What you observed\",\n"
+        "  \"anomalies\": [\"specific issues\"]\n"
+        "}"
     )
+    
 def assess_image_visual_veracity(
     image_path: str,
     loader: LLMModelLoader,

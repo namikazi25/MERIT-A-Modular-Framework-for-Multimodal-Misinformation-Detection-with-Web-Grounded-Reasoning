@@ -1,0 +1,6 @@
+sample_index,image_path,headline,prompt_tokens,completion_tokens,total_tokens
+1,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_64.png,A woman wearing a pink hair towel working in a factory.,183626,1567,185193
+2,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_149.png,found these trees growing through old farm equipment out in the middle of the woods,54339,829,55168
+3,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_SD_26.png,Temple Grandin was directed by Mick Jackson in 2008.,156298,901,157199
+4,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_147.png,An image provided by NASA on July 14 shows a region near Pluto s equator with a range of mountains captured by the New Horizons spacecraft,76392,2020,78412
+5,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_230.png,Amber Heard Talks for First Time About Marriage to Johnny Depp,77646,2340,79986

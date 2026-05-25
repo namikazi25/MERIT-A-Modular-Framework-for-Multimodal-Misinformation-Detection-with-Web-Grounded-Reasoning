@@ -1,0 +1,4 @@
+sample_index,image_path,headline,prompt_tokens,completion_tokens,total_tokens
+1,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_772.png,"Westworld first season premiered on August 28, 2015.",341411,2284,343695
+2,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_173.png,a bathroom with a big mirror above the sink,371306,3233,374539
+3,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_261.png,Oscar Pistorius passes family members of the late Reeva Steenkamp on his arrival in court to await the verdict,112689,2389,115078

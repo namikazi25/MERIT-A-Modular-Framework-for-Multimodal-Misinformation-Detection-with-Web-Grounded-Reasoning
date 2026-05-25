@@ -23,31 +23,39 @@ from scripts.utils.media import image_to_data_url
 
 
 _DEFAULT_SYSTEM_PROMPT = (
-    "You are an investigative assistant skilled at verifying news claims. "
-    "Given a headline and an accompanying image, generate concise, Google-style "
-    "search queries that a fact-checker would use to assess misinformation. "
-    "Prefer neutral, specific terms (entities, locations, dates). Respond with strict JSON only."
+    "You are an investigative assistant. Generate search queries to verify if an "
+    "image-headline pairing is authentic or misleading. Focus on verifying both "
+    "the headline's claims AND whether the image matches. Respond with strict JSON only."
 )
 
-_MAX_CONTEXT_QA = 5
 def _make_instruction(headline: str, k: int, prior: List[str], answered: List[Tuple[str, str]]) -> str:
     prior_block = "\n".join(f"- {q}" for q in prior) if prior else "(none)"
     answered_block = (
-        "\n".join(f"- Q: {q}\n  A: {a}" for q, a in answered)
+        "\n".join(f"- Q: {q}\n  A: {a[:150]}..." for q, a in answered[-3:])  # Last 3, truncated
         if answered
         else "(none yet)"
     )
+    
     return (
-        "Task: Propose Google-style search queries to verify whether the headline is misinformation, "
-        "taking the image into account.\n"
+        "Task: Generate {k} Google-style search queries to verify this headline.\n"
         f"Headline: {headline}\n\n"
-        f"Previously generated (avoid duplicates):\n{prior_block}\n\n"
-        f"Context from earlier Q/A (use to refine or deepen investigation):\n{answered_block}\n\n"
-        f"Generate exactly {k} distinct queries, concise (max 12 words), \n"
-        "avoiding punctuation unless needed. Prefer entity names, places, dates.\n\n"
-        "Output JSON strictly as an array of strings.\n"
-        "Example: [\"Event name location date verification\", \"Feature in image anomaly term\"]"
+        
+        "Already asked:\n{prior_block}\n\n"
+        "Recent answers:\n{answered_block}\n\n"
+        
+        "Query strategy:\n"
+        "- First query: Verify core claim exists (\"Did [event] happen?\", \"Is [fact] true?\")\n"
+        "- Follow-up queries: Check specific details, dates, people involved\n"
+        "- Use concrete terms: names, places, dates, specific events\n"
+        "- Keep queries short (4-8 words)\n\n"
+        
+        f"Generate exactly {k} NEW queries (avoid duplicates).\n\n"
+        "Output as JSON array only:\n"
+        "[\"query 1\", \"query 2\", ...]"
     )
+
+_MAX_CONTEXT_QA = 5
+
 def generate_investigative_questions(
     image_path: str,
     headline: str,

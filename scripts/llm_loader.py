@@ -763,6 +763,8 @@ class LLMModelLoader:
 
                 loader_usage = self.usage_total
 
+                _usage_lock = threading.Lock()
+
                 class _UsageWrapped:
                     def __init__(self, inner):
                         self._inner = inner
@@ -775,22 +777,23 @@ class LLMModelLoader:
                             p = usage.get("prompt") or 0
                             c = usage.get("completion") or 0
                             t = usage.get("total") or 0
-                            try:
-                                loader_usage["prompt"] += int(p)
-                            except Exception:
-                                pass
-                            try:
-                                loader_usage["completion"] += int(c)
-                            except Exception:
-                                pass
-                            try:
-                                loader_usage["total"] += int(t)
-                            except Exception:
-                                # Derive total if missing
+                            with _usage_lock:
                                 try:
-                                    loader_usage["total"] += int(p) + int(c)
+                                    loader_usage["prompt"] += int(p)
                                 except Exception:
                                     pass
+                                try:
+                                    loader_usage["completion"] += int(c)
+                                except Exception:
+                                    pass
+                                try:
+                                    loader_usage["total"] += int(t)
+                                except Exception:
+                                    # Derive total if missing
+                                    try:
+                                        loader_usage["total"] += int(p) + int(c)
+                                    except Exception:
+                                        pass
                         return resp
 
                 self._model_wrapper = _UsageWrapped(base_model)

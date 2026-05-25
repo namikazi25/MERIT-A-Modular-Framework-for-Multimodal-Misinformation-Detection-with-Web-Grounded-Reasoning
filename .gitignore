@@ -36,12 +36,15 @@ pip-wheel-metadata/
 .env.production
 .env.test
 
-# Run outputs
-results/
+# Run outputs (keep JSONL and .metrics.json tracked; reports regenerate)
+results/*.html
+results/checkpoints/
+
+# Datasets / archives
+*.zip
+data/
 
 # Folders
-data/
-/MMFakeBench_test.zip
 /.codex
 .lightning_studio
 .cursor-server
@@ -49,3 +52,22 @@ data/
 .wget-hsts
 .windsurf-server
 todo.txt
+digest.txt
+
+# AI assistant / editor state
+.claude/
+.claude.json
+.copilot/
+.cache/
+
+# Shell / terminal state
+.bash_history
+.zsh_history
+.zcompdump*
+
+# Local helper scripts
+get_git_config.sh
+
+# Local backups
+repo-backup.git/
+*.bundle

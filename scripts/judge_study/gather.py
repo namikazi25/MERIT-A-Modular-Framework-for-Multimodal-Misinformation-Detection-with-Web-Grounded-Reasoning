@@ -127,7 +127,7 @@ def gather_live(samples_jsonl: str, out_dir: str, run_id: str, repo_root: str,
                 provider: str, model: str, temperature: float,
                 search_provider: str, cache_enabled: bool,
                 q_chains: int, q_per_chain: int, answer_max_sources: int,
-                notes: str = "") -> dict:
+                workers: int = 1, notes: str = "") -> dict:
     from scripts.relevancy_checker import assess_image_headline_relevancy
     from scripts.visual_veracity_checker import assess_image_visual_veracity
     from scripts.question_generator import generate_investigative_questions
@@ -147,14 +147,18 @@ def gather_live(samples_jsonl: str, out_dir: str, run_id: str, repo_root: str,
     )
     write_manifest(manifest, os.path.join(out_dir, "manifest.json"))
 
-    loader = LLMModelLoader(ModelConfig(provider=provider, model=model or None, temperature=temperature))
-    cache = SearchCache(enabled=cache_enabled, verbose=True)
+    from concurrent.futures import ThreadPoolExecutor
 
-    for si, s in enumerate(samples, start=1):
+    loaders = [LLMModelLoader(ModelConfig(provider=provider, model=model or None, temperature=temperature))
+               for _ in range(max(1, workers))]
+    cache = SearchCache(enabled=cache_enabled, verbose=False)
+
+    def process_one(s: dict, si: int) -> None:
+        loader = loaders[si % len(loaders)]
         img = str(s["image_path"])
         headline = str(s.get("headline", ""))
         sample_id = str(s.get("sample_id", img))
-        print(f"[{si}/{len(samples)}] {sample_id}")
+        print(f"[{si}/{len(samples)}] {sample_id}", flush=True)
 
         rel = assess_image_headline_relevancy(img, headline, loader)
         ver = assess_image_visual_veracity(img, loader)
@@ -200,7 +204,7 @@ def gather_live(samples_jsonl: str, out_dir: str, run_id: str, repo_root: str,
                     answers_by_q[best["question"]]["selected"] = True
                 prior_questions.extend(fqs or [])
             except Exception as e:
-                print(f"  selection error: {e}")
+                print(f"  selection error: {e}", flush=True)
 
         bundle = {
             "schema_version": SCHEMA_VERSION,
@@ -218,6 +222,9 @@ def gather_live(samples_jsonl: str, out_dir: str, run_id: str, repo_root: str,
         }
         with open(os.path.join(out_dir, f"{sample_id}.json"), "w") as fh:
             json.dump(bundle, fh, ensure_ascii=False, indent=1)
+
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
+        list(ex.map(lambda pair: process_one(pair[1], pair[0]), enumerate(samples, start=1)))
 
     print(f"wrote {len(samples)} bundles to {out_dir}")
     return manifest
@@ -246,6 +253,7 @@ def main() -> None:
     p.add_argument("--q-chains", type=int, default=3)
     p.add_argument("--q-per-chain", type=int, default=3)
     p.add_argument("--answer-max-sources", type=int, default=5)
+    p.add_argument("--workers", type=int, default=1)
 
     args = ap.parse_args()
     if args.mode == "frozen":
@@ -257,6 +265,7 @@ def main() -> None:
             search_provider=args.search, cache_enabled=not args.no_cache,
             q_chains=args.q_chains, q_per_chain=args.q_per_chain,
             answer_max_sources=args.answer_max_sources,
+            workers=args.workers,
         )
 
 

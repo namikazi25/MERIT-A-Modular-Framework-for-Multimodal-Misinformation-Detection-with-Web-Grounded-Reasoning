@@ -15,6 +15,10 @@ Environment variables:
   - OPENROUTER_RATE_LIMIT_PER_MIN (optional override for rpm throttling; default 18)
   - OPENROUTER_MIN_INTERVAL_SECONDS (optional minimum spacing between requests)
   - OPENROUTER_DAILY_QUOTA (optional hard cap per UTC day; default 45)
+  - LMSTUDIO_BASE_URL (local LM Studio OpenAI-compatible endpoint; default http://localhost:1234/v1)
+  - LMSTUDIO_MODEL (optional model id served by LM Studio; auto-discovered from /v1/models if unset)
+  - LMSTUDIO_API_KEY (optional; LM Studio ignores it, a placeholder is used otherwise)
+  - LMSTUDIO_API_KEY_HEADER (optional; header used for auth, default X-API-Key)
 """
 
 import base64
@@ -32,7 +36,7 @@ from httpx import HTTPStatusError
 from openai import RateLimitError
 
 
-Provider = Literal["openai", "google", "deepinfra", "openrouter"]
+Provider = Literal["openai", "google", "deepinfra", "openrouter", "lmstudio"]
 
 
 @dataclass
@@ -576,6 +580,89 @@ class _DeepInfraChatModel:
         return payload
 
 
+class _LMStudioChatModel:
+    """OpenAI-compatible Chat Completions via a local LM Studio server.
+
+    Uses the OpenAI SDK with base_url pointed at LM Studio's OpenAI-compatible
+    endpoint (default http://localhost:1234/v1). LM Studio ignores the API key,
+    so a placeholder is used. Vision-capable models receive images exactly like
+    OpenAI: base64 data URLs in ``image_url`` content parts are passed through
+    unchanged by ``_to_openai_messages``.
+
+    Environment variables:
+      - LMSTUDIO_BASE_URL (default http://localhost:1234/v1)
+      - LMSTUDIO_MODEL (optional model id; auto-discovered from /v1/models if unset)
+      - LMSTUDIO_API_KEY (optional; LM Studio ignores it, placeholder used otherwise)
+    """
+
+    def __init__(self, cfg: ModelConfig):
+        from openai import OpenAI  # lazy import
+
+        base_url = os.getenv("LMSTUDIO_BASE_URL") or "http://localhost:1234/v1"
+        api_key = os.getenv("LMSTUDIO_API_KEY") or "lm-studio"
+        timeout = cfg.timeout or 1800  # long prefill (RAG contexts) needs a generous ceiling
+        # Some OpenAI-compatible servers (e.g. llama.cpp behind a proxy) authenticate via a
+        # custom header such as X-API-Key instead of Authorization: Bearer. The OpenAI SDK
+        # only sends Bearer, so pass the key in a default header too (LM Studio ignores it;
+        # the header name is configurable via LMSTUDIO_API_KEY_HEADER, default X-API-Key).
+        auth_header = os.getenv("LMSTUDIO_API_KEY_HEADER") or "X-API-Key"
+        self.client = OpenAI(
+            api_key=api_key,
+            base_url=base_url,
+            timeout=timeout,
+            default_headers={auth_header: api_key},
+        )
+        self.cfg = cfg
+        if not self.cfg.model:
+            self.cfg.model = os.getenv("LMSTUDIO_MODEL")
+        if not self.cfg.model:
+            # Discover the id of the model currently loaded in LM Studio.
+            try:
+                models = self.client.models.list()
+                ids = [m.id for m in getattr(models, "data", models)]
+                if ids:
+                    self.cfg.model = ids[0]
+            except Exception as e:  # server down or no models loaded
+                raise ValueError(
+                    "LM Studio: set LMSTUDIO_MODEL (or pass --model) to the id of the loaded "
+                    "model, or start the LM Studio server with a model loaded. "
+                    "Auto-discovery via /v1/models failed: %s" % e
+                ) from e
+
+    def invoke(self, messages: List[Dict[str, Any]]) -> Any:
+        oai_messages = _to_openai_messages(messages)
+        kwargs: Dict[str, Any] = {
+            "model": self.cfg.model,
+            "messages": oai_messages,
+            "temperature": self.cfg.temperature,
+        }
+        if self.cfg.max_tokens is not None:
+            kwargs["max_tokens"] = self.cfg.max_tokens
+        if self.cfg.top_p is not None:
+            kwargs["top_p"] = self.cfg.top_p
+        logprob_settings = _logprob_request_settings(messages, self.cfg.extra)
+        if logprob_settings:
+            kwargs.update(logprob_settings)
+
+        resp = self.client.chat.completions.create(**kwargs)
+        content = resp.choices[0].message.content if resp.choices else ""
+        usage = getattr(resp, "usage", None)
+        prompt = getattr(usage, "prompt_tokens", None) if usage is not None else None
+        completion = getattr(usage, "completion_tokens", None) if usage is not None else None
+        total = getattr(usage, "total_tokens", None) if usage is not None else None
+        usage_dict = {
+            "prompt": int(prompt) if prompt is not None else None,
+            "completion": int(completion) if completion is not None else None,
+            "total": int(total) if total is not None else None,
+        }
+        payload = SimpleNamespace(content=content, usage=usage_dict)
+        if resp.choices:
+            logprob_summary = _extract_logprob_payload(resp.choices[0])
+            if logprob_summary:
+                payload.logprobs = logprob_summary
+        return payload
+
+
 class _OpenRouterChatModel:
     """OpenAI-compatible Chat Completions via OpenRouter endpoint."""
 
@@ -739,8 +826,8 @@ class LLMModelLoader:
         self.config = config if isinstance(config, ModelConfig) else ModelConfig(**config)
         if isinstance(self.config.model, str) and not self.config.model.strip():
             self.config.model = None
-        if self.config.provider not in ("openai", "google", "deepinfra", "openrouter"):
-            raise ValueError("provider must be 'openai', 'google', 'deepinfra', or 'openrouter'")
+        if self.config.provider not in ("openai", "google", "deepinfra", "openrouter", "lmstudio"):
+            raise ValueError("provider must be 'openai', 'google', 'deepinfra', 'openrouter', or 'lmstudio'")
         # Cumulative usage across all invocations via this loader
         self.usage_total = {"prompt": 0, "completion": 0, "total": 0}
         self._model_wrapper = None
@@ -758,6 +845,8 @@ class LLMModelLoader:
                     base_model = _OpenRouterChatModel(self.config)
                 elif self.config.provider == "deepinfra":
                     base_model = _DeepInfraChatModel(self.config)
+                elif self.config.provider == "lmstudio":
+                    base_model = _LMStudioChatModel(self.config)
                 else:
                     base_model = _GoogleChatModel(self.config)
 

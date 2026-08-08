@@ -60,16 +60,31 @@ class SearchCache:
         with open(self._path(query, provider), "w") as fh:
             json.dump(payload, fh, ensure_ascii=False)
 
-    def search(self, query: str, *, provider: Optional[str] = None, **params: Any) -> Tuple[Dict[str, Any], Dict[str, Any]]:
-        """Cached wrapper around web_search. Returns (payload, meta)."""
+    def search(self, query: str, *, provider: Optional[str] = None,
+               max_attempts: int = 3, backoff_base: float = 1.0, **params: Any) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+        """Cached wrapper around web_search (rule 6: retries with backoff, logged).
+
+        Returns (payload, meta). Raises after max_attempts consecutive failures.
+        """
         prov = provider or "duckduckgo"
         cached = self.get(query, prov)
         if cached is not None:
             if self.verbose:
                 print(f"[cache HIT ] {query[:70]}")
-            return cached, {"cache_hit": True, "provider": prov}
-        payload = web_search(query, provider=prov, **params)
-        self.put(query, prov, payload)
-        if self.verbose:
-            print(f"[cache MISS ] {query[:70]} (stored)")
-        return payload, {"cache_hit": False, "provider": prov}
+            return cached, {"cache_hit": True, "provider": prov, "attempts": 1}
+        import time as _time
+        last_err = None
+        for attempt in range(1, max_attempts + 1):
+            try:
+                payload = web_search(query, provider=prov, **params)
+                self.put(query, prov, payload)
+                if self.verbose:
+                    print(f"[cache MISS ] {query[:70]} (stored, attempt {attempt})")
+                return payload, {"cache_hit": False, "provider": prov, "attempts": attempt}
+            except Exception as e:
+                last_err = e
+                if self.verbose or True:
+                    print(f"[search RETRY] {query[:60]} attempt {attempt} failed: {type(e).__name__}: {str(e)[:100]}", flush=True)
+                if attempt < max_attempts:
+                    _time.sleep(backoff_base * (2 ** (attempt - 1)))
+        raise RuntimeError(f"web_search failed after {max_attempts} attempts for {query!r}: {last_err!r}")

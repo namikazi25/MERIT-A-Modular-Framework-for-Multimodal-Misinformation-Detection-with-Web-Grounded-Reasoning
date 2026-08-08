@@ -127,7 +127,7 @@ def gather_live(samples_jsonl: str, out_dir: str, run_id: str, repo_root: str,
                 provider: str, model: str, temperature: float,
                 search_provider: str, cache_enabled: bool,
                 q_chains: int, q_per_chain: int, answer_max_sources: int,
-                workers: int = 1, notes: str = "") -> dict:
+                workers: int = 1, resume: bool = False, notes: str = "") -> dict:
     from scripts.relevancy_checker import assess_image_headline_relevancy
     from scripts.visual_veracity_checker import assess_image_visual_veracity
     from scripts.question_generator import generate_investigative_questions
@@ -143,7 +143,8 @@ def gather_live(samples_jsonl: str, out_dir: str, run_id: str, repo_root: str,
         temperature=temperature, repo_root=repo_root,
         notes=f"live gather from {samples_jsonl}. search={search_provider} cache={'on' if cache_enabled else 'OFF'}. " + notes,
         extra={"mode": "live", "samples_jsonl": samples_jsonl, "schema_version": SCHEMA_VERSION,
-               "q_chains": q_chains, "q_per_chain": q_per_chain, "answer_max_sources": answer_max_sources},
+               "q_chains": q_chains, "q_per_chain": q_per_chain, "answer_max_sources": answer_max_sources,
+               "resume": resume, "workers": workers},
     )
     write_manifest(manifest, os.path.join(out_dir, "manifest.json"))
 
@@ -182,16 +183,24 @@ def gather_live(samples_jsonl: str, out_dir: str, run_id: str, repo_root: str,
 
             answers_by_q: dict = {}
             for q in chain:
-                payload, meta = cache.search(q, provider=search_provider)
-                documents[str(q)] = [
-                    {"url": r.get("url"), "title": r.get("title"), "description": r.get("description") or r.get("snippet")}
-                    for r in _payload_results(payload)
-                ]
-                ans = generate_answer_from_search(q, payload, loader, max_sources=answer_max_sources)
-                ans["question"] = q
-                ans["cache_hit"] = meta["cache_hit"]
-                answers_by_q[q] = ans
-                answers.append(ans)
+                try:
+                    payload, meta = cache.search(q, provider=search_provider)
+                    documents[str(q)] = [
+                        {"url": r.get("url"), "title": r.get("title"), "description": r.get("description") or r.get("snippet")}
+                        for r in _payload_results(payload)
+                    ]
+                    ans = generate_answer_from_search(q, payload, loader, max_sources=answer_max_sources)
+                    ans["question"] = q
+                    ans["cache_hit"] = meta["cache_hit"]
+                    ans["search_attempts"] = meta.get("attempts")
+                    answers_by_q[q] = ans
+                    answers.append(ans)
+                except Exception as e:
+                    print(f"  [Q ERROR] {q[:60]}: {type(e).__name__}: {str(e)[:100]}", flush=True)
+                    documents[str(q)] = []
+                    answers_by_q[q] = {"question": q, "answer": None, "confidence": None,
+                                       "citations": [], "error": f"{type(e).__name__}: {str(e)[:200]}"}
+                    answers.append(answers_by_q[q])
             answers_global.update(answers_by_q)
 
             try:
@@ -223,6 +232,11 @@ def gather_live(samples_jsonl: str, out_dir: str, run_id: str, repo_root: str,
         with open(os.path.join(out_dir, f"{sample_id}.json"), "w") as fh:
             json.dump(bundle, fh, ensure_ascii=False, indent=1)
 
+    if resume:
+        existing = {os.path.splitext(f)[0] for f in os.listdir(out_dir) if f.endswith(".json") and f != "manifest.json"}
+        before = len(samples)
+        samples = [s for s in samples if str(s.get("sample_id", s.get("image_path"))) not in existing]
+        print(f"resume: {before - len(samples)} already done, {len(samples)} remaining", flush=True)
     with ThreadPoolExecutor(max_workers=max(1, workers)) as ex:
         list(ex.map(lambda pair: process_one(pair[1], pair[0]), enumerate(samples, start=1)))
 
@@ -254,6 +268,7 @@ def main() -> None:
     p.add_argument("--q-per-chain", type=int, default=3)
     p.add_argument("--answer-max-sources", type=int, default=5)
     p.add_argument("--workers", type=int, default=1)
+    p.add_argument("--resume", action="store_true", help="skip samples whose bundle file already exists")
 
     args = ap.parse_args()
     if args.mode == "frozen":
@@ -266,6 +281,7 @@ def main() -> None:
             q_chains=args.q_chains, q_per_chain=args.q_per_chain,
             answer_max_sources=args.answer_max_sources,
             workers=args.workers,
+            resume=args.resume,
         )
 
 

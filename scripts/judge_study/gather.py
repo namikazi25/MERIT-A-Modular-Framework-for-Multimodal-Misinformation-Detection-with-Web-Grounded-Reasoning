@@ -160,6 +160,10 @@ def gather_live(samples_jsonl: str, out_dir: str, run_id: str, repo_root: str,
         headline = str(s.get("headline", ""))
         sample_id = str(s.get("sample_id", img))
         print(f"[{si}/{len(samples)}] {sample_id}", flush=True)
+        if si % 50 == 0:
+            u = getattr(loader, "usage_total", {})
+            print(f"  [spend-milestone {si}] loader usage: prompt={u.get('prompt')} completion={u.get('completion')} "
+                  f"(gpt-4o-mini ~${(u.get('prompt', 0) or 0) / 1e6 * 0.15 + (u.get('completion', 0) or 0) / 1e6 * 0.60:.3f})", flush=True)
 
         rel = assess_image_headline_relevancy(img, headline, loader)
         ver = assess_image_visual_veracity(img, loader)

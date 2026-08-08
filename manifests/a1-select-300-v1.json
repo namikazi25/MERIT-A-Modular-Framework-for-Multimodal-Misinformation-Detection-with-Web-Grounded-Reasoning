@@ -1,0 +1,2124 @@
+{
+ "task": "A.1",
+ "seed": 20260808,
+ "strata": {
+  "mismatch": 0.3,
+  "original": 0.3,
+  "textual_veracity_distortion": 0.3,
+  "visual_veracity_distortion": 0.1
+ },
+ "targets": {
+  "mismatch": 90,
+  "original": 90,
+  "textual_veracity_distortion": 90,
+  "visual_veracity_distortion": 30
+ },
+ "excluded": {
+  "existing_200": 200,
+  "cache_test_20": 20
+ },
+ "n": 300,
+ "sample_list_hash": "24a92f3f37d59ba4e5918d1b0923a93fadbb87741818eb464fba48a1595ce8ae",
+ "samples": [
+  {
+   "sample_id": "ds8815",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_315.png",
+   "headline": "A white, beige and brown baby blanket under a beige/white comforter.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9213",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_213.png",
+   "headline": "A plane accelerating through the sky leaving a tail.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9486",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_486.png",
+   "headline": "Two striped cats lying with two sneakers on a ledge.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7153",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_153.png",
+   "headline": "Roger Federer returns the ball to Mikhail Youzhny during the final of the Gerry Weber Open in Halle",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9100",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_100.png",
+   "headline": "A kitchen table and chairs with greenery and tulips.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9128",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_128.png",
+   "headline": "A cow standing next to a white wall and bright blue door.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8357",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_357.png",
+   "headline": "Christian Grey does nt have vanilla tastes as Anastasia will discover",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8646",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_146.png",
+   "headline": "Two people holding Wii remotes and consoles in an indoor area.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9492",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_492.png",
+   "headline": "A bottle is next to a hotdog on foil.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8638",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_138.png",
+   "headline": "A kitchen with a big fridge and a big freezer.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9027",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_27.png",
+   "headline": "Chicago style deep dish pizza with tomato sauce and sausage.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8631",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_131.png",
+   "headline": "Apples and oranges and a tree with branches in front of potted plants.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9362",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_362.png",
+   "headline": "A surfer wearing red and black shorts rides a white surf board.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8003",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_3.png",
+   "headline": "A fireworks display in Weymouth marked the opening of London 2012",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7402",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_402.png",
+   "headline": "President Obama addresses the National Governors Association on February 22 2016 in the State Dining Room of the White House",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8717",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_217.png",
+   "headline": "a pillow with a blanket and some pillows",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7042",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_42.png",
+   "headline": "Andy Murray serves to Jerzy Janowicz during their semifinal match",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9568",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_68.png",
+   "headline": "Hamas Prime Minister Ismail Haniya right said the deal was wrong for all Palestinians",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8989",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_489.png",
+   "headline": "The two women sit near the window next to a table covered in fruit.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8677",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_177.png",
+   "headline": "orange slice with fork and various fruits on plate",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9433",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_433.png",
+   "headline": "a big long train that has some storage containers on it",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7618",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_118.png",
+   "headline": "Syrian refugees in northern Greece head for the unguarded border with Macedonia",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8806",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_306.png",
+   "headline": "Elephants standing beside each other outside on a balcony.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8744",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_244.png",
+   "headline": "A shirtless man is in mid air above some people on his skateboard.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7878",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_378.png",
+   "headline": "A Bangladeshi family wades through flood water to refuge in Harinagar Satkhira",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9777",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_277.png",
+   "headline": "Des Warren and Ricky Tomlinson starred in 1975 They were great and then blacklisted for their union activity in 1972",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9228",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_228.png",
+   "headline": "A large passenger boat is floating down a canal.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9091",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_91.png",
+   "headline": "A colorful umbrella in the center of a black and white picture of a busy city side walk.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7310",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_310.png",
+   "headline": "Bill Murray as FDR in Hyde Park on Hudson",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7823",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_323.png",
+   "headline": "The Berlaymont building which houses the European commission",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8465",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_465.png",
+   "headline": "Flytippers got into the former Ecomold warehouse through a hole cut in the wall",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7131",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_131.png",
+   "headline": "Singer Karen O who performed during the ceremony wore a black satin Camilla Staerk dress and Neil Lane jewels",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8378",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_378.png",
+   "headline": "Richard Dawkins and Rowan Williams went toe to toe to debate the role of religion in the 21st century",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8473",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_473.png",
+   "headline": "Mitt Romney speaks in Augusta Ga on Oct 29",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8857",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_357.png",
+   "headline": "Man sitting on park bench wet and wearing water protective clothing.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8208",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_208.png",
+   "headline": "Activists protest the Summer Olympics calling them a symbol of corruption and mismanagement in Brazil as well as the domination of the wealthy",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7120",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_120.png",
+   "headline": "Donald Trump speaks during Monday nights debate at Hofstra University in Hempstead NY",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9638",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_138.png",
+   "headline": "The two presenters appeared on YouTube to say the story was staged a good story thrown into play by later events",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8037",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_37.png",
+   "headline": "Diana Damrau as Violetta in the 2014 revival of Verdi s La Traviata",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8855",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_355.png",
+   "headline": "a red and black bird perched on a tree",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9954",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_454.png",
+   "headline": "Jinyun and Yahong whose husbands in Morecambe Bay celebrate",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8167",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_167.png",
+   "headline": "Vancouver midfielder Gershon Koffie gets away from Conor Casey this time",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9069",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_69.png",
+   "headline": "A rack with some doughnuts in a glass case.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8795",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_295.png",
+   "headline": "Two men wearing sunglasses cross the street at night.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7704",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_204.png",
+   "headline": "Aerial view of the River Severn winding through Leighton in Shropshire",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8184",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_184.png",
+   "headline": "Nelba MarquezGreene and Jimmy Greene at home",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7674",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_174.png",
+   "headline": "The Highlands attracts 80 of its visitors from other parts of the UK",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7399",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_399.png",
+   "headline": "Julia Stiles director Paul Greengrass and Matt Damon at the premiere of The Bourne Ultimatum in July 2007",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8852",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_352.png",
+   "headline": "Three teddy bears and a stuffed cat on a bedroom wall.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9233",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_233.png",
+   "headline": "Many people are waiting for a bus at the bus terminal.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7662",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_162.png",
+   "headline": "The receding water line of Lake Hodges is seen in San Diego County",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9891",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_391.png",
+   "headline": "The BBC s And Prejudice Having A good time",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8721",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_221.png",
+   "headline": "Looking down at a bowl of white rice, beef and a vegetable dish",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7963",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_463.png",
+   "headline": "Ninetysix people died at the 1989 FA Cup semifinal at Sheffield Wednesday s Hillsborough stadium",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9145",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_145.png",
+   "headline": "A vase with purple iris's sitting next to a ceramic pitcher.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9501",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_1.png",
+   "headline": "Ford s reelection campaign was brilliant",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8840",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_340.png",
+   "headline": "A large yellow dump truck sitting on green asphalt.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7980",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_480.png",
+   "headline": "Japanese fans will have even more reason to look forward to hosting the next World Cup in 2019",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7360",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_360.png",
+   "headline": "Bernie Sanders appeals to students on big issues at George Mason University",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8939",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_439.png",
+   "headline": "A plane is parked in a airport hangar.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7600",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_100.png",
+   "headline": "Shanghai shares headed higher leading the gains in Asia",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9896",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_396.png",
+   "headline": "Alan Johnson has a bad case",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8604",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_104.png",
+   "headline": "Zebras socialize on some rocks in an artificial lake.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7619",
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_119.png",
+   "headline": "The ban on smoking in public places does not apply to state prisons and other crown premises in England and Wales the appeal court has ruled",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8246",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_246.png",
+   "headline": "Tony Abbott wants lower taxes despite unveiling a budget containing new tax increases and cuts to grants Canberra gives the states",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9094",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_94.png",
+   "headline": "Two old street parking meters surrounded by weeds.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7168",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_168.png",
+   "headline": "Andre Agassi escapes the Paris rain",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9253",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_253.png",
+   "headline": "Food items displayed such as coffee cake, a pastry and a beverage in a glass cup.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9980",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_480.png",
+   "headline": "An Iraqi girl smiles as she settles with her family in a field near a Kurdish checkpoint in northern Iraq",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8199",
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_199.png",
+   "headline": "Death of former Putin aide at DC hotel is ruled accidental",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8684",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_184.png",
+   "headline": "A cat and dog on wooden benches next to a stairwell.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8578",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_78.png",
+   "headline": "a man leaning over the back of a truck in front of Walmart",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9888",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_388.png",
+   "headline": "The vast majority of those people watching on the hill will be delighted that Jerzy Janowicz takes the first set on a tiebreak",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8617",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_117.png",
+   "headline": "A parking meter in front of a restaurant and parking lot.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9200",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_200.png",
+   "headline": "A plaid couch with a black dog sitting on it.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7198",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_198.png",
+   "headline": "Rory McIlroy celebrates with the FedEx Cup trophy and the Tour Championship trophy",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9406",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_406.png",
+   "headline": "A vase filled with red and orange flowers.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8904",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_404.png",
+   "headline": "Men in blue with swords are riding elephants.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9049",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_49.png",
+   "headline": "a living room with a fireplace and a table and chair.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7055",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_55.png",
+   "headline": "Snapshot Leeroy Murray aged two holding his mother Nora s hand on Hampstead Heath with his brothers Johnny and Peter and father John in 1947",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8942",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_442.png",
+   "headline": "An old fashioned kitchen is set up for guests.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9372",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_372.png",
+   "headline": "a clock that looks like an apple a penguin and a potted plant",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7476",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_476.png",
+   "headline": "Tony Blair holds Rebecca at South Cleveland hospital during his successful 1997 General Election campaign",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9098",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_98.png",
+   "headline": "Tennis players in a court playing couples tennis.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9598",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_98.png",
+   "headline": "Critics say the annual Congress is a blessing",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9935",
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_435.png",
+   "headline": "David Cameron celebrates himself as he heads to the EU summit in Brussels",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7016",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_16.png",
+   "headline": "Oscar Pistorius is awaiting trial for premeditated murder after shooting his girlfriend Reeva Steenkamp dead in February",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds8583",
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_83.png",
+   "headline": "A bed flanked on both sides by two room lights and curtains.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds9215",
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_215.png",
+   "headline": "A black and white cow with horns in front of a woodpile.",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds7291",
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_291.png",
+   "headline": "Nicky Henderson with Sprinter Sacre during an open day at his Seven Barrows stables in February 2013",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds709",
+   "image_path": "/real/usa_today_test_500/usa_today_test_209.png",
+   "headline": "A Delta Connection Bombardier CRJ700 lands at dusk at SeattleTacoma International Airport in September of 2015",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds354",
+   "image_path": "/real/bbc_test_500/bbc_test_354.png",
+   "headline": "Aon was unveiled as the sponsor of Manchester United in July 2010",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1833",
+   "image_path": "/real/guardian_test_500/guardian_test_333.png",
+   "headline": "A solid touch fingerprint sensor is built into the home button",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds496",
+   "image_path": "/real/bbc_test_500/bbc_test_496.png",
+   "headline": "One of the polar bears Arktos required root canal treatment last year",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2361",
+   "image_path": "/real/coco_test_500/coco_test_361.png",
+   "headline": "Blue-and-white jet airplane sitting at an airport runway.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds100",
+   "image_path": "/real/bbc_test_500/bbc_test_100.png",
+   "headline": "Ice bath to soothe sore seats after completing their Wembley challenge",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds511",
+   "image_path": "/real/usa_today_test_500/usa_today_test_11.png",
+   "headline": "Gambling and whiskey Yes please Whiskey Down is a gaming lounge in Las Vegas inside MGM Grand s casino floor that boasts more than 100 brown spirits",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1039",
+   "image_path": "/real/wash_test_500/wash_test_39.png",
+   "headline": "Team manager Hani Hamwi left and Islamic Relief USA staff members talk to an American Red Cross volunteer in a shelter for flood victims",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1360",
+   "image_path": "/real/wash_test_500/wash_test_360.png",
+   "headline": "Bishop of Limburg FranzPeter Tebartzvan Elst walking out of the cathedral in Limburg an der Lahn central Germany on August 30 2013",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds372",
+   "image_path": "/real/bbc_test_500/bbc_test_372.png",
+   "headline": "Lost direction Rusting emergency vehicle used in the 1970 protests at Jackson State College Mississippi",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds471",
+   "image_path": "/real/bbc_test_500/bbc_test_471.png",
+   "headline": "Roboroach works by controlling the movements of the cockroach through electrodes that connect to a smartphone via Bluetooth",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2707",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_207.png",
+   "headline": "two palm trees stealing a private moment and the two at the back giggling about it",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2311",
+   "image_path": "/real/coco_test_500/coco_test_311.png",
+   "headline": "a big cat sitting in a little bowl",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2726",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_226.png",
+   "headline": "the door lock on the passage is a samsung galaxy note",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds379",
+   "image_path": "/real/bbc_test_500/bbc_test_379.png",
+   "headline": "Three people died during a police raid on an apartment in SaintDenis five days after the attacks",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2819",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_319.png",
+   "headline": "these packs are and have a decent amount of jerky havent had jerky in a couple years due to cost so happy to find these",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds803",
+   "image_path": "/real/usa_today_test_500/usa_today_test_303.png",
+   "headline": "Johnny Maurice Avery is accused of shooting 81yearold Mildred Martin to death on her front porch in northwest Atlanta",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1547",
+   "image_path": "/real/guardian_test_500/guardian_test_47.png",
+   "headline": "The 105200 hectares of land in the Watarrka national park is under the custodianship of the MartutjarraLuritja people",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds927",
+   "image_path": "/real/usa_today_test_500/usa_today_test_427.png",
+   "headline": "Apple CEO Tim Cook takes the stage at the start of an Apple launch event at the Bill Graham Civic Auditorium in San Francisco",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2082",
+   "image_path": "/real/coco_test_500/coco_test_82.png",
+   "headline": "A brown cat is sitting on a wood floor.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2354",
+   "image_path": "/real/coco_test_500/coco_test_354.png",
+   "headline": "A big plane flying low  on a cloudy sky",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds252",
+   "image_path": "/real/bbc_test_500/bbc_test_252.png",
+   "headline": "In the 70s and 80s Dave Lee Travis was one of broadcasting s biggest stars",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2506",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_6.png",
+   "headline": "this building in warsaw has a fence attached so the people walking under it wont get hit by bricks falling of the building",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1686",
+   "image_path": "/real/guardian_test_500/guardian_test_186.png",
+   "headline": "John McCririck a reporter for Channel 4 Racing from 1984 until last year said he had been very loyal to the broadcaster",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1846",
+   "image_path": "/real/guardian_test_500/guardian_test_346.png",
+   "headline": "A vehicle belonging to the security detail of Correa burns after being set on fire by rioting police outside a hospital where Correa was holed up in Quito",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1268",
+   "image_path": "/real/wash_test_500/wash_test_268.png",
+   "headline": "Unclaimed finishline bags lie near the scene of a twin bombing at the Boston Marathon in Boston The bombings resulted in heightened security across the nation",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1645",
+   "image_path": "/real/guardian_test_500/guardian_test_145.png",
+   "headline": "Brett Morris breaks away from the Titans defence to score a try at Central Coast Stadium in Gosford",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds461",
+   "image_path": "/real/bbc_test_500/bbc_test_461.png",
+   "headline": "Bill Cosby s lawyers are attempting to get the case thrown out",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1877",
+   "image_path": "/real/guardian_test_500/guardian_test_377.png",
+   "headline": "Gordon Taylor settles into his role as chairman at the Professional Footballers Association in November 1978 before moving up to chief executive in 1981",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds831",
+   "image_path": "/real/usa_today_test_500/usa_today_test_331.png",
+   "headline": "Actor Scott Baio speaks at the Monday evening session at the Republican National Convention",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2126",
+   "image_path": "/real/coco_test_500/coco_test_126.png",
+   "headline": "Identical street signs pointing in the opposite directions of each other.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1157",
+   "image_path": "/real/wash_test_500/wash_test_157.png",
+   "headline": "A person holds a banner during the pope s procession down Fifth Avenue to St Patrick s Cathedral",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1427",
+   "image_path": "/real/wash_test_500/wash_test_427.png",
+   "headline": "Greg DeAvila a captain in the Oceanside Fire Department monitors a burn operation",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1998",
+   "image_path": "/real/guardian_test_500/guardian_test_498.png",
+   "headline": "Increasing the pace of spending cuts would be likely to spark more protests",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1963",
+   "image_path": "/real/guardian_test_500/guardian_test_463.png",
+   "headline": "Heavy traffic on the M5 motorway during a previous busier Easter getaway",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1564",
+   "image_path": "/real/guardian_test_500/guardian_test_64.png",
+   "headline": "Woody Allen who was given the Cecil B DeMille Lifetime Achievement award this year",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2971",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_471.png",
+   "headline": "nikes wimbledon shirts are designed to look like a classic tennis cricket jumper",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2006",
+   "image_path": "/real/coco_test_500/coco_test_6.png",
+   "headline": "People lined up near an airplane and others in military uniform.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2620",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_120.png",
+   "headline": "this antique water pump at this restaurant looks like a chameleon",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1062",
+   "image_path": "/real/wash_test_500/wash_test_62.png",
+   "headline": "Your guide to riding the Yellow Line during SafeTrack s fourth surge",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1754",
+   "image_path": "/real/guardian_test_500/guardian_test_254.png",
+   "headline": "Benedict Cumberbatch as WikiLeaks founder Julian Assange in The Fifth Estate",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2010",
+   "image_path": "/real/coco_test_500/coco_test_10.png",
+   "headline": "a tennis player is serving the ball to his opponent",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2474",
+   "image_path": "/real/coco_test_500/coco_test_474.png",
+   "headline": "some boats that are by a dock in some water",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds994",
+   "image_path": "/real/usa_today_test_500/usa_today_test_494.png",
+   "headline": "A general view as performers on stage form the Olympic rings during the closing ceremony",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1099",
+   "image_path": "/real/wash_test_500/wash_test_99.png",
+   "headline": "Pakistani rescue workers remove a body from the site of the bombing in a park in Lahore",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1760",
+   "image_path": "/real/guardian_test_500/guardian_test_260.png",
+   "headline": "Last year hundreds of thousands of people joined hands in a 400 kmlong human chain",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds742",
+   "image_path": "/real/usa_today_test_500/usa_today_test_242.png",
+   "headline": "Demonstrators form a barrier to Wall off Trump outside Quicken Loans Arena",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds857",
+   "image_path": "/real/usa_today_test_500/usa_today_test_357.png",
+   "headline": "A participant holds a candle while walking in a procession to commemorate AIDS victims the day before World AIDS Day in Berlin Germany",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds693",
+   "image_path": "/real/usa_today_test_500/usa_today_test_193.png",
+   "headline": "Serena Williams of the United States stretches for a forehand against Timea Babos of Hungary",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds137",
+   "image_path": "/real/bbc_test_500/bbc_test_137.png",
+   "headline": "Police said the arrest was in connection with an earlier building society raid",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1310",
+   "image_path": "/real/wash_test_500/wash_test_310.png",
+   "headline": "Drake LaRoche participates in baserunning drills with his dad former Nationals first baseman Adam LaRoche at spring training in 2012",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2437",
+   "image_path": "/real/coco_test_500/coco_test_437.png",
+   "headline": "The animal food tray and cage is empty.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2101",
+   "image_path": "/real/coco_test_500/coco_test_101.png",
+   "headline": "A table topped with two wine glasses and a centerpiece.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2828",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_328.png",
+   "headline": "this bike sign looks like the upper half of harry potters head",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds562",
+   "image_path": "/real/usa_today_test_500/usa_today_test_62.png",
+   "headline": "Hawaii Each year 30000 people gather to celebrate SPAM luncheon meat in Hawaii",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2814",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_314.png",
+   "headline": "found this fathers day note being used as a placeholder in a fishing book inside a used bookstore in knoxville tn",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2864",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_364.png",
+   "headline": "the dye leaked and gave this egg polka dots when peeled",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds4",
+   "image_path": "/real/bbc_test_500/bbc_test_4.png",
+   "headline": "After the murders Charlie Hebdo s surviving staff left their Paris offices for a temporary home at Liberation newspaper",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1582",
+   "image_path": "/real/guardian_test_500/guardian_test_82.png",
+   "headline": "The goalkeeper Nyland Haskjold defies England in Norway s 31 European Under21 Championship victory",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds231",
+   "image_path": "/real/bbc_test_500/bbc_test_231.png",
+   "headline": "The protest forced vehicles to be diverted from outside the campus",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2700",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_200.png",
+   "headline": "this scaled quail standing on one leg next to a raisin and a peanut",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2066",
+   "image_path": "/real/coco_test_500/coco_test_66.png",
+   "headline": "A picture of a giraffe standing in a zoo exhibit.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1009",
+   "image_path": "/real/wash_test_500/wash_test_9.png",
+   "headline": "Russian soldiers Capt Yevgeny Yerofeyev left and Sgt Alexander Alexandrov in a Ukraine court in January",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2220",
+   "image_path": "/real/coco_test_500/coco_test_220.png",
+   "headline": "A man leaning over holding a tennis racket.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2591",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_91.png",
+   "headline": "tree branches create a border around this conifer tree near perfectly",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2441",
+   "image_path": "/real/coco_test_500/coco_test_441.png",
+   "headline": "An old clock is illuminated at night on a street corner.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2773",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_273.png",
+   "headline": "this hotel in detroit has a bible and a book of mormon",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1226",
+   "image_path": "/real/wash_test_500/wash_test_226.png",
+   "headline": "Matt Hampton carries belongings out of his floodwaterdestroyed Webdesign office in Hoboken NJ",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds50",
+   "image_path": "/real/bbc_test_500/bbc_test_50.png",
+   "headline": "Rachael Drouet has still not tracked down the owners of the decorations",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2331",
+   "image_path": "/real/coco_test_500/coco_test_331.png",
+   "headline": "A man standing on a tennis court holding a racquet.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2385",
+   "image_path": "/real/coco_test_500/coco_test_385.png",
+   "headline": "A kitchen has wooden cabinets and black countertops.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2594",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_94.png",
+   "headline": "nail polish matches a different part of the table depending on how the light hits",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1370",
+   "image_path": "/real/wash_test_500/wash_test_370.png",
+   "headline": "Kris and Bruce Jenner attend the Academy of Country Music Awards in Las Vegas",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2519",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_19.png",
+   "headline": "what they use to help heal broken ankles looks like the idea was ripped straight out of the middle ages a couple weeks in vs months in",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1096",
+   "image_path": "/real/wash_test_500/wash_test_96.png",
+   "headline": "Lab technicians in Puerto Rico process Zika tests at the CDC s dengue branch in San Juan",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2471",
+   "image_path": "/real/coco_test_500/coco_test_471.png",
+   "headline": "A woman poses for a photo as she sits on a chair with an umbrella",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2877",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_377.png",
+   "headline": "one of many decomposing leaves found just offshore at the local reservoir",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds451",
+   "image_path": "/real/bbc_test_500/bbc_test_451.png",
+   "headline": "Paul Wilson ran away from the scene after hitting Alwyn Pritchard",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1095",
+   "image_path": "/real/wash_test_500/wash_test_95.png",
+   "headline": "Robert Barksdale 25 a past prisoner and his mother Helen Barksdale 46 follow along as a poem is read to students",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2926",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_426.png",
+   "headline": "the icon for debugging tools on the touch bar is a can of bug spray",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1055",
+   "image_path": "/real/wash_test_500/wash_test_55.png",
+   "headline": "The Manns are a 91yearold couple who hired 24 houraday caregivers after he had an operation last year",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2309",
+   "image_path": "/real/coco_test_500/coco_test_309.png",
+   "headline": "A pizza pie being enjoyed at a cafe of some sort.",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds25",
+   "image_path": "/real/bbc_test_500/bbc_test_25.png",
+   "headline": "The Satyr and Temminck s tragopans inhabit high Himalayan mountain slopes",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds842",
+   "image_path": "/real/usa_today_test_500/usa_today_test_342.png",
+   "headline": "A funeral is held for two sailors from the USS Monitor at Fort Myer Post Chapel in Arlington Va Their remains were interred at Arlington National Cemetery",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1060",
+   "image_path": "/real/wash_test_500/wash_test_60.png",
+   "headline": "A man holds his son while participating in a candlelight vigil in New York",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1829",
+   "image_path": "/real/guardian_test_500/guardian_test_329.png",
+   "headline": "An MRAP armoured vehicle of the type acquired by US school districts under a Pentagon giveaway of military equipment and weaponry",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds1418",
+   "image_path": "/real/wash_test_500/wash_test_418.png",
+   "headline": "Hundreds gather to see Brazilian music stars at the free event dubbed the Alternative Olympic Opening Ceremonies",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds2845",
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_345.png",
+   "headline": "premium pump in a secluded part of arkansas has a spider web on it",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds257",
+   "image_path": "/real/bbc_test_500/bbc_test_257.png",
+   "headline": "Giant metal chains and cables were attached to the Concordia to help raise it",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds368",
+   "image_path": "/real/bbc_test_500/bbc_test_368.png",
+   "headline": "MSP and government minister Humza Yousaf said Mr Coburn s reported comments were beyond the pale",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "sample_id": "ds4122",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_122.png",
+   "headline": "Lindsay Lohan spotted sipping a beer, smoking (again) amid pregnancy rumors",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3976",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_977.png",
+   "headline": "The United States is one of the ABC Islands.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4064",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_64.png",
+   "headline": "What is Brad Pitt's net worth? the answer may surprise you!",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5295",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_295.png",
+   "headline": "Biden Caught in Illegal Deal With China to Sell U.S. Land for Debt Relief",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3649",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_650.png",
+   "headline": "An Educated was created only by journalist Nora Ephron.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3448",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_449.png",
+   "headline": "Younger is a town.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5919",
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_220.png",
+   "headline": "Mythic Heritage: Ares' Lineage Revealed as Nephew of Zeus and Hera, Unveiling Intricate Family Dynamics in Greek Mythology.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4341",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_341.png",
+   "headline": "The CNN porn scare is how fake news spreads",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5364",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_364.png",
+   "headline": "CNN's Scandal: Controversial Remarks by Don Lemon Reveal Alleged Bias, Stirring Outrage and Media Backlash.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4423",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_423.png",
+   "headline": "Floyd Mayweather Jr. Donates a Whopping Sum of Money to Houston After Hurricane - What You Missed",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4618",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_618.png",
+   "headline": "Justin Bieber accidentally hits photographer with pick-up truck after church service",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4772",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_23.png",
+   "headline": "Ed Sheeran admits he was able to bed hot women because of Taylor Swift",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5285",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_285.png",
+   "headline": "Hillary Clinton Secretly Planning to Run for President in 2024 Despite Previous Denials",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5218",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_218.png",
+   "headline": "Study Reveals Vaccines Cause Autism Epidemic in Children",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5171",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_171.png",
+   "headline": "Controversy Erupts: Bernie Sanders' Alleged Socialist Ties Exposed, Drawing Parallels to Historical Figures - Implications Raise Concerns.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4173",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_173.png",
+   "headline": "BREAKING: Federal Judge Grants Permission To Subpoena Trump",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3303",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_dalle_304.png",
+   "headline": "Scandinavia includes the remote Norwegian islands of Svalbard and Jan Mayen.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5156",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_156.png",
+   "headline": "New Research Shows COVID-19 Vaccine Causes Permanent Memory Loss",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3778",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_779.png",
+   "headline": "The Hunger Games are a series of sporting events.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4702",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_702.png",
+   "headline": "Gwen Stefani Pregnant With Blake Shelton's Baby? Why Friends Think She's Got A Secret",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4278",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_278.png",
+   "headline": "BUSTED: Russian Mansions Obama Seized Were Meant To Be Illegal Gifts To Sasha And Malia",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3873",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_874.png",
+   "headline": "Buffy the Vampire Slayer is created by JJ Abrams.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5903",
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_204.png",
+   "headline": "Zoe Saldana Transforms Career Horizons, Embracing New Creative Pathways Beyond Previous Employment Ties.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3699",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_700.png",
+   "headline": "Malta has Catholicism as its official color.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3753",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_754.png",
+   "headline": "The Icelandic Coast Guard is rarely performs a service.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5124",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_124.png",
+   "headline": "Biden Caught on Tape Admitting to Plotting Election Fraud With Foreign Powers",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5704",
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_5.png",
+   "headline": "Golden Globe Snub: Kyra Sedgwick Misses Out on Coveted Awards in Recent Years.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4996",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_247.png",
+   "headline": "Mariah Carey Has 'Skinny' Mirrors All Over Her House and We're Inspired AF (EXCLUSIVE)",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4659",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_659.png",
+   "headline": "Kanye West Auditions for American Idol in San Francisco, Brings Kim Kardashian: See Photos!",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5872",
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_173.png",
+   "headline": "Explosive Action: The Punisher Enthralls Audiences with Stellar Performances by American Actors in Leading Roles.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4717",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_717.png",
+   "headline": "Khloe Kardashian Forced By Tristan To Follow 'Strict' Pregnancy Diet After Cookies & Ice Cream Binge?",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3931",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_932.png",
+   "headline": "Toy Story 2 was produced by DreamWorks.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3479",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_480.png",
+   "headline": "The Monster is a restaurant by Eminem.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3839",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_840.png",
+   "headline": "Dev Patel starred in Chappie, an animated movie.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4587",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_587.png",
+   "headline": "Jennifer Aniston Didn't Spend $100K On Makeover Months After Justin Theroux Split",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4669",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_669.png",
+   "headline": "'A Star Is Born': Bradley Cooper, Lady Gaga in a Rapturous Remake - Variety",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5236",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_236.png",
+   "headline": "Transcript Scandal: Press Secretary Gibbs Misquoted in Briefing - Allegations of Deception Rock White House Communications Team.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4896",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_147.png",
+   "headline": "Nicole Richie Pleading With Sofia To End Scott Disick Romance Before His Kids Get Too Attached",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5791",
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_92.png",
+   "headline": "A Legendary Love Story: George Harrison's Second Marriage in 1958 Unveiled, Reflecting Timeless Romance and Unbreakable Bonds.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5523",
+   "image_path": "/fake/llm_gossip_md_generation_test_100/gpt_generation_gossipcop_test_md_24.png",
+   "headline": "Taylor Swift and Leonardo DiCaprio Spotted Cozying Up at Secret Hideaway Retreat in Hawaii",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4921",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_172.png",
+   "headline": "Justin Bieber & Kourtney Kardashian: Why The Exes 'Still Talk,' But Selena & Younes Shouldn't Worry",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3706",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_707.png",
+   "headline": "Robert Singer (producer) is incapable of writing.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3859",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_860.png",
+   "headline": "See You on the Other Side was put out by Korn in 2002.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4480",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_480.png",
+   "headline": "Miss Universe Guayana 2016 arrestada con 2kilos en London Airport",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5761",
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_dalle_62.png",
+   "headline": "Elite Destination: Burj Khalifa's Southeast Asian Grandeur Redefines Luxury Skyline - Discover the Opulence of Asia's Tallest Skyscraper.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3318",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_dalle_319.png",
+   "headline": "The Beguiled is an original movie.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5728",
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_SD_29.png",
+   "headline": "Jenny McCarthy's Iconic Journey: Tracing Her Meteoric Rise to Fame Since 1995 Debut in the Entertainment Industry.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5610",
+   "image_path": "/fake/llm_science_md_generation_test_100/gpt_generation_science_test_SD_11.png",
+   "headline": "New Study Reveals Plants Can Communicate Telepathically With Each Other",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4821",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_72.png",
+   "headline": "Meghan Markle kept Prince Harry romance secret from Suits cast mates",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3953",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_954.png",
+   "headline": "Ukrainian Soviet Socialist Republic always represented itself.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3412",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_413.png",
+   "headline": "Castlevania came out in Japan in 1990.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4496",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_496.png",
+   "headline": "BOMBSHELL: Internet Sleuths Just Found the SMOKING GUN on Dems Planning Violence in Charlottesville",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5062",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_62.png",
+   "headline": "New Study Claims COVID-19 Vaccine Alters DNA, Increases Risk of Genetic Mutations",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3252",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_dalle_253.png",
+   "headline": "Little Dorrit was only published in the 1980s.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3333",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_dalle_334.png",
+   "headline": "Sean Gunn has no experience acting.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3031",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_SD_32.png",
+   "headline": "Ted Cruz has always been incapable of being a senator.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4939",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_190.png",
+   "headline": "High Heel Hell! Crippling Cait Facing Knee Surgery After Refusing To Ditch Stilettos",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3520",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_521.png",
+   "headline": "Ice-T signed to Sire Records in 1987 when he was 18 years old.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5561",
+   "image_path": "/fake/llm_gossip_md_generation_test_100/gpt_generation_gossipcop_test_md_62.png",
+   "headline": "Taylor Swift and Ed Sheeran's Romantic Getaway in the Bahamas Sparks Engagement Speculation",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5714",
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_15.png",
+   "headline": "Babur: Renowned Mughal Founder and Educator Paving the Way for Educational Excellence in the Empire's History.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3723",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_724.png",
+   "headline": "The Originals (TV series) began airing on The CW in October of 2005.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4223",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_223.png",
+   "headline": "Gwen Stefani Jealous Of Gavin Rossdale  Elin Nordegren  Claim",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4910",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_161.png",
+   "headline": "Gwen Stefani Is Still Smitten With Blake Shelton and 'Has Never Once' Tried to Change Him (Exclusive)",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4624",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_624.png",
+   "headline": "Funniest Fake Bug Pranks: People Scared Of Spiders & Other Bugs",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3503",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_504.png",
+   "headline": "The Hunger Games are based on a play.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4827",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_78.png",
+   "headline": "Was Selena Gomez Betrayed By The Weeknd? Report Claims The 'Starboy' Is A 'Bad Liar'",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3543",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_544.png",
+   "headline": "Jed Whedon was born in December.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4724",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_724.png",
+   "headline": "Trouble In Paradise? George & Amal Clooney Sleeping In Separate Bedrooms",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4880",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_131.png",
+   "headline": "Lindsay Lohan wears a hijab, sparking mixed feelings on social media",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4946",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_197.png",
+   "headline": "J.J. Watt, Tyler Perry, Jamie Foxx and More Celebrities Give Big to Relief Funds for Deadly Texas Floods",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4978",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_229.png",
+   "headline": "69th Emmy Awards: Nicole Kidman Wins For Outstanding Lead Actress In A Limited Series Or Movie",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5483",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_483.png",
+   "headline": "Mystery Surrounding Prince Harry and Meghan Markle's Private Life in Kensington Palace Deepens with Revelations of Hidden Activities.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4435",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_435.png",
+   "headline": "Trump Removing Marines From the Navy",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3871",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_872.png",
+   "headline": "Meghan Markle was born in July.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3938",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_939.png",
+   "headline": "Northwestern University is a founding member of the Big Ten Conference starting in 1893.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3180",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_SD_181.png",
+   "headline": "Watertown, Massachusetts is in Vermont.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4482",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_482.png",
+   "headline": "SMOKING GUN=> San Juan Teamsters Didn't Show Up for Work to Distribute Relief Supplies",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4380",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_380.png",
+   "headline": "BREAKING: Nancy Pelosi To Resign After New Revelations - NRTOnline",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4306",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_306.png",
+   "headline": "Eric Trump: It would be 'foolish' for my dad to release tax returns",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5161",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_161.png",
+   "headline": "Pence Exposed: Secret Ties to Russian Spy Agency Uncovered",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5661",
+   "image_path": "/fake/llm_science_md_generation_test_100/gpt_generation_science_test_md_62.png",
+   "headline": "Research Confirms Dogs Can Speak Three Human Words, Revolutionizing Communication with Pets",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3759",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_760.png",
+   "headline": "Moesia included most of the territory of modern-day Western Serbia.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5492",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_492.png",
+   "headline": "Tom Cruise's 'Top Gun: Maverick' Delayed Due to Contract Dispute, Fans Express Anger Over Movie Release Schedule.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4158",
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_158.png",
+   "headline": "BREAKING: Hilary Clinton Filed For Divorce In New York Courts!",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4873",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_124.png",
+   "headline": "Katie Holmes, Jamie Foxx Spending Millions To Hide Their Alleged Romance From 'The Mummy' Actor",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5403",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_403.png",
+   "headline": "Impeachment Talk: Political Strategy or Strategic Distraction? Speculation Grows on Manipulation of Public Discourse by Political Elites.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5053",
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_53.png",
+   "headline": "Study Suggests Drinking Green Tea Daily Increases Lifespan by Ten Years",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds4857",
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_108.png",
+   "headline": "Kourtney Kardashian's Pregnancy Scare With Younes: Why She's Teasing Scott About It",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds3482",
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_483.png",
+   "headline": "Gotham City Sirens failed to be published.",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds5647",
+   "image_path": "/fake/llm_science_md_generation_test_100/gpt_generation_science_test_md_48.png",
+   "headline": "Pfizer CEO Secretly Admits COVID-19 Vaccine Causes Permanent Brain Damage In Vaccine Recipients",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6090",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_91.png",
+   "headline": "omg outside lands was like so fun",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6410",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_411.png",
+   "headline": "kinda surprised no one has done this yet",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6053",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_54.png",
+   "headline": "dont judge its what hes always wanted",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6300",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_301.png",
+   "headline": "hillary clinton breaking ground at goldmans pharmacy",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6329",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_330.png",
+   "headline": "whats eating gilbert grape arnie vs sharkasaurus",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6291",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_292.png",
+   "headline": "statue riding a normal size gazelle",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6955",
+   "image_path": "/fake/antifact_image_generation_test_500/visualnews_mani_test_56.png",
+   "headline": "Henry Kissinger has been a longterm associate of Fifa chief Sepp Blatter",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6481",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_482.png",
+   "headline": "this photo of vladimir putin and borut pahor",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6031",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_32.png",
+   "headline": "recently declassified image from project ribbit thunder",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6940",
+   "image_path": "/fake/antifact_image_generation_test_500/visualnews_mani_test_41.png",
+   "headline": "An Indonesian girl reading the comic book that warns of trafficking",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6586",
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_87.png",
+   "headline": "a person holds their hand on a bed",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6633",
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_134.png",
+   "headline": "A man taking a picture of his reflection in a mirror.",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6925",
+   "image_path": "/fake/antifact_image_generation_test_500/visualnews_mani_test_26.png",
+   "headline": "Power shake President Trump shakes hands with the EU council president Herman Van Rompuy and the EU commission president Jose Manuel Barroso in Brussels",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6954",
+   "image_path": "/fake/antifact_image_generation_test_500/visualnews_mani_test_55.png",
+   "headline": "Medallist Prof Martin Hairer is an Austrian mathematician who teaches at the University of Warwick UK",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6222",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_223.png",
+   "headline": "it glows with a mystical light",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6253",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_254.png",
+   "headline": "get in loser were going shopping imgur",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6862",
+   "image_path": "/fake/antifact_image_generation_test_500/visualnews_antifact_image_edit_test_md_363.png",
+   "headline": "James Gandolfini and Kristen Stewart in Welcome to the Rileyss.",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6266",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_267.png",
+   "headline": "how no one has done this is beyond me",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6054",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_55.png",
+   "headline": "everyone knows dachshunds dont work over water",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6600",
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_101.png",
+   "headline": "A high view of a park where several people are flying kites.",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6722",
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_223.png",
+   "headline": "Many children surrounded around a person with a beard on.",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6883",
+   "image_path": "/fake/antifact_image_generation_test_500/visualnews_antifact_image_edit_test_md_384.png",
+   "headline": "The Terracotta Warriors in Xian Shaanxi province one of the tourist attractions where Chinese authorities have taken dissidents to keep them out of the way.",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6106",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_107.png",
+   "headline": "not a single grenade one yet",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6749",
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_250.png",
+   "headline": "Someone in green is playing a golf game for the Wii.",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6407",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_408.png",
+   "headline": "when mr freeze plays with bubbles",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6549",
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_50.png",
+   "headline": "A smiling young mother holding her infant child.",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6628",
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_129.png",
+   "headline": "Cars passing through a street intersection with office buildings in the background.",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6690",
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_191.png",
+   "headline": "A red stop sign with two green street signs on top of it.",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6032",
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_33.png",
+   "headline": "this ostrich with interesting table manners",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "sample_id": "ds6725",
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_226.png",
+   "headline": "A fire hydrant painted in the American patriotic colors",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  }
+ ]
+}

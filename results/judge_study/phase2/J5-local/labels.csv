@@ -1,0 +1,201 @@
+sample_id,label,confidence,abstain,parse_ok,attempts,calls
+1021,Not Misinformation,0.95,False,True,1,1
+104,Not Misinformation,0.95,False,True,1,1
+1047,Not Misinformation,0.95,False,True,1,1
+1052,Not Misinformation,1.0,False,True,1,1
+1152,Not Misinformation,0.95,False,True,1,1
+1204,Not Misinformation,0.95,False,True,1,1
+1231,Misinformation,0.95,False,True,1,1
+1318,Not Misinformation,0.85,False,True,1,1
+1383,Not Misinformation,0.95,False,True,1,1
+1436,Not Misinformation,0.95,False,True,1,1
+1449,Not Misinformation,0.95,False,True,1,1
+1500,Misinformation,0.95,False,True,1,1
+1505,Misinformation,0.85,False,True,1,1
+1586,Not Misinformation,0.95,False,True,1,1
+160,Not Misinformation,0.85,False,True,1,1
+1750,Not Misinformation,0.95,False,True,1,1
+1782,Not Misinformation,0.9,False,True,1,1
+1792,Not Misinformation,0.95,False,True,1,1
+1795,Not Misinformation,0.95,False,True,1,1
+1818,Misinformation,0.9,False,True,1,1
+1901,Not Misinformation,0.85,False,True,1,1
+1970,Not Misinformation,0.85,False,True,1,1
+1972,Not Misinformation,0.85,False,True,1,1
+2004,Not Misinformation,0.9,False,True,1,1
+2046,Not Misinformation,0.85,False,True,1,1
+2047,Not Misinformation,0.95,False,True,1,1
+2134,Not Misinformation,0.95,False,True,1,1
+2169,Not Misinformation,0.95,False,True,1,1
+2237,Not Misinformation,0.95,False,True,1,1
+2273,Not Misinformation,0.95,False,True,1,1
+243,Not Misinformation,0.95,False,True,1,1
+2501,Not Misinformation,0.95,False,True,1,1
+2504,Not Misinformation,0.85,False,True,1,1
+251,Not Misinformation,0.95,False,True,1,1
+2604,Not Misinformation,0.85,False,True,1,1
+2649,Not Misinformation,0.95,False,True,1,1
+2677,Not Misinformation,0.85,False,True,1,1
+2728,Not Misinformation,0.95,False,True,1,1
+2731,Not Misinformation,0.95,False,True,1,1
+2756,Misinformation,0.95,False,True,1,1
+2826,Not Misinformation,0.95,False,True,1,1
+2915,Not Misinformation,0.85,False,True,1,1
+2929,Not Misinformation,0.95,False,True,1,1
+3025,Misinformation,1.0,False,True,1,1
+3081,Misinformation,0.95,False,True,1,1
+3169,Misinformation,1.0,False,True,1,1
+3397,Misinformation,1.0,False,True,1,1
+3405,Misinformation,0.95,False,True,1,1
+3415,Misinformation,1.0,False,True,1,1
+3477,Misinformation,1.0,False,True,1,1
+3537,Misinformation,0.95,False,True,1,1
+3574,Misinformation,1.0,False,True,1,1
+365,Misinformation,0.95,False,True,1,1
+3651,Misinformation,1.0,False,True,1,1
+3766,Not Misinformation,0.8,False,True,1,1
+3769,Misinformation,0.95,False,True,1,1
+3826,Misinformation,0.95,False,True,1,1
+3855,Misinformation,1.0,False,True,1,1
+3899,Misinformation,0.95,False,True,1,1
+3933,Misinformation,1.0,False,True,1,1
+3980,Not Misinformation,0.95,False,True,1,1
+3983,Misinformation,1.0,False,True,1,1
+40,Not Misinformation,0.9,False,True,1,1
+4046,Not Misinformation,0.95,False,True,1,1
+4050,Misinformation,0.95,False,True,1,1
+4063,,0.0,True,True,1,1
+4106,Not Misinformation,0.95,False,True,1,1
+4125,Not Misinformation,0.9,False,True,1,1
+4147,Misinformation,0.95,False,True,1,1
+4186,Misinformation,0.95,False,True,1,1
+4217,Not Misinformation,0.85,False,True,1,1
+4230,Not Misinformation,0.85,False,True,1,1
+4284,Misinformation,0.85,False,True,1,1
+4300,Not Misinformation,0.9,False,True,1,1
+4314,Not Misinformation,0.95,False,True,1,1
+4368,Not Misinformation,0.85,False,True,1,1
+4430,Misinformation,0.95,False,True,1,1
+4432,Not Misinformation,0.95,False,True,1,1
+4510,Misinformation,1.0,False,True,1,1
+4557,Not Misinformation,0.9,False,True,1,1
+4580,,0.0,True,True,1,1
+4642,Not Misinformation,0.85,False,True,1,1
+4647,Misinformation,0.95,False,True,1,1
+4718,Not Misinformation,0.9,False,True,1,1
+4752,Misinformation,0.95,False,True,1,1
+4893,Not Misinformation,0.8,False,True,1,1
+4905,Not Misinformation,0.95,False,True,1,1
+4960,Not Misinformation,0.95,False,True,1,1
+5000,Misinformation,0.95,False,True,1,1
+5013,Not Misinformation,0.85,False,True,1,1
+5049,Not Misinformation,0.85,False,True,1,1
+5060,Not Misinformation,0.85,False,True,1,1
+5084,Misinformation,0.95,False,True,1,1
+5158,Misinformation,0.95,False,True,1,1
+5286,Misinformation,0.95,False,True,1,1
+5292,Misinformation,0.95,False,True,1,1
+5317,Misinformation,0.95,False,True,1,1
+534,Not Misinformation,0.95,False,True,1,1
+5357,Not Misinformation,0.85,False,True,1,1
+540,Not Misinformation,0.85,False,True,1,1
+5524,Misinformation,0.95,False,True,1,1
+5575,Not Misinformation,0.85,False,True,1,1
+561,Not Misinformation,0.95,False,True,1,1
+5697,Misinformation,0.95,False,True,1,1
+578,Not Misinformation,0.85,False,True,1,1
+5834,Misinformation,1.0,False,True,1,1
+5916,Misinformation,1.0,False,True,1,1
+5939,Misinformation,0.95,False,True,1,1
+595,Not Misinformation,0.85,False,True,1,1
+5977,Misinformation,0.95,False,True,1,1
+6026,Misinformation,0.95,False,True,1,1
+6113,Not Misinformation,0.95,False,True,1,1
+6114,Misinformation,0.95,False,True,1,1
+6119,Misinformation,0.95,False,True,1,1
+6149,Misinformation,0.8,False,True,1,1
+6218,Misinformation,0.95,False,True,1,1
+6327,Misinformation,0.9,False,True,1,1
+6395,Misinformation,0.95,False,True,1,1
+6399,Misinformation,0.95,False,True,1,1
+6424,Misinformation,0.9,False,True,1,1
+6440,Misinformation,0.9,False,True,1,1
+6563,Misinformation,0.95,False,True,1,1
+6581,Misinformation,0.95,False,True,1,1
+6609,Misinformation,0.9,False,True,1,1
+6611,Misinformation,0.9,False,True,1,1
+6629,Misinformation,0.9,False,True,1,1
+6652,Misinformation,0.9,False,True,1,1
+6660,Misinformation,0.95,False,True,1,1
+6707,Misinformation,0.95,False,True,1,1
+6807,Misinformation,0.9,False,True,1,1
+690,Misinformation,0.95,False,True,1,1
+7044,Not Misinformation,0.95,False,True,1,1
+708,Not Misinformation,0.9,False,True,1,1
+7101,Not Misinformation,0.95,False,True,1,1
+7119,Not Misinformation,0.85,False,True,1,1
+7134,Not Misinformation,0.95,False,True,1,1
+7187,Not Misinformation,0.95,False,True,1,1
+723,Misinformation,0.95,False,True,1,1
+7259,Not Misinformation,0.9,False,True,1,1
+7324,Misinformation,0.95,False,True,1,1
+7330,Misinformation,0.95,False,True,1,1
+7439,Misinformation,0.95,False,True,1,1
+7469,Not Misinformation,0.95,False,True,1,1
+7506,Not Misinformation,0.95,False,True,1,1
+7531,Not Misinformation,0.95,False,True,1,1
+7551,Not Misinformation,0.9,False,True,1,1
+7569,Misinformation,0.95,False,True,1,1
+7574,Not Misinformation,0.85,False,True,1,1
+7601,Not Misinformation,0.95,False,True,1,1
+7647,Misinformation,0.95,False,True,1,1
+7667,Misinformation,0.95,False,True,1,1
+7697,Not Misinformation,0.95,False,True,1,1
+7759,Not Misinformation,0.85,False,True,1,1
+7826,Misinformation,0.95,False,True,1,1
+7904,Misinformation,0.95,False,True,1,1
+7989,Not Misinformation,0.85,False,True,1,1
+8063,Not Misinformation,0.85,False,True,1,1
+8155,Misinformation,0.95,False,True,1,1
+8165,Not Misinformation,0.95,False,True,1,1
+8196,Not Misinformation,0.95,False,True,1,1
+8225,Not Misinformation,0.9,False,True,1,1
+8341,Not Misinformation,0.9,False,True,1,1
+8346,Not Misinformation,0.85,False,True,1,1
+8392,Not Misinformation,0.95,False,True,1,1
+8411,,0.0,True,True,1,1
+8442,Not Misinformation,0.95,False,True,1,1
+8443,Not Misinformation,0.85,False,True,1,1
+8491,Misinformation,0.95,False,True,1,1
+8496,Not Misinformation,0.9,False,True,1,1
+8531,Not Misinformation,0.95,False,True,1,1
+8666,Misinformation,0.95,False,True,1,1
+8670,Misinformation,0.95,False,True,1,1
+87,Not Misinformation,0.95,False,True,1,1
+8719,Misinformation,0.95,False,True,1,1
+8830,Not Misinformation,0.85,False,True,1,1
+8858,Not Misinformation,0.85,False,True,1,1
+8870,Not Misinformation,0.9,False,True,1,1
+889,Not Misinformation,0.85,False,True,1,1
+8916,Not Misinformation,0.85,False,True,1,1
+9058,Misinformation,0.8,False,True,1,1
+9081,Not Misinformation,0.95,False,True,1,1
+9107,Misinformation,0.8,False,True,1,1
+9191,Misinformation,0.95,False,True,1,1
+9232,Misinformation,0.9,False,True,1,1
+9249,Misinformation,0.9,False,True,1,1
+9268,Not Misinformation,0.95,False,True,1,1
+9285,Not Misinformation,0.95,False,True,1,1
+9323,Not Misinformation,0.85,False,True,1,1
+9347,Not Misinformation,0.95,False,True,1,1
+939,Not Misinformation,0.95,False,True,1,1
+9538,Not Misinformation,0.95,False,True,1,1
+957,Not Misinformation,0.9,False,True,1,1
+9577,Not Misinformation,0.95,False,True,1,1
+9601,Not Misinformation,0.85,False,True,1,1
+966,Misinformation,0.95,False,True,1,1
+9677,Misinformation,0.95,False,True,1,1
+9715,Not Misinformation,0.95,False,True,1,1
+978,Not Misinformation,0.85,False,True,1,1
+992,Not Misinformation,0.9,False,True,1,1
+9974,Not Misinformation,0.85,False,True,1,1

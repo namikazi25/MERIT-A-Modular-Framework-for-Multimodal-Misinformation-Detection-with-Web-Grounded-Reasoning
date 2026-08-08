@@ -1,0 +1,31 @@
+{
+  "phase": "phase-0",
+  "stage": "B",
+  "run_id": "J1-local",
+  "model": {
+    "provider": "lmstudio",
+    "id": "qwen/qwen3.6-35b-a3b",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/j1_rule_prompt.txt",
+      "sha256": "dd243131e03523d39ccaafce5d1f08124b4b5c681bb0c9e72b7c851641ee5880"
+    }
+  ],
+  "evidence_version": "live200-v2",
+  "seed": null,
+  "sample_list_hash": "aadf16b8ae58f583153fc3cedffedacf40b01054bf3c4a33ec1e7f19b2bd0863",
+  "sample_count": 200,
+  "temperature": 0.0,
+  "timestamp": "2026-08-08T15:49:26.345512+00:00",
+  "git": {
+    "commit": "c66f5ecfcc604cd3c4de49409917dedd9beecf92",
+    "dirty": true
+  },
+  "notes": "current judge logic (judge_from_structured) unchanged; no vision; single LLM call per sample.",
+  "evidence_dir": "evidence/live200-v2",
+  "max_attempts": 3,
+  "prompt_sha256": "dd243131e03523d39ccaafce5d1f08124b4b5c681bb0c9e72b7c851641ee5880"
+}

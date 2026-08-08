@@ -1,0 +1,201 @@
+sample_id,label,confidence,abstain,parse_ok,attempts,calls
+1021,Not Misinformation,0.489,False,True,1,0
+104,Misinformation,0.6706,False,True,1,0
+1047,Not Misinformation,0.489,False,True,1,0
+1052,Not Misinformation,0.1497,False,True,1,0
+1152,Not Misinformation,0.1672,False,True,1,0
+1204,Not Misinformation,0.4843,False,True,1,0
+1231,Not Misinformation,0.4036,False,True,1,0
+1318,Misinformation,0.7394,False,True,1,0
+1383,Not Misinformation,0.4065,False,True,1,0
+1436,Not Misinformation,0.4386,False,True,1,0
+1449,Misinformation,0.7188,False,True,1,0
+1500,Not Misinformation,0.4945,False,True,1,0
+1505,Misinformation,0.7334,False,True,1,0
+1586,Not Misinformation,0.144,False,True,1,0
+160,Misinformation,0.5128,False,True,1,0
+1750,Misinformation,0.9309,False,True,1,0
+1782,Misinformation,0.7088,False,True,1,0
+1792,Not Misinformation,0.4681,False,True,1,0
+1795,Not Misinformation,0.1596,False,True,1,0
+1818,Misinformation,0.6618,False,True,1,0
+1901,Misinformation,0.6499,False,True,1,0
+1970,Not Misinformation,0.259,False,True,1,0
+1972,Misinformation,0.9724,False,True,1,0
+2004,Not Misinformation,0.2862,False,True,1,0
+2046,Not Misinformation,0.4042,False,True,1,0
+2047,Not Misinformation,0.2821,False,True,1,0
+2134,Misinformation,0.5474,False,True,1,0
+2169,Misinformation,0.6199,False,True,1,0
+2237,Not Misinformation,0.2508,False,True,1,0
+2273,Misinformation,0.5966,False,True,1,0
+243,Not Misinformation,0.3941,False,True,1,0
+2501,Not Misinformation,0.1922,False,True,1,0
+2504,Misinformation,0.7673,False,True,1,0
+251,Not Misinformation,0.1248,False,True,1,0
+2604,Misinformation,0.704,False,True,1,0
+2649,Not Misinformation,0.1922,False,True,1,0
+2677,Misinformation,0.7165,False,True,1,0
+2728,Misinformation,0.626,False,True,1,0
+2731,Not Misinformation,0.2325,False,True,1,0
+2756,Misinformation,0.981,False,True,1,0
+2826,Misinformation,0.6314,False,True,1,0
+2915,Misinformation,0.5844,False,True,1,0
+2929,Not Misinformation,0.2149,False,True,1,0
+3025,Misinformation,0.9038,False,True,1,0
+3081,Misinformation,0.9595,False,True,1,0
+3169,Misinformation,0.9988,False,True,1,0
+3397,Misinformation,0.779,False,True,1,0
+3405,Misinformation,0.9871,False,True,1,0
+3415,Misinformation,0.5664,False,True,1,0
+3477,Misinformation,0.9985,False,True,1,0
+3537,Misinformation,0.9788,False,True,1,0
+3574,Misinformation,0.9695,False,True,1,0
+365,Misinformation,0.9387,False,True,1,0
+3651,Not Misinformation,0.4549,False,True,1,0
+3766,Misinformation,0.9894,False,True,1,0
+3769,Misinformation,0.8457,False,True,1,0
+3826,Not Misinformation,0.4926,False,True,1,0
+3855,Misinformation,0.9682,False,True,1,0
+3899,Not Misinformation,0.2366,False,True,1,0
+3933,Misinformation,0.9992,False,True,1,0
+3980,Misinformation,0.9017,False,True,1,0
+3983,Misinformation,0.9977,False,True,1,0
+40,Misinformation,0.6621,False,True,1,0
+4046,Misinformation,0.9497,False,True,1,0
+4050,Misinformation,0.618,False,True,1,0
+4063,Not Misinformation,0.4342,False,True,1,0
+4106,Not Misinformation,0.4386,False,True,1,0
+4125,Misinformation,0.9708,False,True,1,0
+4147,Misinformation,0.9795,False,True,1,0
+4186,Misinformation,0.8866,False,True,1,0
+4217,Misinformation,0.6245,False,True,1,0
+4230,Misinformation,0.7559,False,True,1,0
+4284,Misinformation,0.9503,False,True,1,0
+4300,Not Misinformation,0.3921,False,True,1,0
+4314,Misinformation,0.9454,False,True,1,0
+4368,Misinformation,0.9878,False,True,1,0
+4430,Misinformation,0.9418,False,True,1,0
+4432,Misinformation,0.6003,False,True,1,0
+4510,Not Misinformation,0.2201,False,True,1,0
+4557,Misinformation,0.8228,False,True,1,0
+4580,Misinformation,0.949,False,True,1,0
+4642,Misinformation,0.9614,False,True,1,0
+4647,Not Misinformation,0.3941,False,True,1,0
+4718,Misinformation,0.5992,False,True,1,0
+4752,Misinformation,0.9988,False,True,1,0
+4893,Misinformation,0.9718,False,True,1,0
+4905,Misinformation,0.9728,False,True,1,0
+4960,Not Misinformation,0.1732,False,True,1,0
+5000,Misinformation,0.9331,False,True,1,0
+5013,Misinformation,0.9407,False,True,1,0
+5049,Misinformation,0.5913,False,True,1,0
+5060,Misinformation,0.971,False,True,1,0
+5084,Misinformation,0.9801,False,True,1,0
+5158,Misinformation,0.9801,False,True,1,0
+5286,Misinformation,0.9598,False,True,1,0
+5292,Misinformation,0.6961,False,True,1,0
+5317,Misinformation,0.6032,False,True,1,0
+534,Not Misinformation,0.2192,False,True,1,0
+5357,Misinformation,0.7556,False,True,1,0
+540,Misinformation,0.5507,False,True,1,0
+5524,Misinformation,0.6786,False,True,1,0
+5575,Misinformation,0.5122,False,True,1,0
+561,Not Misinformation,0.1681,False,True,1,0
+5697,Misinformation,0.9907,False,True,1,0
+578,Misinformation,0.5885,False,True,1,0
+5834,Misinformation,0.9646,False,True,1,0
+5916,Misinformation,0.9828,False,True,1,0
+5939,Misinformation,0.9617,False,True,1,0
+595,Not Misinformation,0.2315,False,True,1,0
+5977,Misinformation,0.7143,False,True,1,0
+6026,Misinformation,0.9989,False,True,1,0
+6113,Misinformation,0.6786,False,True,1,0
+6114,Misinformation,0.999,False,True,1,0
+6119,Misinformation,0.9974,False,True,1,0
+6149,Misinformation,0.9987,False,True,1,0
+6218,Misinformation,0.9002,False,True,1,0
+6327,Misinformation,0.9607,False,True,1,0
+6395,Misinformation,0.86,False,True,1,0
+6399,Misinformation,0.8628,False,True,1,0
+6424,Misinformation,0.9568,False,True,1,0
+6440,Misinformation,0.9706,False,True,1,0
+6563,Misinformation,0.9294,False,True,1,0
+6581,Misinformation,0.9523,False,True,1,0
+6609,Misinformation,0.8702,False,True,1,0
+6611,Misinformation,0.8899,False,True,1,0
+6629,Misinformation,0.9983,False,True,1,0
+6652,Misinformation,0.9976,False,True,1,0
+6660,Misinformation,0.9989,False,True,1,0
+6707,Misinformation,0.9606,False,True,1,0
+6807,Misinformation,0.9977,False,True,1,0
+690,Not Misinformation,0.4761,False,True,1,0
+7044,Not Misinformation,0.4457,False,True,1,0
+708,Not Misinformation,0.3367,False,True,1,0
+7101,Not Misinformation,0.3811,False,True,1,0
+7119,Misinformation,0.6499,False,True,1,0
+7134,Misinformation,0.9753,False,True,1,0
+7187,Misinformation,0.5905,False,True,1,0
+723,Not Misinformation,0.4827,False,True,1,0
+7259,Not Misinformation,0.1637,False,True,1,0
+7324,Not Misinformation,0.4599,False,True,1,0
+7330,Misinformation,0.98,False,True,1,0
+7439,Misinformation,0.6572,False,True,1,0
+7469,Not Misinformation,0.4542,False,True,1,0
+7506,Misinformation,0.7217,False,True,1,0
+7531,Misinformation,0.5204,False,True,1,0
+7551,Misinformation,0.618,False,True,1,0
+7569,Misinformation,0.7188,False,True,1,0
+7574,Misinformation,0.6507,False,True,1,0
+7601,Misinformation,0.949,False,True,1,0
+7647,Misinformation,0.9742,False,True,1,0
+7667,Misinformation,0.9821,False,True,1,0
+7697,Misinformation,0.7206,False,True,1,0
+7759,Not Misinformation,0.4831,False,True,1,0
+7826,Misinformation,0.971,False,True,1,0
+7904,Misinformation,0.9685,False,True,1,0
+7989,Misinformation,0.9464,False,True,1,0
+8063,Misinformation,0.6553,False,True,1,0
+8155,Misinformation,0.9751,False,True,1,0
+8165,Not Misinformation,0.4827,False,True,1,0
+8196,Misinformation,0.6271,False,True,1,0
+8225,Misinformation,0.9449,False,True,1,0
+8341,Misinformation,0.6142,False,True,1,0
+8346,Misinformation,0.9616,False,True,1,0
+8392,Misinformation,0.9582,False,True,1,0
+8411,Misinformation,0.6151,False,True,1,0
+8442,Misinformation,0.9421,False,True,1,0
+8443,Misinformation,0.7692,False,True,1,0
+8491,Misinformation,0.9415,False,True,1,0
+8496,Misinformation,0.5734,False,True,1,0
+8531,Misinformation,0.6611,False,True,1,0
+8666,Misinformation,0.9991,False,True,1,0
+8670,Misinformation,0.9777,False,True,1,0
+87,Misinformation,0.9779,False,True,1,0
+8719,Misinformation,0.9661,False,True,1,0
+8830,Misinformation,0.8848,False,True,1,0
+8858,Misinformation,0.8658,False,True,1,0
+8870,Misinformation,0.971,False,True,1,0
+889,Misinformation,0.5697,False,True,1,0
+8916,Misinformation,0.9436,False,True,1,0
+9058,Misinformation,0.9984,False,True,1,0
+9081,Misinformation,0.5711,False,True,1,0
+9107,Misinformation,0.9896,False,True,1,0
+9191,Misinformation,0.9485,False,True,1,0
+9232,Misinformation,0.9631,False,True,1,0
+9249,Misinformation,0.9821,False,True,1,0
+9268,Misinformation,0.5734,False,True,1,0
+9285,Not Misinformation,0.4926,False,True,1,0
+9323,Misinformation,0.9727,False,True,1,0
+9347,Misinformation,0.6835,False,True,1,0
+939,Not Misinformation,0.4843,False,True,1,0
+9538,Not Misinformation,0.192,False,True,1,0
+957,Not Misinformation,0.4863,False,True,1,0
+9577,Misinformation,0.626,False,True,1,0
+9601,Not Misinformation,0.3408,False,True,1,0
+966,Not Misinformation,0.1448,False,True,1,0
+9677,Not Misinformation,0.4599,False,True,1,0
+9715,Not Misinformation,0.3196,False,True,1,0
+978,Not Misinformation,0.478,False,True,1,0
+992,Not Misinformation,0.2846,False,True,1,0
+9974,Misinformation,0.5386,False,True,1,0

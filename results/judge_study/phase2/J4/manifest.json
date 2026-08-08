@@ -1,0 +1,28 @@
+{
+  "phase": "phase-2",
+  "stage": "B",
+  "run_id": "J4",
+  "model": {
+    "provider": "numpy",
+    "id": "LogisticRegression(L2=0.01)",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [],
+  "evidence_version": "live200-v2",
+  "seed": 42,
+  "sample_list_hash": "aadf16b8ae58f583153fc3cedffedacf40b01054bf3c4a33ec1e7f19b2bd0863",
+  "sample_count": 200,
+  "temperature": 0.0,
+  "timestamp": "2026-08-08T16:09:01.686727+00:00",
+  "git": {
+    "commit": "c66f5ecfcc604cd3c4de49409917dedd9beecf92",
+    "dirty": true
+  },
+  "notes": "J4 learned aggregator: logistic regression on module confidence vector; 5-fold CV; NOT training-free (each fold trained on other folds' GT).",
+  "model_class": "LogisticRegression",
+  "l2": 0.01,
+  "steps": 2000,
+  "features": 7,
+  "k": 5
+}

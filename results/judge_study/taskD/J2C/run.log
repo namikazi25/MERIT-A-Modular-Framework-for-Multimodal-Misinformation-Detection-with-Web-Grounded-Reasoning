@@ -1,0 +1,100 @@
+1436 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=3123 comp=334 retried=0 ~$0.0007
+1795 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=5498 comp=557 retried=0 ~$0.0012
+2169 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=7773 comp=764 retried=0 ~$0.0016
+2756 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=12040 comp=974 retried=0 ~$0.0024
+2826 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=14434 comp=1248 retried=0 ~$0.0029
+2915 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=16302 comp=1476 retried=0 ~$0.0033
+3397 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=18945 comp=1654 retried=0 ~$0.0038
+3415 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=21150 comp=1941 retried=0 ~$0.0043
+3980 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=23063 comp=2123 retried=0 ~$0.0047
+4230 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=27707 comp=2398 retried=0 ~$0.0056
+4284 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=30326 comp=2685 retried=0 ~$0.0062
+4557 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=32758 comp=2976 retried=0 ~$0.0067
+4642 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=35281 comp=3259 retried=0 ~$0.0072
+4718 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=37301 comp=3520 retried=0 ~$0.0077
+4960 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=39540 comp=3733 retried=0 ~$0.0082
+5000 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=42028 comp=4036 retried=0 ~$0.0087
+5013 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=44089 comp=4353 retried=0 ~$0.0092
+5060 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=48870 comp=4653 retried=0 ~$0.0101
+5575 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=51841 comp=4874 retried=0 ~$0.0107
+5939 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=54058 comp=5036 retried=0 ~$0.0111
+5977 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=56043 comp=5205 retried=0 ~$0.0115
+6026 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=59030 comp=5391 retried=0 ~$0.0121
+6119 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=62789 comp=5573 retried=0 ~$0.0128
+7187 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=65351 comp=5877 retried=0 ~$0.0133
+7259 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=67349 comp=6072 retried=0 ~$0.0137
+7330 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=69283 comp=6240 retried=0 ~$0.0141
+7439 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=71321 comp=6465 retried=0 ~$0.0146
+7469 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=74009 comp=6707 retried=0 ~$0.0151
+7759 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=77135 comp=7043 retried=0 ~$0.0158
+8063 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=79989 comp=7239 retried=0 ~$0.0163
+8155 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=84221 comp=7526 retried=0 ~$0.0171
+8341 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=86105 comp=7743 retried=0 ~$0.0176
+8719 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=90021 comp=7977 retried=0 ~$0.0183
+8830 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=91656 comp=8162 retried=0 ~$0.0186
+9081 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=94731 comp=8387 retried=0 ~$0.0192
+9323 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=96486 comp=8507 retried=0 ~$0.0196
+9577 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=98602 comp=8686 retried=0 ~$0.0200
+978 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=100624 comp=8862 retried=0 ~$0.0204
+992 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=103083 comp=9159 retried=0 ~$0.0210
+ds1060 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=105338 comp=9451 retried=0 ~$0.0215
+ds1062 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=108197 comp=9703 retried=0 ~$0.0221
+ds1099 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=110810 comp=9992 retried=0 ~$0.0226
+ds1157 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=117713 comp=10269 retried=0 ~$0.0238
+ds1564 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=119683 comp=10470 retried=0 ~$0.0242
+ds1754 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=122861 comp=10678 retried=0 ~$0.0248
+ds1829 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=124800 comp=10883 retried=0 ~$0.0252
+ds1998 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=126893 comp=11119 retried=0 ~$0.0257
+ds2006 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=129794 comp=11323 retried=0 ~$0.0263
+ds2101 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=132854 comp=11558 retried=0 ~$0.0269
+ds2311 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=134917 comp=11786 retried=0 ~$0.0273
+ds2354 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=136916 comp=11980 retried=0 ~$0.0277
+ds2437 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=138644 comp=12178 retried=0 ~$0.0281
+ds2506 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=140980 comp=12356 retried=0 ~$0.0286
+ds2594 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=143562 comp=12594 retried=0 ~$0.0291
+ds2845 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=146834 comp=12862 retried=0 ~$0.0297
+ds2864 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=148923 comp=13082 retried=0 ~$0.0302
+ds2926 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=151274 comp=13264 retried=0 ~$0.0306
+ds3303 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=153617 comp=13504 retried=0 ~$0.0311
+ds3503 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=155549 comp=13673 retried=0 ~$0.0315
+ds372 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=157590 comp=13905 retried=0 ~$0.0320
+ds3839 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=160277 comp=14104 retried=0 ~$0.0325
+ds4 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=163451 comp=14326 retried=0 ~$0.0331
+ds4064 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=165321 comp=14498 retried=0 ~$0.0335
+ds4278 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=167887 comp=14753 retried=0 ~$0.0340
+ds451 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=169909 comp=14986 retried=0 ~$0.0345
+ds4717 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=174106 comp=15217 retried=0 ~$0.0352
+ds4724 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=176159 comp=15441 retried=0 ~$0.0357
+ds4821 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=179960 comp=15707 retried=0 ~$0.0364
+ds4939 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=183178 comp=15941 retried=0 ~$0.0370
+ds5053 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=185547 comp=16214 retried=0 ~$0.0376
+ds5161 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=187375 comp=16420 retried=0 ~$0.0380
+ds5403 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=189194 comp=16670 retried=0 ~$0.0384
+ds5610 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=191129 comp=16885 retried=0 ~$0.0388
+ds5647 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=194391 comp=17129 retried=0 ~$0.0394
+ds5714 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=196500 comp=17334 retried=0 ~$0.0399
+ds6031 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=199926 comp=17471 retried=0 ~$0.0405
+ds6266 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=201997 comp=17656 retried=0 ~$0.0409
+ds6291 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=205822 comp=17825 retried=0 ~$0.0416
+ds6481 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=207936 comp=18004 retried=0 ~$0.0420
+ds6549 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=211859 comp=18144 retried=0 ~$0.0427
+ds6725 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=214019 comp=18406 retried=0 ~$0.0431
+ds6940 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=215947 comp=18611 retried=0 ~$0.0436
+ds6954 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=217783 comp=18837 retried=0 ~$0.0440
+ds7131 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=220266 comp=19078 retried=0 ~$0.0445
+ds7291 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=222375 comp=19338 retried=0 ~$0.0450
+ds8199 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=224326 comp=19571 retried=0 ~$0.0454
+ds8617 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=229071 comp=19693 retried=0 ~$0.0462
+ds8684 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=232505 comp=19835 retried=0 ~$0.0468
+ds8721 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=236570 comp=20057 retried=0 ~$0.0475
+ds8815 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=238611 comp=20202 retried=0 ~$0.0479
+ds9027 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=241683 comp=20351 retried=0 ~$0.0485
+ds9049 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=243964 comp=20637 retried=0 ~$0.0490
+ds9145 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=248228 comp=20777 retried=0 ~$0.0497
+ds9200 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=249992 comp=20910 retried=0 ~$0.0500
+ds9228 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=252619 comp=21132 retried=0 ~$0.0506
+ds9253 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=254523 comp=21357 retried=0 ~$0.0510
+ds9362 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=256280 comp=21568 retried=0 ~$0.0514
+ds994 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=259781 comp=21837 retried=0 ~$0.0521
+ds9954 -> Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=261731 comp=22013 retried=0 ~$0.0525
+ds9980 -> Not Misinformation abstain=False attempts=1 gpt-4o-mini-2024-07-18: prompt=264388 comp=22254 retried=0 ~$0.0530

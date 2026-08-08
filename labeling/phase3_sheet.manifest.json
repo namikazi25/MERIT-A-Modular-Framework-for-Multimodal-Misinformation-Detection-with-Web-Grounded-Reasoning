@@ -1,0 +1,9 @@
+{
+ "task": "E",
+ "n": 150,
+ "seed": 20260810,
+ "flipped_included": 29,
+ "dev_only": true,
+ "sample_list_hash": "2fb00c41fb0c7fda9fcbffacbfdcddc6598f51df1a89aa341631aba2a0cd3223",
+ "created": "2026-08-08T20:36:27.020088+00:00"
+}

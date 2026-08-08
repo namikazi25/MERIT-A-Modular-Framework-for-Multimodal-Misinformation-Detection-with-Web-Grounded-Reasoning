@@ -74,6 +74,25 @@ Total Phase 2 gpt spend ≈ **$0.55**; cumulative study spend ≈ $3.9 of the $1
 ## Verdict for the paper
 
 - The **rule-based J1 baseline stands** (and is model-robust: local ≈ gpt).
-- **J4 is the only design that beats J1** (0.765/0.835 vs 0.750/0.816; n.s. by McNemar but directionally +1.5pp acc / +1.9pp F1, and +16.7pp on the mismatch class) — a supervised headroom result, explicitly not training-free.
-- J2/J3/J5 as specified do not improve the pipeline on this evidence; their failure modes (evidence overload, no abstention signal) are themselves the paper's negative-result content.
+- **J4 has the best point estimates but is n.s. vs J1** (0.765/0.835 vs 0.750/0.816; McNemar p=0.755; +16.7pp on the mismatch class) — a supervised headroom result, explicitly not training-free.
+- J2/J3/J5 as specified in Phase 2 do not improve the pipeline on this evidence (claim scoped to those prompts — see Task D below); their failure modes (evidence overload, no abstention signal) are themselves the paper's negative-result content.
 - Adaptive follow-up judge (J6, Phase 4) remains gated on approval; given J2's degradation, J6's additional retrieval is unlikely to help without first fixing evidence selection — recommendation: do not start Phase 4.
+
+
+---
+
+## Amendment (Task D, Brief 2) — J2 robustness mini-sweep (dev core, n=100, gpt-4o-mini)
+
+Task D tested whether the Phase 2 "evidence-grounded judging is worse" result is prompt-specific. All variants on the 100-sample dev core, gpt-4o-mini, temp 0, manifests in `results/judge_study/taskD/`.
+
+| judge | acc [CI] | F1 [CI] | vs J1 (McNemar) |
+|---|---|---|---|
+| J1 (baseline) | 0.730 [0.640, 0.820] | 0.794 [0.714, 0.866] | — |
+| J2 (original prompt) | 0.680 [0.580, 0.770] | 0.750 [0.655, 0.830] | p=0.267 n.s. |
+| J2A (top-3 sources, 300-tok) | 0.690 [0.600, 0.780] | 0.760 [0.672, 0.836] | p=0.424 n.s. |
+| J2B (citation-required) | 0.720 [0.630, 0.810] | 0.816 [0.745, 0.878] | p=1.000 n.s. |
+| J2C (reasoning-first) | 0.700 [0.600, 0.790] | 0.762 [0.667, 0.840] | p=0.508 n.s. |
+
+Parse failures: 0 for all variants. Spend: $0.14 total (vs $1.50 estimate).
+
+**Verdict:** no variant loses to J1 significantly → the Phase 2 "evidence-grounded judging is worse" claim does **not** upgrade to design-level; it was prompt-specific. **J2B (citation-required) closes the gap** (ties J1, p=1.0, higher F1 point estimate) → **fed into Task B as a pre-seeded candidate**.

@@ -182,11 +182,63 @@ def judge_j5(bundle: dict, loader, cfg: Optional[dict] = None) -> dict:
                       "evidence_items": parsed.get("evidence_items") or []}}
 
 
-JUDGES = {"J1": judge_j1, "J2": judge_j2, "J3": judge_j3, "J5": judge_j5}
+# ---------------- J2 variants (Task D) ----------------
+def evidence_blocks_top3(bundle: dict, max_sources: int = 3, max_chars: int = 1200) -> str:
+    """Evidence rendering: top-N sources per question, tighter truncation (~300 tokens)."""
+    lines = []
+    docs = bundle.get("documents") or {}
+    for q, items in docs.items():
+        lines.append(f"Q: {q}")
+        if not items:
+            lines.append("  (no documents retrieved)")
+        for i, d in enumerate(items[:max_sources], start=1):
+            lines.append(f"  [{i}] {d.get('title')} | {d.get('url')} | {truncate(d.get('description'), max_chars)}")
+    return "\n".join(lines) if lines else "(no evidence)"
+
+
+def _judge_j2_variant(bundle: dict, loader, prompt_name: str, renderer) -> dict:
+    sys_p = load_prompt(prompt_name)
+    user = (f"CLAIM: {bundle.get('claim')}\n\n"
+            f"MODULE SIGNALS:\n{module_block(bundle)}\n\n"
+            f"RETRIEVED EVIDENCE:\n{renderer(bundle)}\n\n"
+            "Return your verdict JSON.")
+    resp = loader.get_model().invoke([{"role": "system", "content": sys_p},
+                                      {"role": "user", "content": user}])
+    parsed = extract_json_object(str(getattr(resp, "content", resp)), fallback=lambda p: {})
+    label = _norm_label(parsed.get("label"))
+    if label is None:
+        return _parse_fail()
+    try:
+        conf = float(parsed.get("confidence"))
+    except Exception:
+        conf = None
+    return {"label": label, "confidence": conf, "rationale": parsed.get("rationale"),
+            "abstain": False,
+            "extra": {"parse_ok": True, "calls": 1,
+                      "evidence_items": parsed.get("evidence_items") or []}}
+
+
+def judge_j2a(bundle: dict, loader, cfg=None) -> dict:
+    return _judge_j2_variant(bundle, loader, "j2a_top3_300.txt", evidence_blocks_top3)
+
+
+def judge_j2b(bundle: dict, loader, cfg=None) -> dict:
+    return _judge_j2_variant(bundle, loader, "j2b_citation_required.txt", evidence_blocks)
+
+
+def judge_j2c(bundle: dict, loader, cfg=None) -> dict:
+    return _judge_j2_variant(bundle, loader, "j2c_reasoning_first.txt", evidence_blocks)
+
+
+JUDGES = {"J1": judge_j1, "J2": judge_j2, "J3": judge_j3, "J5": judge_j5,
+          "J2A": judge_j2a, "J2B": judge_j2b, "J2C": judge_j2c}
 PROMPT_FILES = {
     "J1": ["prompts/judge_study/j1_rule_prompt.txt"],
     "J2": ["prompts/judge_study/j2_evidence_grounded.txt"],
     "J3": ["prompts/judge_study/j3_debate_fake.txt", "prompts/judge_study/j3_debate_authentic.txt",
            "prompts/judge_study/j3_adjudicate.txt"],
     "J5": ["prompts/judge_study/j5_abstaining.txt"],
+    "J2A": ["prompts/judge_study/j2a_top3_300.txt"],
+    "J2B": ["prompts/judge_study/j2b_citation_required.txt"],
+    "J2C": ["prompts/judge_study/j2c_reasoning_first.txt"],
 }

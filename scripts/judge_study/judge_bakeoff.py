@@ -123,14 +123,16 @@ def main() -> None:
 
         if result is None:
             row = {"sample_id": b["sample_id"], "label": "JUDGE_ERROR", "confidence": None,
-                   "abstain": False, "parse_ok": False, "attempts": attempts, "calls": None}
+                   "abstain": False, "parse_ok": False, "attempts": attempts, "calls": None,
+                   "rationale": None}
             parse_failures.append(row)
             log.write(f"{b['sample_id']} FAILED after {attempts} attempts\n")
         else:
             row = {"sample_id": b["sample_id"], "label": result.get("label"),
                    "confidence": result.get("confidence"), "abstain": bool(result.get("abstain")),
                    "parse_ok": result.get("extra", {}).get("parse_ok", True),
-                   "attempts": attempts, "calls": result.get("extra", {}).get("calls", 1)}
+                   "attempts": attempts, "calls": result.get("extra", {}).get("calls", 1),
+                   "rationale": (result.get("rationale") or "")[:1500]}
             if result.get("abstain"):
                 n_abstain += 1
             if not row["parse_ok"]:
@@ -145,7 +147,7 @@ def main() -> None:
     log.close()
 
     with open(os.path.join(args.out, "labels.csv"), "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=["sample_id", "label", "confidence", "abstain", "parse_ok", "attempts", "calls"])
+        w = csv.DictWriter(fh, fieldnames=["sample_id", "label", "confidence", "abstain", "parse_ok", "attempts", "calls", "rationale"])
         w.writeheader()
         w.writerows(rows)
     with open(os.path.join(args.out, "labels.jsonl"), "w") as fh:

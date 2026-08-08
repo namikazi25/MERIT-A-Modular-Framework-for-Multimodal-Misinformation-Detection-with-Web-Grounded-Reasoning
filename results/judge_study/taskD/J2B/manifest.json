@@ -1,0 +1,34 @@
+{
+  "phase": "phase-2",
+  "stage": "B",
+  "run_id": "J2B",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-4o-mini-2024-07-18",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/j2b_citation_required.txt",
+      "sha256": "5f8f96570e17e871866fda55a31831451e8c1f38d88d406df88de50bb6a921f0"
+    }
+  ],
+  "evidence_version": "devcore-100-v1",
+  "seed": null,
+  "sample_list_hash": "cd613a2e3ee3a0f6a52aacf149a1286ad79fbad38f10813db736dbc834b05433",
+  "sample_count": 100,
+  "temperature": 0.0,
+  "timestamp": "2026-08-08T19:29:25.018757+00:00",
+  "git": {
+    "commit": "2cc743b02193bfb8d04ec631bd8d0a648c5c09e1",
+    "dirty": true
+  },
+  "notes": "Phase 2 judge J2B. Parse failures logged, never averaged silently.",
+  "judge": "J2B",
+  "evidence_dir": "evidence/devcore-100-v1",
+  "max_attempts": 3,
+  "prompt_shas": {
+    "prompts/judge_study/j2b_citation_required.txt": "5f8f96570e17e871866fda55a31831451e8c1f38d88d406df88de50bb6a921f0"
+  }
+}

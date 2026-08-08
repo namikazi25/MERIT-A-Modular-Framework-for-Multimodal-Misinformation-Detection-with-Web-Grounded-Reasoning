@@ -87,7 +87,7 @@ def rewrite_queries(bundle: Dict[str, Any], cache, provider: str = "duckduckgo")
     # extract key phrases: drop stopwords, keep top 8 tokens
     stop = set("the a an is are was were of in on at to for with and or not do does did how what when where why which who".split())
     toks = [t for t in re.findall(r"[a-zA-Z][a-zA-Z'-]{2,}", claim.lower()) if t not in stop]
-    keyphrases = " ".join(dict.fromkeys(toks)[:8])  # ordered unique, capped
+    keyphrases = " ".join(list(dict.fromkeys(toks))[:8])  # ordered unique, capped
     docs = bundle.get("documents") or {}
     new_docs = {}
     hits = misses = 0

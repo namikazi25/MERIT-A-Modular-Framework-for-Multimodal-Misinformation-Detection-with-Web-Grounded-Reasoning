@@ -89,7 +89,10 @@ def main() -> None:
     print(f"total: {len(ids)} (old {len(old)} + new {len(new)})")
 
     dev, hold = stratified_split(ids, args.dev, args.hold, args.seed)
-    print(f"dev {len(dev)} / holdout {len(hold)}; overlap: {len(set(dev) & set(hold))}")
+    dev_paths = {d["image_path"] for d in dev}
+    hold_paths = {h["image_path"] for h in hold}
+    assert not (dev_paths & hold_paths), "dev/holdout overlap!"
+    print(f"dev {len(dev)} / holdout {len(hold)}; overlap: {len(dev_paths & hold_paths)} (verified 0)")
     from collections import Counter
     print("dev strata:", dict(Counter(d["fake_cls"] for d in dev)))
     print("hold strata:", dict(Counter(h["fake_cls"] for h in hold)))

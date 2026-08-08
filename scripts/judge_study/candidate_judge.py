@@ -83,10 +83,12 @@ def judge_candidate(bundle: dict, loader, cand: dict) -> dict:
                 "abstain": False, "extra": {"parse_ok": False, "calls": 1}}
 
     abstain = bool(parsed.get("abstain")) and cand["abstain"]
+    ev_suff = parsed.get("evidence_sufficient")
     if abstain:
         return {"label": None, "confidence": 0.0, "rationale": parsed.get("rationale"),
                 "abstain": True, "extra": {"parse_ok": True, "calls": 1,
-                                           "abstain_reason": parsed.get("abstain_reason")}}
+                                           "abstain_reason": parsed.get("abstain_reason"),
+                                           "evidence_sufficient": ev_suff}}
 
     if cand["confidence"] == "verbal":
         cl = str(parsed.get("confidence_label") or "").strip().lower()
@@ -96,6 +98,9 @@ def judge_candidate(bundle: dict, loader, cand: dict) -> dict:
             conf = float(parsed.get("confidence"))
         except Exception:
             conf = None
-    return {"label": label, "confidence": conf, "rationale": parsed.get("rationale"),
-            "abstain": False, "extra": {"parse_ok": True, "calls": 1,
-                                        "evidence_items": parsed.get("evidence_items") or []}}
+    out = {"label": label, "confidence": conf, "rationale": parsed.get("rationale"),
+           "abstain": False, "extra": {"parse_ok": True, "calls": 1,
+                                       "evidence_items": parsed.get("evidence_items") or []}}
+    if ev_suff is not None:
+        out["extra"]["evidence_sufficient"] = ev_suff
+    return out

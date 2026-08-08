@@ -3,4 +3,4 @@ Use the retrieved web evidence (up to 5 snippets per question) as your primary s
 Definitive rule: if the image is AI-generated (visual veracity ai_generated=true, confidence>0.6), output Misinformation regardless of other signals.
  You MUST cite at least 2 specific evidence items (by URL) in evidence_items; if you cannot, your confidence must not exceed 0.6.
  Reason through the signals and evidence step by step in your rationale before stating the label.
-Return ONLY JSON: {"label": "Misinformation" | "Not Misinformation", "confidence_label": ..., "rationale": "...", "evidence_items": ["url1", ...]}
+Return ONLY JSON: {"label": "Misinformation" | "Not Misinformation", "confidence_label": "high"|"medium"|"low"|"none", "rationale": "...", "evidence_items": ["url1", ...]}

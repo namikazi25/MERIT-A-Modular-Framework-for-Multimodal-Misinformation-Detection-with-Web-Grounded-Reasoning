@@ -1,6 +1,6 @@
 {
  "task": "B.2",
- "n": 29,
+ "n": 44,
  "created": "2026-08-08T20:57:44.421044+00:00",
  "candidates": [
   {
@@ -91,7 +91,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CF-verbal-none.txt",
-   "prompt_sha256": "92f9162a54a4e33556e0a0742ec16bfdc5bd1cd104e1b563ee14985127e8c668"
+   "prompt_sha256": "fd1f3afc38f5ff838270b10353ccaa518b1fc41f2e3ddf162461f226e7c9f52f"
   },
   {
    "id": "CF-verbal-top3_300",
@@ -101,7 +101,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CF-verbal-top3_300.txt",
-   "prompt_sha256": "0d31af3101e4d1bfc581624831ed664ad31fb42797d44864af3b70d27d3a8fd3"
+   "prompt_sha256": "42e94faa47e13096ec5c0aa33b0ef3964e7c18b5eee6083be60f4f5ea62f7fd8"
   },
   {
    "id": "CF-verbal-top5_500",
@@ -111,7 +111,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CF-verbal-top5_500.txt",
-   "prompt_sha256": "e56308571485ec53c0a0f32c3e4608623ae59d760802591cdaaa97ef4894e567"
+   "prompt_sha256": "60a254ab89748080ac95ee6fd054871134c39caf2aff28034e1d736266fab491"
   },
   {
    "id": "CF-verbal-full",
@@ -121,7 +121,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CF-verbal-full.txt",
-   "prompt_sha256": "4158eaba52206a777b837a4b15b6527eb5a692fb53135f1c7c82a998d056c78f"
+   "prompt_sha256": "aa6eb30ca7ae412129c5370dac3ee54336619f9d966e773ec69a5e5f4b7cb2bf"
   },
   {
    "id": "CB-1",
@@ -141,7 +141,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CB-2.txt",
-   "prompt_sha256": "64577d8ad92c6790d33c072c3eb4b4b56d3ad7b6522f5a36270cab7a6830c340"
+   "prompt_sha256": "e90347a237fac33a1a683a68a9837d397e78b0e09288bc81b5400fbc8efe7c39"
   },
   {
    "id": "CB-3",
@@ -171,7 +171,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CB-5.txt",
-   "prompt_sha256": "1d4fa6aa4244206c4ecfb21080af346aa8fb222ab07c873910e635da51f81da0"
+   "prompt_sha256": "af98c9a78f92b561f45932880c01e3e28d4a24b20671a682cc822df3ba9a1dfd"
   },
   {
    "id": "CB-6",
@@ -191,7 +191,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CB-7.txt",
-   "prompt_sha256": "d7ca2d432e6b46f94d8e1088cc3c047a0145a873527b2a19313f7230e80de0ff"
+   "prompt_sha256": "f97bc71940175acbdad7cc05a42dadcd6042182d7262fcaa9052e286f993fd0a"
   },
   {
    "id": "CB-8",
@@ -201,7 +201,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CB-8.txt",
-   "prompt_sha256": "146a520c021be6a96f6d024a127bd6aa5e2b5dfc148a1461358e69c2d56a2bff"
+   "prompt_sha256": "fae2e6957bbbc5c4ecbb9c64451739896627b1caacf32f759e7bc55a39df3884"
   },
   {
    "id": "CB-9",
@@ -221,7 +221,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CB-10.txt",
-   "prompt_sha256": "75d0a147208900d09617ca214a140e61d0d36077902afff30f43aa7787ab8df5"
+   "prompt_sha256": "58b785977f96e122a046008e434c3cef8234a47ba6b55d83feb58b1a3e6c90c1"
   },
   {
    "id": "CB-11",
@@ -231,7 +231,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CB-11.txt",
-   "prompt_sha256": "73d9f79e11de8d6d4b47fbc0f887aa89d1a8a5f66d5f867ff550759d4350be55"
+   "prompt_sha256": "1110749b784377da503d96f6542d949dfb914b625353eabf184b076259484d55"
   },
   {
    "id": "CB-12",
@@ -241,7 +241,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CB-12.txt",
-   "prompt_sha256": "741ad6192ca00380f5a68bbc1938bb735fe4e135a9168d3160640e4ce0bf839e"
+   "prompt_sha256": "1d8a5bd29b29b4c211f00e856755fe14260029c8ef4987d580cc05559b296619"
   },
   {
    "id": "AB-1",
@@ -251,7 +251,7 @@
    "confidence": "raw",
    "abstain": true,
    "prompt_path": "prompts/judge_study/b2/AB-1.txt",
-   "prompt_sha256": "9caa99b5181eb67ddbb11923551c3c5544242ab0012398dd3c85e94cbfafc9c2"
+   "prompt_sha256": "e2d090a87ae17231218d09a6d999ee9034b7bfdb1f42d6208fb5445a84ed0875"
   },
   {
    "id": "AB-2",
@@ -261,7 +261,7 @@
    "confidence": "raw",
    "abstain": true,
    "prompt_path": "prompts/judge_study/b2/AB-2.txt",
-   "prompt_sha256": "3dff77fe76fed4f35a9a33292f705548b5fcbc41dd01a7f0cdd4b1a8a464f21a"
+   "prompt_sha256": "0c0445258778ea63c72d0e09c102220d0acf44d7b6d6c3f0f42838b83dc21a88"
   },
   {
    "id": "AB-3",
@@ -271,7 +271,7 @@
    "confidence": "raw",
    "abstain": true,
    "prompt_path": "prompts/judge_study/b2/AB-3.txt",
-   "prompt_sha256": "781ec081c6453c0c0a384c7268e140bb87f767798d45c42900e96490c9398823"
+   "prompt_sha256": "263a6981608ea88c60a782db0d4c15f5a8f22449428d7935b42728156cafd8cb"
   },
   {
    "id": "CF-verbal-none-A",
@@ -281,7 +281,7 @@
    "confidence": "verbal",
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CF-verbal-none-A.txt",
-   "prompt_sha256": "e334edf60be4ecf9c84c20b87f1468a709fd8b99e82f1f800a552131f58e381a"
+   "prompt_sha256": "614897d662bee7ba6dc24f66ae0a5edd2704d02f7bed17e049147fe5f29d6f81"
   },
   {
    "id": "CF-raw-none",
@@ -292,6 +292,156 @@
    "abstain": false,
    "prompt_path": "prompts/judge_study/b2/CF-raw-none.txt",
    "prompt_sha256": "15c97f7fbfc6e20e52f7427fe4ee85a913e55366ea387d73b828a01764001e4d"
+  },
+  {
+   "id": "CB-13",
+   "evidence": "top3_300",
+   "citation": "free",
+   "reasoning": "checklist",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-13.txt",
+   "prompt_sha256": "b6817b383878f38bfac638b6888f77b9bc9226d844ee98cfcd8d1e79c4ad001e"
+  },
+  {
+   "id": "CB-14",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-14.txt",
+   "prompt_sha256": "fdf26704846e099187e2e77c4d02e57e62ee9ef756bac0083ecabbf2030f8826"
+  },
+  {
+   "id": "CB-15",
+   "evidence": "none",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-15.txt",
+   "prompt_sha256": "fd1f3afc38f5ff838270b10353ccaa518b1fc41f2e3ddf162461f226e7c9f52f"
+  },
+  {
+   "id": "CB-16",
+   "evidence": "top5_500",
+   "citation": "free",
+   "reasoning": "checklist",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-16.txt",
+   "prompt_sha256": "f603ce93efae66eefac932b80a500b620736ca8a45487efba99428880b946394"
+  },
+  {
+   "id": "CB-17",
+   "evidence": "top3_300",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-17.txt",
+   "prompt_sha256": "42e94faa47e13096ec5c0aa33b0ef3964e7c18b5eee6083be60f4f5ea62f7fd8"
+  },
+  {
+   "id": "CB-18",
+   "evidence": "full",
+   "citation": "free",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-18.txt",
+   "prompt_sha256": "019303b2dd4b50e0edecd66f3967d00aa262a778e0c709c988d74eccda508c1c"
+  },
+  {
+   "id": "CB-19",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-19.txt",
+   "prompt_sha256": "60a254ab89748080ac95ee6fd054871134c39caf2aff28034e1d736266fab491"
+  },
+  {
+   "id": "CB-20",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-20.txt",
+   "prompt_sha256": "17f0d7058d7caf3cceb8c3a903c9e4c4bbd1c33de0a8fce506dd441bc13c6921"
+  },
+  {
+   "id": "CB-21",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "checklist",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-21.txt",
+   "prompt_sha256": "af98c9a78f92b561f45932880c01e3e28d4a24b20671a682cc822df3ba9a1dfd"
+  },
+  {
+   "id": "CB-22",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-22.txt",
+   "prompt_sha256": "aa6eb30ca7ae412129c5370dac3ee54336619f9d966e773ec69a5e5f4b7cb2bf"
+  },
+  {
+   "id": "CB-23",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "checklist",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-23.txt",
+   "prompt_sha256": "233f2e55b723357ed293326c09603e04acbb3e34892d2a55f1d2c9dd24755d85"
+  },
+  {
+   "id": "AB-4",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": true,
+   "prompt_path": "prompts/judge_study/b2/AB-4.txt",
+   "prompt_sha256": "e33909b3b619b9f3508aad6baabfce799b11e8c2b911fefa0bc0500ffdbbf77a"
+  },
+  {
+   "id": "AB-5",
+   "evidence": "top3_300",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": true,
+   "prompt_path": "prompts/judge_study/b2/AB-5.txt",
+   "prompt_sha256": "f2f67c8ee815bdc1759ffc3ab596d4ce2157f29b8619fc6dfd2e53f848703177"
+  },
+  {
+   "id": "AB-6",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": true,
+   "prompt_path": "prompts/judge_study/b2/AB-6.txt",
+   "prompt_sha256": "263a6981608ea88c60a782db0d4c15f5a8f22449428d7935b42728156cafd8cb"
+  },
+  {
+   "id": "CB-24",
+   "evidence": "top3_300",
+   "citation": "free",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-24.txt",
+   "prompt_sha256": "6ec82af244e4d47e399a725968b7d5fb342d7fab4931fe1f3ab61e0bdb599c21"
   }
  ]
 }

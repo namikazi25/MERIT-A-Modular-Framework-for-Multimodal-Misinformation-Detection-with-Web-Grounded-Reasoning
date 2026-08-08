@@ -1,6 +1,6 @@
 # Phase 1 — Kill-or-Confirm the Pilot Findings (frozen v1, 200 samples)
 
-**Summary: on identical frozen evidence judged today, the local qwen3.6-35b-a3b judge reaches 73.5% accuracy / 0.787 F1 vs gpt-4o-mini's 77.0% / 0.826 — a 3.5pp gap that is NOT statistically significant (McNemar p=0.21, n=200). The pilot's "local is more conservative" pattern (higher precision, lower recall) survives on frozen evidence, but the local judge cannot reach gpt-4o-mini's operating point at any threshold: the PR curves cross, so the conservatism is partly a real model property, not purely a threshold artifact. The pilot's visual-module advantage is NOT testable here (frozen v1 evidence was gathered by gpt-4o-mini; only the judge effect is isolated in Phase 1).**
+**Summary: on identical frozen evidence judged today, there is NO detectable judge-model difference at n=200.** Local qwen3.6-35b-a3b: 73.5% accuracy / 0.787 F1; gpt-4o-mini: 77.0% / 0.826 — 3.5pp gap, McNemar p=0.210, CIs overlap. The pilot's per-class "weaker at semantic manipulation" narrative does not survive shared evidence (its per-class deltas were retrieval-driven). The real finding is the **PR crossing**: neither judge reaches the other's operating point at any threshold — the two models have genuinely different score distributions, and J1's hardcoded thresholds pick a different operating point on each. That is the empirical motivation for the Phase 2 bake-off. Separately, the pilot's **visual-module result is clean, not confounded** (the visual stage takes only the image; retrieval never touches it), and a paired McNemar on the same 200 images shows the local model is **significantly better at AI-generated-image detection** (p=0.029) — see the dedicated section below.
 
 ## Method (per study rules)
 
@@ -36,13 +36,26 @@ Scores: signed judge confidence (label=Misinformation → +conf; Not → −conf
 
 ## Verdict — "local is more conservative": model property or threshold artifact?
 
-**Both, but not purely a threshold artifact.** The signed-score operating point at θ=0 is a construction choice, and sliding θ trades local's precision for recall (e.g., θ=−0.8 raises local's recall to 0.736 while keeping precision 0.88). However, no θ lets local match gpt-4o-mini's (0.879, 0.779) point, and the crossing curves show the two judges' score distributions genuinely differ: local concentrates its misinformation calls at higher confidence. Net judgment: **a real model difference in score calibration, whose *operating* manifestation (precision/recall tradeoff at θ=0) is partly a threshold choice; the accuracy difference itself is not significant (McNemar p=0.21).**
+**The honest claim: no detectable judge-model difference on shared evidence at n=200 (McNemar p=0.210).** What remains is a *score-distribution* difference: the PR curves cross, so neither judge can reach the other's operating point at any threshold. A fixed threshold (J1's θ=0, itself a hardcoded design choice) therefore lands each model on a different precision-recall point — local high-precision/low-recall (0.923 / 0.686), gpt-4o-mini lower-precision/higher-recall (0.879 / 0.779). This is not "local is worse"; it is evidence that **J1's threshold encodes a model-specific operating choice that does not transfer across models** — the empirical motivation for the Phase 2 judge redesign.
+
+**Deployment framing:** in misinformation detection the high-precision regime is the deployment-relevant one — false accusations of authentic content are the costly error and are this pipeline's documented failure mode (the pilot's FP analysis). The local judge dominating the high-precision region of its PR curve (precision 0.92 at recall 0.69; 0.88 at recall 0.74) is a point in favor of the open-weight judge for cost-sensitive moderation, not a consolation prize.
 
 ## Surprises / deviations flagged (per brief)
 
 1. **Citation re-fetch (previously ordered, silently dropped — acknowledged and fixed this session):** v1 bundles now carry extracted text for cited URLs (`refetch_manifest.json`; 781 OK / 24 failed — dead links, paywalls, read timeouts). No J1 behavior changes: the judge consumes only url/title/citation counts.
 2. **v2 live re-gather (for Phase 2 J2/J5 full evidence text) crashed once** at sample 64 on an unhandled DuckDuckGo `TimeoutException`. Fixed: search retries with exponential backoff (logged, rule 6), per-question error tolerance in gather, `--resume`. Re-gather completed 200/200 → `evidence/live200-v2/` (gpt-4o-mini gather, workers=4, DDG; cost ≈ $3–4). J1-on-v2 vs J1-on-v1 agreement will be checked before Phase 2 as ordered (flag disagreements, don't reconcile silently).
-3. **Visual-module advantage is not testable in Phase 1** — frozen v1 evidence contains gpt-4o-mini's own visual-veracity outputs; the pilot's 38/38-vs-23/38 finding requires local-gathered evidence (see `reports/phase0_confound.md` §3).
+3. **Correction (previous version of this report was wrong):** the pilot's visual-module result is NOT confounded. The confound report established only that *retrieval* was not shared; the visual veracity module consumes only the image, and both pilot runs processed the identical 200 images. The paired comparison is valid as-is and is reported below (McNemar p=0.029, significant). What frozen v1 cannot do is *re-test* the visual module (v1 carries gpt-4o-mini's visual outputs) — but it does not need re-testing; the existing paired outputs are the test.
+
+## Visual module — paired comparison on the identical 200 images (zero-spend, from pilot artifacts)
+
+The visual veracity stage takes only the image (no retrieval), and both pilot runs (`results/lmstudio-200.jsonl`, `results/gpt4omini-200.jsonl`) processed the same 200 images in the same order. Per-sample `visual_veracity.ai_generated` vs GT (`image_source == "AI-generated Image"`, n=38/200). Data: `results/judge_study/phase1/visual_paired.csv`.
+
+| model | accuracy [CI] | F1 [CI] | precision | recall | CM (TP/FP/FN/TN) |
+|---|---|---|---|---|---|
+| local qwen3.6-35b-a3b | **0.880** [0.835, 0.920] | **0.760** [0.660, 0.843] | 0.613 | **1.000** (38/38) | 38/24/0/138 |
+| gpt-4o-mini | 0.810 [0.755, 0.865] | 0.548 [0.418, 0.667] | 0.500 | 0.605 (23/38) | 23/23/15/139 |
+
+**McNemar (paired): b=11, c=25, n=36, chi2=4.69, p=0.029 → significant.** The local model correctly flags all 38 AI-generated images (recall 1.0) vs 23 for gpt-4o-mini, with a comparable false-positive count (24 vs 23). Local's F1 advantage (0.760 vs 0.548) is driven entirely by recall; precision is similar (0.61 vs 0.50). This is the strongest single result in favor of the open-weight model and it required no new compute.
 
 ## Appendix: historical labels (Oct 2025, for reference only)
 

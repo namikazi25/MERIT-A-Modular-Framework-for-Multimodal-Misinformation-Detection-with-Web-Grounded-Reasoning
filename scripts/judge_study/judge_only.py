@@ -28,6 +28,14 @@ import time
 
 sys.path.insert(0, os.getcwd())
 
+# Load .env (mirrors main.py)
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except Exception:
+    pass
+
 from scripts.ai_judge import judge_from_structured, _SYSTEM_PROMPT
 from scripts.llm_loader import LLMModelLoader, ModelConfig
 from scripts.judge_study.manifest import make_manifest, write_manifest, sha256_file

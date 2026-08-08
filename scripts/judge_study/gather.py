@@ -28,6 +28,14 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.getcwd())  # allow `python -m scripts.judge_study.gather` from repo root
 
+# Load .env (mirrors main.py)
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except Exception:
+    pass
+
 from scripts.llm_loader import LLMModelLoader, ModelConfig
 from scripts.judge_study.manifest import make_manifest, write_manifest
 from scripts.judge_study.search_cache import SearchCache

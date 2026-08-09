@@ -27,3 +27,27 @@ After the first 10 candidates scored (Round 1), the top-3 (EV-top3_300, CF-verba
 | CB-2 | 0.6486 | 0.5785 |
 
 Spearman rho = -0.50 < 0.5 → **ranking inverted; local-only optimization is not predictive of gpt ordering.** Per B.4, Round 2 (local, 10 candidates on dev-350) was paused at candidate 0. Under review: switch Round 2 to gpt-4o-mini as the primary judge model (final Round 3 requires both models anyway; ~$1.75), and/or widen the transfer check (n=3 Spearman is degenerate — only 5 attainable values). No scored run from the paused Round 2 is used.
+
+
+---
+
+## B.4 transfer check #2 (n=10) — inversion CONFIRMED (standalone finding)
+
+Widened per review: full Round-1 top-10 scored on gpt-4o-mini, dev core (100), ~$0.50.
+
+| candidate | local macroF1 (rank) | gpt macroF1 (rank) |
+|---|---|---|
+| EV-top3_300 | 0.6667 (1) | 0.5593 (6) |
+| CF-verbal-top5_500 | 0.6486 (2) | 0.5785 (2) |
+| CB-2 | 0.6486 (3) | 0.5679 (5) |
+| CB-19 | 0.6486 (4) | 0.5785 (3) |
+| CT-free | 0.6485 (5) | 0.5300 (10) |
+| CF-verbal-top3_300 | 0.6461 (6) | 0.5593 (7) |
+| AB-2 | 0.6461 (7) | 0.5987 (1) |
+| CB-17 | 0.6461 (8) | 0.5689 (4) |
+| CB-7 | 0.6440 (9) | 0.5383 (9) |
+| BASE | 0.6434 (10) | 0.5593 (8) |
+
+**Spearman rho (n=10) = 0.370 < 0.5 → inversion confirmed.** Local-optimized judge rankings do NOT transfer to the API model. Pattern: the abstain-capable AB-2 (sufficiency-gated) is gpt's best but only local's 7th; CT-free (no citation requirement) collapses on gpt (5th → 10th); the verbal-confidence variants are the most rank-stable across models.
+
+**Consequence:** Round 2 advances on **gpt-4o-mini ranking** (primary judge model); local runs in parallel as a sensitivity column only. Reported per the B.4 protocol; not a footnote.

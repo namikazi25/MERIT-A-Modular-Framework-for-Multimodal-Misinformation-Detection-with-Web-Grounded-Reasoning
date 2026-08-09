@@ -1,0 +1,101 @@
+sample_id,label,confidence,abstain
+ds6031,,0.0,True
+3397,,0.0,True
+ds4717,Uncertain,0.3,False
+4718,Uncertain,0.5,False
+ds2101,Not Misinformation,0.9,False
+5000,,0.0,True
+ds4724,,0.0,True
+ds1157,,0.0,True
+5013,Uncertain,0.44,False
+ds9980,,0.0,True
+ds2354,Not Misinformation,0.9,False
+ds4,Uncertain,0.5,False
+8830,,0.0,True
+ds5053,Uncertain,0.5,False
+ds2437,,0.0,True
+ds1754,Not Misinformation,0.9,False
+ds4278,,0.0,True
+ds6954,,0.0,True
+ds3303,,0.0,True
+ds7131,,0.0,True
+ds3839,,0.0,True
+7469,Uncertain,0.52,False
+ds2506,,0.0,True
+ds6291,Not Misinformation,0.79,False
+ds994,Not Misinformation,0.9,False
+7187,Uncertain,0.52,False
+ds5161,,0.0,True
+8155,,0.0,True
+ds4064,Not Misinformation,0.9,False
+7330,,0.0,True
+6119,,0.0,True
+8719,,0.0,True
+ds6481,Not Misinformation,0.9,False
+ds8617,,0.0,True
+5939,,0.0,True
+ds3503,Uncertain,0.56,False
+ds6940,,0.0,True
+992,Not Misinformation,0.9,False
+ds6549,,0.0,True
+ds9027,,0.0,True
+ds1998,Not Misinformation,0.9,False
+3980,,0.0,True
+ds2845,,0.0,True
+ds8721,,0.0,True
+ds9200,,0.0,True
+9081,,0.0,True
+ds2006,,0.0,True
+ds6266,,0.0,True
+5060,,0.0,True
+2169,,0.0,True
+ds372,,0.0,True
+ds2864,,0.0,True
+ds9049,,0.0,True
+4960,Not Misinformation,0.9,False
+5575,,0.0,True
+ds1060,Not Misinformation,0.9,False
+ds5403,Uncertain,0.52,False
+8341,Uncertain,0.47,False
+ds5714,,0.0,True
+1795,Not Misinformation,0.9,False
+7759,,0.0,True
+6026,,0.0,True
+5977,,0.0,True
+ds9954,,0.0,True
+ds5647,,0.0,True
+ds451,Uncertain,0.3,False
+ds8199,Uncertain,0.3,False
+1436,Uncertain,0.52,False
+ds1062,Uncertain,0.52,False
+7439,,0.0,True
+2915,,0.0,True
+ds8815,,0.0,True
+2756,,0.0,True
+ds7291,Uncertain,0.5,False
+ds2311,,0.0,True
+9577,Uncertain,0.5,False
+ds9145,,0.0,True
+ds9362,,0.0,True
+ds1099,Not Misinformation,0.9,False
+4642,,0.0,True
+4230,Uncertain,0.5,False
+ds5610,,0.0,True
+978,,0.0,True
+9323,,0.0,True
+4284,,0.0,True
+8063,,0.0,True
+7259,Not Misinformation,0.9,False
+ds9228,,0.0,True
+ds6725,Not Misinformation,0.84,False
+2826,Uncertain,0.51,False
+ds1564,,0.0,True
+ds2594,Uncertain,0.38,False
+ds2926,,0.0,True
+ds1829,Not Misinformation,0.9,False
+3415,,0.0,True
+ds4821,,0.0,True
+ds4939,,0.0,True
+ds9253,,0.0,True
+4557,Uncertain,0.44,False
+ds8684,,0.0,True

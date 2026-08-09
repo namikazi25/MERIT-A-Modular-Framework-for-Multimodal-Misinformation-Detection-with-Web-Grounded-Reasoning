@@ -1,0 +1,34 @@
+{
+  "phase": "phase-2",
+  "stage": "B",
+  "run_id": "J2C",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-4o-mini-2024-07-18",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/j2c_reasoning_first.txt",
+      "sha256": "d6e70964cbff9f775f645efdf4fdd148b1e07c7a94477d7eac39ea17e1896e21"
+    }
+  ],
+  "evidence_version": "devcore-100-v1",
+  "seed": null,
+  "sample_list_hash": "cd613a2e3ee3a0f6a52aacf149a1286ad79fbad38f10813db736dbc834b05433",
+  "sample_count": 100,
+  "temperature": 0.0,
+  "timestamp": "2026-08-08T19:29:25.018779+00:00",
+  "git": {
+    "commit": "2cc743b02193bfb8d04ec631bd8d0a648c5c09e1",
+    "dirty": true
+  },
+  "notes": "Phase 2 judge J2C. Parse failures logged, never averaged silently.",
+  "judge": "J2C",
+  "evidence_dir": "evidence/devcore-100-v1",
+  "max_attempts": 3,
+  "prompt_shas": {
+    "prompts/judge_study/j2c_reasoning_first.txt": "d6e70964cbff9f775f645efdf4fdd148b1e07c7a94477d7eac39ea17e1896e21"
+  }
+}

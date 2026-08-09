@@ -1,0 +1,16 @@
+{
+  "judge": "J5",
+  "tokens": {
+    "qwen/qwen3.6-35b-a3b": {
+      "prompt": 552100,
+      "completion": 66515,
+      "retried": 0
+    }
+  },
+  "cost_usd": 0.0,
+  "cap": 15.0,
+  "cap_undefined": false,
+  "n": 200,
+  "parse_failures": 0,
+  "abstentions": 3
+}

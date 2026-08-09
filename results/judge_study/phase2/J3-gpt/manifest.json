@@ -1,0 +1,44 @@
+{
+  "phase": "phase-2",
+  "stage": "B",
+  "run_id": "J3-gpt",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-4o-mini-2024-07-18",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/j3_debate_fake.txt",
+      "sha256": "71c8b4e1d680728af312d294e62cdfaa49d5b0d925c679f09d3ec715608f4c57"
+    },
+    {
+      "path": "prompts/judge_study/j3_debate_authentic.txt",
+      "sha256": "13846abd344f1eee3cc5b07701bcfaf49d6ed4da07b118dbb952638cabc44324"
+    },
+    {
+      "path": "prompts/judge_study/j3_adjudicate.txt",
+      "sha256": "8a0b7ebbd4222178aeabc996468acaa02da682ec7973e7dda44a25509b19b70f"
+    }
+  ],
+  "evidence_version": "live200-v2",
+  "seed": null,
+  "sample_list_hash": "aadf16b8ae58f583153fc3cedffedacf40b01054bf3c4a33ec1e7f19b2bd0863",
+  "sample_count": 200,
+  "temperature": 0.0,
+  "timestamp": "2026-08-08T16:03:09.437740+00:00",
+  "git": {
+    "commit": "c66f5ecfcc604cd3c4de49409917dedd9beecf92",
+    "dirty": true
+  },
+  "notes": "Phase 2 judge J3. Parse failures logged, never averaged silently.",
+  "judge": "J3",
+  "evidence_dir": "evidence/live200-v2",
+  "max_attempts": 3,
+  "prompt_shas": {
+    "prompts/judge_study/j3_debate_fake.txt": "71c8b4e1d680728af312d294e62cdfaa49d5b0d925c679f09d3ec715608f4c57",
+    "prompts/judge_study/j3_debate_authentic.txt": "13846abd344f1eee3cc5b07701bcfaf49d6ed4da07b118dbb952638cabc44324",
+    "prompts/judge_study/j3_adjudicate.txt": "8a0b7ebbd4222178aeabc996468acaa02da682ec7973e7dda44a25509b19b70f"
+  }
+}

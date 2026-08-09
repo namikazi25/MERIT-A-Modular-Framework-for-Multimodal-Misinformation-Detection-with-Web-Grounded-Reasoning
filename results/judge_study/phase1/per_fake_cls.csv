@@ -1,0 +1,9 @@
+judge,n,accuracy,acc_ci,f1,f1_ci,precision,recall,cm,fake_cls
+local qwen3.6-35b-a3b,60,0.5333,"[0.4167, 0.65]",0.6957,"[0.5882, 0.7879]",1.0,0.5333,"{'TP': 32, 'FP': 0, 'FN': 28, 'TN': 0}",mismatch
+gpt-4o-mini (today),60,0.65,"[0.5333, 0.7667]",0.7879,"[0.6957, 0.8679]",1.0,0.65,"{'TP': 39, 'FP': 0, 'FN': 21, 'TN': 0}",mismatch
+local qwen3.6-35b-a3b,60,0.85,"[0.75, 0.9333]",0.0,"[0.0, 0.0]",0.0,0.0,"{'TP': 0, 'FP': 8, 'FN': 0, 'TN': 51}",original
+gpt-4o-mini (today),60,0.75,"[0.6333, 0.85]",0.0,"[0.0, 0.0]",0.0,0.0,"{'TP': 0, 'FP': 15, 'FN': 0, 'TN': 45}",original
+local qwen3.6-35b-a3b,60,0.7667,"[0.65, 0.8667]",0.8679,"[0.7879, 0.9286]",1.0,0.7667,"{'TP': 46, 'FP': 0, 'FN': 14, 'TN': 0}",textual_veracity_distortion
+gpt-4o-mini (today),60,0.8667,"[0.7833, 0.95]",0.9286,"[0.8785, 0.9744]",1.0,0.8667,"{'TP': 52, 'FP': 0, 'FN': 8, 'TN': 0}",textual_veracity_distortion
+local qwen3.6-35b-a3b,20,0.9,"[0.75, 1.0]",0.9474,"[0.8571, 1.0]",1.0,0.9,"{'TP': 18, 'FP': 0, 'FN': 2, 'TN': 0}",visual_veracity_distortion
+gpt-4o-mini (today),20,0.9,"[0.75, 1.0]",0.9474,"[0.8571, 1.0]",1.0,0.9,"{'TP': 18, 'FP': 0, 'FN': 2, 'TN': 0}",visual_veracity_distortion

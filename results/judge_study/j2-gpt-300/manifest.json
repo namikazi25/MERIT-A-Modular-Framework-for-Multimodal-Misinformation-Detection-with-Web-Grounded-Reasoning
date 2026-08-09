@@ -1,0 +1,34 @@
+{
+  "phase": "phase-2",
+  "stage": "B",
+  "run_id": "j2-gpt-300",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-4o-mini-2024-07-18",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/j2_evidence_grounded.txt",
+      "sha256": "c6eb40a087d96722d451e4461813320813b3de24c64bc9147440b9fe78a157c6"
+    }
+  ],
+  "evidence_version": "live300-v2",
+  "seed": null,
+  "sample_list_hash": "88f092404957140a2724352155ee12cb56ebdd37ffe63302879e323832d61f32",
+  "sample_count": 300,
+  "temperature": 0.0,
+  "timestamp": "2026-08-08T19:23:34.717962+00:00",
+  "git": {
+    "commit": "2cc743b02193bfb8d04ec631bd8d0a648c5c09e1",
+    "dirty": true
+  },
+  "notes": "Phase 2 judge J2. Parse failures logged, never averaged silently.",
+  "judge": "J2",
+  "evidence_dir": "evidence/live300-v2",
+  "max_attempts": 3,
+  "prompt_shas": {
+    "prompts/judge_study/j2_evidence_grounded.txt": "c6eb40a087d96722d451e4461813320813b3de24c64bc9147440b9fe78a157c6"
+  }
+}

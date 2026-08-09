@@ -1,0 +1,151 @@
+sample_id,label,confidence,raw_present,attempts
+1021,Misinformation,0.8,True,1
+1383,Not Misinformation,0.8,True,1
+1500,Not Misinformation,0.8,True,1
+1586,Not Misinformation,1.0,True,1
+2046,Not Misinformation,0.9,True,1
+2047,Not Misinformation,0.9,True,1
+2134,Not Misinformation,0.8,True,1
+243,Not Misinformation,0.8,True,1
+2504,Misinformation,0.6,True,1
+2604,Misinformation,0.6,True,1
+2677,Misinformation,0.7,True,1
+3025,Misinformation,0.8,True,1
+3574,Misinformation,1.0,True,1
+3651,Misinformation,1.0,True,1
+3766,Misinformation,0.8,True,1
+3826,Misinformation,0.9,True,1
+3933,Misinformation,1.0,True,1
+40,Not Misinformation,0.8,True,1
+4050,Misinformation,0.9,True,1
+4063,Misinformation,0.8,True,1
+4106,Not Misinformation,0.9,True,1
+4147,Misinformation,0.9,True,1
+4314,Misinformation,1.0,True,1
+4430,Misinformation,1.0,True,1
+4432,Misinformation,0.9,True,1
+4510,Misinformation,1.0,True,1
+5158,Misinformation,1.0,True,1
+534,Not Misinformation,0.9,True,1
+5916,Misinformation,0.9,True,1
+6113,Not Misinformation,0.7,True,1
+6218,Misinformation,0.8,True,1
+6629,Misinformation,1.0,True,1
+6652,Misinformation,0.9,True,1
+6707,Misinformation,0.8,True,1
+7134,Misinformation,0.8,True,1
+7324,Misinformation,0.8,True,1
+7569,Not Misinformation,0.9,True,1
+7574,Not Misinformation,0.8,True,1
+7647,Misinformation,0.8,True,1
+7667,Misinformation,0.8,True,1
+7989,Misinformation,0.8,True,1
+8346,Misinformation,0.9,True,1
+8443,Misinformation,0.6,True,1
+8491,Misinformation,0.9,True,1
+8496,Misinformation,0.7,True,1
+8666,Misinformation,0.8,True,1
+8670,Misinformation,0.8,True,1
+87,Misinformation,1.0,True,1
+9191,Misinformation,0.8,True,1
+9232,Misinformation,0.9,True,1
+9268,Not Misinformation,0.7,True,1
+9285,Not Misinformation,0.7,True,1
+939,Not Misinformation,0.8,True,1
+9538,Not Misinformation,0.9,True,1
+957,Not Misinformation,0.8,True,1
+9601,Not Misinformation,0.7,True,1
+9715,Not Misinformation,0.7,True,1
+ds1039,Not Misinformation,0.9,True,1
+ds1055,Misinformation,1.0,True,1
+ds1095,Not Misinformation,0.7,True,1
+ds1268,Not Misinformation,0.9,True,1
+ds1310,Not Misinformation,0.9,True,1
+ds1427,Misinformation,0.7,True,1
+ds1645,Not Misinformation,0.8,True,1
+ds1833,Not Misinformation,1.0,True,1
+ds2082,Misinformation,0.8,True,1
+ds2220,Not Misinformation,0.95,True,1
+ds231,Not Misinformation,0.8,True,1
+ds2361,Misinformation,0.7,True,1
+ds2385,Not Misinformation,0.95,True,1
+ds2441,Not Misinformation,0.9,True,1
+ds25,Not Misinformation,0.8,True,1
+ds2519,Not Misinformation,0.9,True,1
+ds257,Not Misinformation,1.0,True,1
+ds2591,Misinformation,0.8,True,1
+ds2620,Misinformation,0.9,True,1
+ds2726,Misinformation,1.0,True,1
+ds2819,Not Misinformation,0.95,True,1
+ds2828,Misinformation,0.8,True,1
+ds2971,Not Misinformation,0.8,True,1
+ds3031,Misinformation,1.0,True,1
+ds3318,Misinformation,1.0,True,1
+ds3333,Misinformation,1.0,True,1
+ds3479,Misinformation,1.0,True,1
+ds3543,Misinformation,1.0,True,1
+ds368,Not Misinformation,0.9,True,1
+ds3699,Misinformation,0.8,True,1
+ds3759,Misinformation,0.9,True,1
+ds3778,Misinformation,0.9,True,1
+ds3873,Misinformation,1.0,True,1
+ds4122,Misinformation,1.0,True,1
+ds4223,Misinformation,0.8,True,1
+ds4341,Misinformation,0.2,True,1
+ds4480,Misinformation,0.9,True,1
+ds4496,Misinformation,0.6,True,1
+ds4624,Not Misinformation,0.9,True,1
+ds4827,Misinformation,0.8,True,1
+ds4873,Misinformation,0.6,True,1
+ds496,Misinformation,0.9,True,1
+ds4996,Misinformation,1.0,True,1
+ds5171,Not Misinformation,0.9,True,1
+ds5218,Misinformation,1.0,True,1
+ds5236,Not Misinformation,0.9,True,1
+ds5295,Misinformation,0.8,True,1
+ds5483,Misinformation,0.9,True,1
+ds5492,Misinformation,0.8,True,1
+ds5523,Misinformation,1.0,True,1
+ds5561,Misinformation,0.9,True,1
+ds5704,Misinformation,0.8,True,1
+ds5791,Misinformation,1.0,True,1
+ds5903,Not Misinformation,0.8,True,1
+ds6222,Misinformation,0.8,True,1
+ds6407,Misinformation,0.8,True,1
+ds6410,Misinformation,0.9,True,1
+ds6600,Misinformation,0.8,True,1
+ds6628,Misinformation,0.9,True,1
+ds6633,Misinformation,0.8,True,1
+ds6749,Misinformation,0.9,True,1
+ds6862,Misinformation,1.0,True,1
+ds6883,Misinformation,1.0,True,1
+ds6925,Misinformation,1.0,True,1
+ds693,Misinformation,0.8,True,1
+ds7042,Misinformation,1.0,True,1
+ds7120,Not Misinformation,0.8,True,1
+ds7153,Misinformation,0.8,True,1
+ds7168,Misinformation,1.0,True,1
+ds7310,Misinformation,1.0,True,1
+ds7402,Misinformation,0.7,True,1
+ds7476,Misinformation,0.8,True,1
+ds7618,Misinformation,1.0,True,1
+ds7619,Not Misinformation,0.9,True,1
+ds8037,Not Misinformation,0.7,True,1
+ds8167,Misinformation,1.0,True,1
+ds8184,Misinformation,1.0,True,1
+ds842,Not Misinformation,0.8,True,1
+ds8465,Misinformation,0.9,True,1
+ds8473,Misinformation,1.0,True,1
+ds857,Misinformation,0.8,True,1
+ds8583,Not Misinformation,0.9,True,1
+ds8638,Not Misinformation,0.7,True,1
+ds8855,Not Misinformation,0.8,True,1
+ds8857,Not Misinformation,0.9,True,1
+ds8904,Misinformation,0.9,True,1
+ds8939,Misinformation,1.0,True,1
+ds9098,Not Misinformation,0.8,True,1
+ds927,Not Misinformation,0.8,True,1
+ds9372,Misinformation,0.8,True,1
+ds9406,Misinformation,1.0,True,1
+ds9492,Misinformation,0.8,True,1
+ds9568,Not Misinformation,0.8,True,1

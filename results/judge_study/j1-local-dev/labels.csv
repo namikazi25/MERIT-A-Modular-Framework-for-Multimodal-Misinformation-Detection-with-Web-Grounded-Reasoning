@@ -1,0 +1,351 @@
+sample_id,label,confidence,raw_present,attempts
+104,Not Misinformation,0.85,True,1
+1047,Not Misinformation,0.85,True,1
+1052,Not Misinformation,0.95,True,1
+1152,Not Misinformation,0.9,True,1
+1204,Not Misinformation,0.85,True,1
+1231,Not Misinformation,0.8,True,1
+1318,Not Misinformation,0.85,True,1
+1436,Not Misinformation,0.8,True,1
+1449,Not Misinformation,0.85,True,1
+1505,Not Misinformation,0.85,True,1
+160,Not Misinformation,0.7,True,1
+1750,Misinformation,0.95,True,1
+1782,Not Misinformation,0.85,True,1
+1792,Not Misinformation,0.85,True,1
+1795,Not Misinformation,0.95,True,1
+1818,Not Misinformation,0.7,True,1
+1901,Not Misinformation,0.85,True,1
+1970,Not Misinformation,0.9,True,1
+1972,Misinformation,0.85,True,1
+2004,Not Misinformation,0.9,True,1
+2169,Not Misinformation,0.85,True,1
+2237,Not Misinformation,0.95,True,1
+2273,Not Misinformation,0.85,True,1
+2501,Not Misinformation,0.95,True,1
+251,Not Misinformation,0.95,True,1
+2649,Not Misinformation,0.95,True,1
+2728,Not Misinformation,0.85,True,1
+2731,Not Misinformation,0.9,True,1
+2756,Misinformation,0.9,True,1
+2826,Not Misinformation,0.85,True,1
+2915,Not Misinformation,0.8,True,1
+2929,Not Misinformation,0.95,True,1
+3081,Misinformation,0.9,True,1
+3169,Misinformation,1.0,True,1
+3397,Misinformation,0.8,True,1
+3405,Misinformation,0.8,True,1
+3415,Misinformation,0.95,True,1
+3477,Misinformation,0.95,True,1
+3537,Misinformation,0.8,True,1
+365,Misinformation,0.8,True,1
+3769,Misinformation,0.95,True,1
+3855,Misinformation,1.0,True,1
+3899,Not Misinformation,0.7,True,1
+3980,Misinformation,0.95,True,1
+3983,Misinformation,0.95,True,1
+4046,Misinformation,0.95,True,1
+4125,Not Misinformation,0.85,True,1
+4186,Misinformation,0.95,True,1
+4217,Not Misinformation,0.75,True,1
+4230,Not Misinformation,0.85,True,1
+4284,Misinformation,0.85,True,1
+4300,Not Misinformation,0.9,True,1
+4368,Misinformation,0.95,True,1
+4557,Misinformation,0.85,True,1
+4580,Misinformation,0.85,True,1
+4642,Misinformation,0.95,True,1
+4647,Not Misinformation,0.85,True,1
+4718,Not Misinformation,0.85,True,1
+4752,Misinformation,0.95,True,1
+4893,Misinformation,0.95,True,1
+4905,Misinformation,0.95,True,1
+4960,Not Misinformation,0.9,True,1
+5000,Misinformation,0.95,True,1
+5013,Misinformation,0.95,True,1
+5049,Not Misinformation,0.85,True,1
+5060,Misinformation,0.95,True,1
+5084,Misinformation,0.95,True,1
+5286,Misinformation,0.95,True,1
+5292,Misinformation,0.95,True,1
+5317,Misinformation,0.95,True,1
+5357,Misinformation,0.85,True,1
+540,Not Misinformation,0.85,True,1
+5524,Not Misinformation,0.85,True,1
+5575,Not Misinformation,0.85,True,1
+561,Not Misinformation,0.95,True,1
+5697,Misinformation,0.95,True,1
+578,Not Misinformation,0.8,True,1
+5834,Misinformation,0.95,True,1
+5939,Misinformation,0.95,True,1
+595,Not Misinformation,0.95,True,1
+5977,Misinformation,0.9,True,1
+6026,Misinformation,0.95,True,1
+6114,Misinformation,0.95,True,1
+6119,Misinformation,0.95,True,1
+6149,Misinformation,0.95,True,1
+6327,Misinformation,0.9,True,1
+6395,Misinformation,0.9,True,1
+6399,Misinformation,0.8,True,1
+6424,Misinformation,0.9,True,1
+6440,Misinformation,0.9,True,1
+6563,Misinformation,0.8,True,1
+6581,Misinformation,0.8,True,1
+6609,Misinformation,0.9,True,1
+6611,Misinformation,0.9,True,1
+6660,Misinformation,0.95,True,1
+6807,Misinformation,0.95,True,1
+690,Misinformation,0.95,True,1
+7044,Not Misinformation,0.8,True,1
+708,Not Misinformation,0.9,True,1
+7101,Not Misinformation,0.8,True,1
+7119,Not Misinformation,0.85,True,1
+7187,Not Misinformation,0.85,True,1
+723,Not Misinformation,0.7,True,1
+7259,Not Misinformation,0.9,True,1
+7330,Misinformation,0.95,True,1
+7439,Misinformation,0.9,True,1
+7469,Not Misinformation,0.85,True,1
+7506,Not Misinformation,0.75,True,1
+7531,Not Misinformation,0.85,True,1
+7551,Not Misinformation,0.8,True,1
+7601,Misinformation,0.95,True,1
+7697,Misinformation,0.85,True,1
+7759,Misinformation,0.85,True,1
+7826,Misinformation,0.95,True,1
+7904,Misinformation,0.95,True,1
+8063,Not Misinformation,0.7,True,1
+8155,Misinformation,0.95,True,1
+8165,Not Misinformation,0.85,True,1
+8196,Misinformation,0.85,True,1
+8225,Misinformation,1.0,True,1
+8341,Misinformation,0.85,True,1
+8392,Misinformation,0.95,True,1
+8411,Misinformation,0.85,True,1
+8442,Misinformation,0.95,True,1
+8531,Not Misinformation,0.7,True,1
+8719,Misinformation,0.8,True,1
+8830,Misinformation,0.95,True,1
+8858,Misinformation,0.95,True,1
+8870,Misinformation,0.9,True,1
+889,Not Misinformation,0.85,True,1
+8916,Misinformation,0.95,True,1
+9058,Misinformation,0.95,True,1
+9081,Not Misinformation,0.85,True,1
+9107,Misinformation,0.8,True,1
+9249,Misinformation,0.9,True,1
+9323,Misinformation,0.95,True,1
+9347,Not Misinformation,0.85,True,1
+9577,Not Misinformation,0.7,True,1
+966,Misinformation,0.9,True,1
+9677,Not Misinformation,0.8,True,1
+978,Not Misinformation,0.8,True,1
+992,Not Misinformation,0.95,True,1
+9974,Not Misinformation,0.8,True,1
+ds100,Not Misinformation,0.8,True,1
+ds1009,Not Misinformation,0.85,True,1
+ds1060,Not Misinformation,0.9,True,1
+ds1062,Not Misinformation,0.85,True,1
+ds1096,Not Misinformation,0.8,True,1
+ds1099,Not Misinformation,0.9,True,1
+ds1157,Not Misinformation,0.75,True,1
+ds1226,Not Misinformation,0.7,True,1
+ds1360,Not Misinformation,0.7,True,1
+ds137,Not Misinformation,0.85,True,1
+ds1370,Not Misinformation,0.95,True,1
+ds1418,Not Misinformation,0.75,True,1
+ds1547,Not Misinformation,0.85,True,1
+ds1564,Misinformation,0.95,True,1
+ds1582,Misinformation,0.9,True,1
+ds1686,Not Misinformation,0.95,True,1
+ds1754,Not Misinformation,0.95,True,1
+ds1760,Not Misinformation,0.85,True,1
+ds1829,Not Misinformation,0.9,True,1
+ds1846,Misinformation,0.85,True,1
+ds1877,Not Misinformation,0.85,True,1
+ds1963,Not Misinformation,0.8,True,1
+ds1998,Not Misinformation,0.95,True,1
+ds2006,Not Misinformation,0.7,True,1
+ds2010,Not Misinformation,0.95,True,1
+ds2066,Not Misinformation,0.95,True,1
+ds2101,Not Misinformation,0.9,True,1
+ds2126,Not Misinformation,0.8,True,1
+ds2309,Not Misinformation,0.9,True,1
+ds2311,Not Misinformation,0.95,True,1
+ds2331,Not Misinformation,0.9,True,1
+ds2354,Not Misinformation,0.9,True,1
+ds2437,Misinformation,1.0,True,1
+ds2471,Not Misinformation,0.95,True,1
+ds2474,Not Misinformation,0.95,True,1
+ds2506,Not Misinformation,0.85,True,1
+ds252,Not Misinformation,0.85,True,1
+ds2594,Misinformation,0.8,True,1
+ds2700,Not Misinformation,0.8,True,1
+ds2707,Not Misinformation,0.85,True,1
+ds2773,Not Misinformation,0.9,True,1
+ds2814,Not Misinformation,0.95,True,1
+ds2845,Not Misinformation,0.75,True,1
+ds2864,Not Misinformation,0.85,True,1
+ds2877,Not Misinformation,0.85,True,1
+ds2926,Misinformation,0.95,True,1
+ds3180,Misinformation,1.0,True,1
+ds3252,Misinformation,0.95,True,1
+ds3303,Misinformation,0.9,True,1
+ds3412,Misinformation,1.0,True,1
+ds3448,Misinformation,0.8,True,1
+ds3482,Uncertain,0.5,True,1
+ds3503,Misinformation,0.95,True,1
+ds3520,Misinformation,0.95,True,1
+ds354,Not Misinformation,0.95,True,1
+ds3649,Misinformation,1.0,True,1
+ds3706,Misinformation,0.9,True,1
+ds372,Not Misinformation,0.85,True,1
+ds3723,Misinformation,1.0,True,1
+ds3753,Not Misinformation,0.85,True,1
+ds379,Not Misinformation,0.9,True,1
+ds3839,Misinformation,0.95,True,1
+ds3859,Misinformation,0.95,True,1
+ds3871,Misinformation,1.0,True,1
+ds3931,Misinformation,1.0,True,1
+ds3938,Not Misinformation,0.85,True,1
+ds3953,Misinformation,0.8,True,1
+ds3976,Misinformation,0.95,True,1
+ds4,Not Misinformation,0.85,True,1
+ds4064,Not Misinformation,0.9,True,1
+ds4158,Misinformation,0.95,True,1
+ds4173,Not Misinformation,0.85,True,1
+ds4278,Misinformation,0.95,True,1
+ds4306,Not Misinformation,0.95,True,1
+ds4380,Misinformation,0.95,True,1
+ds4423,Misinformation,0.95,True,1
+ds4435,Misinformation,0.9,True,1
+ds4482,Misinformation,0.85,True,1
+ds451,Misinformation,0.95,True,1
+ds4587,Misinformation,0.95,True,1
+ds461,Not Misinformation,0.8,True,1
+ds4618,Not Misinformation,0.85,True,1
+ds4659,Not Misinformation,0.85,True,1
+ds4669,Misinformation,0.95,True,1
+ds4702,Not Misinformation,0.85,True,1
+ds471,Not Misinformation,0.95,True,1
+ds4717,Misinformation,0.95,True,1
+ds4724,Not Misinformation,0.85,True,1
+ds4772,Misinformation,0.95,True,1
+ds4821,Not Misinformation,0.85,True,1
+ds4857,Misinformation,0.95,True,1
+ds4880,Not Misinformation,0.85,True,1
+ds4896,Not Misinformation,0.75,True,1
+ds4910,Not Misinformation,0.9,True,1
+ds4921,Misinformation,0.95,True,1
+ds4939,Not Misinformation,0.75,True,1
+ds4946,Misinformation,0.85,True,1
+ds4978,Not Misinformation,0.85,True,1
+ds50,Not Misinformation,0.85,True,1
+ds5053,Not Misinformation,0.85,True,1
+ds5062,Misinformation,0.95,True,1
+ds511,Not Misinformation,0.95,True,1
+ds5124,Misinformation,1.0,True,1
+ds5156,Misinformation,0.95,True,1
+ds5161,Misinformation,0.95,True,1
+ds5285,Misinformation,0.95,True,1
+ds5364,Not Misinformation,0.85,True,1
+ds5403,Not Misinformation,0.85,True,1
+ds5610,Misinformation,0.95,True,1
+ds562,Not Misinformation,0.95,True,1
+ds5647,Misinformation,0.95,True,1
+ds5661,Misinformation,0.95,True,1
+ds5714,Misinformation,0.8,True,1
+ds5728,Not Misinformation,0.85,True,1
+ds5761,Misinformation,0.8,True,1
+ds5872,Misinformation,0.8,True,1
+ds5919,Misinformation,0.95,True,1
+ds6031,Misinformation,0.95,True,1
+ds6032,Not Misinformation,0.95,True,1
+ds6053,Misinformation,0.95,True,1
+ds6054,Not Misinformation,0.85,True,1
+ds6090,Misinformation,0.8,True,1
+ds6106,Misinformation,0.8,True,1
+ds6253,Misinformation,0.9,True,1
+ds6266,Misinformation,0.95,True,1
+ds6291,Misinformation,0.9,True,1
+ds6300,Misinformation,0.9,True,1
+ds6329,Misinformation,0.95,True,1
+ds6481,Not Misinformation,0.95,True,1
+ds6549,Misinformation,0.8,True,1
+ds6586,Misinformation,0.95,True,1
+ds6690,Misinformation,0.9,True,1
+ds6722,Misinformation,0.8,True,1
+ds6725,Misinformation,0.8,True,1
+ds6940,Misinformation,0.8,True,1
+ds6954,Misinformation,0.95,True,1
+ds6955,Misinformation,1.0,True,1
+ds7016,Not Misinformation,0.95,True,1
+ds7055,Misinformation,0.95,True,1
+ds709,Not Misinformation,0.85,True,1
+ds7131,Not Misinformation,0.85,True,1
+ds7198,Not Misinformation,0.8,True,1
+ds7291,Not Misinformation,0.85,True,1
+ds7360,Not Misinformation,0.85,True,1
+ds7399,Misinformation,1.0,True,1
+ds742,Not Misinformation,0.8,True,1
+ds7600,Misinformation,0.85,True,1
+ds7662,Misinformation,0.95,True,1
+ds7674,Misinformation,0.95,True,1
+ds7704,Misinformation,0.95,True,1
+ds7823,Misinformation,1.0,True,1
+ds7878,Not Misinformation,0.85,True,1
+ds7963,Misinformation,0.95,True,1
+ds7980,Misinformation,0.95,True,1
+ds8003,Misinformation,0.85,True,1
+ds803,Not Misinformation,0.85,True,1
+ds8199,Misinformation,0.95,True,1
+ds8208,Misinformation,0.85,True,1
+ds8246,Misinformation,0.95,True,1
+ds831,Not Misinformation,0.95,True,1
+ds8357,Misinformation,0.95,True,1
+ds8378,Not Misinformation,0.85,True,1
+ds8578,Not Misinformation,0.85,True,1
+ds8604,Misinformation,0.8,True,1
+ds8617,Misinformation,0.8,True,1
+ds8631,Misinformation,0.95,True,1
+ds8646,Misinformation,0.8,True,1
+ds8677,Misinformation,0.8,True,1
+ds8684,Misinformation,0.8,True,1
+ds8717,Not Misinformation,0.95,True,1
+ds8721,Not Misinformation,0.8,True,1
+ds8744,Not Misinformation,0.8,True,1
+ds8795,Not Misinformation,0.8,True,1
+ds8806,Misinformation,0.95,True,1
+ds8815,Misinformation,0.95,True,1
+ds8840,Misinformation,0.8,True,1
+ds8852,Not Misinformation,0.7,True,1
+ds8942,Not Misinformation,0.9,True,1
+ds8989,Not Misinformation,0.8,True,1
+ds9027,Misinformation,0.8,True,1
+ds9049,Not Misinformation,0.7,True,1
+ds9069,Not Misinformation,0.7,True,1
+ds9091,Misinformation,0.95,True,1
+ds9094,Misinformation,0.8,True,1
+ds9100,Misinformation,0.8,True,1
+ds9128,Misinformation,0.8,True,1
+ds9145,Misinformation,0.8,True,1
+ds9200,Misinformation,0.9,True,1
+ds9213,Misinformation,0.8,True,1
+ds9215,Misinformation,0.8,True,1
+ds9228,Not Misinformation,0.8,True,1
+ds9233,Not Misinformation,0.9,True,1
+ds9253,Not Misinformation,0.85,True,1
+ds9362,Not Misinformation,0.85,True,1
+ds9433,Misinformation,0.95,True,1
+ds9486,Misinformation,0.8,True,1
+ds9501,Misinformation,0.95,True,1
+ds9598,Misinformation,0.85,True,1
+ds9638,Not Misinformation,0.85,True,1
+ds9777,Not Misinformation,0.85,True,1
+ds9888,Not Misinformation,0.9,True,1
+ds9891,Not Misinformation,0.8,True,1
+ds9896,Misinformation,0.85,True,1
+ds9935,Misinformation,0.95,True,1
+ds994,Not Misinformation,0.95,True,1
+ds9954,Misinformation,0.85,True,1
+ds9980,Not Misinformation,0.7,True,1

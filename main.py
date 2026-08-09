@@ -116,6 +116,8 @@ RUN_METADATA_ENV_KEYS = [
     "PIPELINE_DATASET_ROOT",
     "PIPELINE_DATASET_JSON",
     "PIPELINE_WORKERS",
+    "LMSTUDIO_BASE_URL",
+    "LMSTUDIO_MODEL",
 ]
 
 
@@ -900,7 +902,7 @@ def main() -> None:
         loader = LLMModelLoader(loader_cfg)
     except Exception as e:
         print("Checker setup failed:", e)
-        print("Hints: set OPENAI_API_KEY or GOOGLE_API_KEY or DEEPINFRA_API_KEY or OPENROUTER_API_KEY; set ALIGN_PROVIDER=openai|google|deepinfra|openrouter; optionally pass --model/--image/--headline/--relevancy-limit.")
+        print("Hints: set OPENAI_API_KEY or GOOGLE_API_KEY or DEEPINFRA_API_KEY or OPENROUTER_API_KEY; for a local LM Studio server set ALIGN_PROVIDER=lmstudio (plus LMSTUDIO_BASE_URL/LMSTUDIO_MODEL); ALIGN_PROVIDER=openai|google|deepinfra|openrouter|lmstudio; optionally pass --model/--image/--headline/--relevancy-limit.")
         return
 
     # Create one LLMModelLoader per worker slot to avoid usage_total contention.

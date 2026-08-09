@@ -1,0 +1,9 @@
+[25/200] J2 done; cost $0.0128
+[50/200] J2 done; cost $0.0245
+[75/200] J2 done; cost $0.0367
+[100/200] J2 done; cost $0.0497
+[125/200] J2 done; cost $0.0615
+[150/200] J2 done; cost $0.0741
+[175/200] J2 done; cost $0.0865
+[200/200] J2 done; cost $0.0985
+J2: 200 labels, parse_failures=0, abstentions=0, cost $0.0985 -> results/judge_study/phase2/J2-gpt

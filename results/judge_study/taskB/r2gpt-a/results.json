@@ -1,0 +1,83 @@
+{
+ "n_candidates": 3,
+ "results": [
+  {
+   "id": "CB-2",
+   "n": 350,
+   "decided": 350,
+   "macro_f1": 0.5993,
+   "macro_ci": [
+    0.548,
+    0.6479
+   ],
+   "acc": 0.6029,
+   "acc_ci": [
+    0.5514,
+    0.6514
+   ],
+   "f1": 0.6371,
+   "f1_ci": [
+    0.5792,
+    0.6861
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.0,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 865.3
+  },
+  {
+   "id": "CF-verbal-top5_500",
+   "n": 350,
+   "decided": 350,
+   "macro_f1": 0.5909,
+   "macro_ci": [
+    0.5397,
+    0.641
+   ],
+   "acc": 0.5943,
+   "acc_ci": [
+    0.5429,
+    0.6429
+   ],
+   "f1": 0.6283,
+   "f1_ci": [
+    0.5692,
+    0.6786
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.0,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 789.8
+  },
+  {
+   "id": "EV-top3_300",
+   "n": 350,
+   "decided": 350,
+   "macro_f1": 0.5812,
+   "macro_ci": [
+    0.5307,
+    0.6298
+   ],
+   "acc": 0.5829,
+   "acc_ci": [
+    0.5314,
+    0.6343
+   ],
+   "f1": 0.6075,
+   "f1_ci": [
+    0.5471,
+    0.6614
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.0,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 713.9
+  }
+ ]
+}

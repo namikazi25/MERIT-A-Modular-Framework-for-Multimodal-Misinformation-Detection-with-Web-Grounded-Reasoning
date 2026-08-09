@@ -1,0 +1,60 @@
+{
+ "H1": {
+  "acc": 0.625,
+  "acc_ci": [
+   0.375,
+   0.875
+  ],
+  "f1": 0.0,
+  "abstentions": 64,
+  "vs_J1_p": 0.5,
+  "vs_J1_sig": false,
+  "beats_J1_ci": false
+ },
+ "H2": {
+  "acc": 0.73,
+  "acc_ci": [
+   0.65,
+   0.81
+  ],
+  "f1": 0.8211920529801325,
+  "abstentions": 0,
+  "vs_J1_p": 1.0,
+  "vs_J1_sig": false,
+  "beats_J1_ci": false
+ },
+ "H3": {
+  "acc": 0.6388888888888888,
+  "acc_ci": [
+   0.4722222222222222,
+   0.7777777777777778
+  ],
+  "f1": 0.5806451612903226,
+  "abstentions": 64,
+  "vs_J1_p": 1.0,
+  "vs_J1_sig": false,
+  "beats_J1_ci": false
+ },
+ "h2_folds": [
+  {
+   "fold": 1,
+   "acc": 0.8
+  },
+  {
+   "fold": 2,
+   "acc": 0.7
+  },
+  {
+   "fold": 3,
+   "acc": 0.8
+  },
+  {
+   "fold": 4,
+   "acc": 0.75
+  },
+  {
+   "fold": 5,
+   "acc": 0.6
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+  "phase": "task-B",
+  "stage": "B",
+  "run_id": "r3gpt/AB-2",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-4o-mini-2024-07-18",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/b2/AB-2.txt",
+      "sha256": "0c0445258778ea63c72d0e09c102220d0acf44d7b6d6c3f0f42838b83dc21a88"
+    }
+  ],
+  "evidence_version": "holdout",
+  "seed": null,
+  "sample_list_hash": "9c31d987900f702b3b9f0d51220a345c7d416cc56548e33c64c991356cf18ada",
+  "sample_count": 150,
+  "temperature": 0.0,
+  "timestamp": "2026-08-09T14:33:48.857438+00:00",
+  "git": {
+    "commit": "d295396e28b1465531aa607cf57ade016723e7df",
+    "dirty": true
+  },
+  "notes": "Task B candidate scored run; concurrency 1 (B.1); interventions C1+C2 active; temp 0.",
+  "candidate": "AB-2",
+  "axes": {
+    "evidence": "top3_300",
+    "citation": "must",
+    "reasoning": "direct",
+    "confidence": "raw",
+    "abstain": true
+  },
+  "prompt_sha256": "0c0445258778ea63c72d0e09c102220d0acf44d7b6d6c3f0f42838b83dc21a88",
+  "concurrency": 1,
+  "interventions_active": [
+    "C1",
+    "C2"
+  ]
+}

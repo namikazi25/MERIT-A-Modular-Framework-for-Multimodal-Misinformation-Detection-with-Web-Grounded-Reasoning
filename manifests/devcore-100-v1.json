@@ -1,0 +1,614 @@
+{
+ "task": "B.3-devcore",
+ "n": 100,
+ "seed": 20260810,
+ "parent_split": "manifests/split-500-v1.json",
+ "devcore_list_hash": "03c1373422b0afaca286921422d6c67dd389b6bfb4b586bf792072c12f700243",
+ "created": "2026-08-08T19:23:16.940665+00:00",
+ "git": {
+  "commit": "2cc743b02193bfb8d04ec631bd8d0a648c5c09e1",
+  "dirty": true
+ },
+ "dev_core": [
+  {
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_77.png",
+   "sample_id": "9577",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_27.png",
+   "sample_id": "ds9027",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_439.png",
+   "sample_id": "7439",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_480.png",
+   "sample_id": "ds9980",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_63.png",
+   "sample_id": "8063",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_221.png",
+   "sample_id": "ds8721",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_362.png",
+   "sample_id": "ds9362",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_253.png",
+   "sample_id": "ds9253",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_219.png",
+   "sample_id": "8719",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_454.png",
+   "sample_id": "ds9954",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_323.png",
+   "sample_id": "9323",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_49.png",
+   "sample_id": "ds9049",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_259.png",
+   "sample_id": "7259",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_117.png",
+   "sample_id": "ds8617",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_145.png",
+   "sample_id": "ds9145",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_228.png",
+   "sample_id": "ds9228",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_291.png",
+   "sample_id": "ds7291",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_81.png",
+   "sample_id": "9081",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_155.png",
+   "sample_id": "8155",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_image_edit_test_500/coco_image_edit_test_200.png",
+   "sample_id": "ds9200",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_131.png",
+   "sample_id": "ds7131",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_330.png",
+   "sample_id": "8830",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_184.png",
+   "sample_id": "ds8684",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_199.png",
+   "sample_id": "ds8199",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_330.png",
+   "sample_id": "7330",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_341.png",
+   "sample_id": "8341",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_259.png",
+   "sample_id": "7759",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/coco_text_edit_test_500/coco_text_edit_test_315.png",
+   "sample_id": "ds8815",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_187.png",
+   "sample_id": "7187",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Newsclipings_person_test_500/Newsclipings_person_test_469.png",
+   "sample_id": "7469",
+   "fake_cls": "mismatch",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/real/bbc_test_500/bbc_test_4.png",
+   "sample_id": "ds4",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/coco_test_500/coco_test_6.png",
+   "sample_id": "ds2006",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/usa_today_test_500/usa_today_test_478.png",
+   "sample_id": "978",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/guardian_test_500/guardian_test_64.png",
+   "sample_id": "ds1564",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/guardian_test_500/guardian_test_498.png",
+   "sample_id": "ds1998",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_6.png",
+   "sample_id": "ds2506",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_345.png",
+   "sample_id": "ds2845",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/coco_test_500/coco_test_311.png",
+   "sample_id": "ds2311",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/wash_test_500/wash_test_62.png",
+   "sample_id": "ds1062",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/wash_test_500/wash_test_99.png",
+   "sample_id": "ds1099",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_415.png",
+   "sample_id": "2915",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/coco_test_500/coco_test_354.png",
+   "sample_id": "ds2354",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_364.png",
+   "sample_id": "ds2864",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/coco_test_500/coco_test_437.png",
+   "sample_id": "ds2437",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/coco_test_500/coco_test_169.png",
+   "sample_id": "2169",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/usa_today_test_500/usa_today_test_492.png",
+   "sample_id": "992",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_426.png",
+   "sample_id": "ds2926",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_256.png",
+   "sample_id": "2756",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/wash_test_500/wash_test_157.png",
+   "sample_id": "ds1157",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_94.png",
+   "sample_id": "ds2594",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/guardian_test_500/guardian_test_295.png",
+   "sample_id": "1795",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/wash_test_500/wash_test_60.png",
+   "sample_id": "ds1060",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/wash_test_500/wash_test_436.png",
+   "sample_id": "1436",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/usa_today_test_500/usa_today_test_494.png",
+   "sample_id": "ds994",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/guardian_test_500/guardian_test_254.png",
+   "sample_id": "ds1754",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/fakeddit_test_500/fakeddit_test_326.png",
+   "sample_id": "2826",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/coco_test_500/coco_test_101.png",
+   "sample_id": "ds2101",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/bbc_test_500/bbc_test_451.png",
+   "sample_id": "ds451",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/bbc_test_500/bbc_test_372.png",
+   "sample_id": "ds372",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/real/guardian_test_500/guardian_test_329.png",
+   "sample_id": "ds1829",
+   "fake_cls": "original",
+   "gt": "True"
+  },
+  {
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_642.png",
+   "sample_id": "4642",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/llm_science_md_generation_test_100/gpt_generation_science_test_md_48.png",
+   "sample_id": "ds5647",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/fever_AI_test_1000/fever_test_dalle_304.png",
+   "sample_id": "ds3303",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_53.png",
+   "sample_id": "ds5053",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_60.png",
+   "sample_id": "5060",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_13.png",
+   "sample_id": "5013",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_240.png",
+   "sample_id": "5939",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_0.png",
+   "sample_id": "5000",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_278.png",
+   "sample_id": "ds4278",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_557.png",
+   "sample_id": "4557",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_161.png",
+   "sample_id": "ds5161",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_72.png",
+   "sample_id": "ds4821",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_15.png",
+   "sample_id": "ds5714",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_284.png",
+   "sample_id": "4284",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/chatgpt_match_test_500/chatgpt_match_test_403.png",
+   "sample_id": "ds5403",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_718.png",
+   "sample_id": "4718",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/llm_gossip_md_generation_test_100/gpt_generation_gossipcop_test_md_76.png",
+   "sample_id": "5575",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_840.png",
+   "sample_id": "ds3839",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_230.png",
+   "sample_id": "4230",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_504.png",
+   "sample_id": "ds3503",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_211.png",
+   "sample_id": "4960",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_278.png",
+   "sample_id": "5977",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_981.png",
+   "sample_id": "3980",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/fever_AI_test_1000/fever_test_dalle_398.png",
+   "sample_id": "3397",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_724.png",
+   "sample_id": "ds4724",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_190.png",
+   "sample_id": "ds4939",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/llm_science_md_generation_test_100/gpt_generation_science_test_SD_11.png",
+   "sample_id": "ds5610",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/fever_AI_test_1000/fever_test_md_416.png",
+   "sample_id": "3415",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_64.png",
+   "sample_id": "ds4064",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/rumor_match_test_750/rumor_match_test_717.png",
+   "sample_id": "ds4717",
+   "fake_cls": "textual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/antifact_image_generation_test_500/visualnews_mani_test_55.png",
+   "sample_id": "ds6954",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_292.png",
+   "sample_id": "ds6291",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_226.png",
+   "sample_id": "ds6725",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_267.png",
+   "sample_id": "ds6266",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_32.png",
+   "sample_id": "ds6031",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_27.png",
+   "sample_id": "6026",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/antifact_image_generation_test_500/visualnews_mani_test_41.png",
+   "sample_id": "ds6940",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_482.png",
+   "sample_id": "ds6481",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_120.png",
+   "sample_id": "6119",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  },
+  {
+   "image_path": "/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_50.png",
+   "sample_id": "ds6549",
+   "fake_cls": "visual_veracity_distortion",
+   "gt": "Fake"
+  }
+ ]
+}

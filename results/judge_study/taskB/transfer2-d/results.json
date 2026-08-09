@@ -1,0 +1,28 @@
+{
+ "n_candidates": 1,
+ "results": [
+  {
+   "id": "BASE",
+   "n": 100,
+   "decided": 100,
+   "macro_f1": 0.5593,
+   "macro_ci": [
+    0.4598,
+    0.65
+   ],
+   "acc": 0.56,
+   "acc_ci": [
+    0.46,
+    0.65
+   ],
+   "f1": 0.5769,
+   "f1_ci": [
+    0.4565,
+    0.678
+   ],
+   "abstentions": 0,
+   "parse_failures": 0,
+   "seconds": 209.0
+  }
+ ]
+}

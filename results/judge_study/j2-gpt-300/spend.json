@@ -1,0 +1,16 @@
+{
+  "judge": "J2",
+  "tokens": {
+    "gpt-4o-mini-2024-07-18": {
+      "prompt": 786642,
+      "completion": 53533,
+      "retried": 0
+    }
+  },
+  "cost_usd": 0.15011609999999997,
+  "cap": 15.0,
+  "cap_undefined": false,
+  "n": 300,
+  "parse_failures": 0,
+  "abstentions": 0
+}

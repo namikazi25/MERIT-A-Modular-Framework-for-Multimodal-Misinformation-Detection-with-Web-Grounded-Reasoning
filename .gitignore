@@ -2,6 +2,11 @@
 __pycache__/
 *.pyc
 
+# Virtual environments
+.venv/
+venv/
+env/
+
 # Env
 .env
 .env.production
@@ -34,3 +39,6 @@ digest.txt
 todo.txt
 repo-backup.git/
 *.bundle
+evidence/
+
+*.log

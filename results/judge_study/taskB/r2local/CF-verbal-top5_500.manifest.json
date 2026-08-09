@@ -1,0 +1,42 @@
+{
+  "phase": "task-B",
+  "stage": "B",
+  "run_id": "r2local/CF-verbal-top5_500",
+  "model": {
+    "provider": "lmstudio",
+    "id": "qwen/qwen3.6-35b-a3b",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/b2/CF-verbal-top5_500.txt",
+      "sha256": "60a254ab89748080ac95ee6fd054871134c39caf2aff28034e1d736266fab491"
+    }
+  ],
+  "evidence_version": "dev",
+  "seed": null,
+  "sample_list_hash": "76a1d3ff3ea47a2fa5db83d0087c1ff51b129905d9785120ae4a0d2b92643ff7",
+  "sample_count": 350,
+  "temperature": 0.0,
+  "timestamp": "2026-08-09T15:54:24.158985+00:00",
+  "git": {
+    "commit": "ccf7659513c8a0038d2ab04c637b6675c20d31bb",
+    "dirty": true
+  },
+  "notes": "Task B candidate scored run; concurrency 1 (B.1); interventions C1+C2 active; temp 0.",
+  "candidate": "CF-verbal-top5_500",
+  "axes": {
+    "evidence": "top5_500",
+    "citation": "must",
+    "reasoning": "direct",
+    "confidence": "verbal",
+    "abstain": false
+  },
+  "prompt_sha256": "60a254ab89748080ac95ee6fd054871134c39caf2aff28034e1d736266fab491",
+  "concurrency": 1,
+  "interventions_active": [
+    "C1",
+    "C2"
+  ]
+}

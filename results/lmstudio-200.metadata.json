@@ -1,0 +1,88 @@
+{
+  "run_id": "lmstudio-200",
+  "started_at": "2026-08-07T20:42:00.813996+00:00",
+  "paths": {
+    "jsonl": "results/lmstudio-200.jsonl",
+    "html": "results/lmstudio-200.html",
+    "checkpoint_dir": "results/checkpoints/lmstudio-200"
+  },
+  "dataset": {
+    "root": "data/MMFakeBench_test",
+    "json": "data/MMFakeBench_test/source/MMFakeBench_test.json",
+    "stratify": [
+      "fake_cls"
+    ]
+  },
+  "modules": {
+    "relevancy": true,
+    "visual_veracity": true,
+    "questions": true,
+    "question_answering": true,
+    "judge": true
+  },
+  "args": {
+    "image": null,
+    "headline": null,
+    "model": "",
+    "temperature": 0.0,
+    "relevancy_limit": 1,
+    "max_samples": 200,
+    "q_chains": 3,
+    "q_per_chain": 3,
+    "answer_questions": true,
+    "answer_max_sources": 5,
+    "dataset_root": "data/MMFakeBench_test",
+    "dataset_json": "",
+    "dataset_stratify": "fake_cls",
+    "emit_json": true,
+    "judge": true,
+    "save_jsonl": "results/lmstudio-200.jsonl",
+    "html_report": "results/lmstudio-200.html",
+    "html_title": "Pipeline Results",
+    "html_inline_images": false,
+    "disable_relevancy": false,
+    "disable_visual": false,
+    "disable_questions": false,
+    "disable_judge": false,
+    "checkpoint_dir": "results/checkpoints/lmstudio-200",
+    "checkpoint_size": 20,
+    "workers": 2
+  },
+  "environment": {
+    "ALIGN_PROVIDER": "lmstudio",
+    "ALIGN_MODEL": "",
+    "ALIGN_TEMPERATURE": "0.2",
+    "PIPELINE_MAX_SAMPLES": "1",
+    "PIPELINE_HTML_REPORT": "",
+    "PIPELINE_HTML_TITLE": "Pipeline Results",
+    "PIPELINE_HTML_INLINE_IMAGES": "0",
+    "PIPELINE_CHECKPOINT_DIR": "",
+    "PIPELINE_CHECKPOINT_SIZE": "100",
+    "PIPELINE_RESUME": "",
+    "PIPELINE_OUTPUT_JSONL": "",
+    "PIPELINE_DISABLE_RELEVANCY": "0",
+    "PIPELINE_DISABLE_VISUAL": "0",
+    "PIPELINE_DISABLE_QUESTIONS": "0",
+    "PIPELINE_DISABLE_JUDGE": "0",
+    "SEARCH_PROVIDER": "duckduckgo",
+    "ANSWER_ENABLE": "1",
+    "ANSWER_MAX_SOURCES": "5",
+    "LMSTUDIO_BASE_URL": "http://localhost:1234/v1",
+    "LMSTUDIO_MODEL": "qwen/qwen3.6-35b-a3b"
+  },
+  "git": {
+    "commit": "6d5d38a5dd6a1ecd146acd827fa8650b7b0d153b",
+    "dirty": true
+  },
+  "resume_from": null,
+  "status": "completed",
+  "target_samples": 200,
+  "progress": {
+    "processed_samples": 200,
+    "target_samples": 200
+  },
+  "last_checkpoint": "results/checkpoints/lmstudio-200/lmstudio-200.upto00200.json",
+  "completed_at": "2026-08-08T11:50:45.262482+00:00",
+  "duration_seconds": 54524.448,
+  "outputs_count": 200
+}

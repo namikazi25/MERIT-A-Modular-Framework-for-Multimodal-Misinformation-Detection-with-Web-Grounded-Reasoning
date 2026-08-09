@@ -1,0 +1,301 @@
+sample_id,label,confidence,abstain,parse_ok,attempts,calls
+ds100,Not Misinformation,0.85,False,True,1,1
+ds1009,Not Misinformation,1.0,False,True,1,1
+ds1039,Not Misinformation,0.8,False,True,1,1
+ds1055,Misinformation,0.9,False,True,1,1
+ds1060,Not Misinformation,0.9,False,True,1,1
+ds1062,Not Misinformation,0.9,False,True,1,1
+ds1095,Not Misinformation,0.8,False,True,1,1
+ds1096,Misinformation,0.9,False,True,1,1
+ds1099,Not Misinformation,0.9,False,True,1,1
+ds1157,Misinformation,0.9,False,True,1,1
+ds1226,Misinformation,0.9,False,True,1,1
+ds1268,Not Misinformation,0.9,False,True,1,1
+ds1310,Not Misinformation,1.0,False,True,1,1
+ds1360,Misinformation,0.9,False,True,1,1
+ds137,Not Misinformation,0.9,False,True,1,1
+ds1370,Not Misinformation,0.95,False,True,1,1
+ds1418,Misinformation,0.8,False,True,1,1
+ds1427,Misinformation,0.8,False,True,1,1
+ds1547,Misinformation,0.9,False,True,1,1
+ds1564,Misinformation,1.0,False,True,1,1
+ds1582,Misinformation,0.9,False,True,1,1
+ds1645,Not Misinformation,0.9,False,True,1,1
+ds1686,Not Misinformation,0.9,False,True,1,1
+ds1754,Not Misinformation,0.9,False,True,1,1
+ds1760,Misinformation,1.0,False,True,1,1
+ds1829,Not Misinformation,0.9,False,True,1,1
+ds1833,Not Misinformation,1.0,False,True,1,1
+ds1846,Misinformation,0.9,False,True,1,1
+ds1877,Not Misinformation,1.0,False,True,1,1
+ds1963,Not Misinformation,0.9,False,True,1,1
+ds1998,Not Misinformation,0.9,False,True,1,1
+ds2006,Not Misinformation,0.8,False,True,1,1
+ds2010,Not Misinformation,0.95,False,True,1,1
+ds2066,Not Misinformation,0.95,False,True,1,1
+ds2082,Misinformation,0.8,False,True,1,1
+ds2101,Not Misinformation,0.9,False,True,1,1
+ds2126,Misinformation,0.9,False,True,1,1
+ds2220,Not Misinformation,0.95,False,True,1,1
+ds2309,Not Misinformation,0.9,False,True,1,1
+ds231,Not Misinformation,0.9,False,True,1,1
+ds2311,Misinformation,0.9,False,True,1,1
+ds2331,Not Misinformation,0.9,False,True,1,1
+ds2354,Not Misinformation,0.9,False,True,1,1
+ds2361,Misinformation,0.8,False,True,1,1
+ds2385,Not Misinformation,0.95,False,True,1,1
+ds2437,Misinformation,0.9,False,True,1,1
+ds2441,Not Misinformation,0.9,False,True,1,1
+ds2471,Not Misinformation,0.9,False,True,1,1
+ds2474,Not Misinformation,0.95,False,True,1,1
+ds25,Not Misinformation,0.9,False,True,1,1
+ds2506,Not Misinformation,0.9,False,True,1,1
+ds2519,Not Misinformation,0.9,False,True,1,1
+ds252,Not Misinformation,0.9,False,True,1,1
+ds257,Not Misinformation,1.0,False,True,1,1
+ds2591,Misinformation,0.8,False,True,1,1
+ds2594,Misinformation,0.9,False,True,1,1
+ds2620,Misinformation,0.9,False,True,1,1
+ds2700,Not Misinformation,0.9,False,True,1,1
+ds2707,Misinformation,0.9,False,True,1,1
+ds2726,Misinformation,1.0,False,True,1,1
+ds2773,Not Misinformation,0.9,False,True,1,1
+ds2814,Not Misinformation,0.9,False,True,1,1
+ds2819,Not Misinformation,0.95,False,True,1,1
+ds2828,Misinformation,0.9,False,True,1,1
+ds2845,Misinformation,0.9,False,True,1,1
+ds2864,Misinformation,0.9,False,True,1,1
+ds2877,Not Misinformation,0.9,False,True,1,1
+ds2926,Misinformation,1.0,False,True,1,1
+ds2971,Not Misinformation,0.8,False,True,1,1
+ds3031,Misinformation,0.9,False,True,1,1
+ds3180,Misinformation,1.0,False,True,1,1
+ds3252,Misinformation,1.0,False,True,1,1
+ds3303,Misinformation,0.9,False,True,1,1
+ds3318,Misinformation,1.0,False,True,1,1
+ds3333,Misinformation,1.0,False,True,1,1
+ds3412,Misinformation,1.0,False,True,1,1
+ds3448,Misinformation,0.8,False,True,1,1
+ds3479,Misinformation,0.9,False,True,1,1
+ds3482,Misinformation,0.9,False,True,1,1
+ds3503,Misinformation,0.9,False,True,1,1
+ds3520,Misinformation,1.0,False,True,1,1
+ds354,Not Misinformation,1.0,False,True,1,1
+ds3543,Misinformation,1.0,False,True,1,1
+ds3649,Misinformation,1.0,False,True,1,1
+ds368,Not Misinformation,0.9,False,True,1,1
+ds3699,Misinformation,0.9,False,True,1,1
+ds3706,Misinformation,0.9,False,True,1,1
+ds372,Not Misinformation,0.8,False,True,1,1
+ds3723,Misinformation,1.0,False,True,1,1
+ds3753,Misinformation,0.9,False,True,1,1
+ds3759,Misinformation,0.9,False,True,1,1
+ds3778,Misinformation,0.9,False,True,1,1
+ds379,Misinformation,0.9,False,True,1,1
+ds3839,Misinformation,0.9,False,True,1,1
+ds3859,Misinformation,1.0,False,True,1,1
+ds3871,Misinformation,1.0,False,True,1,1
+ds3873,Misinformation,1.0,False,True,1,1
+ds3931,Misinformation,1.0,False,True,1,1
+ds3938,Misinformation,0.9,False,True,1,1
+ds3953,Misinformation,0.9,False,True,1,1
+ds3976,Misinformation,1.0,False,True,1,1
+ds4,Not Misinformation,0.9,False,True,1,1
+ds4064,Not Misinformation,0.9,False,True,1,1
+ds4122,Misinformation,0.9,False,True,1,1
+ds4158,Misinformation,0.9,False,True,1,1
+ds4173,Misinformation,0.9,False,True,1,1
+ds4223,Misinformation,0.9,False,True,1,1
+ds4278,Misinformation,0.9,False,True,1,1
+ds4306,Not Misinformation,1.0,False,True,1,1
+ds4341,Not Misinformation,0.8,False,True,1,1
+ds4380,Misinformation,1.0,False,True,1,1
+ds4423,Misinformation,1.0,False,True,1,1
+ds4435,Misinformation,0.9,False,True,1,1
+ds4480,Misinformation,0.9,False,True,1,1
+ds4482,Misinformation,0.9,False,True,1,1
+ds4496,Misinformation,0.9,False,True,1,1
+ds451,Not Misinformation,0.9,False,True,1,1
+ds4587,Misinformation,0.8,False,True,1,1
+ds461,Not Misinformation,0.9,False,True,1,1
+ds4618,Not Misinformation,0.9,False,True,1,1
+ds4624,Not Misinformation,0.9,False,True,1,1
+ds4659,Not Misinformation,0.9,False,True,1,1
+ds4669,Misinformation,0.9,False,True,1,1
+ds4702,Misinformation,0.8,False,True,1,1
+ds471,Not Misinformation,0.9,False,True,1,1
+ds4717,Misinformation,0.9,False,True,1,1
+ds4724,Misinformation,0.9,False,True,1,1
+ds4772,Misinformation,0.9,False,True,1,1
+ds4821,Misinformation,0.8,False,True,1,1
+ds4827,Misinformation,0.9,False,True,1,1
+ds4857,Misinformation,0.9,False,True,1,1
+ds4873,Misinformation,0.9,False,True,1,1
+ds4880,Not Misinformation,0.9,False,True,1,1
+ds4896,Misinformation,0.8,False,True,1,1
+ds4910,Not Misinformation,0.9,False,True,1,1
+ds4921,Misinformation,0.9,False,True,1,1
+ds4939,Misinformation,0.8,False,True,1,1
+ds4946,Misinformation,0.9,False,True,1,1
+ds496,Misinformation,0.9,False,True,1,1
+ds4978,Not Misinformation,0.9,False,True,1,1
+ds4996,Misinformation,0.9,False,True,1,1
+ds50,Not Misinformation,0.9,False,True,1,1
+ds5053,Not Misinformation,0.8,False,True,1,1
+ds5062,Misinformation,1.0,False,True,1,1
+ds511,Not Misinformation,0.95,False,True,1,1
+ds5124,Misinformation,1.0,False,True,1,1
+ds5156,Misinformation,0.9,False,True,1,1
+ds5161,Misinformation,0.9,False,True,1,1
+ds5171,Not Misinformation,0.9,False,True,1,1
+ds5218,Misinformation,0.9,False,True,1,1
+ds5236,Misinformation,0.9,False,True,1,1
+ds5285,Misinformation,0.9,False,True,1,1
+ds5295,Misinformation,0.9,False,True,1,1
+ds5364,Not Misinformation,0.9,False,True,1,1
+ds5403,Not Misinformation,0.9,False,True,1,1
+ds5483,Misinformation,0.9,False,True,1,1
+ds5492,Misinformation,0.8,False,True,1,1
+ds5523,Misinformation,0.9,False,True,1,1
+ds5561,Misinformation,0.9,False,True,1,1
+ds5610,Misinformation,0.9,False,True,1,1
+ds562,Not Misinformation,0.9,False,True,1,1
+ds5647,Misinformation,0.9,False,True,1,1
+ds5661,Misinformation,0.9,False,True,1,1
+ds5704,Misinformation,0.9,False,True,1,1
+ds5714,Misinformation,0.9,False,True,1,1
+ds5728,Misinformation,0.9,False,True,1,1
+ds5761,Misinformation,0.8,False,True,1,1
+ds5791,Misinformation,1.0,False,True,1,1
+ds5872,Misinformation,0.9,False,True,1,1
+ds5903,Not Misinformation,0.9,False,True,1,1
+ds5919,Misinformation,0.9,False,True,1,1
+ds6031,Misinformation,0.9,False,True,1,1
+ds6032,Misinformation,0.9,False,True,1,1
+ds6053,Misinformation,0.9,False,True,1,1
+ds6054,Misinformation,0.9,False,True,1,1
+ds6090,Misinformation,0.9,False,True,1,1
+ds6106,Misinformation,0.9,False,True,1,1
+ds6222,Misinformation,0.9,False,True,1,1
+ds6253,Misinformation,0.9,False,True,1,1
+ds6266,Misinformation,0.9,False,True,1,1
+ds6291,Misinformation,0.9,False,True,1,1
+ds6300,Misinformation,0.9,False,True,1,1
+ds6329,Misinformation,0.9,False,True,1,1
+ds6407,Misinformation,0.8,False,True,1,1
+ds6410,Misinformation,0.9,False,True,1,1
+ds6481,Not Misinformation,1.0,False,True,1,1
+ds6549,Misinformation,0.8,False,True,1,1
+ds6586,Misinformation,0.9,False,True,1,1
+ds6600,Misinformation,0.8,False,True,1,1
+ds6628,Misinformation,0.9,False,True,1,1
+ds6633,Misinformation,0.9,False,True,1,1
+ds6690,Misinformation,0.9,False,True,1,1
+ds6722,Misinformation,0.9,False,True,1,1
+ds6725,Misinformation,0.8,False,True,1,1
+ds6749,Misinformation,0.9,False,True,1,1
+ds6862,Misinformation,0.9,False,True,1,1
+ds6883,Misinformation,0.9,False,True,1,1
+ds6925,Misinformation,1.0,False,True,1,1
+ds693,Not Misinformation,0.9,False,True,1,1
+ds6940,Misinformation,0.8,False,True,1,1
+ds6954,Misinformation,0.9,False,True,1,1
+ds6955,Misinformation,0.9,False,True,1,1
+ds7016,Not Misinformation,1.0,False,True,1,1
+ds7042,Misinformation,0.9,False,True,1,1
+ds7055,Misinformation,0.9,False,True,1,1
+ds709,Misinformation,0.8,False,True,1,1
+ds7120,Not Misinformation,1.0,False,True,1,1
+ds7131,Misinformation,0.8,False,True,1,1
+ds7153,Misinformation,0.9,False,True,1,1
+ds7168,Misinformation,0.9,False,True,1,1
+ds7198,Not Misinformation,0.9,False,True,1,1
+ds7291,Not Misinformation,0.9,False,True,1,1
+ds7310,Misinformation,0.9,False,True,1,1
+ds7360,Not Misinformation,0.9,False,True,1,1
+ds7399,Misinformation,1.0,False,True,1,1
+ds7402,Misinformation,0.9,False,True,1,1
+ds742,Misinformation,0.9,False,True,1,1
+ds7476,Not Misinformation,0.9,False,True,1,1
+ds7600,Not Misinformation,0.8,False,True,1,1
+ds7618,Not Misinformation,0.8,False,True,1,1
+ds7619,Misinformation,0.9,False,True,1,1
+ds7662,Misinformation,0.9,False,True,1,1
+ds7674,Misinformation,0.8,False,True,1,1
+ds7704,Misinformation,0.9,False,True,1,1
+ds7823,Misinformation,0.9,False,True,1,1
+ds7878,Not Misinformation,0.9,False,True,1,1
+ds7963,Not Misinformation,1.0,False,True,1,1
+ds7980,Misinformation,1.0,False,True,1,1
+ds8003,Misinformation,0.9,False,True,1,1
+ds803,Not Misinformation,0.9,False,True,1,1
+ds8037,Misinformation,0.9,False,True,1,1
+ds8167,Misinformation,0.9,False,True,1,1
+ds8184,Misinformation,1.0,False,True,1,1
+ds8199,Not Misinformation,1.0,False,True,1,1
+ds8208,Not Misinformation,0.8,False,True,1,1
+ds8246,Misinformation,0.9,False,True,1,1
+ds831,Not Misinformation,1.0,False,True,1,1
+ds8357,Not Misinformation,0.8,False,True,1,1
+ds8378,Not Misinformation,0.9,False,True,1,1
+ds842,Not Misinformation,1.0,False,True,1,1
+ds8465,Not Misinformation,0.9,False,True,1,1
+ds8473,Misinformation,0.9,False,True,1,1
+ds857,Misinformation,0.8,False,True,1,1
+ds8578,Not Misinformation,0.8,False,True,1,1
+ds8583,Not Misinformation,0.9,False,True,1,1
+ds8604,Misinformation,0.9,False,True,1,1
+ds8617,Misinformation,0.9,False,True,1,1
+ds8631,Misinformation,0.9,False,True,1,1
+ds8638,Not Misinformation,0.8,False,True,1,1
+ds8646,Misinformation,0.9,False,True,1,1
+ds8677,Misinformation,0.9,False,True,1,1
+ds8684,Misinformation,0.8,False,True,1,1
+ds8717,Not Misinformation,0.9,False,True,1,1
+ds8721,Not Misinformation,0.9,False,True,1,1
+ds8744,Misinformation,0.9,False,True,1,1
+ds8795,Not Misinformation,0.8,False,True,1,1
+ds8806,Misinformation,0.9,False,True,1,1
+ds8815,Misinformation,0.9,False,True,1,1
+ds8840,Misinformation,0.9,False,True,1,1
+ds8852,Misinformation,0.8,False,True,1,1
+ds8855,Not Misinformation,0.8,False,True,1,1
+ds8857,Not Misinformation,0.9,False,True,1,1
+ds8904,Misinformation,0.9,False,True,1,1
+ds8939,Misinformation,0.9,False,True,1,1
+ds8942,Not Misinformation,0.9,False,True,1,1
+ds8989,Not Misinformation,0.9,False,True,1,1
+ds9027,Misinformation,0.8,False,True,1,1
+ds9049,Misinformation,0.8,False,True,1,1
+ds9069,Misinformation,0.9,False,True,1,1
+ds9091,Misinformation,0.9,False,True,1,1
+ds9094,Misinformation,0.9,False,True,1,1
+ds9098,Not Misinformation,0.8,False,True,1,1
+ds9100,Misinformation,0.9,False,True,1,1
+ds9128,Misinformation,0.9,False,True,1,1
+ds9145,Misinformation,0.9,False,True,1,1
+ds9200,Misinformation,0.9,False,True,1,1
+ds9213,Misinformation,0.8,False,True,1,1
+ds9215,Misinformation,0.8,False,True,1,1
+ds9228,Not Misinformation,0.9,False,True,1,1
+ds9233,Not Misinformation,0.9,False,True,1,1
+ds9253,Not Misinformation,0.9,False,True,1,1
+ds927,Not Misinformation,0.9,False,True,1,1
+ds9362,Misinformation,0.8,False,True,1,1
+ds9372,Misinformation,0.9,False,True,1,1
+ds9406,Misinformation,0.9,False,True,1,1
+ds9433,Misinformation,0.8,False,True,1,1
+ds9486,Misinformation,0.9,False,True,1,1
+ds9492,Misinformation,0.8,False,True,1,1
+ds9501,Misinformation,0.9,False,True,1,1
+ds9568,Misinformation,0.8,False,True,1,1
+ds9598,Misinformation,0.8,False,True,1,1
+ds9638,Not Misinformation,0.9,False,True,1,1
+ds9777,Not Misinformation,0.9,False,True,1,1
+ds9888,Misinformation,0.9,False,True,1,1
+ds9891,Not Misinformation,0.9,False,True,1,1
+ds9896,Misinformation,0.9,False,True,1,1
+ds9935,Misinformation,0.9,False,True,1,1
+ds994,Not Misinformation,0.9,False,True,1,1
+ds9954,Misinformation,0.9,False,True,1,1
+ds9980,Not Misinformation,0.8,False,True,1,1

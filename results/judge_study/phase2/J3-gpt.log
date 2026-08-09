@@ -1,0 +1,9 @@
+[25/200] J3 done; cost $0.0391
+[50/200] J3 done; cost $0.0753
+[75/200] J3 done; cost $0.1128
+[100/200] J3 done; cost $0.1529
+[125/200] J3 done; cost $0.1900
+[150/200] J3 done; cost $0.2301
+[175/200] J3 done; cost $0.2679
+[200/200] J3 done; cost $0.3053
+J3: 200 labels, parse_failures=0, abstentions=0, cost $0.3053 -> results/judge_study/phase2/J3-gpt

@@ -1,0 +1,200 @@
+1021 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=1106 comp=226 retried=0 ~$0.0000
+104 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=2257 comp=434 retried=0 ~$0.0000
+1047 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=3270 comp=647 retried=0 ~$0.0000
+1052 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=4276 comp=815 retried=0 ~$0.0000
+1152 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=5243 comp=959 retried=0 ~$0.0000
+1204 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=6308 comp=1187 retried=0 ~$0.0000
+1231 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=7439 comp=1424 retried=0 ~$0.0000
+1318 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=8657 comp=1687 retried=0 ~$0.0000
+1383 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=9692 comp=1859 retried=0 ~$0.0000
+1436 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=10630 comp=2033 retried=0 ~$0.0000
+1449 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=11713 comp=2203 retried=0 ~$0.0000
+1500 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=12795 comp=2430 retried=0 ~$0.0000
+1505 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=13929 comp=2729 retried=0 ~$0.0000
+1586 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=14935 comp=2900 retried=0 ~$0.0000
+160 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=15899 comp=3147 retried=0 ~$0.0000
+1750 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=16867 comp=3308 retried=0 ~$0.0000
+1782 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=18117 comp=3547 retried=0 ~$0.0000
+1792 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=19207 comp=3758 retried=0 ~$0.0000
+1795 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=20265 comp=3925 retried=0 ~$0.0000
+1818 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=21258 comp=4166 retried=0 ~$0.0000
+1901 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=22591 comp=4403 retried=0 ~$0.0000
+1970 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=23630 comp=4576 retried=0 ~$0.0000
+1972 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=24714 comp=4747 retried=0 ~$0.0000
+2004 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=25669 comp=4940 retried=0 ~$0.0000
+2046 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=26662 comp=5093 retried=0 ~$0.0000
+2047 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=27821 comp=5222 retried=0 ~$0.0000
+2134 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=28996 comp=5386 retried=0 ~$0.0000
+2169 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=30064 comp=5603 retried=0 ~$0.0000
+2237 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=31157 comp=5744 retried=0 ~$0.0000
+2273 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=32134 comp=5976 retried=0 ~$0.0000
+243 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=33154 comp=6173 retried=0 ~$0.0000
+2501 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=34123 comp=6364 retried=0 ~$0.0000
+2504 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=35108 comp=6537 retried=0 ~$0.0000
+251 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=36257 comp=6735 retried=0 ~$0.0000
+2604 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=37332 comp=6927 retried=0 ~$0.0000
+2649 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=38331 comp=7093 retried=0 ~$0.0000
+2677 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=39380 comp=7339 retried=0 ~$0.0000
+2728 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=40404 comp=7548 retried=0 ~$0.0000
+2731 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=41440 comp=7714 retried=0 ~$0.0000
+2756 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=42771 comp=7848 retried=0 ~$0.0000
+2826 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=43861 comp=8058 retried=0 ~$0.0000
+2915 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=44861 comp=8222 retried=0 ~$0.0000
+2929 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=45877 comp=8390 retried=0 ~$0.0000
+3025 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=47089 comp=8577 retried=0 ~$0.0000
+3081 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=48024 comp=8767 retried=0 ~$0.0000
+3169 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=49163 comp=8953 retried=0 ~$0.0000
+3397 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=50338 comp=9064 retried=0 ~$0.0000
+3405 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=51522 comp=9211 retried=0 ~$0.0000
+3415 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=52585 comp=9383 retried=0 ~$0.0000
+3477 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=53703 comp=9556 retried=0 ~$0.0000
+3537 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=54861 comp=9661 retried=0 ~$0.0000
+3574 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=55812 comp=9856 retried=0 ~$0.0000
+365 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=57130 comp=9966 retried=0 ~$0.0000
+3651 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=58084 comp=10119 retried=0 ~$0.0000
+3766 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=59527 comp=10267 retried=0 ~$0.0000
+3769 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=60611 comp=10429 retried=0 ~$0.0000
+3826 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=61803 comp=10609 retried=0 ~$0.0000
+3855 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=62878 comp=10765 retried=0 ~$0.0000
+3899 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=63895 comp=11014 retried=0 ~$0.0000
+3933 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=65386 comp=11208 retried=0 ~$0.0000
+3980 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=66354 comp=11372 retried=0 ~$0.0000
+3983 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=67482 comp=11486 retried=0 ~$0.0000
+40 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=68591 comp=11724 retried=0 ~$0.0000
+4046 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=69526 comp=11860 retried=0 ~$0.0000
+4050 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=70660 comp=12091 retried=0 ~$0.0000
+4063 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=71673 comp=12340 retried=0 ~$0.0000
+4106 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=72671 comp=12531 retried=0 ~$0.0000
+4125 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=73731 comp=12748 retried=0 ~$0.0000
+4147 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=74726 comp=12902 retried=0 ~$0.0000
+4186 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=75739 comp=13092 retried=0 ~$0.0000
+4217 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=76753 comp=13380 retried=0 ~$0.0000
+4230 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=78080 comp=13614 retried=0 ~$0.0000
+4284 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=79196 comp=13839 retried=0 ~$0.0000
+4300 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=80229 comp=14026 retried=0 ~$0.0000
+4314 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=81281 comp=14175 retried=0 ~$0.0000
+4368 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=82296 comp=14320 retried=0 ~$0.0000
+4430 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=83290 comp=14483 retried=0 ~$0.0000
+4432 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=84477 comp=14661 retried=0 ~$0.0000
+4510 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=85513 comp=14866 retried=0 ~$0.0000
+4557 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=86528 comp=15047 retried=0 ~$0.0000
+4580 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=87557 comp=15240 retried=0 ~$0.0000
+4642 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=88695 comp=15400 retried=0 ~$0.0000
+4647 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=89732 comp=16260 retried=0 ~$0.0000
+4718 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=90726 comp=16476 retried=0 ~$0.0000
+4752 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=91982 comp=16660 retried=0 ~$0.0000
+4893 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=93004 comp=16812 retried=0 ~$0.0000
+4905 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=94193 comp=16957 retried=0 ~$0.0000
+4960 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=95246 comp=17175 retried=0 ~$0.0000
+5000 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=96339 comp=17335 retried=0 ~$0.0000
+5013 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=97358 comp=17492 retried=0 ~$0.0000
+5049 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=98397 comp=17747 retried=0 ~$0.0000
+5060 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=99768 comp=17943 retried=0 ~$0.0000
+5084 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=100878 comp=18123 retried=0 ~$0.0000
+5158 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=102171 comp=18263 retried=0 ~$0.0000
+5286 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=103185 comp=18462 retried=0 ~$0.0000
+5292 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=104164 comp=18611 retried=0 ~$0.0000
+5317 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=105486 comp=18812 retried=0 ~$0.0000
+534 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=106452 comp=18999 retried=0 ~$0.0000
+5357 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=107502 comp=19223 retried=0 ~$0.0000
+540 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=108630 comp=19464 retried=0 ~$0.0000
+5524 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=109723 comp=19710 retried=0 ~$0.0000
+5575 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=110788 comp=19923 retried=0 ~$0.0000
+561 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=111811 comp=20072 retried=0 ~$0.0000
+5697 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=113279 comp=20235 retried=0 ~$0.0000
+578 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=114618 comp=20477 retried=0 ~$0.0000
+5834 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=115714 comp=20659 retried=0 ~$0.0000
+5916 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=117014 comp=20854 retried=0 ~$0.0000
+5939 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=118220 comp=21015 retried=0 ~$0.0000
+595 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=119205 comp=21198 retried=0 ~$0.0000
+5977 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=120223 comp=21365 retried=0 ~$0.0000
+6026 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=121336 comp=21497 retried=0 ~$0.0000
+6113 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=122346 comp=21705 retried=0 ~$0.0000
+6114 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=123457 comp=21853 retried=0 ~$0.0000
+6119 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=124871 comp=21980 retried=0 ~$0.0000
+6149 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=126064 comp=22121 retried=0 ~$0.0000
+6218 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=127164 comp=22316 retried=0 ~$0.0000
+6327 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=128255 comp=22441 retried=0 ~$0.0000
+6395 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=129329 comp=22579 retried=0 ~$0.0000
+6399 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=130416 comp=22726 retried=0 ~$0.0000
+6424 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=131570 comp=22892 retried=0 ~$0.0000
+6440 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=132694 comp=23014 retried=0 ~$0.0000
+6563 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=133805 comp=23125 retried=0 ~$0.0000
+6581 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=135146 comp=23267 retried=0 ~$0.0000
+6609 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=136255 comp=23393 retried=0 ~$0.0000
+6611 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=137548 comp=23518 retried=0 ~$0.0000
+6629 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=138660 comp=23662 retried=0 ~$0.0000
+6652 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=139847 comp=23838 retried=0 ~$0.0000
+6660 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=140968 comp=24023 retried=0 ~$0.0000
+6707 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=142242 comp=24159 retried=0 ~$0.0000
+6807 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=143349 comp=24305 retried=0 ~$0.0000
+690 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=144431 comp=24511 retried=0 ~$0.0000
+7044 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=145588 comp=24720 retried=0 ~$0.0000
+708 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=146809 comp=24928 retried=0 ~$0.0000
+7101 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=147816 comp=25130 retried=0 ~$0.0000
+7119 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=149095 comp=25371 retried=0 ~$0.0000
+7134 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=150357 comp=25541 retried=0 ~$0.0000
+7187 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=151430 comp=25722 retried=0 ~$0.0000
+723 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=152447 comp=26367 retried=0 ~$0.0000
+7259 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=153405 comp=26524 retried=0 ~$0.0000
+7324 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=154473 comp=26738 retried=0 ~$0.0000
+7330 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=155581 comp=26882 retried=0 ~$0.0000
+7439 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=156624 comp=27055 retried=0 ~$0.0000
+7469 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=157740 comp=27268 retried=0 ~$0.0000
+7506 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=158925 comp=27501 retried=0 ~$0.0000
+7531 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=160008 comp=27693 retried=0 ~$0.0000
+7551 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=161143 comp=27892 retried=0 ~$0.0000
+7569 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=162195 comp=28115 retried=0 ~$0.0000
+7574 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=163504 comp=28330 retried=0 ~$0.0000
+7601 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=164803 comp=28501 retried=0 ~$0.0000
+7647 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=165836 comp=28637 retried=0 ~$0.0000
+7667 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=166971 comp=28761 retried=0 ~$0.0000
+7697 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=168001 comp=28954 retried=0 ~$0.0000
+7759 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=169233 comp=29164 retried=0 ~$0.0000
+7826 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=170525 comp=29319 retried=0 ~$0.0000
+7904 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=171628 comp=29472 retried=0 ~$0.0000
+7989 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=172700 comp=29623 retried=0 ~$0.0000
+8063 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=173779 comp=29800 retried=0 ~$0.0000
+8155 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=175192 comp=29969 retried=0 ~$0.0000
+8165 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=176201 comp=30179 retried=0 ~$0.0000
+8196 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=177168 comp=30464 retried=0 ~$0.0000
+8225 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=178126 comp=30617 retried=0 ~$0.0000
+8341 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=179100 comp=30777 retried=0 ~$0.0000
+8346 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=180224 comp=30936 retried=0 ~$0.0000
+8392 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=181244 comp=31082 retried=0 ~$0.0000
+8411 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=182320 comp=31298 retried=0 ~$0.0000
+8442 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=183324 comp=31447 retried=0 ~$0.0000
+8443 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=184407 comp=31639 retried=0 ~$0.0000
+8491 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=185363 comp=31811 retried=0 ~$0.0000
+8496 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=186348 comp=32035 retried=0 ~$0.0000
+8531 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=187453 comp=32219 retried=0 ~$0.0000
+8666 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=188675 comp=32328 retried=0 ~$0.0000
+8670 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=189821 comp=32460 retried=0 ~$0.0000
+87 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=190807 comp=32616 retried=0 ~$0.0000
+8719 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=192165 comp=32740 retried=0 ~$0.0000
+8830 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=193113 comp=32907 retried=0 ~$0.0000
+8858 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=194168 comp=33088 retried=0 ~$0.0000
+8870 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=195376 comp=33210 retried=0 ~$0.0000
+889 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=196470 comp=33437 retried=0 ~$0.0000
+8916 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=197451 comp=33613 retried=0 ~$0.0000
+9058 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=198486 comp=33756 retried=0 ~$0.0000
+9081 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=199664 comp=33947 retried=0 ~$0.0000
+9107 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=201040 comp=34071 retried=0 ~$0.0000
+9191 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=202147 comp=34208 retried=0 ~$0.0000
+9232 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=203252 comp=34331 retried=0 ~$0.0000
+9249 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=204404 comp=34460 retried=0 ~$0.0000
+9268 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=205446 comp=34636 retried=0 ~$0.0000
+9285 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=206545 comp=34833 retried=0 ~$0.0000
+9323 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=207508 comp=34982 retried=0 ~$0.0000
+9347 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=208769 comp=35178 retried=0 ~$0.0000
+939 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=209832 comp=35388 retried=0 ~$0.0000
+9538 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=211086 comp=35536 retried=0 ~$0.0000
+957 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=212131 comp=35733 retried=0 ~$0.0000
+9577 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=213167 comp=35982 retried=0 ~$0.0000
+9601 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=214246 comp=36192 retried=0 ~$0.0000
+966 -> Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=215377 comp=36389 retried=0 ~$0.0000
+9677 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=216536 comp=36649 retried=0 ~$0.0000
+9715 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=217599 comp=36895 retried=0 ~$0.0000
+978 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=218586 comp=37078 retried=0 ~$0.0000
+992 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=219585 comp=37232 retried=0 ~$0.0000
+9974 -> Not Misinformation (attempts=1) qwen/qwen3.6-35b-a3b: prompt=220589 comp=37441 retried=0 ~$0.0000

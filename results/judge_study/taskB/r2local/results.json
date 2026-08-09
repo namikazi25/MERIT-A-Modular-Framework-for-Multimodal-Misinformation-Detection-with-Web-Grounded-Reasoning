@@ -1,0 +1,265 @@
+{
+ "n_candidates": 10,
+ "results": [
+  {
+   "id": "CB-17",
+   "n": 348,
+   "decided": 348,
+   "macro_f1": 0.675,
+   "macro_ci": [
+    0.6227,
+    0.7243
+   ],
+   "acc": 0.6897,
+   "acc_ci": [
+    0.6408,
+    0.7385
+   ],
+   "f1": 0.7441,
+   "f1_ci": [
+    0.6923,
+    0.7917
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.007787,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 2,
+   "seconds": 1978.4
+  },
+  {
+   "id": "EV-top3_300",
+   "n": 350,
+   "decided": 350,
+   "macro_f1": 0.6709,
+   "macro_ci": [
+    0.6169,
+    0.7189
+   ],
+   "acc": 0.6886,
+   "acc_ci": [
+    0.64,
+    0.7343
+   ],
+   "f1": 0.7471,
+   "f1_ci": [
+    0.7019,
+    0.7891
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.016348,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 1886.3
+  },
+  {
+   "id": "CF-verbal-top3_300",
+   "n": 349,
+   "decided": 349,
+   "macro_f1": 0.667,
+   "macro_ci": [
+    0.6133,
+    0.7162
+   ],
+   "acc": 0.6819,
+   "acc_ci": [
+    0.6304,
+    0.7307
+   ],
+   "f1": 0.7376,
+   "f1_ci": [
+    0.689,
+    0.7793
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.007508,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 1,
+   "seconds": 3144.8
+  },
+  {
+   "id": "CB-2",
+   "n": 349,
+   "decided": 349,
+   "macro_f1": 0.6668,
+   "macro_ci": [
+    0.6109,
+    0.7157
+   ],
+   "acc": 0.6791,
+   "acc_ci": [
+    0.6246,
+    0.7278
+   ],
+   "f1": 0.7308,
+   "f1_ci": [
+    0.6749,
+    0.7743
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.005355,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 1,
+   "seconds": 3883.5
+  },
+  {
+   "id": "AB-2",
+   "n": 341,
+   "decided": 341,
+   "macro_f1": 0.6663,
+   "macro_ci": [
+    0.6153,
+    0.7158
+   ],
+   "acc": 0.6833,
+   "acc_ci": [
+    0.6334,
+    0.7331
+   ],
+   "f1": 0.7416,
+   "f1_ci": [
+    0.6918,
+    0.7897
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.007149,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 7,
+   "seconds": 2362.6
+  },
+  {
+   "id": "CF-verbal-top5_500",
+   "n": 347,
+   "decided": 347,
+   "macro_f1": 0.6638,
+   "macro_ci": [
+    0.612,
+    0.7129
+   ],
+   "acc": 0.683,
+   "acc_ci": [
+    0.634,
+    0.7291
+   ],
+   "f1": 0.7442,
+   "f1_ci": [
+    0.6977,
+    0.7873
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.008641,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 3,
+   "seconds": 2795.2
+  },
+  {
+   "id": "CB-19",
+   "n": 348,
+   "decided": 348,
+   "macro_f1": 0.6628,
+   "macro_ci": [
+    0.607,
+    0.7132
+   ],
+   "acc": 0.681,
+   "acc_ci": [
+    0.6293,
+    0.727
+   ],
+   "f1": 0.7413,
+   "f1_ci": [
+    0.693,
+    0.785
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.007508,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 2,
+   "seconds": 2330.7
+  },
+  {
+   "id": "BASE",
+   "n": 347,
+   "decided": 347,
+   "macro_f1": 0.6541,
+   "macro_ci": [
+    0.6001,
+    0.7037
+   ],
+   "acc": 0.6744,
+   "acc_ci": [
+    0.6225,
+    0.7205
+   ],
+   "f1": 0.7378,
+   "f1_ci": [
+    0.6895,
+    0.7795
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.001547,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 3,
+   "seconds": 2000.2
+  },
+  {
+   "id": "CB-7",
+   "n": 349,
+   "decided": 349,
+   "macro_f1": 0.65,
+   "macro_ci": [
+    0.5952,
+    0.696
+   ],
+   "acc": 0.659,
+   "acc_ci": [
+    0.6046,
+    0.7049
+   ],
+   "f1": 0.7062,
+   "f1_ci": [
+    0.6486,
+    0.7551
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.000337,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 1,
+   "seconds": 4259.5
+  },
+  {
+   "id": "CT-free",
+   "n": 348,
+   "decided": 348,
+   "macro_f1": 0.6465,
+   "macro_ci": [
+    0.5955,
+    0.6953
+   ],
+   "acc": 0.658,
+   "acc_ci": [
+    0.6092,
+    0.704
+   ],
+   "f1": 0.7105,
+   "f1_ci": [
+    0.6615,
+    0.7566
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.000227,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 2,
+   "seconds": 2739.3
+  }
+ ]
+}

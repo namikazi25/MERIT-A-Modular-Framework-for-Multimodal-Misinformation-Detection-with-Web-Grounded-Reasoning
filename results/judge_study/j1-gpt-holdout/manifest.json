@@ -1,0 +1,31 @@
+{
+  "phase": "phase-0",
+  "stage": "B",
+  "run_id": "j1-gpt-holdout",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-4o-mini-2024-07-18",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/j1_rule_prompt.txt",
+      "sha256": "dd243131e03523d39ccaafce5d1f08124b4b5c681bb0c9e72b7c851641ee5880"
+    }
+  ],
+  "evidence_version": "hold150-v1",
+  "seed": null,
+  "sample_list_hash": "9d5e7d86660d796c40011685087241391c8bda16306f09350ad1d05e47d96803",
+  "sample_count": 150,
+  "temperature": 0.0,
+  "timestamp": "2026-08-09T13:58:48.665874+00:00",
+  "git": {
+    "commit": "d295396e28b1465531aa607cf57ade016723e7df",
+    "dirty": true
+  },
+  "notes": "current judge logic (judge_from_structured) unchanged; no vision; single LLM call per sample.",
+  "evidence_dir": "evidence/hold150-v1",
+  "max_attempts": 3,
+  "prompt_sha256": "dd243131e03523d39ccaafce5d1f08124b4b5c681bb0c9e72b7c851641ee5880"
+}

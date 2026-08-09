@@ -1,0 +1,54 @@
+{
+ "summary": [
+  {
+   "concurrency": 1,
+   "wall": 93.0,
+   "prompt_tokens": 32134,
+   "completion_tokens": 5976,
+   "tok_per_sec": 409.8,
+   "swap_before": "vm.swapusage: total = 7168.00M  used = 5729.69M  free = 1438.31M  (encrypted)",
+   "swap_after": "vm.swapusage: total = 7168.00M  used = 5641.69M  free = 1526.31M  (encrypted)"
+  },
+  {
+   "concurrency": 2,
+   "wall": 56.3,
+   "prompt_tokens": 32134,
+   "completion_tokens": 5968,
+   "tok_per_sec": 677.2,
+   "swap_before": "vm.swapusage: total = 7168.00M  used = 5641.69M  free = 1526.31M  (encrypted)",
+   "swap_after": "vm.swapusage: total = 7168.00M  used = 5641.69M  free = 1526.31M  (encrypted)"
+  },
+  {
+   "concurrency": 4,
+   "wall": 41.2,
+   "prompt_tokens": 32134,
+   "completion_tokens": 5942,
+   "tok_per_sec": 923.3,
+   "swap_before": "vm.swapusage: total = 7168.00M  used = 5641.69M  free = 1526.31M  (encrypted)",
+   "swap_after": "vm.swapusage: total = 7168.00M  used = 5625.69M  free = 1542.31M  (encrypted)"
+  }
+ ],
+ "identical_across_concurrency": false,
+ "diff_samples": [
+  "1021",
+  "104",
+  "1047",
+  "1052",
+  "1152",
+  "1204",
+  "1231",
+  "1318",
+  "1383",
+  "1436",
+  "1449",
+  "1500",
+  "1505",
+  "1586",
+  "160",
+  "1750",
+  "1782",
+  "1792",
+  "1795",
+  "1818"
+ ]
+}

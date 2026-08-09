@@ -1,0 +1,101 @@
+sample_id,label,confidence,stats
+9577,Misinformation,0.9,{}
+ds9027,Misinformation,1.0,{}
+7439,Misinformation,0.9,{}
+ds9980,Misinformation,0.8,{}
+8063,Misinformation,0.9,{}
+ds8721,Misinformation,0.8,{}
+ds9362,Misinformation,0.8,{}
+ds9253,Not Misinformation,0.8,{}
+8719,Misinformation,0.9,{}
+ds9954,Misinformation,0.9,{}
+9323,Misinformation,0.8,{}
+ds9049,Misinformation,0.8,{}
+7259,Not Misinformation,0.9,{}
+ds8617,Misinformation,1.0,{}
+ds9145,Misinformation,1.0,{}
+ds9228,Not Misinformation,0.8,{}
+ds7291,Not Misinformation,0.8,{}
+9081,Not Misinformation,0.7,{}
+8155,Misinformation,0.9,{}
+ds9200,Misinformation,1.0,{}
+ds7131,Misinformation,0.8,{}
+8830,Misinformation,0.8,{}
+ds8684,Misinformation,0.9,{}
+ds8199,Misinformation,0.9,{}
+7330,Misinformation,0.9,{}
+8341,Misinformation,0.8,{}
+7759,Misinformation,0.8,{}
+ds8815,Misinformation,0.9,{}
+7187,Not Misinformation,0.8,{}
+7469,Not Misinformation,0.9,{}
+ds4,Misinformation,0.9,{}
+ds2006,Not Misinformation,0.7,{}
+978,Misinformation,0.8,{}
+ds1564,Misinformation,0.9,{}
+ds1998,Misinformation,0.9,{}
+ds2506,Misinformation,0.9,{}
+ds2845,Misinformation,0.9,{}
+ds2311,Misinformation,0.9,{}
+ds1062,Misinformation,0.9,{}
+ds1099,Misinformation,0.9,{}
+2915,Misinformation,0.8,{}
+ds2354,Not Misinformation,0.8,{}
+ds2864,Misinformation,0.8,{}
+ds2437,Misinformation,0.9,{}
+2169,Not Misinformation,0.8,{}
+992,Not Misinformation,0.8,{}
+ds2926,Misinformation,0.9,{}
+2756,Misinformation,1.0,{}
+ds1157,Misinformation,0.9,{}
+ds2594,Misinformation,0.9,{}
+1795,Not Misinformation,0.9,{}
+ds1060,Misinformation,0.9,{}
+1436,Misinformation,0.9,{}
+ds994,Not Misinformation,0.9,{}
+ds1754,Not Misinformation,0.9,{}
+2826,Not Misinformation,0.8,{}
+ds2101,Not Misinformation,0.9,{}
+ds451,Misinformation,1.0,{}
+ds372,Misinformation,0.8,{}
+ds1829,Misinformation,0.9,{}
+4642,Misinformation,0.9,{}
+ds5647,Misinformation,0.9,{}
+ds3303,Misinformation,0.9,{}
+ds5053,Misinformation,0.8,{}
+5060,Misinformation,0.9,{}
+5013,Misinformation,0.9,{}
+5939,Misinformation,0.9,{}
+5000,Misinformation,0.9,{}
+ds4278,Misinformation,0.9,{}
+4557,Not Misinformation,0.8,{}
+ds5161,Misinformation,0.9,{}
+ds4821,Misinformation,0.9,{}
+ds5714,Misinformation,0.9,{}
+4284,Misinformation,0.8,{}
+ds5403,Misinformation,0.9,{}
+4718,Misinformation,0.9,{}
+5575,Misinformation,0.9,{}
+ds3839,Misinformation,1.0,{}
+4230,Misinformation,0.9,{}
+ds3503,Misinformation,1.0,{}
+4960,Misinformation,0.9,{}
+5977,Misinformation,0.9,{}
+3980,Misinformation,0.9,{}
+3397,Misinformation,1.0,{}
+ds4724,Misinformation,0.9,{}
+ds4939,Misinformation,0.8,{}
+ds5610,Misinformation,0.9,{}
+3415,Misinformation,0.9,{}
+ds4064,Misinformation,0.9,{}
+ds4717,Misinformation,0.8,{}
+ds6954,Misinformation,1.0,{}
+ds6291,Misinformation,0.9,{}
+ds6725,Misinformation,1.0,{}
+ds6266,Misinformation,1.0,{}
+ds6031,Misinformation,1.0,{}
+6026,Misinformation,1.0,{}
+ds6940,Misinformation,0.8,{}
+ds6481,Not Misinformation,0.9,{}
+6119,Misinformation,1.0,{}
+ds6549,Misinformation,1.0,{}

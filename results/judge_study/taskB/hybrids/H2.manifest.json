@@ -1,0 +1,29 @@
+{
+  "phase": "task-B",
+  "stage": "B",
+  "run_id": "hybrids/H2",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-4o-mini-2024-07-18",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [],
+  "evidence_version": "dev-core",
+  "seed": null,
+  "sample_list_hash": "cfb7c7c3c61fad06aac22717fc8b5717ae19894d9d9c8323df63cb218d136409",
+  "sample_count": 100,
+  "temperature": 0.0,
+  "timestamp": "2026-08-09T12:37:00.026149+00:00",
+  "git": {
+    "commit": "23cd36354f02ad51ac9796e3972dc84cfb629301",
+    "dirty": true
+  },
+  "notes": "Hybrid H2; sufficiency ratings from gpt pass; H2 supervised 5-fold CV (NOT training-free).",
+  "hybrid": "H2",
+  "concurrency": 1,
+  "interventions_active": [
+    "C1",
+    "C2"
+  ]
+}

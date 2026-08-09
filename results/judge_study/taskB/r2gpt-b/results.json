@@ -1,0 +1,83 @@
+{
+ "n_candidates": 3,
+ "results": [
+  {
+   "id": "CB-19",
+   "n": 350,
+   "decided": 350,
+   "macro_f1": 0.5962,
+   "macro_ci": [
+    0.5444,
+    0.6443
+   ],
+   "acc": 0.6,
+   "acc_ci": [
+    0.5486,
+    0.6486
+   ],
+   "f1": 0.6354,
+   "f1_ci": [
+    0.5761,
+    0.6853
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.0,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 833.0
+  },
+  {
+   "id": "CF-verbal-top3_300",
+   "n": 350,
+   "decided": 350,
+   "macro_f1": 0.5947,
+   "macro_ci": [
+    0.5453,
+    0.6418
+   ],
+   "acc": 0.5971,
+   "acc_ci": [
+    0.5457,
+    0.6457
+   ],
+   "f1": 0.626,
+   "f1_ci": [
+    0.5645,
+    0.6769
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.0,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 704.5
+  },
+  {
+   "id": "CT-free",
+   "n": 350,
+   "decided": 350,
+   "macro_f1": 0.5822,
+   "macro_ci": [
+    0.5334,
+    0.6337
+   ],
+   "acc": 0.5829,
+   "acc_ci": [
+    0.5343,
+    0.6343
+   ],
+   "f1": 0.5989,
+   "f1_ci": [
+    0.5398,
+    0.6531
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.0,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 850.7
+  }
+ ]
+}

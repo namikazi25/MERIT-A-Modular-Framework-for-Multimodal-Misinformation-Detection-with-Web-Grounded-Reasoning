@@ -1,0 +1,447 @@
+{
+ "task": "B.2",
+ "n": 44,
+ "created": "2026-08-08T20:57:44.421044+00:00",
+ "candidates": [
+  {
+   "id": "J1REF",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/J1REF.txt",
+   "prompt_sha256": "15c97f7fbfc6e20e52f7427fe4ee85a913e55366ea387d73b828a01764001e4d"
+  },
+  {
+   "id": "BASE",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/BASE.txt",
+   "prompt_sha256": "8479e058b150daca1af96b7f7bd37982e732042b8fa6c32c0070a06ddac9b200"
+  },
+  {
+   "id": "EV-none",
+   "evidence": "none",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/EV-none.txt",
+   "prompt_sha256": "5d78ee6381003d467be354f1adc8d62719fc5d21cd9254c2452c2ef4a6378cbb"
+  },
+  {
+   "id": "EV-top3_300",
+   "evidence": "top3_300",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/EV-top3_300.txt",
+   "prompt_sha256": "da8e831fdf473cbeee0960b9073b1dd2f01d081186b15b817029f7e57ca98ef7"
+  },
+  {
+   "id": "EV-full",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/EV-full.txt",
+   "prompt_sha256": "26ab249023d9bf2e221aa87468bea0bf409dc9d40634780f7004615b2ce40f78"
+  },
+  {
+   "id": "CT-free",
+   "evidence": "top5_500",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CT-free.txt",
+   "prompt_sha256": "13fea49948c8e6768e2b3a5b5481d6b442badbb11804fb3fca3b37f19fcb15c3"
+  },
+  {
+   "id": "RS-rationale_first",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "rationale_first",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/RS-rationale_first.txt",
+   "prompt_sha256": "e5c1b5956bb7f3c45e169a2a10259f925546091cf2f7790e0a9a47203984191b"
+  },
+  {
+   "id": "RS-checklist",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "checklist",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/RS-checklist.txt",
+   "prompt_sha256": "2ea8a029fdf6a560005e24144b3b2a9227bd291dc0b477a8e61571c105682a86"
+  },
+  {
+   "id": "CF-verbal-none",
+   "evidence": "none",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CF-verbal-none.txt",
+   "prompt_sha256": "fd1f3afc38f5ff838270b10353ccaa518b1fc41f2e3ddf162461f226e7c9f52f"
+  },
+  {
+   "id": "CF-verbal-top3_300",
+   "evidence": "top3_300",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CF-verbal-top3_300.txt",
+   "prompt_sha256": "42e94faa47e13096ec5c0aa33b0ef3964e7c18b5eee6083be60f4f5ea62f7fd8"
+  },
+  {
+   "id": "CF-verbal-top5_500",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CF-verbal-top5_500.txt",
+   "prompt_sha256": "60a254ab89748080ac95ee6fd054871134c39caf2aff28034e1d736266fab491"
+  },
+  {
+   "id": "CF-verbal-full",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CF-verbal-full.txt",
+   "prompt_sha256": "aa6eb30ca7ae412129c5370dac3ee54336619f9d966e773ec69a5e5f4b7cb2bf"
+  },
+  {
+   "id": "CB-1",
+   "evidence": "top3_300",
+   "citation": "must",
+   "reasoning": "rationale_first",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-1.txt",
+   "prompt_sha256": "9d3f5a3f6d3f91b91895e8a78cac4b1ccfcb9aea973f2446c3e13f793a732fd6"
+  },
+  {
+   "id": "CB-2",
+   "evidence": "top3_300",
+   "citation": "must",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-2.txt",
+   "prompt_sha256": "e90347a237fac33a1a683a68a9837d397e78b0e09288bc81b5400fbc8efe7c39"
+  },
+  {
+   "id": "CB-3",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "rationale_first",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-3.txt",
+   "prompt_sha256": "e74d78e4bddbee75990dafee459e4a52ceff98fd2d5567aa042c82a6a9f1e0e3"
+  },
+  {
+   "id": "CB-4",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "rationale_first",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-4.txt",
+   "prompt_sha256": "b5415b0fff71fc692d777167ae78f8e9342a51957f865f85e468480f502bb81b"
+  },
+  {
+   "id": "CB-5",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "checklist",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-5.txt",
+   "prompt_sha256": "af98c9a78f92b561f45932880c01e3e28d4a24b20671a682cc822df3ba9a1dfd"
+  },
+  {
+   "id": "CB-6",
+   "evidence": "top3_300",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-6.txt",
+   "prompt_sha256": "8a2cb468387197fe652adcffd1427651e623832407aa8da9e21d8dbf50c70e3e"
+  },
+  {
+   "id": "CB-7",
+   "evidence": "top5_500",
+   "citation": "free",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-7.txt",
+   "prompt_sha256": "f97bc71940175acbdad7cc05a42dadcd6042182d7262fcaa9052e286f993fd0a"
+  },
+  {
+   "id": "CB-8",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "checklist",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-8.txt",
+   "prompt_sha256": "fae2e6957bbbc5c4ecbb9c64451739896627b1caacf32f759e7bc55a39df3884"
+  },
+  {
+   "id": "CB-9",
+   "evidence": "full",
+   "citation": "free",
+   "reasoning": "checklist",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-9.txt",
+   "prompt_sha256": "8639bd6440fa6078f1a25e612c4a473ea2e75cccf39989c15a2337c3352bce6d"
+  },
+  {
+   "id": "CB-10",
+   "evidence": "top3_300",
+   "citation": "must",
+   "reasoning": "checklist",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-10.txt",
+   "prompt_sha256": "58b785977f96e122a046008e434c3cef8234a47ba6b55d83feb58b1a3e6c90c1"
+  },
+  {
+   "id": "CB-11",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-11.txt",
+   "prompt_sha256": "1110749b784377da503d96f6542d949dfb914b625353eabf184b076259484d55"
+  },
+  {
+   "id": "CB-12",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "checklist",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-12.txt",
+   "prompt_sha256": "1d8a5bd29b29b4c211f00e856755fe14260029c8ef4987d580cc05559b296619"
+  },
+  {
+   "id": "AB-1",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": true,
+   "prompt_path": "prompts/judge_study/b2/AB-1.txt",
+   "prompt_sha256": "e2d090a87ae17231218d09a6d999ee9034b7bfdb1f42d6208fb5445a84ed0875"
+  },
+  {
+   "id": "AB-2",
+   "evidence": "top3_300",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": true,
+   "prompt_path": "prompts/judge_study/b2/AB-2.txt",
+   "prompt_sha256": "0c0445258778ea63c72d0e09c102220d0acf44d7b6d6c3f0f42838b83dc21a88"
+  },
+  {
+   "id": "AB-3",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": true,
+   "prompt_path": "prompts/judge_study/b2/AB-3.txt",
+   "prompt_sha256": "263a6981608ea88c60a782db0d4c15f5a8f22449428d7935b42728156cafd8cb"
+  },
+  {
+   "id": "CF-verbal-none-A",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CF-verbal-none-A.txt",
+   "prompt_sha256": "614897d662bee7ba6dc24f66ae0a5edd2704d02f7bed17e049147fe5f29d6f81"
+  },
+  {
+   "id": "CF-raw-none",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CF-raw-none.txt",
+   "prompt_sha256": "15c97f7fbfc6e20e52f7427fe4ee85a913e55366ea387d73b828a01764001e4d"
+  },
+  {
+   "id": "CB-13",
+   "evidence": "top3_300",
+   "citation": "free",
+   "reasoning": "checklist",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-13.txt",
+   "prompt_sha256": "b6817b383878f38bfac638b6888f77b9bc9226d844ee98cfcd8d1e79c4ad001e"
+  },
+  {
+   "id": "CB-14",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-14.txt",
+   "prompt_sha256": "fdf26704846e099187e2e77c4d02e57e62ee9ef756bac0083ecabbf2030f8826"
+  },
+  {
+   "id": "CB-15",
+   "evidence": "none",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-15.txt",
+   "prompt_sha256": "fd1f3afc38f5ff838270b10353ccaa518b1fc41f2e3ddf162461f226e7c9f52f"
+  },
+  {
+   "id": "CB-16",
+   "evidence": "top5_500",
+   "citation": "free",
+   "reasoning": "checklist",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-16.txt",
+   "prompt_sha256": "f603ce93efae66eefac932b80a500b620736ca8a45487efba99428880b946394"
+  },
+  {
+   "id": "CB-17",
+   "evidence": "top3_300",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-17.txt",
+   "prompt_sha256": "42e94faa47e13096ec5c0aa33b0ef3964e7c18b5eee6083be60f4f5ea62f7fd8"
+  },
+  {
+   "id": "CB-18",
+   "evidence": "full",
+   "citation": "free",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-18.txt",
+   "prompt_sha256": "019303b2dd4b50e0edecd66f3967d00aa262a778e0c709c988d74eccda508c1c"
+  },
+  {
+   "id": "CB-19",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-19.txt",
+   "prompt_sha256": "60a254ab89748080ac95ee6fd054871134c39caf2aff28034e1d736266fab491"
+  },
+  {
+   "id": "CB-20",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-20.txt",
+   "prompt_sha256": "17f0d7058d7caf3cceb8c3a903c9e4c4bbd1c33de0a8fce506dd441bc13c6921"
+  },
+  {
+   "id": "CB-21",
+   "evidence": "top5_500",
+   "citation": "must",
+   "reasoning": "checklist",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-21.txt",
+   "prompt_sha256": "af98c9a78f92b561f45932880c01e3e28d4a24b20671a682cc822df3ba9a1dfd"
+  },
+  {
+   "id": "CB-22",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-22.txt",
+   "prompt_sha256": "aa6eb30ca7ae412129c5370dac3ee54336619f9d966e773ec69a5e5f4b7cb2bf"
+  },
+  {
+   "id": "CB-23",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "checklist",
+   "confidence": "raw",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-23.txt",
+   "prompt_sha256": "233f2e55b723357ed293326c09603e04acbb3e34892d2a55f1d2c9dd24755d85"
+  },
+  {
+   "id": "AB-4",
+   "evidence": "full",
+   "citation": "must",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": true,
+   "prompt_path": "prompts/judge_study/b2/AB-4.txt",
+   "prompt_sha256": "e33909b3b619b9f3508aad6baabfce799b11e8c2b911fefa0bc0500ffdbbf77a"
+  },
+  {
+   "id": "AB-5",
+   "evidence": "top3_300",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "raw",
+   "abstain": true,
+   "prompt_path": "prompts/judge_study/b2/AB-5.txt",
+   "prompt_sha256": "f2f67c8ee815bdc1759ffc3ab596d4ce2157f29b8619fc6dfd2e53f848703177"
+  },
+  {
+   "id": "AB-6",
+   "evidence": "none",
+   "citation": "free",
+   "reasoning": "direct",
+   "confidence": "verbal",
+   "abstain": true,
+   "prompt_path": "prompts/judge_study/b2/AB-6.txt",
+   "prompt_sha256": "263a6981608ea88c60a782db0d4c15f5a8f22449428d7935b42728156cafd8cb"
+  },
+  {
+   "id": "CB-24",
+   "evidence": "top3_300",
+   "citation": "free",
+   "reasoning": "rationale_first",
+   "confidence": "verbal",
+   "abstain": false,
+   "prompt_path": "prompts/judge_study/b2/CB-24.txt",
+   "prompt_sha256": "6ec82af244e4d47e399a725968b7d5fb342d7fab4931fe1f3ab61e0bdb599c21"
+  }
+ ]
+}

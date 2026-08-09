@@ -51,3 +51,42 @@ Widened per review: full Round-1 top-10 scored on gpt-4o-mini, dev core (100), ~
 **Spearman rho (n=10) = 0.370 < 0.5 → inversion confirmed.** Local-optimized judge rankings do NOT transfer to the API model. Pattern: the abstain-capable AB-2 (sufficiency-gated) is gpt's best but only local's 7th; CT-free (no citation requirement) collapses on gpt (5th → 10th); the verbal-confidence variants are the most rank-stable across models.
 
 **Consequence:** Round 2 advances on **gpt-4o-mini ranking** (primary judge model); local runs in parallel as a sensitivity column only. Reported per the B.4 protocol; not a footnote.
+
+
+---
+
+## Round 2 (gpt-primary, 350 dev) + confidence-elicitation findings
+
+Round 2 scored the Round-1 top-10 on the full 350 dev with gpt-4o-mini (primary; local sensitivity column running in parallel). J1-gpt dev baseline acc = 0.7514.
+
+| rank | candidate | macroF1 [CI] | acc | beats J1 (CI) |
+|---|---|---|---|---|
+| 1 | AB-2 (sufficiency-gated, abstain) | 0.6174 [0.569, 0.669] | 0.622 | no |
+| 2 | CB-2 | 0.5993 [0.548, 0.648] | 0.603 | no |
+| 3 | BASE (J2B-like) | 0.5988 [0.548, 0.648] | 0.603 | no |
+| 4 | CB-19 | 0.5962 | 0.600 | no |
+| 5 | CF-verbal-top3_300 | 0.5947 | 0.597 | no |
+| 6 | CF-verbal-top5_500 | 0.5909 | 0.594 | no |
+| 7 | CB-17 | 0.5893 | 0.591 | no |
+| 8 | CT-free | 0.5822 | 0.583 | no |
+| 9 | EV-top3_300 | 0.5812 | 0.583 | no |
+| 10 | CB-7 | 0.5782 | 0.580 | no |
+
+**No candidate beats J1 on gpt; all sit far below J1's accuracy.** Advance to Round 3: **AB-2, CB-2, BASE** (gpt ranking) + **H2** (hybrid clause: best dev-core gpt score among hybrids, 0.730 acc / 0.821 F1 5-fold CV — supervised, NOT training-free; did not beat J1 on dev-core either, p=1.0; included as 4th finalist, flagged).
+
+### Confidence elicitation (the prioritized axis) — negative result
+
+Per-candidate ECE / Brier on gpt dev-350 (histograms: `results/judge_study/taskB/r2gpt_conf_histograms.png`):
+
+| candidate | ECE | Brier | %conf>=0.8 |
+|---|---|---|---|
+| J1-gpt (baseline) | **0.126** | **0.192** | 83.7% |
+| AB-2 | 0.225 | 0.269 | 86.9% |
+| CB-2 | 0.259 | 0.300 | 87.4% |
+| BASE | 0.225 | 0.274 | 82.9% |
+| CF-verbal-top3_300 | 0.251 | 0.286 | 82.6% |
+| CF-verbal-top5_500 | 0.254 | 0.288 | 82.9% |
+| CT-free | 0.272 | 0.312 | 96.3% |
+| CB-7 | 0.286 | 0.320 | 88.6% |
+
+**Verbal elicitation does NOT de-degenerate the confidence distribution**: the model answers "high" almost always, so the verbal variants keep 82–96% of confidences at >=0.8 (raw candidates: 81–96%). All candidates are ~2x worse calibrated than J1. **The confidence channel is not a usable abstention signal from any candidate, gpt or local** — abstention must ride the explicit evidence-sufficiency mechanism (AB-2's design), not confidence thresholds.

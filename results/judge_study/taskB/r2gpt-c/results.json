@@ -1,0 +1,83 @@
+{
+ "n_candidates": 3,
+ "results": [
+  {
+   "id": "AB-2",
+   "n": 344,
+   "decided": 344,
+   "macro_f1": 0.6174,
+   "macro_ci": [
+    0.5687,
+    0.6688
+   ],
+   "acc": 0.6221,
+   "acc_ci": [
+    0.5727,
+    0.6744
+   ],
+   "f1": 0.6597,
+   "f1_ci": [
+    0.6061,
+    0.716
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.0,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 940.4
+  },
+  {
+   "id": "CB-17",
+   "n": 350,
+   "decided": 350,
+   "macro_f1": 0.5893,
+   "macro_ci": [
+    0.5392,
+    0.6379
+   ],
+   "acc": 0.5914,
+   "acc_ci": [
+    0.54,
+    0.64
+   ],
+   "f1": 0.6187,
+   "f1_ci": [
+    0.5572,
+    0.6701
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.0,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 739.4
+  },
+  {
+   "id": "CB-7",
+   "n": 350,
+   "decided": 350,
+   "macro_f1": 0.5782,
+   "macro_ci": [
+    0.5265,
+    0.6271
+   ],
+   "acc": 0.58,
+   "acc_ci": [
+    0.5286,
+    0.6286
+   ],
+   "f1": 0.6059,
+   "f1_ci": [
+    0.5439,
+    0.658
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.0,
+   "vs_baseline_sig": true,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 882.0
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+  "phase": "task-B",
+  "stage": "B",
+  "run_id": "r1/CB-22",
+  "model": {
+    "provider": "lmstudio",
+    "id": "qwen/qwen3.6-35b-a3b",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/b2/CB-22.txt",
+      "sha256": "aa6eb30ca7ae412129c5370dac3ee54336619f9d966e773ec69a5e5f4b7cb2bf"
+    }
+  ],
+  "evidence_version": "dev-core",
+  "seed": null,
+  "sample_list_hash": "cfb7c7c3c61fad06aac22717fc8b5717ae19894d9d9c8323df63cb218d136409",
+  "sample_count": 100,
+  "temperature": 0.0,
+  "timestamp": "2026-08-09T05:53:07.707436+00:00",
+  "git": {
+    "commit": "88c87f346fb70276bfa2a0d7dc9291fb9c806895",
+    "dirty": true
+  },
+  "notes": "Task B candidate scored run; concurrency 1 (B.1); interventions C1+C2 active; temp 0.",
+  "candidate": "CB-22",
+  "axes": {
+    "evidence": "full",
+    "citation": "must",
+    "reasoning": "direct",
+    "confidence": "verbal",
+    "abstain": false
+  },
+  "prompt_sha256": "aa6eb30ca7ae412129c5370dac3ee54336619f9d966e773ec69a5e5f4b7cb2bf",
+  "concurrency": 1,
+  "interventions_active": [
+    "C1",
+    "C2"
+  ]
+}

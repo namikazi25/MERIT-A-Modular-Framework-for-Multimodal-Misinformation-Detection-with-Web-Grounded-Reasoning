@@ -1,0 +1,201 @@
+sample_index,image_path,headline,prompt_tokens,completion_tokens,total_tokens
+1,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_64.png,A woman wearing a pink hair towel working in a factory.,3870,1375,5245
+2,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_149.png,found these trees growing through old farm equipment out in the middle of the woods,4072,1299,5371
+3,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_SD_26.png,Temple Grandin was directed by Mick Jackson in 2008.,4952,1486,6438
+4,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_147.png,An image provided by NASA on July 14 shows a region near Pluto s equator with a range of mountains captured by the New Horizons spacecraft,4291,1309,5600
+5,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_230.png,Amber Heard Talks for First Time About Marriage to Johnny Depp,7348,1611,8959
+6,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_58.png,A plate that has some broccoli on it.,4548,1565,6113
+7,data/MMFakeBench_test/real/wash_test_500/wash_test_152.png,Radio host Howard Stern and wife Beth Ostrosky were in attendance,4026,1519,5545
+8,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_278.png,Revealing the Global Expansion: Konidela Production Company Emerges as a Key Player in the Chinese Entertainment Industry.,3803,1393,5196
+9,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_326.png,this mug that changes color depending on how much coffee thats in it,3826,1414,5240
+10,data/MMFakeBench_test/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_474.png,Oh please do nt let Kanye send a reply tweet We need to know that,4073,1519,5592
+11,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_292.png,Secret Recording Exposes Biden Promising to Abolish the Second Amendment If Reelected,4099,1620,5719
+12,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_191.png,Two ladies taking a turkey outside of an oven.,3865,1614,5479
+13,data/MMFakeBench_test/real/bbc_test_500/bbc_test_104.png,There are hundreds of commercial airlines globally but not all of them have inflight connectivity or access to the internet,3847,1592,5439
+14,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_441.png,glorious leader takes a smoke break and has stiltlegs adjusted,3902,1352,5254
+15,data/MMFakeBench_test/real/bbc_test_500/bbc_test_365.png,At a naming ceremony for baby gorillas in Rwanda on Saturday people in gorilla costumes entertain the crowds who have turned up to watch,6047,2163,8210
+16,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_46.png,George H.W. Bush has died at 94 - New York,3950,1116,5066
+17,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_119.png,Julian Assange at the Ecuadorian embassy The WikiLeaks founder is calling for the threat of arrest to be lifted,4089,1583,5672
+18,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_0.png,Obama Admits Secret Deal With China to Hand Over U.S. Territory to Settle Debt,3861,1296,5157
+19,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_78.png,Bob Bailey tinkers with a pump as he tries to keep floodwaters from the Mississippi River out of one of his rental properties in Clarksville Mo,4269,1553,5822
+20,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_323.png,A sink with a cabinet on legs in a bathroom.,4217,1643,5860
+21,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_328.png,in a fish market long ago and far away,4638,1428,6066
+22,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_63.png,Emma Stone and Ryan Gosling 'used body doubles in La La Land',3870,1034,4904
+23,data/MMFakeBench_test/real/guardian_test_500/guardian_test_282.png,North Korean workers at the Southowned Shinwon clothes company in Kaesong industrial park,4234,1608,5842
+24,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_439.png,President Obama earlier this month at a campaign event in Roanoke,4305,1480,5785
+25,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_284.png,"Caitlyn Jenner, 68, escorts gal pal Sophia Hutchins, 21, to Nobu Malibu in her $200K purple Porsche",4689,1827,6516
+26,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_443.png,A police officer points at demonstrators in Kenya s western town of Kisumu a stronghold for Odinga supporters,4641,1540,6181
+27,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_466.png,Rubio mans the grill at the Iowa Pork Producers Pork Tent during the Iowa State Fair on Aug 18 2015 in Des Moines,4411,1472,5883
+28,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_856.png,Maximum Overdrive is only a 1980 romance film.,3761,1385,5146
+29,data/MMFakeBench_test/fake/coco_text_edit_test_500/coco_text_edit_test_219.png,a pink and green bus parked on a grass field parking lot.,3753,1579,5332
+30,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_177.png,the japanese have a sink that soaps rinses and drys all in one,4921,1394,6315
+31,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_346.png,GM cotton grown in a field in Dali county Shaanxi province China The plant produces a toxin lethal to insects but harmless to people,4066,1385,5451
+32,data/MMFakeBench_test/real/guardian_test_500/guardian_test_401.png,Venice s San Michele island cemetery will gain a pontoon from which relatives may scatter ashes,4176,1681,5857
+33,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_158.png,"Former Disney Star Orlando Brown: Arrest Hints at Troubled Past, Unveiling Dark Secrets and Hidden Scandals.",4992,1655,6647
+34,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_326.png,A green flag and a towel hang from a woman s house in Novosasitli proclaiming the news that she just returned from Mecca,3878,1266,5144
+35,data/MMFakeBench_test/real/guardian_test_500/guardian_test_0.png,Amir Khan right has questioned the presence of a mystery man in a hat circled at his defeat to Lamont Peterson,5357,2050,7407
+36,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_432.png,"Bill Murray Had This to Say About Rochester, New Hampshire Residents - News Daily 12",4200,1551,5751
+37,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_150.png,sometimes its better not to know,3627,1533,5160
+38,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_217.png,J.Lo 'Wild' Over A-Rod's 'Passionate' Kisses — Their Make Outs Are 'Next Level',4192,1493,5685
+39,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_330.png,Jonathan Jones on the Millennium bridge in central London,3544,1370,4914
+40,data/MMFakeBench_test/real/coco_test_500/coco_test_169.png,"Shoes, a cap, an iPod, a name tag and other items",3710,1521,5231
+41,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_231.png,this innovative take on the baby on board sticker we just passed,4030,1491,5521
+42,data/MMFakeBench_test/fake/llm_gossip_md_generation_test_100/gpt_generation_gossipcop_test_md_76.png,Bradley Cooper and Lady Gaga Spotted Kissing on Romantic Getaway to Italy,3954,1526,5480
+43,data/MMFakeBench_test/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_101.png,Advertisers say the Afghan modelling scene unique and professional,4236,1574,5810
+44,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_187.png,Supreme Leader Ayatollah Ali Khamenei waves during a meeting in Tehran last September,4106,1451,5557
+45,data/MMFakeBench_test/real/wash_test_500/wash_test_21.png,A campaign poster of incumbent President Teodoro Obiang Nguema dominates the view in Malabo Equatorial Guinea s capital on April 23 2016,5273,1610,6883
+46,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_642.png,"Cindy Crawford Says Daughter Kaia Gerber ''Loves Kendall Jenner,'' Talks 14-Year-Old's Modeling Future: Watch",4402,1424,5826
+47,data/MMFakeBench_test/fake/coco_text_edit_test_500/coco_text_edit_test_358.png,A man walking on his back in the snow with snow covered trees in the background.,3908,1722,5630
+48,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_425.png,harpy coming in for a landing,3793,1660,5453
+49,data/MMFakeBench_test/real/bbc_test_500/bbc_test_160.png,Dorothy the cat who was shot in the head and leg in separate pellet gun incidents in Newport,4071,1474,5545
+50,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_580.png,Kourtney Kardashian Picks Kylie Jenner's Lip Kit Over Kim Kardashian's Contour Sticks,3862,1412,5274
+51,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_491.png,Blackburn Rovers striker DJ Campbell will spend the rest of the season at Millwall after agreeing a loan deal,3915,1853,5768
+52,data/MMFakeBench_test/real/coco_test_500/coco_test_47.png,Several skiers stand on a flat portion of the mountain.,3952,1486,5438
+53,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_240.png,"Artistry Unveiled: Vic Mensa's Roots in Houston, Texas Influence His Unique Musical Style and Global Impact.",3960,1491,5451
+54,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_61.png,Hurricane Matthew was photographed from the International Space Station on the afternoon of Oct 3 2016,4171,1703,5874
+55,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_300.png,The Twilight Curse: Will Robert Pattinson and Kristen Stewart Ever Be Taken Seriously?,4527,1435,5962
+56,data/MMFakeBench_test/fake/coco_text_edit_test_500/coco_text_edit_test_170.png,A man dressed in a mask and gloves holds a handsaw.,3992,1131,5123
+57,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_285.png,several sail boats in the water at night,3724,1548,5272
+58,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_49.png,"Controversy Erupts: Ranking Every Season of The Bachelorette Sparks Outrage Among Fans, Accusations of Biased Reviews and Manipulated Rankings.",4422,1831,6253
+59,data/MMFakeBench_test/real/coco_test_500/coco_test_237.png,A large bird in the air over a heavily forested area.,4854,1784,6638
+60,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_120.png,not no way not no how,3766,1442,5208
+61,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_27.png,oh god jay no youre killing everybody,3699,1302,5001
+62,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_95.png,This 2012 file photo shows the Cleveland skyline taken from Edgewater Park,4705,1416,6121
+63,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_324.png,US House Speaker John Boehner a Republican from Ohio speaks during a news conference at the Capitol in Washington DC US on Thursday Feb 6 2014 Photographer Pete MarovichBloomberg,4350,1443,5793
+64,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_934.png,Super Bowl XLV was the first time the Super Bowl was played in outer-space.,3827,1391,5218
+65,data/MMFakeBench_test/real/bbc_test_500/bbc_test_40.png,South Korean customers had to cancel their credit cards after data was stolen,3811,1430,5241
+66,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_575.png,Menace II Society is set in Paris.,3787,1241,5028
+67,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_496.png,Georgia Arnold is SVP for social responsibility at VIMN and executive director of MTV Staying Alive Foundation,4020,1664,5684
+68,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_186.png,Katie Holmes Reignites Friendship With James Van Der Beek To Make Jamie Jealous!,4341,1682,6023
+69,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_439.png,Defense attorney Brent Usery speaks during court proceedings involving sportscaster and television host Erin Andrews Wednesday March 2 2016 in Nashville Tenn,4173,1510,5683
+70,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_347.png,A man wearing glasses and a lavender shirt.,3105,1207,4312
+71,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_SD_170.png,"On May 19, 1945, Ian Gillan was born.",5704,2013,7717
+72,data/MMFakeBench_test/real/coco_test_500/coco_test_46.png,A silver sports car is parked beside horse droppings left by a group of horses.,5985,1381,7366
+73,data/MMFakeBench_test/fake/coco_text_edit_test_500/coco_text_edit_test_370.png,A bath towel in a small bathroom with towels hanging over it.,4117,1491,5608
+74,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_478.png,Trouble with the Curve stars a squid.,4636,1477,6113
+75,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_404.png,Boys from the Mandari tribe wait by the Nile in September 2012 for boats with the day s catch to arrive in Terekeka a fishing community in South Sudan,4175,1557,5732
+76,data/MMFakeBench_test/real/coco_test_500/coco_test_4.png,THERE IS A GAME A BASKETBALL GAME GOING ON,3796,1446,5242
+77,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_114.png,now hold him still just one second longer,4728,1327,6055
+78,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_647.png,Angelina Jolie   Jennifer Aniston Did NOT Have FaceToFace Meeting FaceToFace Meeting Despite Report,4189,1532,5721
+79,data/MMFakeBench_test/real/coco_test_500/coco_test_134.png,A horse drawn carriage driving down a small road.,3652,1359,5011
+80,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_51.png,Snow has fallen across parts of the UK such as Kielder Water in Northumberland and more is predicted over the weekend,3993,1384,5377
+81,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_469.png,Donald Trump arrives to speak at a rally in Bangor Maine on Oct 15 2016,4290,1652,5942
+82,data/MMFakeBench_test/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_211.png,"J-Rod! Jennifer Lopez and Alex Rodriguez on Love, Beauty, and Redemption",4125,1611,5736
+83,data/MMFakeBench_test/real/bbc_test_500/bbc_test_87.png,Mahdi Hashi from Camden is thought to be in jail in East Africa,4159,1573,5732
+84,data/MMFakeBench_test/real/wash_test_500/wash_test_318.png,Patrons relax in rows of theater seats or at a long bar while waiting to play bocce,6809,1980,8789
+85,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_259.png,Dong Energy s gasfired power station in Newport south Wales the government has been proposing gas as a bridging technology,4132,1524,5656
+86,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_557.png,Irish actress Ruth Negga to see her Hollywood star status SOAR,8453,2468,10921
+87,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_112.png,A couple of people wearing umbrella hats next to the ocean.,3711,1370,5081
+88,data/MMFakeBench_test/real/wash_test_500/wash_test_449.png,Hinchliffe Stadium in Paterson NJ opened in 1932 The stadium played host to the Negro League and barnstorming games The facility is now abandoned and in ruins,4518,1730,6248
+89,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_125.png,Kevin Hart Relives His Cheating Scandal By Playing Himself in J. Cole Music Video,3874,1330,5204
+90,data/MMFakeBench_test/fake/coco_text_edit_test_500/coco_text_edit_test_416.png,A white toilet with a black mirror on top of a tiled floor.,10984,2098,13082
+91,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_827.png,James Brolin has never appeared in a sitcom.,3819,1319,5138
+92,data/MMFakeBench_test/real/guardian_test_500/guardian_test_295.png,Justin Fashanu is described as intelligent witty honest and articulate in Nick Baker s Forbidden Forward,11266,2439,13705
+93,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_63.png,FULL WHACK These Taiko drummers are a picture of power and concentration at the Deep River festival in Ontario Canada,4095,1686,5781
+94,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_161.png,The man holds a ping pong paddle under the shelf on a wall.,3767,1611,5378
+95,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_984.png,A Good Day to Die Hard was directed by John Moore in 2008.,4711,1443,6154
+96,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_232.png,Small group of sheep being herded by three border collies.,6434,1807,8241
+97,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_104.png,this book is so old it was printed with a dot matrix printer,4378,1435,5813
+98,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_770.png,Tangled is a shoelace.,4592,1365,5957
+99,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_341.png,The Riverside is the European Museum of the Year 2013 but it has seen a drop in visitors,3873,1362,5235
+100,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_389.png,Migrants are seen on the shore in the eastern Aegean island of Rhodes Greece,4265,1630,5895
+101,data/MMFakeBench_test/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_156.png,Lindsay Shookus Still NOT Pregnant  Ben Affleck Baby Shocker Baby Shocker Untrue,4228,1647,5875
+102,data/MMFakeBench_test/real/wash_test_500/wash_test_204.png,Mexican police deployed on a Jalisco state road where at least 15 police officers were killed in an ambush carried out by a gang,4421,1783,6204
+103,data/MMFakeBench_test/fake/coco_text_edit_test_500/coco_text_edit_test_330.png,an old clock hanging up against the side of a barn,3638,1358,4996
+104,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_223.png,Dolphins running back Reggie Bush celebrates a thirdquarter touchdown against the Bills,4804,1460,6264
+105,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_69.png,Students at Georgia s Wilcox County High School turned out in big numbers Saturday for the school s first integrated prom in Cordele Ga,4062,1581,5643
+106,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_718.png,Too Close For Comfort? Jennifer Lopez Might Take A BREAK From Alex Rodriguez,4036,1391,5427
+107,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_396.png,dont worry beyonce nobody will ever know this was you,4108,1436,5544
+108,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_249.png,A mother elephant and her baby are standing alongside a dry water pool.,3532,1611,5143
+109,data/MMFakeBench_test/real/wash_test_500/wash_test_47.png,Kentucky Gov Matt Bevin addresses the Kentucky Chamber of Commerce dinner Thursday Jan 7 2016 at Heritage Hall in Lexington Ky,4441,2095,6536
+110,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_357.png,"Stimulus Unveils Education Secretary's Controversial Plan: Critics Fear Financial Risks, Potential Fallout in School Systems.",3869,1383,5252
+111,data/MMFakeBench_test/real/wash_test_500/wash_test_383.png,Black Lives Matter and Black Immigration Network activists interrupt the Netroots Nation meeting,4028,1562,5590
+112,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_430.png,412 Michigan Muslims Arrested In Fed's 'LARGEST BUST IN U.S. HISTORY',4120,1653,5773
+113,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_74.png,More than 2500 people live in Guryong Village s makeshift shelters amid some of Seoul s most expensive real estate,4227,1588,5815
+114,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_208.png,A brown and white puppy laying on a woman.,3861,1606,5467
+115,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_167.png,A rendering of the proposed proposed Prince George s Regional Medical Center planned for Largo,4453,1588,6041
+116,data/MMFakeBench_test/fake/llm_science_md_generation_test_100/gpt_generation_science_test_md_98.png,"Breaking: NASA Reveals Earth's Second Moon Discovered, Potentially Habitable",4087,1776,5863
+117,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_429.png,criticized for her colorful hair nurse gives perfect response to shamers,4230,1459,5689
+118,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_dalle_398.png,"Planet Hollywood Las Vegas is owned by a corporation based in Paris, Texas.",3552,1332,4884
+119,data/MMFakeBench_test/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_177.png,Sri Lanka captain Tillakaratne Dilshan and Kumar Sangakkara celebrate after making England famous in the field,5518,1794,7312
+120,data/MMFakeBench_test/real/guardian_test_500/guardian_test_292.png,Australian Motoring Enthusiast party s Ricky Muir is likely to be an elected senator despite receiving only a tiny number of first preference votes,5146,1379,6525
+121,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_SD_82.png,Story of My Life was recorded exclusively by a girl band.,4756,1434,6190
+122,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_101.png,Rafael Nadal of Spain in action against Facundo Bagnis of Argentina during their secondround match,4356,1635,5991
+123,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_190.png,Auburn coach Gus Malzahn on the sideline during the third quarter,4142,1552,5694
+124,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_219.png,drake sitting on samuel l jackson sitting strangely on a chair,3980,1495,5475
+125,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_392.png,Oregon Attorney General Ellen Rosenblum alleges that GNC knowingly sold supplements containing two synthetic chemicals,3865,1355,5220
+126,data/MMFakeBench_test/real/guardian_test_500/guardian_test_250.png,Scarlett Johansson Notes with panic the poster advertising a gig by another band called the Singles,4721,1692,6413
+127,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_314.png,Prince Harry and Meghan Markle's Wedding Cake Breaks with Centuries of Royal Tradition,4431,1406,5837
+128,data/MMFakeBench_test/real/coco_test_500/coco_test_273.png,A very simple and modern bathroom with a white toilet.,1666,394,2060
+129,data/MMFakeBench_test/fake/coco_text_edit_test_500/coco_text_edit_test_31.png,A smaller kitchen with a very decorated interior.,1650,374,2024
+130,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_13.png,Brooke Burke's Controversial Dating Revelation Amid Divorce Sparks Speculation: Shocking Insights into Celebrity Love Life Exposed.,4506,1743,6249
+131,data/MMFakeBench_test/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_3.png,"Robert Pattinson, Kristen Stewart Buzz Cuts Pit Against Each Other In HollywoodLife Clickbait",6767,2648,9415
+132,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_196.png,Guy Scott of Scottish descent became interim president after the incumbent s death,4183,1477,5660
+133,data/MMFakeBench_test/real/wash_test_500/wash_test_436.png,Musician Buddy Guy arrives at the Kennedy Center Honors reception at the White House,4087,1641,5728
+134,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_400.png,polish police officers pose with ninja turtles,6089,2558,8647
+135,data/MMFakeBench_test/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_38.png,David Cameron has previously said the EU work would benefit if it could show flexibility,4147,1465,5612
+136,data/MMFakeBench_test/real/guardian_test_500/guardian_test_86.png,Quadruplet clouded leopard cubs were born at Point Defiance zoo and aquarium in Tacoma Washington,4816,1552,6368
+137,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_368.png,Jennifer Garner & Josh Duhamel Dating: Why Ben Affleck Feels 'Threatened' By The Rumor,4108,1400,5508
+138,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_268.png,A brown and white vase with foliage on a small table.,3862,1726,5588
+139,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_208.png,13 Carmelo Anthony and La La Vazquez Anthony In 2011 Carmelo had to deny reports La La was forcing him to seek a trade out of Denver,4347,1569,5916
+140,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_50.png,"3,000-Pound Great White Shark Captured in Great Lakes",4296,1457,5753
+141,data/MMFakeBench_test/fake/coco_text_edit_test_500/coco_text_edit_test_166.png,A rainbow colored cat that is drinking from a glass of water.,4007,1574,5581
+142,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_1.png,a girl who is happy she just cought a bull frog,3935,1501,5436
+143,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_106.png,Kanye West is All Smiles as He Battles Kardashians on 'Family Feud',4093,1458,5551
+144,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_155.png,melinamara Charlie Pierce member of Gov Mitt Romney staff makes a phone call in the doorway of a wire factory in Ohio 2012unfiltered romney washingtonpost,4246,1744,5990
+145,data/MMFakeBench_test/real/bbc_test_500/bbc_test_243.png,Matthew Crawley was one of the original cast of Downton Abbey which has captivated millions of ITV viewers,3807,1151,4958
+146,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_416.png,Hezbollah received zero support from Iran.,3872,1567,5439
+147,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_308.png,there is a large bowl with vegetables and broccoli in it,4882,1686,6568
+148,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_492.png,High water overruns homes and businesses near the Shiawassee River and Shiawassee National Wildlife Refuge in Michigan,4756,1570,6326
+149,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_81.png,"A lunch box with a sandwich, carrots, salad and a muffin.",5325,1625,6950
+150,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_84.png,Senate Votes Unanimously to Ban All Independent Media Critical of Government,4075,1617,5692
+151,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_489.png,Investors who borrow against their 401s could be losing out on hundreds of dollars a month in retirement according to an analysis by Fidelity Investments,4413,1574,5987
+152,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_286.png,Biden Found to Have Accepted Illegitimate Votes in 2020 Election,4578,1819,6397
+153,data/MMFakeBench_test/real/guardian_test_500/guardian_test_472.png,Great white hope the new and intimidating Chrysler 300C is actually softer looking than the outgoing model,4686,1479,6165
+154,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_767.png,Castlevania was developed for the Nintendo Wii.,3651,1573,5224
+155,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_165.png,Emily Cruse Elliott dances in Club Sizzle on Saturday at the Blue Ribbon Bacon Fest in Des Moines,4164,1409,5573
+156,data/MMFakeBench_test/real/guardian_test_500/guardian_test_470.png,More younger patients than older patients said they were informed about financial help Illustration Cancer Patient Experience Survey 201112,5852,1741,7593
+157,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_228.png,an activist faced years in prison for helping migrants but jurors wouldnt convict him,6290,2210,8500
+158,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_130.png,A bathroom looks clean but is missing tile at the shower stall.,4032,1604,5636
+159,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_31.png,The Occupy protest at St Paul s cathederal London,4208,1680,5888
+160,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_135.png,Innovative Feline Creations: How the iPhone 4 was Crafted by Cat Visionaries in a Technological Breakthrough.,4206,1594,5800
+161,data/MMFakeBench_test/real/guardian_test_500/guardian_test_318.png,The Opinion Debate section moves from the main paper to the Viewspaper there is also more room for readers letters,3760,1234,4994
+162,data/MMFakeBench_test/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_77.png,Brian and Eileen Maguire said it was an excellent waiting to happen,4273,1631,5904
+163,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_510.png,"Executive Order Leads to Capture of ISIS Leader, Rasheed Muhammad",3697,1336,5033
+164,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_478.png,Frank Gehrydesigned Power Play chairs are among the stylish touches in the Winter Garden,3722,1430,5152
+165,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_44.png,Democratic presidential candidate Hillary Clinton at a rally in Columbus Ohio,3841,1302,5143
+166,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_60.png,Experts Warn Against Using Smartphones Due to Harmful Radiation Exposure Linked to Cancer,4019,1291,5310
+167,data/MMFakeBench_test/fake/DGM4_text_edit_senti_test_500/DGM4_text_edit_senti_test_215.png,I have a sense of regret for Jamie Cullum and his ilk short men who are confident enough to step out with much taller women in his case Sophie Dahl,4401,1500,5901
+168,data/MMFakeBench_test/fake/Fakeddit_photo_edit_test_500/Fakeddit_photo_edit_test_115.png,mail order mickey mouse watch from russia,3657,1578,5235
+169,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_457.png,Robert Masterson president of Ripley s Believe It or Not in front of the Ripley s Believe It or Not museum in Orlando Florida,4745,1569,6314
+170,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_538.png,Action films are a subgenre of martial arts films.,3781,1416,5197
+171,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_110.png,A small horse on a large wooden chair.,4054,1584,5638
+172,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_197.png,A draft proposal suggests two garden cities at Yalding in Kent and Gerrards Cross in Buckinghamshire,4130,1647,5777
+173,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_415.png,the entrance of this restroom has a detailed map for the blind,4426,1422,5848
+174,data/MMFakeBench_test/fake/chatgpt_match_test_500/chatgpt_match_test_317.png,Study Claims Herbal Tea From Amazon Rainforest Eradicates COVID-19 Instantly,4096,1518,5614
+175,data/MMFakeBench_test/real/guardian_test_500/guardian_test_5.png,Business rates have added about 500m to retailers costs in the past three years,4249,1450,5699
+176,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_225.png,Charles Kennedy on the campaign trail in 2005 shortly after the birth of his son Donald,6200,1495,7695
+177,data/MMFakeBench_test/fake/gossipcop_midjourney_test_250/gossipcop_midjourney_test_md_144.png,"Mark Wahlberg Teased Mel Gibson About Weight, Offered To Become Personal Trainer?",4093,1591,5684
+178,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_411.png,Mats Zuccarello scored for the New York Rangers a little more than two minutes later to make it 20,5338,2067,7405
+179,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_34.png,New Jersey Gov Chris Christie speaks March 6 2014 at the American Conservative Union Conference in National Harbor Md,4079,1414,5493
+180,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_652.png,Issa Rae created Arrested Development.,4321,1258,5579
+181,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_981.png,Touch My Body is a law.,3772,1420,5192
+182,data/MMFakeBench_test/real/bbc_test_500/bbc_test_251.png,Sameena Jabeen Ahmed received her best newcomer award from actor James Corden,4200,1460,5660
+183,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_259.png,Bernie Sanders speaks in Des Moines Iowa on Thursday,4214,1643,5857
+184,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_900.png,The Tenth Doctor is accompanied by Rose Tyler for The End of Time.,14092,1294,15386
+185,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_101.png,Bangladeshi security personnel stand guard near a restaurant attacked by gunmen in Dhaka Bangladesh on July 1 2016,4318,1603,5921
+186,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_256.png,tree man of bangladesh cured after operations to fight rare skin condition,4334,1478,5812
+187,data/MMFakeBench_test/real/wash_test_500/wash_test_52.png,The iPhone 5C is displayed during an Apple product announcement at the Apple campus in Cupertino Calif It was released Sept 20 2013,4249,1280,5529
+188,data/MMFakeBench_test/fake/Newsclipings_person_test_500/Newsclipings_person_test_134.png,Indian environment minister Jairam Ramesh left and China s senior climate change adviser Xie Zhenhua centre left with South African and Brazilian representatives in Delhi,4492,1789,6281
+189,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_82.png,A yellow fluffy cat sitting in a window sill next to a window.,3779,1501,5280
+190,data/MMFakeBench_test/fake/fever_AI_test_1000/fever_test_md_406.png,David Lloyd George was voted the second greatest British prime minister of the 20th century.,3926,1426,5352
+191,data/MMFakeBench_test/fake/Newsclipings_scene_test_500/Newsclipings_scene_test_6.png,Dedham Vale Essex and Suffolk Come May the coach parties from Shenzhen arrive and stay until autumn,3953,1302,5255
+192,data/MMFakeBench_test/real/fakeddit_test_500/fakeddit_test_4.png,there was a funnel in the clouds on the way home,4071,1459,5530
+193,data/MMFakeBench_test/fake/llm_rewrite_test_300/fever_refute_llm_rewrite_generation_test_md_217.png,"Eternal Harmony: Vivaldi's Cleopatre - A musical masterpiece, composed by Vivaldi: unveiling the mysterious Queen of Ancient Egypt with unprecedented artistry.",3912,1624,5536
+194,data/MMFakeBench_test/fake/rumor_match_test_750/rumor_match_test_147.png,BREAKING! Roy Moore's Accuser Worked for Democratic Leaders and Is Actively Campaigning for Moore's Opponent - Activist Mommy,4264,1585,5849
+195,data/MMFakeBench_test/fake/Newsclipings_semantic_test_500/Newsclipings_semantic_test_442.png,Ben Stokes thwacks his way to 47 when he misjudges a Peter Siddle delivery and leaves it but it catches the top of his middle stump,4902,1923,6825
+196,data/MMFakeBench_test/real/wash_test_500/wash_test_231.png,Redskins quarterback Robert Griffin III runs during pregame warmups at Raymond James Stadium,3924,1361,5285
+197,data/MMFakeBench_test/real/usa_today_test_500/usa_today_test_40.png,Serena Williams questions a call Williams advance to Saturday s final,5843,1590,7433
+198,data/MMFakeBench_test/fake/llm_gossip_md_generation_test_100/gpt_generation_gossipcop_test_md_25.png,Jennifer Aniston Accused of Sabotaging Brad Pitt's Hollywood Comeback Amid Divorce Drama,4457,1694,6151
+199,data/MMFakeBench_test/fake/coco_image_edit_test_500/coco_image_edit_test_107.png,a silver oven sits next to other appliances,3601,1422,5023
+200,data/MMFakeBench_test/fake/antifact_image_generation_test_500/coco_antifact_image_edit_test_md_153.png,A very tall and big room with some people.,3871,1476,5347

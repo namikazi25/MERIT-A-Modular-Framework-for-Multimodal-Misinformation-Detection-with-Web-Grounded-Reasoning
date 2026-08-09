@@ -1,0 +1,13 @@
+{
+  "tokens": {
+    "gpt-4o-mini-2024-07-18": {
+      "prompt": 319319,
+      "completion": 31929,
+      "retried": 0
+    }
+  },
+  "cost_usd": 0.06705525,
+  "cap": 15.0,
+  "cap_undefined": false,
+  "judge_errors": 0
+}

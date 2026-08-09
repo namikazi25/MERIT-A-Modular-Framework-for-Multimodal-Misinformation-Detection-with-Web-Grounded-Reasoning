@@ -1,0 +1,13 @@
+{
+  "tokens": {
+    "qwen/qwen3.6-35b-a3b": {
+      "prompt": 386217,
+      "completion": 65584,
+      "retried": 0
+    }
+  },
+  "cost_usd": 0.0,
+  "cap": 15.0,
+  "cap_undefined": false,
+  "judge_errors": 0
+}

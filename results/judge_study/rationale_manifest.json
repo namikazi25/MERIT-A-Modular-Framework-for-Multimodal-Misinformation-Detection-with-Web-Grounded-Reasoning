@@ -1,0 +1,32 @@
+{
+  "phase": "task-e",
+  "stage": "B",
+  "run_id": "dev_rationales",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-4o-mini-2024-07-18",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/j1_rule_prompt.txt",
+      "sha256": "dd243131e03523d39ccaafce5d1f08124b4b5c681bb0c9e72b7c851641ee5880"
+    },
+    {
+      "path": "prompts/judge_study/j2_evidence_grounded.txt",
+      "sha256": "c6eb40a087d96722d451e4461813320813b3de24c64bc9147440b9fe78a157c6"
+    }
+  ],
+  "evidence_version": "split-500-v1.json",
+  "seed": null,
+  "sample_list_hash": "76a1d3ff3ea47a2fa5db83d0087c1ff51b129905d9785120ae4a0d2b92643ff7",
+  "sample_count": 350,
+  "temperature": 0.0,
+  "timestamp": "2026-08-08T19:36:28.027758+00:00",
+  "git": {
+    "commit": "2cc743b02193bfb8d04ec631bd8d0a648c5c09e1",
+    "dirty": true
+  },
+  "notes": "J1+J2 rationale capture for Task E labeling sheet (dev only)."
+}

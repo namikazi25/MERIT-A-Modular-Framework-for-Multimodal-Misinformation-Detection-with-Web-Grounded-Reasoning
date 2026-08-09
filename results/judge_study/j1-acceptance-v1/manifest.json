@@ -1,0 +1,32 @@
+{
+  "phase": "phase-0",
+  "stage": "B",
+  "run_id": "j1-acceptance-v1",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-4o-mini-2024-07-18",
+    "revision": "n/a",
+    "quant": "n/a"
+  },
+  "prompt_files": [
+    {
+      "path": "prompts/judge_study/j1_rule_prompt.txt",
+      "sha256": "dd243131e03523d39ccaafce5d1f08124b4b5c681bb0c9e72b7c851641ee5880"
+    }
+  ],
+  "evidence_version": "frozen-gpt4omini-200-v1",
+  "seed": null,
+  "sample_list_hash": "aadf16b8ae58f583153fc3cedffedacf40b01054bf3c4a33ec1e7f19b2bd0863",
+  "sample_count": 200,
+  "temperature": 0.0,
+  "timestamp": "2026-08-08T14:36:34.268558+00:00",
+  "git": {
+    "commit": "cee144fc88e45a91d38c41eb8c9c62edc276da6d",
+    "dirty": true
+  },
+  "notes": "current judge logic (judge_from_structured) unchanged; no vision; single LLM call per sample.",
+  "evidence_dir": "evidence/frozen-gpt4omini-200-v1",
+  "max_attempts": 3,
+  "prompt_sha256": "dd243131e03523d39ccaafce5d1f08124b4b5c681bb0c9e72b7c851641ee5880",
+  "acceptance_note": "98.5% agreement (197/200) with the original run's labels; 3 diffs diagnosed as gpt-4o-mini drift over time (byte-identical judge inputs, identical prompt, stable re-judging today). No state leak in the split. See reports/phase0_acceptance.md."
+}

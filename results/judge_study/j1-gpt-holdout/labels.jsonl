@@ -1,0 +1,150 @@
+{"sample_id": "1021", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "1383", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "1500", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "1586", "label": "Not Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "2046", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "2047", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "2134", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "243", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "2504", "label": "Misinformation", "confidence": 0.6, "raw_present": true, "attempts": 1}
+{"sample_id": "2604", "label": "Misinformation", "confidence": 0.6, "raw_present": true, "attempts": 1}
+{"sample_id": "2677", "label": "Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "3025", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "3574", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "3651", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "3766", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "3826", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "3933", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "40", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "4050", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "4063", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "4106", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "4147", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "4314", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "4430", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "4432", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "4510", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "5158", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "534", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "5916", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "6113", "label": "Not Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "6218", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "6629", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "6652", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "6707", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "7134", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "7324", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "7569", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "7574", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "7647", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "7667", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "7989", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "8346", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "8443", "label": "Misinformation", "confidence": 0.6, "raw_present": true, "attempts": 1}
+{"sample_id": "8491", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "8496", "label": "Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "8666", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "8670", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "87", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "9191", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "9232", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "9268", "label": "Not Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "9285", "label": "Not Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "939", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "9538", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "957", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "9601", "label": "Not Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "9715", "label": "Not Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "ds1039", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds1055", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds1095", "label": "Not Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "ds1268", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds1310", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds1427", "label": "Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "ds1645", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds1833", "label": "Not Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2082", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2220", "label": "Not Misinformation", "confidence": 0.95, "raw_present": true, "attempts": 1}
+{"sample_id": "ds231", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2361", "label": "Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2385", "label": "Not Misinformation", "confidence": 0.95, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2441", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds25", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2519", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds257", "label": "Not Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2591", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2620", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2726", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2819", "label": "Not Misinformation", "confidence": 0.95, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2828", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds2971", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds3031", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds3318", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds3333", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds3479", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds3543", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds368", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds3699", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds3759", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds3778", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds3873", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds4122", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds4223", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds4341", "label": "Misinformation", "confidence": 0.2, "raw_present": true, "attempts": 1}
+{"sample_id": "ds4480", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds4496", "label": "Misinformation", "confidence": 0.6, "raw_present": true, "attempts": 1}
+{"sample_id": "ds4624", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds4827", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds4873", "label": "Misinformation", "confidence": 0.6, "raw_present": true, "attempts": 1}
+{"sample_id": "ds496", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds4996", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5171", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5218", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5236", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5295", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5483", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5492", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5523", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5561", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5704", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5791", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds5903", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6222", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6407", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6410", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6600", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6628", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6633", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6749", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6862", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6883", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds6925", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds693", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds7042", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds7120", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds7153", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds7168", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds7310", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds7402", "label": "Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "ds7476", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds7618", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds7619", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8037", "label": "Not Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8167", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8184", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds842", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8465", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8473", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds857", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8583", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8638", "label": "Not Misinformation", "confidence": 0.7, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8855", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8857", "label": "Not Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8904", "label": "Misinformation", "confidence": 0.9, "raw_present": true, "attempts": 1}
+{"sample_id": "ds8939", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds9098", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds927", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds9372", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds9406", "label": "Misinformation", "confidence": 1.0, "raw_present": true, "attempts": 1}
+{"sample_id": "ds9492", "label": "Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}
+{"sample_id": "ds9568", "label": "Not Misinformation", "confidence": 0.8, "raw_present": true, "attempts": 1}

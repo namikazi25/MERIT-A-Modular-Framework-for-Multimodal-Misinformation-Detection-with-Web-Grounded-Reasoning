@@ -1,0 +1,151 @@
+sample_id,label,confidence,abstain
+9232,Misinformation,0.9757,False
+534,Not Misinformation,0.2786,False
+3025,Misinformation,0.8965,False
+ds5236,Misinformation,0.5896,False
+ds5492,Misinformation,0.5081,False
+ds3333,Misinformation,0.9066,False
+ds5295,Misinformation,0.7524,False
+1021,Misinformation,0.532,False
+40,Misinformation,0.5911,False
+ds2361,Misinformation,0.6605,False
+ds5171,Not Misinformation,0.3925,False
+ds6749,Misinformation,0.964,False
+ds231,Not Misinformation,0.4979,False
+9268,Misinformation,0.6742,False
+ds1645,Not Misinformation,0.494,False
+4050,Misinformation,0.5973,False
+ds3318,Not Misinformation,0.1949,False
+ds5561,Misinformation,0.665,False
+ds3759,Misinformation,0.9806,False
+7574,Misinformation,0.676,False
+ds2591,Misinformation,0.5689,False
+ds4341,Misinformation,0.9481,False
+2604,Misinformation,0.7421,False
+ds7168,Misinformation,0.9634,False
+2504,Misinformation,0.7401,False
+ds25,Misinformation,0.5932,False
+4430,Misinformation,0.9469,False
+ds7619,Misinformation,0.6472,False
+7324,Misinformation,0.5013,False
+1586,Not Misinformation,0.2462,False
+ds2441,Not Misinformation,0.2929,False
+ds8857,Not Misinformation,0.3002,False
+8670,Misinformation,0.9671,False
+1383,Misinformation,0.52,False
+ds6883,Misinformation,0.9079,False
+ds5903,Misinformation,0.5953,False
+ds7402,Misinformation,0.5932,False
+4147,Misinformation,0.9643,False
+ds1833,Not Misinformation,0.2896,False
+4063,Misinformation,0.5933,False
+3574,Misinformation,0.9517,False
+ds496,Not Misinformation,0.4422,False
+6707,Misinformation,0.9654,False
+5916,Misinformation,0.9663,False
+4314,Misinformation,0.9448,False
+8666,Misinformation,0.9981,False
+ds6925,Misinformation,0.9977,False
+7989,Misinformation,0.9542,False
+ds4480,Misinformation,0.7247,False
+ds1268,Not Misinformation,0.2336,False
+ds1039,Misinformation,0.6754,False
+2677,Misinformation,0.6783,False
+7667,Misinformation,0.9837,False
+ds2082,Misinformation,0.9423,False
+87,Misinformation,0.9622,False
+8346,Misinformation,0.9502,False
+3826,Misinformation,0.5835,False
+ds4873,Misinformation,0.6844,False
+2047,Not Misinformation,0.3626,False
+ds6628,Misinformation,0.9755,False
+3933,Misinformation,0.9969,False
+3651,Misinformation,0.6124,False
+ds8904,Misinformation,0.9612,False
+ds9372,Misinformation,0.9511,False
+ds6410,Misinformation,0.9714,False
+939,Misinformation,0.5172,False
+ds7042,Misinformation,0.9302,False
+ds8184,Misinformation,0.9645,False
+ds3543,Misinformation,0.5769,False
+ds4996,Misinformation,0.9988,False
+7569,Misinformation,0.6678,False
+ds7120,Misinformation,0.5044,False
+ds368,Not Misinformation,0.3636,False
+2134,Misinformation,0.5985,False
+9601,Misinformation,0.6348,False
+ds5704,Not Misinformation,0.4926,False
+8496,Misinformation,0.6625,False
+ds4122,Misinformation,0.9735,False
+4106,Not Misinformation,0.4896,False
+ds6633,Misinformation,0.9747,False
+ds3873,Misinformation,0.9973,False
+ds2819,Not Misinformation,0.3241,False
+ds8037,Misinformation,0.5875,False
+ds6222,Misinformation,0.9532,False
+ds8167,Misinformation,0.9626,False
+ds9098,Misinformation,0.5294,False
+ds3479,Misinformation,0.8855,False
+9191,Misinformation,0.9683,False
+8491,Misinformation,0.9483,False
+3766,Misinformation,0.9725,False
+6652,Misinformation,0.997,False
+ds2519,Not Misinformation,0.3647,False
+ds7153,Misinformation,0.9281,False
+ds8465,Misinformation,0.945,False
+ds4827,Misinformation,0.5998,False
+ds7476,Misinformation,0.9385,False
+7647,Misinformation,0.9658,False
+6629,Misinformation,0.9982,False
+ds8939,Misinformation,0.9275,False
+7134,Misinformation,0.9537,False
+5158,Misinformation,0.9724,False
+ds3699,Misinformation,0.9535,False
+ds1427,Misinformation,0.6884,False
+ds693,Misinformation,0.5007,False
+ds6862,Misinformation,0.9306,False
+ds9406,Misinformation,0.998,False
+ds8638,Misinformation,0.5864,False
+ds1095,Misinformation,0.6544,False
+1500,Misinformation,0.5201,False
+ds5218,Misinformation,0.9645,False
+ds5791,Misinformation,0.5752,False
+ds2385,Not Misinformation,0.3184,False
+ds9492,Misinformation,0.9716,False
+2046,Not Misinformation,0.4503,False
+4510,Misinformation,0.601,False
+ds3031,Misinformation,0.9629,False
+ds8473,Misinformation,0.9722,False
+ds6600,Misinformation,0.9259,False
+ds1310,Not Misinformation,0.2999,False
+9285,Misinformation,0.5639,False
+ds5483,Misinformation,0.9507,False
+243,Misinformation,0.5048,False
+9538,Not Misinformation,0.3529,False
+ds257,Not Misinformation,0.2877,False
+9715,Misinformation,0.6109,False
+ds2620,Misinformation,0.6311,False
+ds857,Not Misinformation,0.4878,False
+ds4624,Not Misinformation,0.3556,False
+ds927,Misinformation,0.505,False
+ds4496,Misinformation,0.5984,False
+ds8583,Not Misinformation,0.3628,False
+ds1055,Misinformation,0.6094,False
+ds2828,Misinformation,0.9586,False
+957,Misinformation,0.5147,False
+6218,Misinformation,0.9516,False
+ds9568,Misinformation,0.5574,False
+ds2220,Not Misinformation,0.3024,False
+ds2971,Misinformation,0.5717,False
+ds7618,Misinformation,0.9635,False
+4432,Misinformation,0.6425,False
+ds7310,Misinformation,0.9334,False
+ds6407,Misinformation,0.8984,False
+ds842,Misinformation,0.5019,False
+ds5523,Misinformation,0.5742,False
+ds4223,Misinformation,0.599,False
+8443,Misinformation,0.7432,False
+ds2726,Misinformation,0.5096,False
+6113,Misinformation,0.6934,False
+ds8855,Misinformation,0.6314,False
+ds3778,Misinformation,0.8948,False

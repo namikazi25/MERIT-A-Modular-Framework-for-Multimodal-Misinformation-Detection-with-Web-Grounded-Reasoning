@@ -1,0 +1,83 @@
+{
+ "n_candidates": 3,
+ "results": [
+  {
+   "id": "BASE",
+   "n": 150,
+   "decided": 150,
+   "macro_f1": 0.7189,
+   "macro_ci": [
+    0.6438,
+    0.7905
+   ],
+   "acc": 0.7333,
+   "acc_ci": [
+    0.66,
+    0.8067
+   ],
+   "f1": 0.7826,
+   "f1_ci": [
+    0.7143,
+    0.8478
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.404873,
+   "vs_baseline_sig": false,
+   "beats_baseline_ci": false,
+   "parse_failures": 0,
+   "seconds": 1558.6
+  },
+  {
+   "id": "AB-2",
+   "n": 148,
+   "decided": 148,
+   "macro_f1": 0.7084,
+   "macro_ci": [
+    0.6266,
+    0.783
+   ],
+   "acc": 0.7297,
+   "acc_ci": [
+    0.6486,
+    0.7973
+   ],
+   "f1": 0.7872,
+   "f1_ci": [
+    0.7135,
+    0.8473
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.307456,
+   "vs_baseline_sig": false,
+   "beats_baseline_ci": false,
+   "parse_failures": 1,
+   "seconds": 1720.2
+  },
+  {
+   "id": "CB-2",
+   "n": 149,
+   "decided": 149,
+   "macro_f1": 0.6947,
+   "macro_ci": [
+    0.6164,
+    0.7704
+   ],
+   "acc": 0.7047,
+   "acc_ci": [
+    0.6309,
+    0.7785
+   ],
+   "f1": 0.75,
+   "f1_ci": [
+    0.6705,
+    0.8163
+   ],
+   "abstentions": 0,
+   "vs_baseline_p": 0.078354,
+   "vs_baseline_sig": false,
+   "beats_baseline_ci": false,
+   "parse_failures": 1,
+   "seconds": 1571.3
+  }
+ ]
+}

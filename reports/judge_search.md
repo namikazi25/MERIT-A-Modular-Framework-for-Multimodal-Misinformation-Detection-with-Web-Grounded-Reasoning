@@ -15,3 +15,15 @@
 ## Protocol reminder
 - Round 1: all 44 on dev-core (100), local, temp 0, concurrency 1 (B.1). Top-10 by macro F1 → Round 2 (full 350 dev). Top-3 → Round 3 (150 holdout, once, local + gpt-4o-mini). Beats-J1 = 95% CI excludes J1's point estimate on the same samples. B.4 transfer checks: after every 10 candidates, top-3 to gpt on dev-core; Spearman < 0.5 → pause and flag.
 - J1 baseline: `results/judge_study/taskC/labels_none.csv` (J1-local on dev-core, 0.700 acc).
+
+## B.4 transfer check #1 — FLAG (search paused for review)
+
+After the first 10 candidates scored (Round 1), the top-3 (EV-top3_300, CF-verbal-top5_500, CB-2) were run on gpt-4o-mini on the dev core:
+
+| candidate | local macroF1 | gpt macroF1 |
+|---|---|---|
+| EV-top3_300 | 0.6667 | 0.5496 |
+| CF-verbal-top5_500 | 0.6486 | 0.5785 |
+| CB-2 | 0.6486 | 0.5785 |
+
+Spearman rho = -0.50 < 0.5 → **ranking inverted; local-only optimization is not predictive of gpt ordering.** Per B.4, Round 2 (local, 10 candidates on dev-350) was paused at candidate 0. Under review: switch Round 2 to gpt-4o-mini as the primary judge model (final Round 3 requires both models anyway; ~$1.75), and/or widen the transfer check (n=3 Spearman is degenerate — only 5 attainable values). No scored run from the paused Round 2 is used.

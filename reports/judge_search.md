@@ -1,92 +1,77 @@
-# Task B — Judge Auto-Search (in progress)
+# Task B — Judge Auto-Search: final report
 
-## Candidate-space accounting (reviewer note: "cap 50", found 44)
+**Honest framing (first line): the search found NO judge that beats J1 on the sealed holdout. After 44 candidates, successive halving, transfer checks, and three hybrids, the simple current-rule judge (J1) stands; the scale-up decision rule (criterion a) is NOT met, and per the pre-registered rule the 500-sample analysis is the paper unless criterion (b) triggers from the Phase 3 cross-tab.**
 
-- The cap of 50 in the brief is a **ceiling, not a target**. The space was **not truncated by the cap**; it was expanded from an initial principled set of 29 to 44 before Round 1 scored them.
-- **29 → 44 expansion**: the initial space covered single-axis sweeps (evidence budget, citation, reasoning, confidence) + 12 combos + 3 abstain variants. Before scoring, it was extended with 15 further combos (fuller cross-products of the four axes, more verbal-confidence variants, 3 additional abstain variants) → **44 candidates, 6 abstain variants**.
-- What was deliberately NOT included: the full Cartesian product 4 evidence × 2 citation × 3 reasoning × 2 confidence × 2 abstain = 96 (would exceed the cap and is largely redundant), and a logprob-derived confidence axis (the local judge model exposes no logprobs; flagged in each candidate manifest, excluded from local Round 1; gpt transfer checks could add it in a future round if a top candidate justifies it).
-- Every candidate prompt is SHA256-pinned in `manifests/candidates-50-v1.json`; per-candidate scored-run manifests record axes + concurrency 1 + active interventions (C1, C2).
+## Search trajectory
+1. **Space**: 44 candidates (cap 50 = ceiling, not target; 96-combo Cartesian product deliberately excluded as redundant; logprob-confidence axis unavailable on local). Axes: evidence budget (none/top3_300/top5_500/full) x citation (free/must) x reasoning (direct/rationale_first/checklist) x confidence (raw/verbal) + 6 abstain variants (sufficiency-triggered, NOT confidence-triggered). Prompts SHA256-pinned (`manifests/candidates-50-v1.json`).
+2. **B.1**: concurrency 1 pinned for scored runs (outputs not byte-identical across c1/c2/c4; c2=1.65x/c4=2.25x exploration-only).
+3. **Round 1** (all 44, dev-core 100, local): full scores below; top-10 by macro F1 advanced. No candidate beat J1 (CI criterion).
+4. **B.4 transfer checks**: #1 (n=3) Spearman -0.50 → pause; #2 (n=10) Spearman 0.370 → inversion CONFIRMED (full table above in this report): **local-optimized judge rankings do not transfer to gpt-4o-mini** (standalone finding). Round 2 advanced on gpt ranking; local kept as sensitivity.
+5. **Round 2** (top-10, 350 dev, gpt-primary): AB-2 > CB-2 > BASE; none beat J1 (J1-gpt dev acc 0.751). Local sensitivity column runs in parallel (results/judge_study/taskB/r2local).
+6. **Hybrids H1-H3** (gpt dev-core): sufficiency ratings show **64% of dev-core evidence rated insufficient** by gpt. H1 (rule+gate) F1=0.000 (64 abstentions); H2 (LR+evidence features, 5-fold CV, supervised) 0.730/0.821 ties J1; H3 (LLM+gate) 0.639/0.581 (64 abstentions). No hybrid beat J1. H2 advanced to Round 3 via the hybrid clause (flagged: supervised).
+7. **Round 3** (150 sealed holdout, ONCE, both models):
 
-## Abstain-variant trigger (reviewer note: degenerate confidence distribution)
-
-- The 6 abstain variants (AB-1..AB-6) do **not** abstain on the raw confidence signal (known degenerate: 199/200 confidences >= 0.8 in Phase 2). Their prompts require an explicit **evidence-sufficiency rating** (`"evidence_sufficient": true|false`) and instruct: abstain=true only when evidence_sufficient=false AND signals are genuinely insufficient; never on confidence. The rating is captured per sample (candidate judge output `extra.evidence_sufficient`) and feeds the Phase 3 cross-tab contrast (abstention as a retrieval-failure detector).
-- This was a pre-registration change made before any abstain candidate was scored (Round 1 order puts AB-* last).
-
-## Protocol reminder
-- Round 1: all 44 on dev-core (100), local, temp 0, concurrency 1 (B.1). Top-10 by macro F1 → Round 2 (full 350 dev). Top-3 → Round 3 (150 holdout, once, local + gpt-4o-mini). Beats-J1 = 95% CI excludes J1's point estimate on the same samples. B.4 transfer checks: after every 10 candidates, top-3 to gpt on dev-core; Spearman < 0.5 → pause and flag.
-- J1 baseline: `results/judge_study/taskC/labels_none.csv` (J1-local on dev-core, 0.700 acc).
-
-## B.4 transfer check #1 — FLAG (search paused for review)
-
-After the first 10 candidates scored (Round 1), the top-3 (EV-top3_300, CF-verbal-top5_500, CB-2) were run on gpt-4o-mini on the dev core:
-
-| candidate | local macroF1 | gpt macroF1 |
-|---|---|---|
-| EV-top3_300 | 0.6667 | 0.5496 |
-| CF-verbal-top5_500 | 0.6486 | 0.5785 |
-| CB-2 | 0.6486 | 0.5785 |
-
-Spearman rho = -0.50 < 0.5 → **ranking inverted; local-only optimization is not predictive of gpt ordering.** Per B.4, Round 2 (local, 10 candidates on dev-350) was paused at candidate 0. Under review: switch Round 2 to gpt-4o-mini as the primary judge model (final Round 3 requires both models anyway; ~$1.75), and/or widen the transfer check (n=3 Spearman is degenerate — only 5 attainable values). No scored run from the paused Round 2 is used.
-
-
----
-
-## B.4 transfer check #2 (n=10) — inversion CONFIRMED (standalone finding)
-
-Widened per review: full Round-1 top-10 scored on gpt-4o-mini, dev core (100), ~$0.50.
-
-| candidate | local macroF1 (rank) | gpt macroF1 (rank) |
-|---|---|---|
-| EV-top3_300 | 0.6667 (1) | 0.5593 (6) |
-| CF-verbal-top5_500 | 0.6486 (2) | 0.5785 (2) |
-| CB-2 | 0.6486 (3) | 0.5679 (5) |
-| CB-19 | 0.6486 (4) | 0.5785 (3) |
-| CT-free | 0.6485 (5) | 0.5300 (10) |
-| CF-verbal-top3_300 | 0.6461 (6) | 0.5593 (7) |
-| AB-2 | 0.6461 (7) | 0.5987 (1) |
-| CB-17 | 0.6461 (8) | 0.5689 (4) |
-| CB-7 | 0.6440 (9) | 0.5383 (9) |
-| BASE | 0.6434 (10) | 0.5593 (8) |
-
-**Spearman rho (n=10) = 0.370 < 0.5 → inversion confirmed.** Local-optimized judge rankings do NOT transfer to the API model. Pattern: the abstain-capable AB-2 (sufficiency-gated) is gpt's best but only local's 7th; CT-free (no citation requirement) collapses on gpt (5th → 10th); the verbal-confidence variants are the most rank-stable across models.
-
-**Consequence:** Round 2 advances on **gpt-4o-mini ranking** (primary judge model); local runs in parallel as a sensitivity column only. Reported per the B.4 protocol; not a footnote.
-
-
----
-
-## Round 2 (gpt-primary, 350 dev) + confidence-elicitation findings
-
-Round 2 scored the Round-1 top-10 on the full 350 dev with gpt-4o-mini (primary; local sensitivity column running in parallel). J1-gpt dev baseline acc = 0.7514.
-
-| rank | candidate | macroF1 [CI] | acc | beats J1 (CI) |
+| finalist | gpt acc [CI] | gpt McNemar vs J1 | local acc [CI] | local McNemar vs J1 |
 |---|---|---|---|---|
-| 1 | AB-2 (sufficiency-gated, abstain) | 0.6174 [0.569, 0.669] | 0.622 | no |
-| 2 | CB-2 | 0.5993 [0.548, 0.648] | 0.603 | no |
-| 3 | BASE (J2B-like) | 0.5988 [0.548, 0.648] | 0.603 | no |
-| 4 | CB-19 | 0.5962 | 0.600 | no |
-| 5 | CF-verbal-top3_300 | 0.5947 | 0.597 | no |
-| 6 | CF-verbal-top5_500 | 0.5909 | 0.594 | no |
-| 7 | CB-17 | 0.5893 | 0.591 | no |
-| 8 | CT-free | 0.5822 | 0.583 | no |
-| 9 | EV-top3_300 | 0.5812 | 0.583 | no |
-| 10 | CB-7 | 0.5782 | 0.580 | no |
+| J1 (baseline) | 0.747 [0.680, 0.820] | — | 0.767 [0.693, 0.833] | — |
+| AB-2 | 0.633 [0.553, 0.713] | p=0.0137 SIG (worse) | 0.730 [0.649, 0.797] | p=0.308 n.s. |
+| CB-2 | 0.667 [0.593, 0.740] | p=0.081 n.s. | 0.705 [0.631, 0.779] | p=0.078 n.s. |
+| BASE | 0.673 [0.600, 0.747] | p=0.108 n.s. | 0.733 [0.660, 0.807] | p=0.405 n.s. |
+| H2 | 0.767 [0.693, 0.833] | p=0.728 n.s. | (LR, model-agnostic) | — |
 
-**No candidate beats J1 on gpt; all sit far below J1's accuracy.** Advance to Round 3: **AB-2, CB-2, BASE** (gpt ranking) + **H2** (hybrid clause: best dev-core gpt score among hybrids, 0.730 acc / 0.821 F1 5-fold CV — supervised, NOT training-free; did not beat J1 on dev-core either, p=1.0; included as 4th finalist, flagged).
+**No candidate's CI excludes J1's point estimate on the holdout on either model → criterion (a) NOT met.** Notably, AB-2 — the search's own top candidate on gpt dev — is significantly WORSE than J1 on the holdout (p=0.014): the dev-core signal did not transfer to the held-out set, validating the halving/CI discipline.
 
-### Confidence elicitation (the prioritized axis) — negative result
+## Round-1 dev-core scores (all 44, local)
+| id | macroF1 | acc | pf |
+| EV-top3_300 | 0.6667 | 0.680 | 0 |
+| CF-verbal-top5_500 | 0.6486 | 0.660 | 0 |
+| CB-2 | 0.6486 | 0.660 | 0 |
+| CB-19 | 0.6486 | 0.660 | 0 |
+| CT-free | 0.6485 | 0.657 | 1 |
+| CF-verbal-top3_300 | 0.6461 | 0.657 | 1 |
+| AB-2 | 0.6461 | 0.657 | 1 |
+| CB-17 | 0.6461 | 0.657 | 1 |
+| CB-7 | 0.6440 | 0.650 | 0 |
+| BASE | 0.6434 | 0.657 | 1 |
+| CB-1 | 0.6396 | 0.650 | 0 |
+| AB-1 | 0.6396 | 0.650 | 0 |
+| CB-14 | 0.6396 | 0.650 | 0 |
+| CB-8 | 0.6393 | 0.646 | 1 |
+| AB-3 | 0.6393 | 0.646 | 0 |
+| AB-6 | 0.6393 | 0.646 | 0 |
+| CF-verbal-none | 0.6380 | 0.653 | 2 |
+| CB-15 | 0.6380 | 0.653 | 2 |
+| EV-none | 0.6369 | 0.650 | 0 |
+| CB-9 | 0.6347 | 0.640 | 0 |
+| CF-verbal-full | 0.6344 | 0.646 | 1 |
+| CB-22 | 0.6344 | 0.646 | 1 |
+| EV-full | 0.6279 | 0.640 | 0 |
+| RS-rationale_first | 0.6236 | 0.630 | 0 |
+| CF-verbal-none-A | 0.6236 | 0.630 | 0 |
+| AB-4 | 0.6225 | 0.636 | 0 |
+| CB-3 | 0.6215 | 0.630 | 0 |
+| CB-11 | 0.6215 | 0.630 | 0 |
+| CB-18 | 0.6207 | 0.626 | 1 |
+| CB-10 | 0.6186 | 0.626 | 1 |
+| CB-16 | 0.6176 | 0.622 | 2 |
+| J1REF | 0.6144 | 0.620 | 0 |
+| CB-4 | 0.6144 | 0.620 | 0 |
+| CB-12 | 0.6144 | 0.620 | 0 |
+| CF-raw-none | 0.6144 | 0.620 | 0 |
+| CB-6 | 0.6124 | 0.620 | 0 |
+| CB-5 | 0.6094 | 0.616 | 1 |
+| CB-21 | 0.6094 | 0.616 | 1 |
+| AB-5 | 0.6081 | 0.610 | 0 |
+| RS-checklist | 0.6033 | 0.610 | 0 |
+| CB-23 | 0.6002 | 0.606 | 1 |
+| CB-24 | 0.5970 | 0.602 | 2 |
+| CB-20 | 0.5960 | 0.600 | 0 |
+| CB-13 | 0.5867 | 0.590 | 0 |
 
-Per-candidate ECE / Brier on gpt dev-350 (histograms: `results/judge_study/taskB/r2gpt_conf_histograms.png`):
+Full artifacts: `results/judge_study/taskB/r1/` (labels + per-candidate manifests), `r2gpt-*/`, `r3gpt/`, `r3local/`, `r3h2/`, `hybrids/`; calibration: `r2gpt_calibration.json`, `r2gpt_conf_histograms.png`.
 
-| candidate | ECE | Brier | %conf>=0.8 |
-|---|---|---|---|
-| J1-gpt (baseline) | **0.126** | **0.192** | 83.7% |
-| AB-2 | 0.225 | 0.269 | 86.9% |
-| CB-2 | 0.259 | 0.300 | 87.4% |
-| BASE | 0.225 | 0.274 | 82.9% |
-| CF-verbal-top3_300 | 0.251 | 0.286 | 82.6% |
-| CF-verbal-top5_500 | 0.254 | 0.288 | 82.9% |
-| CT-free | 0.272 | 0.312 | 96.3% |
-| CB-7 | 0.286 | 0.320 | 88.6% |
+## Confidence-elicitation axis (prioritized): negative result
+Verbal elicitation does not de-degenerate the confidence pile-up (82-96% of confidences >= 0.8 for verbal variants; raw 81-96%); all candidates ~2x worse calibrated than J1 (ECE 0.22-0.29 vs 0.126; Brier 0.27-0.32 vs 0.192). Confidence is not a usable abstention signal from any candidate; abstention must use the explicit evidence-sufficiency mechanism (AB-2's design).
 
-**Verbal elicitation does NOT de-degenerate the confidence distribution**: the model answers "high" almost always, so the verbal variants keep 82–96% of confidences at >=0.8 (raw candidates: 81–96%). All candidates are ~2x worse calibrated than J1. **The confidence channel is not a usable abstention signal from any candidate, gpt or local** — abstention must ride the explicit evidence-sufficiency mechanism (AB-2's design), not confidence thresholds.
+## Compute / spend
+Total Task B spend: dev-core rounds $0 (local) + transfer checks ~$0.75 + Round 2 gpt ~$1.75 + Round 3 gpt ~$0.35 + hybrids/sufficiency ~$0.2 + local sensitivity $0. Cumulative study spend ~$9-10 of $15 cap.

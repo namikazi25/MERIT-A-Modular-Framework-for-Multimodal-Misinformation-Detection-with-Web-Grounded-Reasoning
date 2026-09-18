@@ -47,11 +47,18 @@ def structured_object(raw):
 
 
 class GLMClient:
+    provider = 'baseten'
+    endpoint = 'https://inference.baseten.co/v1'
+    model = 'zai-org/GLM-5.3-Flash'
+    image_input_bound = 1048576
+    output_rate = Decimal('.50')
+    supports_reasoning = True
+
     def __init__(self, config, admission, ledger, *, client=None, max_output=1024, reasoning='low', audit_dir=None):
         self.config=dict(config); self.admission=admission;self.ledger=ledger
-        if config.get('provider')!='baseten' or config.get('base_url')!='https://inference.baseten.co/v1':
-            raise ValueError('Explicit reviewed Baseten endpoint required')
-        if config.get('model')!='zai-org/GLM-5.3-Flash':
+        if config.get('provider')!=self.provider or config.get('base_url')!=self.endpoint:
+            raise ValueError('Explicit reviewed provider endpoint required')
+        if config.get('model')!=self.model:
             raise ValueError('Changed model requires a new capability/pricing review')
         if type(max_output) is not int or not 1<=max_output<=8192 or reasoning not in ('low','high','max'):
             raise ValueError('Unsupported output/reasoning limit')
@@ -106,22 +113,22 @@ class GLMClient:
 
     def _dispatch(self,messages,structured=True):
         has_image=any(isinstance(m.get('content'),list) and any(p.get('type')=='image_url' for p in m['content']) for m in messages)
-        input_bound=1048576 if has_image else len(json.dumps(messages,ensure_ascii=False).encode())+4096
-        if input_bound>(1048576 if has_image else 65536):raise ValueError('Input context bound exceeded')
-        maximum=Decimal(input_bound)*Decimal('.15')/1000000 + Decimal(self.max_output)*Decimal('.50')/1000000
+        input_bound=self.image_input_bound if has_image else len(json.dumps(messages,ensure_ascii=False).encode())+4096
+        if input_bound>(self.image_input_bound if has_image else 65536):raise ValueError('Input context bound exceeded')
+        maximum=Decimal(input_bound)*Decimal('.15')/1000000 + Decimal(self.max_output)*self.output_rate/1000000
         client=self.client
         if client is None:
             key=os.environ.get(self.config['api_key_env'])
-            if not key: raise ProviderFailure('Baseten key unavailable in client environment')
-        rid=self.ledger.reserve('baseten:GLM-5.3-Flash',maximum)
+            if not key: raise ProviderFailure('Configured provider key unavailable in client environment')
+        rid=self.ledger.reserve(self.provider+':'+self.model,maximum)
         started=time.monotonic()
         try:
             if client is None:
                 from openai import OpenAI
                 client=OpenAI(api_key=key,base_url=self.config['base_url'],max_retries=0,timeout=45)
-            response=client.chat.completions.create(model=self.config['model'],
-                messages=messages,
-                max_tokens=self.max_output,reasoning_effort=self.reasoning)
+            parameters={'model':self.config['model'],'messages':messages,'max_tokens':self.max_output}
+            if self.supports_reasoning:parameters['reasoning_effort']=self.reasoning
+            response=client.chat.completions.create(**parameters)
         except Exception as exc:
             if getattr(exc,'status_code',None) in (402,403):self.ledger.halt('Provider billing/access failure')
             self._record(rid,{'request_id':rid,'status':'TRANSPORT_FAILURE','error_type':type(exc).__name__,
@@ -138,7 +145,7 @@ class GLMClient:
                           'raw':choice.message.content if choice else None,'latency_s':time.monotonic()-started})
         n_in,n_out=usage_counts(usage,'prompt_tokens','completion_tokens')
         # Use uncached rate for conservative rated usage; do not claim invoice reconciliation.
-        rated=(Decimal(n_in)*Decimal('.15')+Decimal(n_out)*Decimal('.50'))/1000000
+        rated=(Decimal(n_in)*Decimal('.15')+Decimal(n_out)*self.output_rate)/1000000
         self.ledger.settle(rid,rated,{'prompt_tokens':n_in,'completion_tokens':n_out,'basis':'published_uncached_rate'})
         if response.model!=self.config['model']:raise ProviderFailure('Unexpected returned model')
         if not response.choices or response.choices[0].finish_reason!='stop':raise ProviderFailure('Incomplete model output')
@@ -148,6 +155,20 @@ class GLMClient:
             return {'raw':raw,'model':response.model,'usage':usage,'request_id':rid,'latency_s':time.monotonic()-started}
         parsed=structured_object(raw)
         return {'parsed':parsed,'raw':raw,'model':response.model,'usage':usage,'request_id':rid,'latency_s':time.monotonic()-started}
+
+
+class GPTMiniClient(GLMClient):
+    """Pinned comparison arm; inherits the same admission and payload boundary.
+
+    Published uncached rates reviewed 2026-09-18. This is an explicit separate
+    model arm, never a fallback for GLM. Non-reasoning model: omit reasoning_effort.
+    """
+    provider = 'openai'
+    endpoint = 'https://api.openai.com/v1'
+    model = 'gpt-4o-mini-2024-07-18'
+    image_input_bound = 128000
+    output_rate = Decimal('.60')
+    supports_reasoning = False
 
 
 class JevClient:

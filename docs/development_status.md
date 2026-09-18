@@ -36,3 +36,17 @@ See [reproducibility requirements](reproducibility.md) before attempting a clean
 The remaining portability work was completed separately: **189 full local tests** and **185 portable tests** pass. The portable profile was actually run in a source-only export without data, registries, model files, environment files or private audit artifacts. Its four excluded historical-artifact checks are named explicitly. Before the correction, the same export failed three tests and skipped two.
 
 A standard-library-only verifier reproduces **22 recorded condition metrics for the existing five cases** from a minimal evaluation-only local bundle. The synthetic example, exporter/verifier, regression tests and 18-package version snapshot are versionable; real labels/predictions remain local pending release review. No new experimental requests or paid use were required. A fresh dependency installation and full paper/evidence reproduction remain unvalidated. See [commands and exact limits](offline_reproduction.md).
+
+
+## Latest bounded live continuation — 18 September 2026
+
+The repaired SearXNG-to-DuckDuckGo route passed one public and five development queries, at least 30 seconds apart. Ten page-fetch attempts produced three accepted pages; the page-augmented condition remained blocked for two cases. Both exact model versions passed synthetic image tests. A preregistered five-case comparison then used identical cached search snippets in both arms:
+
+| Model | Answered | Accuracy, all five | Macro-F1, answered | Authentic false positives | Rated pair-arm cost |
+|---|---:|---:|---:|---:|---:|
+| GPT-4o-mini-2024-07-18 | 5/5 | 60% | 0.583 | 0 | $0.14675295 |
+| GLM-5.3-Flash | 5/5 | 60% | 0.375 | 1 | $0.01932820 |
+
+This is a fixed-evidence backbone diagnostic on five reused core cases, not the larger old-dataset comparison or evidence of superiority. Previously GLM-generated queries, provider decoding defaults, snippet limitations and missing human annotation remain explicit. No PROBE experiment occurred. Full/portable offline suites passed 193/189 tests; 4,199 protected historical artifacts and both registries remained unchanged. New rated use was $0.16740290, cumulative $0.218046352, with no pending charges and $14.781953648 remaining under the unchanged cap. The two-hour window ends at 13:22:32 UTC. Direct DDGS remains blocked; pre-existing SearXNG remains running, and run-started Firecrawl containers are stopped.
+
+The source adds a pinned GPT-mini comparison client and audited, budget-preserving session renewal. Local raw evidence, protocols, predictions, usage and acceptance records are retained under the ignored `reports/autonomous/20260917T215500Z/paired_baseline_20260918_v1/` directory; a fresh clone does not contain them. No credentials or raw cases belong in the code checkpoint. Stage 1 remains incomplete.

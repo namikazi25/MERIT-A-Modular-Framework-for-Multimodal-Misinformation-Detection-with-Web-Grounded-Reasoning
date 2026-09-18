@@ -1,4 +1,5 @@
 import concurrent.futures
+from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 import tempfile
@@ -65,6 +66,36 @@ class LedgerTests(unittest.TestCase):
         for bad in ('NaN', '-1', 'Infinity'):
             with self.assertRaises(ValueError): other.reserve('x', bad)
         with self.assertRaises(ValueError): other.reserve('x', 0, retries=3)
+
+    def authorization(self, old, cap='1'):
+        now=datetime.now(timezone.utc)
+        p=Path(self.tmp.name)/'approval.json'
+        p.write_text(json.dumps({'window_start_utc':now.isoformat(),'deadline_utc':(now+timedelta(hours=2)).isoformat(),
+            'previous_deadline_utc':old,'combined_cap_usd':cap,'new_budget_grant':False,
+            'authorization':'Explicit synthetic user approval','user_reply':'Approved'}))
+        return p
+
+    def test_approved_deadline_renewal_preserves_spend_and_rechecks_record(self):
+        old='2000-01-01T00:00:00Z'
+        ledger=Ledger(self.path,1,applicable_remaining=1,deadline=old)
+        stale=Ledger(self.path,1,applicable_remaining=1,deadline=old)
+        approval=self.authorization(old)
+        ledger.renew_deadline(approval)
+        rid=ledger.reserve('dummy','.5');ledger.settle(rid,'.2')
+        resumed=Ledger(self.path,1,applicable_remaining=1,deadline=ledger.deadline)
+        self.assertEqual(resumed.summary()['session_available_usd'],'0.8')
+        with self.assertRaises(BudgetBlocked):stale.reserve('dummy',0)
+        approval.write_text('{}')
+        with self.assertRaises(BudgetBlocked):resumed.reserve('dummy',0)
+
+    def test_deadline_extension_requires_record_and_cannot_increase_cap(self):
+        old='2000-01-01T00:00:00Z'
+        ledger=Ledger(self.path,1,applicable_remaining=1,deadline=old)
+        with self.assertRaises(BudgetBlocked):
+            Ledger(self.path,1,applicable_remaining=1,deadline='2099-01-01T00:00:00Z')
+        before=self.path.read_bytes()
+        with self.assertRaises(BudgetBlocked):ledger.renew_deadline(self.authorization(old,cap='15'))
+        self.assertEqual(self.path.read_bytes(),before)
 
 
 class EvaluationTests(unittest.TestCase):

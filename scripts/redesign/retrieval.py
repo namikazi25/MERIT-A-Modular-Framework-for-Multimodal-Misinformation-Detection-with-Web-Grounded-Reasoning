@@ -110,6 +110,7 @@ class Discovery:
             ident=self.store.put('discovery',result,settings)
             return dict(result,snapshot_id=ident,mode='NO_DISPATCH')
         scopes=['search:all']+['engine:'+e for e in (self.engines if self.backend=='searxng' else ['duckduckgo'])]
+        if self.backend=='duckduckgo':scopes.append('route:direct_ddgs')
         try:ticket=self.traffic.start('search',scopes,deadline=self.ledger.deadline)
         except TrafficBlocked as exc:
             result={'query':query,'backend':self.backend,'status':'SERVICE_BLOCKED','results':[],

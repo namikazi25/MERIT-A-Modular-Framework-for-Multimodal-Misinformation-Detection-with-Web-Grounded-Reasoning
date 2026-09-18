@@ -1,6 +1,6 @@
 # Reproducibility and repository boundaries
 
-This records the release plan and current status. The paper reproduction package is not complete. Direct DDGS repair is deferred; fresh experiments remain stopped at their recorded access and annotation gates. Engineering continuation is on `codex/merit-redesign-preflight`.
+This records the release plan and current status. The paper reproduction package is not complete. Direct DDGS repair is deferred; the latest bounded SearXNG/DDG and fixed-evidence experiment is recorded in [development status](development_status.md). Larger experiments and human annotation remain gated. Engineering continuation is on `codex/merit-redesign-preflight`.
 
 ## Search access
 
@@ -65,3 +65,10 @@ At cleanup, Git already tracked 578 historical result files, including one appro
 Before a code checkpoint, review the explicit file list and diff and scan the proposed non-environment payload for secrets and private artifacts. Avoid blanket staging. Before publication, test a clean checkout with only documented release assets and complete historical-artifact review. No commit or push was made during this cleanup.
 
 Subsequent user authorization allowed a code checkpoint and push to `codex/merit-redesign-preflight` (initial commit `effc9f6`). Raw run data, annotation packets, registry artifacts and local model files were excluded. New source and synthetic tests are versioned; the ignored evidence is preserved locally and is not backed up by that push. See [PROBE preparation](probe_detector.md) for its separate licence and inference gates.
+
+
+## Approved session renewal and repaired-route diagnostic
+
+The 18 September two-hour continuation appended a deadline-renewal event to the same ledger, without changing its cap or resetting spend. Each dispatch rechecks the referenced approval-record hash and effective deadline; stale ledger objects fail closed. This is consistency checking against recorded approval, not protection against someone able to rewrite the records. No model client renews a session automatically.
+
+A supervised review preserved the failed direct-DDGS route under a separate persistent route block and admitted the user-repaired SearXNG route for one public diagnostic. That query and five paced development queries succeeded; this does not establish a sustainable DuckDuckGo quota. All ten attempted page fetches and their failures were cached. A separate, registered five-case backbone diagnostic reused search snippets for both exact models, with no model-triggered searches. Full passages were not silently substituted for failed extraction. Raw local cache redistribution, a portable service definition and broader replication remain release prerequisites.

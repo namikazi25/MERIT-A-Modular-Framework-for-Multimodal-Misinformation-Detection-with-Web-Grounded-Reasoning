@@ -8,7 +8,7 @@ from types import SimpleNamespace as NS
 import unittest
 from unittest.mock import Mock
 from PIL import Image
-from scripts.redesign.clients import GLMClient,JevClient,ProviderFailure,parse_answers,validate_questions,structured_object
+from scripts.redesign.clients import GLMClient,GPTMiniClient,JevClient,ProviderFailure,parse_answers,validate_questions,structured_object
 from scripts.redesign.ledger import Ledger,BudgetBlocked
 from scripts.redesign_registry import claim_sha256
 
@@ -29,6 +29,25 @@ class ClientTests(unittest.TestCase):
         self.sdk.chat.completions.create.return_value=NS(model=CONFIG['model'],usage=NS(model_dump=lambda:{'prompt_tokens':20,'completion_tokens':10}),choices=[NS(finish_reason='stop',message=NS(content='{"ok":true}'))])
         self.payload={'headline':HEAD,'evidence':[{'id':'e1','claim_id':'c1','text':'The source says AI-generated illustrations can be real artwork.','kind':'passage','snapshot_id':'s1','private':{'label':'SECRET'}}],'relevancy':{'aligned':True,'explanation':{'secret':'NO'},'raw':'SECRET'},'visual_veracity':{'ai_generated':True,'anomalies':['legitimate',{'SECRET':'NO'}]},'image_path':'/fake/SECRET','label':'SECRET'}
     def client(self,image=None):return GLMClient(CONFIG,FakeAdmission(image),self.ledger,client=self.sdk)
+    def test_pinned_mini_boundary_parameters_and_distinct_pricing(self):
+        config={'provider':'openai','base_url':'https://api.openai.com/v1','model':'gpt-4o-mini-2024-07-18','api_key_env':'OPENAI_API_KEY'}
+        b=io.BytesIO();Image.new('RGB',(8,8),'red').save(b,format='PNG');data=b.getvalue()
+        self.sdk.chat.completions.create.return_value.model=config['model']
+        client=GPTMiniClient(config,FakeAdmission(data),self.ledger,client=self.sdk)
+        client.complete('synthetic',self.payload,'Return JSON',data)
+        req=self.sdk.chat.completions.create.call_args.kwargs
+        self.assertEqual(req['model'],config['model']);self.assertNotIn('reasoning_effort',req)
+        self.assertNotIn('SECRET',json.dumps(req));self.assertNotIn('image_path',json.dumps(req))
+        self.assertEqual(base64.b64decode(req['messages'][1]['content'][1]['image_url']['url'].split(',')[1]),data)
+        self.assertEqual(self.ledger.summary()['spent_usd'],'0.000009')
+        events=[json.loads(line) for line in self.ledger.path.read_text().splitlines()]
+        reserve=next(e for e in events if e['event']=='reserve')
+        self.assertEqual(reserve['maximum_usd'],'0.0198144')
+        with self.assertRaises(ValueError):GPTMiniClient(CONFIG,FakeAdmission(),self.ledger,client=self.sdk)
+        with self.assertRaises(ValueError):GPTMiniClient(dict(config,model='gpt-4o-mini'),FakeAdmission(),self.ledger,client=self.sdk)
+        self.sdk.reset_mock()
+        with self.assertRaises(ValueError):client.complete('reserved',self.payload,'JSON',data)
+        self.sdk.chat.completions.create.assert_not_called()
     def test_image_bytes_and_typed_signal_payload_at_sdk_boundary(self):
         b=io.BytesIO();Image.new('RGB',(8,8),'red').save(b,format='PNG');data=b.getvalue()
         result=self.client(data).complete('synthetic',self.payload,'Return JSON',data)

@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
 import fcntl
+import hashlib
 import json
 import os
 import uuid
@@ -35,11 +36,75 @@ class Ledger:
                   'applicable_remaining': None if self.remaining is None else str(self.remaining),
                   'deadline': deadline, 'concurrency': concurrency}
         with self.locked() as f:
-            policies = [e for e in self.events(f) if e['event'] == 'ledger_policy']
-            if policies and any(e != policy for e in policies):
+            events = self.events(f)
+            existing = self.effective_policy(events)
+            if existing and existing != policy:
                 raise BudgetBlocked('Ledger policy differs on resume')
-            if not policies:
+            if not existing:
                 self.append(f, policy)
+
+    @staticmethod
+    def effective_policy(events):
+        """A renewal changes only the deadline, with a rechecked approval record."""
+        policy = None
+        for event in events:
+            if event['event'] == 'ledger_policy':
+                if policy is not None:
+                    raise BudgetBlocked('Duplicate ledger policy')
+                policy = dict(event)
+            elif event['event'] == 'deadline_renewal':
+                if policy is None or event['previous_deadline'] != policy['deadline']:
+                    raise BudgetBlocked('Invalid deadline renewal chain')
+                path = Path(event['authorization_path'])
+                if path.name.startswith('.env'):
+                    raise BudgetBlocked('Environment files are not authorization records')
+                try:
+                    data = path.read_bytes()
+                    record = json.loads(data)
+                    start = datetime.fromisoformat(record['window_start_utc'].replace('Z', '+00:00'))
+                    end = datetime.fromisoformat(record['deadline_utc'].replace('Z', '+00:00'))
+                    old = datetime.fromisoformat(record['previous_deadline_utc'].replace('Z', '+00:00'))
+                    valid = (hashlib.sha256(data).hexdigest() == event['authorization_sha256']
+                             and start.tzinfo is not None and end.tzinfo is not None
+                             and 0 < (end - start).total_seconds() <= 7200 and end > old
+                             and record['previous_deadline_utc'] == policy['deadline']
+                             and record['deadline_utc'] == event['deadline']
+                             and money(record['combined_cap_usd']) == money(policy['cap'])
+                             and record['new_budget_grant'] is False
+                             and type(record['authorization']) is str and bool(record['authorization'].strip())
+                             and type(record['user_reply']) is str and bool(record['user_reply'].strip()))
+                except (OSError, ValueError, KeyError, TypeError):
+                    valid = False
+                if not valid:
+                    raise BudgetBlocked('Missing or changed deadline authorization record')
+                policy['deadline'] = event['deadline']
+        return policy
+
+    def renew_deadline(self, authorization_path):
+        """Operator-only action after explicit user approval; never called by a client.
+
+        Approval provenance is an audit reference, not protection against an actor
+        who can rewrite the ledger and all approval records. Budgets never reset.
+        """
+        path = Path(authorization_path).resolve()
+        if path.name.startswith('.env'):
+            raise BudgetBlocked('Environment files are not authorization records')
+        data = path.read_bytes()
+        record = json.loads(data)
+        with self.locked() as f:
+            events = self.events(f)
+            policy = self.effective_policy(events)
+            _, pending, halted = self.balance(events)
+            if pending or halted or policy['deadline'] != self.deadline:
+                raise BudgetBlocked('Reconcile pending, halted or stale ledger before renewal')
+            event = {'event': 'deadline_renewal', 'previous_deadline': self.deadline,
+                     'deadline': record['deadline_utc'], 'authorization_path': str(path),
+                     'authorization_sha256': hashlib.sha256(data).hexdigest()}
+            updated = self.effective_policy(events + [event])
+            if datetime.now(timezone.utc) >= datetime.fromisoformat(updated['deadline'].replace('Z', '+00:00')):
+                raise BudgetBlocked('Renewed window already expired')
+            self.append(f, event)
+            self.deadline = updated['deadline']
 
     @contextmanager
     def locked(self):
@@ -78,7 +143,11 @@ class Ledger:
 
     def summary(self):
         with self.locked() as f:
-            spent, pending, halted = self.balance(self.events(f))
+            events = self.events(f)
+            policy = self.effective_policy(events)
+            if policy['deadline'] != self.deadline:
+                raise BudgetBlocked('Stale deadline; reopen the verified ledger')
+            spent, pending, halted = self.balance(events)
         effective = self.cap if self.remaining is None else min(self.cap, self.remaining)
         return {'spent_usd': str(spent), 'reserved_usd': str(sum(pending.values(), Decimal(0))),
                 'pending_ids': list(pending), 'halted': halted,
@@ -90,7 +159,11 @@ class Ledger:
             raise ValueError('At most two retries are permitted')
         bound = money(maximum_usd) * (retries + 1)
         with self.locked() as f:
-            spent, pending, halted = self.balance(self.events(f))
+            events = self.events(f)
+            policy = self.effective_policy(events)
+            if policy['deadline'] != self.deadline:
+                raise BudgetBlocked('Stale deadline; reopen the verified ledger')
+            spent, pending, halted = self.balance(events)
             if halted:
                 raise BudgetBlocked('Ledger halted after billing failure')
             if self.deadline and datetime.now(timezone.utc) >= datetime.fromisoformat(self.deadline.replace('Z', '+00:00')):

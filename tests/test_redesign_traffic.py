@@ -107,6 +107,19 @@ class TrafficTests(unittest.TestCase):
         with self.assertRaisesRegex(TrafficBlocked, 'Recorded challenge'):
             fresh.start('search', ['search:all', 'engine:duckduckgo'])
 
+    def test_direct_ddgs_remains_blocked_independently_of_searxng(self):
+        self.traffic.record_observed_block('route:direct_ddgs',999,reason='Unrepaired direct route')
+        guard,ledger,store=self.adapters()
+        transport=Mock()
+        result=Discovery(guard,ledger,store,backend='duckduckgo',transport=transport,
+                         traffic=self.traffic).search('core','query')
+        self.assertEqual(result['mode'],'NO_DISPATCH')
+        transport.assert_not_called()
+        good=Mock(return_value=({'results':[]},200))
+        Discovery(guard,ledger,store,backend='searxng',endpoint='http://127.0.0.1:8080',
+                  transport=good,traffic=self.traffic).search('core','query')
+        good.assert_called_once()
+
     def adapters(self):
         return Mock(), Ledger(self.root / 'spend.jsonl', 1, applicable_remaining=1), SnapshotStore(self.root / 'snapshots')
 

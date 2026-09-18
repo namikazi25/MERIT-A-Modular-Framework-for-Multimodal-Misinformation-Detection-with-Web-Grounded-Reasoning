@@ -1,0 +1,153 @@
+{
+  "version": "jev_evidence_questions_v1",
+  "status": "initial_unvalidated_templates",
+  "templates": [
+    {
+      "id": "support",
+      "type": "noul",
+      "instructions": "Does `evidence[0].text` directly support `claims[0].text`?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "contradiction",
+      "type": "noul",
+      "instructions": "Does `evidence[0].text` directly contradict `claims[0].text`?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "same_event",
+      "type": "noul",
+      "instructions": "Does the passage concern the same event as the claim?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "date_established",
+      "type": "noul",
+      "instructions": "Does the passage establish the date asserted by the claim?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "location_established",
+      "type": "noul",
+      "instructions": "Does the passage establish the location asserted by the claim?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "entity_match",
+      "type": "noul",
+      "instructions": "Does the passage refer to the same named entities as the claim?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "qualifier_preserved",
+      "type": "noul",
+      "instructions": "Does the passage support the claim including its uncertainty and attribution?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "direct_observation",
+      "type": "noul",
+      "instructions": "Does the passage describe direct observation rather than hearsay?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "claim_relevant",
+      "type": "noul",
+      "instructions": "Does the passage contain information relevant to checking the claim?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "source_conflict",
+      "type": "noul",
+      "instructions": "Do the supplied passages make incompatible assertions about this claim?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "support_missing",
+      "type": "noul",
+      "instructions": "Is direct support for the claim absent from the supplied passages?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "contradiction_missing",
+      "type": "noul",
+      "instructions": "Is direct contradiction of the claim absent from the supplied passages?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    },
+    {
+      "id": "image_event_link",
+      "type": "noul",
+      "instructions": "Does the supplied image-context description connect the image to the claimed event?",
+      "required_fields": [
+        "claims",
+        "evidence",
+        "image_role"
+      ]
+    },
+    {
+      "id": "image_date_link",
+      "type": "noul",
+      "instructions": "Does the supplied image-context description establish the claimed date of the image?",
+      "required_fields": [
+        "claims",
+        "evidence",
+        "image_role"
+      ]
+    },
+    {
+      "id": "illustration_role",
+      "type": "noul",
+      "instructions": "Does the supplied image-role finding describe illustration rather than literal evidence?",
+      "required_fields": [
+        "claims",
+        "evidence",
+        "image_role"
+      ]
+    },
+    {
+      "id": "duplicate_reporting",
+      "type": "noul",
+      "instructions": "Do the passages appear to repeat the same original report rather than independent observations?",
+      "required_fields": [
+        "claims",
+        "evidence"
+      ]
+    }
+  ]
+}

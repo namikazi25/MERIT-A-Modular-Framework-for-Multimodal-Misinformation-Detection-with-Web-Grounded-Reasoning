@@ -7,14 +7,13 @@ __pycache__/
 venv/
 env/
 
-# Env
-.env
-.env.production
-.env.test
+# Local environment files, including backups and provider-specific variants.
+# Ignore rules do not remove an already tracked template from Git.
+.env*
 
-# Run outputs (keep JSONL and metrics tracked; reports regenerate)
-results/*.html
-results/checkpoints/
+# Generated outputs; existing tracked historical results remain tracked.
+# Curate any future public results bundle separately.
+/results/
 
 # Datasets / archives
 *.zip
@@ -27,6 +26,9 @@ data/
 .cursor-server
 .vscode-server
 .windsurf-server
+.vscode/
+.idea/
+.DS_Store
 .bash_history
 .zsh_history
 .zcompdump*
@@ -42,3 +44,27 @@ repo-backup.git/
 evidence/
 
 *.log
+
+# Downloaded dependencies/weights, local audits and execution records.
+# Retain locally; prepare reviewed reproduction assets separately.
+/.runtime/
+/models/
+/_audit/
+/reports/autonomous/
+/reports/retrieval_diagnostic_*/
+
+# Generated registries include local paths and protected split metadata.
+# Builders and synthetic tests remain versionable under scripts/tests.
+/manifests/redesign_data_registry_v*.json
+/manifests/redesign_sample_registry_v*.jsonl
+
+# Python tooling caches and coverage output.
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+build/
+dist/

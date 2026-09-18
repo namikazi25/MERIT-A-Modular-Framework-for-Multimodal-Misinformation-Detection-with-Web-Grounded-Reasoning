@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "reasoning_effort": "low",
+  "max_output_tokens": 1024,
+  "timeout_seconds": 45,
+  "max_retries": 0,
+  "jev_model": "jev-1.13.0",
+  "jev_endpoint": "https://api.typesafe.ai/v1/systemone",
+  "search_backend": "searxng",
+  "searxng_url": "http://127.0.0.1:8080",
+  "searxng_engines": [
+    "brave"
+  ],
+  "extraction_backend": "firecrawl_self_hosted",
+  "firecrawl_endpoint": "http://127.0.0.1:3002/v2/scrape",
+  "candidate_cap": 5,
+  "page_cap": 2,
+  "evidence_utf8_byte_cap": 12000,
+  "fallback_policy": "none",
+  "max_steps": 4,
+  "live_enabled": true,
+  "pricing_checked_utc": "2026-09-17",
+  "prices_usd_per_million_tokens": {
+    "baseten_input": "0.15",
+    "baseten_output": "0.50",
+    "jev_input": "0.042",
+    "jev_output": "0"
+  },
+  "baseten_total_cap_usd": "35",
+  "baseten_prior_spend_usd": "15",
+  "session_combined_new_cap_usd": "15",
+  "prior_spend_basis": "User statement during this run; no invoice-level reconciliation claimed."
+}

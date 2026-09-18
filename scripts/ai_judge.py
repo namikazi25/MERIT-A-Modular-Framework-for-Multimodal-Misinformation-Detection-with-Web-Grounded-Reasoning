@@ -5,7 +5,7 @@ AI Judge: Decide if the headline+image pair constitutes misinformation.
 
 Input is the Final Structured Output produced by main.py, e.g.:
 {
-  "image_path": str,
+  "image_path": str,   # evaluation-only: present in final_obj, NOT sent to the provider
   "headline": str,
   "relevancy": {"aligned": bool|"partial"|None, "confidence": float|None, "explanation": str},
   "visual_veracity": {"ai_generated": bool|None, "confidence": float|None, "explanation": str, "anomalies": []},
@@ -24,13 +24,17 @@ This module exposes `judge_from_structured(final_obj, loader)` that returns a di
   "logprob_stats": Dict[str, Any] | None,
 }
 
+Only an allowlist of model-facing fields is rendered into the provider request; see
+``_MODEL_FACING_KEYS``. Evaluation-only metadata (label-bearing image path, ground-truth
+labels, distortion classes, benchmark provenance) never leaves the process.
+
 It attempts an LLM judgment first (OpenAI/Google/DeepInfra/OpenRouter via scripts.llm_loader). If that
 fails (e.g., missing API keys), it falls back to a deterministic heuristic using
 relevancy + visual veracity signals.
 """
 
 import json
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from scripts.llm_loader import LLMModelLoader
 from scripts.utils.json_utils import extract_json_object
@@ -79,31 +83,160 @@ _SYSTEM_PROMPT = (
 )
 
 
-def _build_user_message(final_obj: Dict[str, Any]) -> str:
-    # Keep payload compact but informative
-    compact = {
-        "headline": final_obj.get("headline"),
-        "image_path": final_obj.get("image_path"),
-        "relevancy": final_obj.get("relevancy", {}),
-        "visual_veracity": final_obj.get("visual_veracity", {}),
-        # include only minimal Q/A details to keep prompt small
-        "best_qa_per_chain": [
-            {
-                "question": it.get("question"),
-                "answer": it.get("answer"),
-                "confidence": it.get("confidence"),
-                "citations_count": len(it.get("citations") or []),
-            }
-            for it in (final_obj.get("best_qa_per_chain") or [])
-            if isinstance(it, dict)
-        ],
+# --- Model-facing versus evaluation-only information ---------------------------
+# ``final_obj`` mixes both. Only the keys listed below may be rendered into a
+# provider request. Evaluation-only information stays local and is written to the
+# run JSONL for scoring only:
+#   * the image path, which encodes the ground-truth class ("/real/" vs "/fake/"),
+#     the distortion family and the source collection;
+#   * ground-truth labels, distortion classes and benchmark provenance fields;
+#   * dataset row indices and split membership.
+# The payload is built by allowlisting rather than by copying ``final_obj`` and
+# deleting known-bad keys, so a new evaluation-only field cannot leak by default.
+_MODEL_FACING_KEYS: Tuple[str, ...] = ("headline", "relevancy", "visual_veracity", "best_qa_per_chain")
+_MODEL_FACING_QA_KEYS: Tuple[str, ...] = ("question", "answer", "confidence")
+
+# Typed projections for the nested signal objects. These mirror the fields the live
+# judge prompt declares as its input signals, so nothing the judge uses is lost and
+# nothing it does not use is forwarded.
+_RELEVANCY_FIELDS: Tuple[str, ...] = ("aligned", "confidence", "explanation")
+_VISUAL_FIELDS: Tuple[str, ...] = ("ai_generated", "confidence", "explanation", "anomalies")
+_ALIGNED_ALLOWED = ("true", "false", "partial")
+
+
+def _project_confidence(value: Any) -> Optional[float]:
+    """Accept a real finite number. Booleans, strings, NaN and infinities are malformed here.
+
+    The value is passed through unchanged: this boundary validates types, it does not re-scale
+    or filter legitimate computed numbers.
+    """
+    if isinstance(value, bool):
+        return None
+    if not isinstance(value, (int, float)):
+        return None
+    number = float(value)
+    if number != number or number in (float("inf"), float("-inf")):
+        return None
+    return number
+
+
+def _project_text(value: Any) -> Optional[str]:
+    """Accept only a real string, returned verbatim.
+
+    No truncation and no whitespace rewriting: shortening an explanation would change what the
+    judge sees, which is an evidence-selection decision outside this patch.
+    """
+    if not isinstance(value, str):
+        return None
+    return value
+
+
+def _project_text_field(value: Any) -> Optional[str]:
+    """Accept only a real string for a scalar text field, returned verbatim."""
+    return value if isinstance(value, str) else None
+
+
+def _project_anomalies(value: Any) -> List[str]:
+    """Keep a typed list of strings, returned verbatim in their original order.
+
+    Non-string members are malformed for this field and are dropped. No cap is applied to the
+    number of anomalies or to their length.
+    """
+    if not isinstance(value, (list, tuple)):
+        return []
+    return [item for item in value if isinstance(item, str)]
+
+
+def _project_relevancy(obj: Any) -> Dict[str, Any]:
+    """Typed, allowlisted view of the relevancy signal. Nested extras are dropped.
+
+    A malformed whole object yields the same key set with empty values, so the payload shape is
+    consistent for every input.
+    """
+    if not isinstance(obj, dict):
+        return {"aligned": None, "confidence": None, "explanation": None}
+    aligned = obj.get("aligned")
+    if isinstance(aligned, bool):
+        pass
+    elif isinstance(aligned, str) and aligned.lower() in _ALIGNED_ALLOWED:
+        pass  # keep the original string, including its casing
+    else:
+        aligned = None
+    return {
+        "aligned": aligned,
+        "confidence": _project_confidence(obj.get("confidence")),
+        "explanation": _project_text(obj.get("explanation")),
     }
+
+
+def _project_visual_veracity(obj: Any) -> Dict[str, Any]:
+    """Typed, allowlisted view of the visual-veracity signal. Nested extras are dropped.
+
+    A computed ``ai_generated`` finding is a legitimate model-facing signal and is kept.
+    A benchmark annotation describing the image's ground-truth origin is not.
+
+    A malformed whole object yields the same key set with empty values.
+    """
+    if not isinstance(obj, dict):
+        return {"ai_generated": None, "confidence": None, "explanation": None, "anomalies": []}
+    ai_generated = obj.get("ai_generated")
+    if isinstance(ai_generated, bool):
+        pass
+    elif isinstance(ai_generated, str) and ai_generated.lower() in ("true", "false"):
+        ai_generated = ai_generated.lower() == "true"
+    else:
+        ai_generated = None
+    return {
+        "ai_generated": ai_generated,
+        "confidence": _project_confidence(obj.get("confidence")),
+        "explanation": _project_text(obj.get("explanation")),
+        "anomalies": _project_anomalies(obj.get("anomalies")),
+    }
+
+
+def _model_facing_payload(final_obj: Dict[str, Any]) -> Dict[str, Any]:
+    """Return the allowlisted, provider-safe view of a pipeline result.
+
+    The signal objects are projected field by field rather than passed through, so an
+    unexpected nested dictionary, list or malformed field type cannot reach a request.
+    """
+    qa_items: List[Dict[str, Any]] = []
+    for item in final_obj.get("best_qa_per_chain") or []:
+        if not isinstance(item, dict):
+            continue
+        entry = {
+            "question": _project_text_field(item.get("question")),
+            "answer": _project_text_field(item.get("answer")),
+            "confidence": _project_confidence(item.get("confidence")),
+        }
+        # Citation URLs are reduced to a count here. This is the historical
+        # evidence-retention behaviour and is deliberately unchanged by this patch.
+        citations = item.get("citations")
+        entry["citations_count"] = len(citations) if isinstance(citations, (list, tuple)) else 0
+        qa_items.append(entry)
+
+    payload = {
+        "headline": final_obj.get("headline") if isinstance(final_obj.get("headline"), str) else None,
+        "relevancy": _project_relevancy(final_obj.get("relevancy")),
+        "visual_veracity": _project_visual_veracity(final_obj.get("visual_veracity")),
+        "best_qa_per_chain": qa_items,
+    }
+    assert tuple(payload) == _MODEL_FACING_KEYS, "model-facing payload keys drifted from the allowlist"
+    for name, expected in (("relevancy", _RELEVANCY_FIELDS), ("visual_veracity", _VISUAL_FIELDS)):
+        assert tuple(payload[name]) == expected, f"{name} projection keys drifted from the declared signal schema"
+    return payload
+
+
+def _build_user_message(final_obj: Dict[str, Any]) -> str:
+    # Keep payload compact but informative, and free of evaluation-only metadata.
+    compact = _model_facing_payload(final_obj)
     return (
         "You are given the following analysis JSON for a headline+image pair.\n"
         "Make a final misinformation judgment.\n\n"
         f"Analysis JSON (compact):\n{json.dumps(compact, ensure_ascii=False)}\n\n"
         "Respond ONLY with JSON: {\"label\":..., \"confidence\":..., \"rationale\":..., \"key_factors\":[...]}"
     )
+
 
 
 def _safe_float(x: Any) -> Optional[float]:

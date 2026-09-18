@@ -1,0 +1,32 @@
+# Development checkpoint — 18 September 2026
+
+Work continues on `codex/merit-redesign-preflight`. The initial reviewed engineering checkpoint is `effc9f6`. Generated registries, raw evidence, annotation packets, downloaded models and private execution records are preserved locally and excluded from this branch's new commits.
+
+| Component | Verified status | Remaining gate |
+|---|---|---|
+| Preflight 0.2.1 | Four reported defects corrected; current real-registry validation passes | Checksums establish recorded consistency, not malicious-rewrite resistance or complete semantic non-leakage |
+| GLM-5.3-Flash and Jev | Previous synthetic live access and bounded five-case work recorded | Larger experiments require useful evidence and a complete-batch budget bound |
+| Retrieval pacing | Shared search/extraction leases, intervals, `Retry-After`, persistent engine/host stops tested offline | Updated controls have not been exercised against live services |
+| SearXNG | Pinned update returned relevant official results in three spaced public DDG queries | Sustainable access is unproven; later direct DDGS challenge stops further DDG requests pending review |
+| Firecrawl | Prior self-hosted extraction smoke succeeded | Currently stopped; internal fan-out and effective server limits remain to be verified |
+| Astra annotation | Five provisional AI evidence-quality reviews saved and coordinator-reviewed | Human labels remain blank; no annotation gold or calibration claims |
+| PROBE-DINOv2 | Official metadata pinned; preprocessing/aggregation tested | Licence, exact backbone config, loader and real inference pending |
+| Controlled ablations | Seven conditions previously executed on the same five examples with frozen evidence | Small, weak-evidence diagnostic; no generalisation or superiority claim |
+
+The original initial baseline answered three of five cases: two correct misinformation answers and one authentic false positive; two cases had query failures. In the later frozen-evidence comparison C1/C2/C3 all abstained. A2 produced one binary answer, subsequently identified as ungrounded despite matching the benchmark label. The original result remains preserved; an added verdict-consistency guard was checked offline, without claiming a new live result. Detector results in those historical conditions refer to the earlier ViT, never PROBE.
+
+All five Astra packets were judged to have insufficient supplied evidence: three had irrelevant sources and two had no supplied evidence. This is a provisional AI assessment of those packets, not five independently established truth labels. Historical annotation packets lack reconstructed objective source passages and must not treat generated QA as ground evidence. Human review remains necessary.
+
+The final offline suite for this checkpoint passed **184 tests**, with zero audited Python network or environment-file operations. Run it with:
+
+```sh
+.venv/bin/python -B scripts/run_offline_tests.py
+```
+
+The first new traffic run exposed a zero-wait admission bug (173 passed, one failed). Admission now allows an immediately ready request even when the allowed wait is zero; the concurrency regression passes. Tests also cover cross-instance spacing, cross-process exclusion, interrupted leases, persistent blocks, API backoff, target-host exclusion, replay, malformed state and membership revalidation after waits. PROBE fixtures cover repeat padding, grid order, discarded edges, aggregation, malformed logits, resource limits and identity checks. Mocks do not establish live access or checkpoint accuracy.
+
+Local validation found no changes to 4,199 protected artifacts, 429 original run artifacts or either v2 registry file. Registry counts remain 10,000 records, 9,665 groups and 4,187 reserve records; the 100-example core is unchanged. No reserved examples were opened or run. No new experimental GLM/Jev, search or extraction requests were made in this continuation. Public upstream documentation/metadata were inspected and Astra used the existing Codex allowance. New rated third-party spending remains $0.050643452 for the whole session, with no pending reservations; the stricter persisted $15 combined session cap leaves $14.949356548. Provider invoice reconciliation remains separate.
+
+Next work depends on the [PROBE gates](probe_detector.md), supervised retrieval access review and actual human annotation. Direct DDGS repair remains deferred. Prime dispatch remains blocked because an enforceable per-dispatch paid-use bound has not been established. No alternate coding-provider route was used. Stage 1 and final evaluation are not marked complete.
+
+See [reproducibility requirements](reproducibility.md) before attempting a clean-clone paper reproduction. This code checkpoint is not a complete dataset/evidence release.

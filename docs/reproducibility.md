@@ -1,12 +1,18 @@
 # Reproducibility and repository boundaries
 
-This records the release plan and current status. The paper reproduction package is not complete. Direct DDGS repair is deferred; the research run remains stopped at its recorded gates.
+This records the release plan and current status. The paper reproduction package is not complete. Direct DDGS repair is deferred; fresh experiments remain stopped at their recorded access and annotation gates. Engineering continuation is on `codex/merit-redesign-preflight`.
 
 ## Search access
 
 Self-hosting SearXNG does not establish an unlimited DuckDuckGo allowance. We have not verified a guaranteed requests-per-minute quota for automated DuckDuckGo access. SearXNG's inbound limiter and upstream-engine suspension are separate controls.
 
-For the next authorised diagnostic, use one search worker, at least 30 seconds between uncached logical searches, first-page results, query deduplication and a bounded batch. This is a proposed conservative policy, not a proven sustainable provider rate or a claim that the production adapter already enforces global pacing. Honour any `Retry-After`; stop on HTTP 429, access denial or CAPTCHA. Report a provider block separately from an empty evidence finding. Do not rotate identities or switch engines silently.
+The guarded redesign adapters now enforce one in-flight search, at least 30 seconds between logical searches, and a shared persisted stop after HTTP 429, access denial or CAPTCHA. Extraction allows one in-flight request, at least 6 seconds globally and 30 seconds per original target host. These are conservative project ceilings, not proven sustainable provider rates. Keep first-page results, query deduplication and bounded batches. Report a provider block separately from an empty evidence finding. Do not rotate identities or switch engines silently.
+
+`scripts/redesign/traffic.py` stores leases, spacing and engine/host blocks in `.runtime/redesign-retrieval/traffic.json`, shared across adapter instances and run directories. File locking prevents concurrent admission. Interrupted leases and corrupt state fail closed. API `Retry-After` values extend the minimum backoff of 3,600 seconds for rate failures or 86,400 seconds for access challenges. Elapsed backoff never automatically clears a block. Frozen snapshot replay dispatches nothing and does not consume a live lease. Membership and budget checks run again after any pacing wait. Do not delete state to bypass a block; reconcile an interrupted request or review access before any supervised state change.
+
+This controls calls made through the guarded redesign adapters. Legacy runners, manual HTTP calls and other users of Docker are outside this control. SearXNG can fan out to multiple configured engines; Firecrawl may perform internal retries, page-resource loads and redirects that the client cannot count or pace. The target-host interval applies to the submitted host, not every downstream resource host. A client ceiling does not prove upstream quota compliance. The implementation adds no automatic retry. Hidden upstream fan-out and deployment settings must be reviewed before sustained collection.
+
+The inspected Firecrawl service is self-hosted. Its source contains rate-limit defaults, but the active authentication/limiter path was not established. [Firecrawl Cloud limits](https://docs.firecrawl.dev/rate-limits) are not a verified quota for this deployment. The project ceilings above apply regardless.
 
 SearXNG documents default engine suspensions of 3,600 seconds for HTTP 429 and 86,400 seconds for CAPTCHA/access denial. These are local backoff settings, not promises of upstream recovery. The inspected deployment instead had 180 seconds for HTTP 429/access denial and 3,600 seconds for CAPTCHA. Review these shorter settings before sustained live work; the research adapter additionally preserves a stop record requiring supervised review. No suspension settings were changed during repository cleanup.
 
@@ -55,3 +61,5 @@ Do not blanket-ignore all JSON/JSONL or all reports: that would hide legitimate 
 At cleanup, Git already tracked 578 historical result files, including one approximately 22.8 MB JSONL file, and `.env.sample`. These names were inventoried without reading the environment template. Ignore rules do not remove tracked files or scrub history. Existing tracked artifacts were preserved. Publication review must determine what is suitable for distribution; `*.tokens.csv` usage-accounting filenames are not themselves evidence of exposed credentials.
 
 Before a code checkpoint, review the explicit file list and diff and scan the proposed non-environment payload for secrets and private artifacts. Avoid blanket staging. Before publication, test a clean checkout with only documented release assets and complete historical-artifact review. No commit or push was made during this cleanup.
+
+Subsequent user authorization allowed a code checkpoint and push to `codex/merit-redesign-preflight` (initial commit `effc9f6`). Raw run data, annotation packets, registry artifacts and local model files were excluded. New source and synthetic tests are versioned; the ignored evidence is preserved locally and is not backed up by that push. See [PROBE preparation](probe_detector.md) for its separate licence and inference gates.

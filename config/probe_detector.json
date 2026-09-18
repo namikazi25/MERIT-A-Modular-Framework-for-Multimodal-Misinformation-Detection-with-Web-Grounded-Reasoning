@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "detector": "PROBE-DINOv2",
+  "status": "PREPROCESSING_ONLY_INFERENCE_BLOCKED",
+  "source": {
+    "repository": "https://github.com/Amamiya-C/PROBE-AIGI-Detection",
+    "revision": "b145f7130004c02725e9b3703954a3329ebf56de",
+    "evaluation_file": "Detector/evaluate_dino.py"
+  },
+  "checkpoint": {
+    "repository": "https://modelscope.cn/models/shuinishaojiu/PROBE-AIGI-Detection",
+    "filename": "DINOv2_best_model_step_34999.pth",
+    "file_revision": "423e5877bc5ac51248508de56f3ac22f7dd1128f",
+    "size_bytes": 1217679947,
+    "sha256": "c8caa9bad54c029e4d22e1909c4673e46a239d8419a986e0ab461d423a450156",
+    "downloaded": false,
+    "licence": null
+  },
+  "backbone": {
+    "upstream_commented_identifier": "facebook/dinov2-with-registers-large",
+    "exact_config_verified": false,
+    "configuration_sha256": null
+  },
+  "preprocessing": {
+    "color": "RGB",
+    "patch_size": 336,
+    "stride": 336,
+    "small_image_padding": "repeat",
+    "partial_edge_patches": "discard",
+    "resize": false,
+    "exif_transpose": false,
+    "augmentation": false,
+    "mean": [0.485, 0.456, 0.406],
+    "std": [0.229, 0.224, 0.225]
+  },
+  "aggregation": "sigmoid(mean(patch_logits))",
+  "positive_threshold": "strictly greater than 0.5",
+  "local_bounds": {"max_pixels": 16000000, "max_patches": 64},
+  "fallback": null,
+  "blockers": ["Unspecified source/checkpoint licence", "Exact released backbone configuration unverified", "Checkpoint loader and real inference validation pending"]
+}

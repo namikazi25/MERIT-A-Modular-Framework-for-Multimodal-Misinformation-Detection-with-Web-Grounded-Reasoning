@@ -1,0 +1,80 @@
+{
+  "schema": "merit_metrics_bundle_v1",
+  "evaluation_only": true,
+  "evaluator_sha256": "dd9f6163684e9db725209c5724e957a86dca159a23f374acb63a262a8d062784",
+  "payload": {
+    "truth": {
+      "synthetic-1": "Fake",
+      "synthetic-2": "True",
+      "synthetic-3": "True",
+      "synthetic-4": "Fake",
+      "synthetic-5": "True"
+    },
+    "groups": {
+      "synthetic-1": "group-0",
+      "synthetic-2": "group-1",
+      "synthetic-3": "group-1",
+      "synthetic-4": "group-2",
+      "synthetic-5": "group-2"
+    },
+    "batches": {
+      "synthetic_example": {
+        "baseline": [
+          {
+            "sample_id": "synthetic-1",
+            "status": "OK",
+            "prediction": "Misinformation"
+          },
+          {
+            "sample_id": "synthetic-2",
+            "status": "OK",
+            "prediction": "Misinformation"
+          },
+          {
+            "sample_id": "synthetic-3",
+            "status": "OK",
+            "prediction": "ABSTAIN"
+          },
+          {
+            "sample_id": "synthetic-4",
+            "status": "ERROR",
+            "prediction": null
+          }
+        ]
+      }
+    }
+  },
+  "expected_metrics": {
+    "synthetic_example": {
+      "baseline": {
+        "n_expected": 5,
+        "n_matched": 4,
+        "statuses": {
+          "answered": 2,
+          "abstain": 1,
+          "failure": 1,
+          "missing": 1
+        },
+        "confusion_answered": {
+          "TP": 1,
+          "TN": 0,
+          "FP": 1,
+          "FN": 0
+        },
+        "accuracy_all": 0.2,
+        "accuracy_answered": 0.5,
+        "macro_f1_answered": 0.3333333333333333,
+        "coverage": 0.4,
+        "class_coverage": {
+          "Fake": 0.5,
+          "True": 0.3333333333333333
+        },
+        "false_flags_all_authentic": 0.3333333333333333,
+        "false_positives_answered_authentic": 1.0,
+        "misinformation_detected_all": 0.5,
+        "misinformation_recall_answered": 1.0
+      }
+    }
+  },
+  "bundle_sha256": "2e03d2e046395829ff1d6f1eda7e19843030a23055676da2a1f0a192208419a9"
+}

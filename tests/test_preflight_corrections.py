@@ -1065,9 +1065,15 @@ class ModelInputBoundaryTest(unittest.TestCase):
 
 class OverwriteGuardTest(unittest.TestCase):
     def test_builder_refuses_to_overwrite_v1_output(self) -> None:
-        out = subprocess.run(
-            [sys.executable, "-m", "scripts.redesign_registry", "--repo", str(REPO), "--version", "v1"],
-            cwd=str(REPO), capture_output=True, text=True)
+        with tempfile.TemporaryDirectory() as directory:
+            repo = make_fixture_repo(Path(directory), basic_rows())
+            artifact = repo / "manifests" / "redesign_sample_registry_v1.jsonl"
+            original = b"preserved synthetic v1 artifact\n"
+            artifact.write_bytes(original)
+            out = subprocess.run(
+                [sys.executable, "-m", "scripts.redesign_registry", "--repo", str(repo), "--version", "v1"],
+                cwd=str(REPO), capture_output=True, text=True)
+            self.assertEqual(artifact.read_bytes(), original)
         self.assertEqual(out.returncode, 3)
         self.assertIn("REFUSING to overwrite", out.stderr)
         self.assertIn("redesign_sample_registry_v1.jsonl", out.stderr)

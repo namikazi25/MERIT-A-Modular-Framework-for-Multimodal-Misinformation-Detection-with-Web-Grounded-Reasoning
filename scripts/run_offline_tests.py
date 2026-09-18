@@ -5,6 +5,7 @@ Resolve the repository from this file, so invocation also works from another cwd
 These Python guards are not an OS sandbox for arbitrary native/subprocess code.
 """
 import io
+import argparse
 import os
 from pathlib import Path
 import socket
@@ -51,10 +52,32 @@ sys.modules['dotenv'] = dotenv
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--profile', choices=('full', 'portable'), default='full',
+                        help='full includes private artifact checks; portable runs synthetic source-only tests')
+    args = parser.parse_args()
     stream = io.StringIO()
     suite = unittest.defaultTestLoader.discover(str(ROOT / 'tests'), pattern='test_*.py')
+    excluded = []
+    if args.profile == 'portable':
+        private_classes = {
+            'test_preflight_corrections.HistoricalPreservationTest',
+            'test_preflight_corrections.PreFixContrastTest',
+        }
+        def select(tests):
+            for test in tests:
+                if isinstance(test, unittest.TestSuite):
+                    yield from select(test)
+                elif test.id().rsplit('.', 1)[0] in private_classes:
+                    excluded.append(test.id())
+                else:
+                    yield test
+        suite = unittest.TestSuite(select(suite))
     result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
     print(f'Interpreter: {sys.executable}\nPython: {sys.version.split()[0]}')
+    print(f'Profile: {args.profile}; explicitly excluded private-artifact checks: {len(excluded)}')
+    for ident in excluded:
+        print(f'EXCLUDED (requires preserved local artifacts): {ident}')
     print('Network and dotenv guards installed before test discovery.')
     print(stream.getvalue())
     print(f'Unexpected audited network/dotenv operations: {len(violations)}')

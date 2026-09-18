@@ -24,13 +24,15 @@ Sources: [suspension settings](https://docs.searxng.org/admin/settings/settings_
 2. **Frozen-evidence rerun:** provide a reviewed, versioned evidence bundle containing search queries, engine settings, ordered results, retrieved passages, URLs, timestamps, statuses and hashes. Run the pipeline against these recorded artifacts. Hosted-model responses can still vary with pinned names and settings; retain original outputs and usage for comparison.
 3. **Fresh web replication:** publish the search/extraction procedure, pinned service/dependency versions, budgets, pacing and failure handling. Ranking, pages, availability and access restrictions can change. New searches must not silently replace the frozen evidence used for reported results.
 
-`scripts/redesign/retrieval.py` already implements hashed snapshot storage and configuration/query-checked replay. A distributable evidence bundle, dependency lock, portable experiment runner and clean-checkout reproduction validation are still required. Passing mocks or preparing annotation sheets does not satisfy those release requirements.
+`scripts/redesign/retrieval.py` implements hashed snapshot storage and configuration/query-checked replay. The [offline reproduction tools](offline_reproduction.md) now support portable synthetic tests and standard-library-only metric verification. They were checked in a source-only export; the real local bundle reproduces 22 condition metrics for five cases. A distributable evidence bundle, validated dependency installation/lock, portable live experiment runner and full paper reproduction validation are still required. Passing mocks or preparing annotation sheets does not satisfy those release requirements.
 
 The source-tree offline test entry point is:
 
 ```sh
 .venv/bin/python -B scripts/run_offline_tests.py
 ```
+
+For a source-only checkout without private audit artifacts, explicitly select `--profile portable`. This retains synthetic safeguard tests and lists the four historical-artifact checks it excludes. The default full profile still requires the private preservation and pre-fix artifacts. See the linked offline guide for the exact tested dependency snapshot and metric-only commands.
 
 It resolves the repository independently of the working directory and writes results to stdout, without requiring an ignored historical run directory. Python network and environment-file guards are installed before discovery; these guards are not an OS sandbox for arbitrary native/subprocess code. The existing installed dependencies are required. This tests the implementation; it does not regenerate paper results or establish live service access.
 

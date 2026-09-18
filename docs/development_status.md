@@ -30,3 +30,9 @@ Local validation found no changes to 4,199 protected artifacts, 429 original run
 Next work depends on the [PROBE gates](probe_detector.md), supervised retrieval access review and actual human annotation. Direct DDGS repair remains deferred. Prime dispatch remains blocked because an enforceable per-dispatch paid-use bound has not been established. No alternate coding-provider route was used. Stage 1 and final evaluation are not marked complete.
 
 See [reproducibility requirements](reproducibility.md) before attempting a clean-clone paper reproduction. This code checkpoint is not a complete dataset/evidence release.
+
+## Subsequent offline engineering continuation
+
+The remaining portability work was completed separately: **189 full local tests** and **185 portable tests** pass. The portable profile was actually run in a source-only export without data, registries, model files, environment files or private audit artifacts. Its four excluded historical-artifact checks are named explicitly. Before the correction, the same export failed three tests and skipped two.
+
+A standard-library-only verifier reproduces **22 recorded condition metrics for the existing five cases** from a minimal evaluation-only local bundle. The synthetic example, exporter/verifier, regression tests and 18-package version snapshot are versionable; real labels/predictions remain local pending release review. No new experimental requests or paid use were required. A fresh dependency installation and full paper/evidence reproduction remain unvalidated. See [commands and exact limits](offline_reproduction.md).
